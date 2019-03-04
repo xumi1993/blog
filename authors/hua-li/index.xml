@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hua Li on Mijian Xu</title>
+    <link>https://xumi1993.github.io/home/authors/hua-li/</link>
+    <description>Recent content in Hua Li on Mijian Xu</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 20 Jan 2018 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://xumi1993.github.io/home/authors/hua-li/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Insight into the subducted Indian slab and origin of the Tengchong volcano in SE Tibet from receiver function analysis</title>
+      <link>https://xumi1993.github.io/home/publication/epsl2018/</link>
+      <pubDate>Sat, 20 Jan 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/publication/epsl2018/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mantle structure and dynamics beneath SE Tibet revealed by new seismic images</title>
+      <link>https://xumi1993.github.io/home/publication/epsl2015/</link>
+      <pubDate>Thu, 01 Jan 2015 23:08:33 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/publication/epsl2015/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Homes on Mijian Xu</title>
+    <link>https://xumi1993.github.io/home/home/</link>
+    <description>Recent content in Homes on Mijian Xu</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://xumi1993.github.io/home/home/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Biography</title>
+      <link>https://xumi1993.github.io/home/home/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/home/about/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Experience</title>
+      <link>https://xumi1993.github.io/home/home/experience/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/home/experience/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Researches</title>
+      <link>https://xumi1993.github.io/home/home/projects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/home/projects/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Featured Publications</title>
+      <link>https://xumi1993.github.io/home/home/featured/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/home/featured/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Recent Publications</title>
+      <link>https://xumi1993.github.io/home/home/publications/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/home/publications/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Softwares</title>
+      <link>https://xumi1993.github.io/home/home/resources/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/home/resources/</guid>
+      <description>Softwares  Seispy: Python module of seismology and receiver functions   CCCN: Cross-Correlation for Coda and Noise   BQMail: Python scripts for requesting seismic data to IRIS DMC  SplitRFLab: A Matlab toolbox of processing receiver functions and shear wave spliting  STALTA: Detecting microearthquakes using STA/LTA method</description>
+    </item>
+    
+    <item>
+      <title>Popular Topics</title>
+      <link>https://xumi1993.github.io/home/home/tags/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/home/tags/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Contact</title>
+      <link>https://xumi1993.github.io/home/home/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/home/contact/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

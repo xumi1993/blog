@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Mijian Xu</title>
+    <link>https://xumi1993.github.io/home/tags/</link>
+    <description>Recent content in Tags on Mijian Xu</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 03 Mar 2019 22:24:27 +0800</lastBuildDate>
+    
+	<atom:link href="https://xumi1993.github.io/home/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Crustal Structure</title>
+      <link>https://xumi1993.github.io/home/tags/crustal-structure/</link>
+      <pubDate>Sun, 03 Mar 2019 22:24:27 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/tags/crustal-structure/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mantle Transition Zone</title>
+      <link>https://xumi1993.github.io/home/tags/mantle-transition-zone/</link>
+      <pubDate>Sun, 03 Mar 2019 21:49:32 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/tags/mantle-transition-zone/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Software</title>
+      <link>https://xumi1993.github.io/home/tags/software/</link>
+      <pubDate>Sun, 03 Mar 2019 22:33:40 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/tags/software/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

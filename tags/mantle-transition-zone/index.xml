@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mantle Transition Zone on Mijian Xu</title>
+    <link>https://xumi1993.github.io/home/tags/mantle-transition-zone/</link>
+    <description>Recent content in Mantle Transition Zone on Mijian Xu</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 03 Mar 2019 21:49:32 +0800</lastBuildDate>
+    
+	<atom:link href="https://xumi1993.github.io/home/tags/mantle-transition-zone/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mantle Transition Zone Structure in SE Tibet</title>
+      <link>https://xumi1993.github.io/home/project/se-tibet-mtz/</link>
+      <pubDate>Sun, 03 Mar 2019 21:49:32 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/project/se-tibet-mtz/</guid>
+      <description>The subduction of the Indian Plate beneath SE Tibet and its related volcanism in Tengchong are important geologic processes that accompany the evolution of the Tibetan Plateau. However, it is still not clear whether the subduction and volcanism are confined to the upper mantle or if they extend deep into the mantle transition zone (MTZ). Here, we imaged MTZ structures by using receiver function methods with the waveforms recorded by more than 300 temporary stations in SE Tibet.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mijian Xu on Mijian Xu</title>
+    <link>https://xumi1993.github.io/home/</link>
+    <description>Recent content in Mijian Xu on Mijian Xu</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 03 Mar 2019 21:49:32 +0800</lastBuildDate>
+    <atom:link href="/home/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Mantle Transition Zone Structure in SE Tibet</title>
+      <link>https://xumi1993.github.io/home/project/se-tibet-mtz/</link>
+      <pubDate>Sun, 03 Mar 2019 21:49:32 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/project/se-tibet-mtz/</guid>
+      <description>&lt;p&gt;The subduction of the Indian Plate beneath SE Tibet and its related volcanism in Tengchong are important geologic processes that accompany the evolution of the Tibetan Plateau. However, it is still not clear whether the subduction and volcanism are confined to the upper mantle or if they extend deep into the mantle transition zone (MTZ). Here, we imaged MTZ structures by using receiver function methods with the waveforms recorded by more than 300 temporary stations in SE Tibet. The results show significant depressions of both the 410-km and 660-km discontinuities and a thickened MTZ (260–280 km) beneath SE Tibet. The depression of the 660-km discontinuity (by 10–30 km) and the thickened MTZ correlate well with high P-wave velocity anomalies in the MTZ, indicating the presence of a subducted Indian slab within the MTZ. Significant depression of the 410-km discontinuity (by 10–20 km) beneath the Tengchong volcano indicates that the volcano originates from the MTZ and is closely related to the subducted Indian slab. Our results confirm the deep subduction of the Indian plate and the deep origin of the Tengchong volcano. However, it remains unknown whether a slab gap exists and contributes to the Tengchong volcano.&lt;/p&gt;
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;mtz.png&#34; alt=&#34;SE Tibet NTZ&#34; /&gt;
+
+
+
+&lt;figcaption data-pre=&#34;Figure &#34; data-post=&#34;:&#34; class=&#34;numbered&#34;&gt;
+  &lt;h4&gt;Topography of MTZ under SE Tibet.&lt;/h4&gt;
+  &lt;p&gt;
+    Comparison of the stacked P-wave receiver functions and the P-wave velocity anomalies (Huang et al., 2015a)along the three profiles shown in the bottom-right figure. Blue and red colors in background denote high and low velocities, respectively. Black and gray lines denote the average P-wave receiver functions and their 95% confidence level, respectively, obtained from 2,000 bootstrapping iterations (see the text for details). Red and blue colors denote the significant positive and negative pulses, respectively. Two dashed horizontal lines denote the 410 km and 660 km depths for reference. The red triangle denotes the Tengchong volcano.
+    
+    
+    
+  &lt;/p&gt; 
+&lt;/figcaption&gt;
+
+&lt;/figure&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SplitRFLab</title>
+      <link>https://xumi1993.github.io/home/project/splitrflab/</link>
+      <pubDate>Sun, 03 Mar 2019 22:33:40 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/project/splitrflab/</guid>
+      <description>&lt;p&gt;We add new modules for receiver function (RF) analysis in SplitLab toolbox, which includes the manual RF analysis module, automatic RF analysis and related quality control modules, and H-k stacking module. The updated toolbox (named SplitRFLab toolbox), espe- cially its automatic RF analysis module, could calculate the RFs quickly and efficiently, which is very useful in RF analysis with huge amount of seismic data. China is now conducting the ChinArray project that plans to deploy thousands of portable stations across Chinese mainland. Our SplitRFLab toolbox may obtain reliable RF results quickly at the first time, which provide essentially new constraint to the crustal and mantle structures.&lt;/p&gt;
+
+
+
+
+&lt;figure&gt;
+
+&lt;img src=&#34;workflow.jpg&#34; /&gt;
+
+
+&lt;/figure&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Crustal Structure in SE Tibet</title>
+      <link>https://xumi1993.github.io/home/project/se-tibet-crust/</link>
+      <pubDate>Sun, 03 Mar 2019 22:24:27 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/project/se-tibet-crust/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Insight into the subducted Indian slab and origin of the Tengchong volcano in SE Tibet from receiver function analysis</title>
+      <link>https://xumi1993.github.io/home/publication/epsl2018/</link>
+      <pubDate>Sat, 20 Jan 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/publication/epsl2018/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SplitRFLab: A MATLAB GUI toolbox for receiver function analysis based on SplitLab</title>
+      <link>https://xumi1993.github.io/home/publication/es2016/</link>
+      <pubDate>Wed, 03 Feb 2016 23:15:13 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/publication/es2016/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mantle structure and dynamics beneath SE Tibet revealed by new seismic images</title>
+      <link>https://xumi1993.github.io/home/publication/epsl2015/</link>
+      <pubDate>Thu, 01 Jan 2015 23:08:33 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/publication/epsl2015/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

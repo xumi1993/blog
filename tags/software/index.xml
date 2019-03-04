@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Software on Mijian Xu</title>
+    <link>https://xumi1993.github.io/home/tags/software/</link>
+    <description>Recent content in Software on Mijian Xu</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 03 Mar 2019 22:33:40 +0800</lastBuildDate>
+    
+	<atom:link href="https://xumi1993.github.io/home/tags/software/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SplitRFLab</title>
+      <link>https://xumi1993.github.io/home/project/splitrflab/</link>
+      <pubDate>Sun, 03 Mar 2019 22:33:40 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/project/splitrflab/</guid>
+      <description>We add new modules for receiver function (RF) analysis in SplitLab toolbox, which includes the manual RF analysis module, automatic RF analysis and related quality control modules, and H-k stacking module. The updated toolbox (named SplitRFLab toolbox), espe- cially its automatic RF analysis module, could calculate the RFs quickly and efficiently, which is very useful in RF analysis with huge amount of seismic data. China is now conducting the ChinArray project that plans to deploy thousands of portable stations across Chinese mainland.</description>
+    </item>
+    
+    <item>
+      <title>SplitRFLab: A MATLAB GUI toolbox for receiver function analysis based on SplitLab</title>
+      <link>https://xumi1993.github.io/home/publication/es2016/</link>
+      <pubDate>Wed, 03 Feb 2016 23:15:13 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/home/publication/es2016/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
