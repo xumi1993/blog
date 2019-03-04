@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ssh on Note to Tech</title>
+    <link>https://xumi1993.github.io/blog/tags/ssh/</link>
+    <description>Recent content in Ssh on Note to Tech</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 26 Oct 2017 21:51:29 +0800</lastBuildDate>
+    
+	<atom:link href="https://xumi1993.github.io/blog/tags/ssh/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>SSH 隧道与端口转发</title>
+      <link>https://xumi1993.github.io/blog/2017/10/ssh-%E9%9A%A7%E9%81%93%E4%B8%8E%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/</link>
+      <pubDate>Thu, 26 Oct 2017 21:51:29 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/blog/2017/10/ssh-%E9%9A%A7%E9%81%93%E4%B8%8E%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/</guid>
+      <description>&lt;p&gt;中文可以称为SSH隧道，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。通过建立这条隧道，用户可以从客户端直接访问服务器端基于TCP协议的服务如HTTP。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

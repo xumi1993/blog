@@ -1,0 +1,1543 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+  
+
+
+  
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.53 with theme Tranquilpeak 0.4.1-BETA">
+    <title>Vim 使用笔记</title>
+    <meta name="author" content="Mijian Xu">
+    <meta name="keywords" content="">
+
+    <link rel="icon" href="https://xumi1993.github.io/blog/favicon.png">
+    
+
+    
+    <meta name="description" content="目录
+
+
+Command Mode
+
+
+Cursor Motions
+Edit Command
+Window Motion
+
+Insert Mode
+Visual Mode
+Search and Replace
+
+
+Basic usage
+Replace
+Regular Expression
+Vim 中常用的替换表达式
+
+Ctags and Taglist
+
+
+Ctags Configure
+为Python标准库添加标签
+为C/C&#43;&#43;系统函数添加标签
+Taglist Configure
+
+">
+    <meta property="og:description" content="目录
+
+
+Command Mode
+
+
+Cursor Motions
+Edit Command
+Window Motion
+
+Insert Mode
+Visual Mode
+Search and Replace
+
+
+Basic usage
+Replace
+Regular Expression
+Vim 中常用的替换表达式
+
+Ctags and Taglist
+
+
+Ctags Configure
+为Python标准库添加标签
+为C/C&#43;&#43;系统函数添加标签
+Taglist Configure
+
+">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Vim 使用笔记">
+    <meta property="og:url" content="/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">
+    <meta property="og:site_name" content="Note to Tech">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Note to Tech">
+    <meta name="twitter:description" content="目录
+
+
+Command Mode
+
+
+Cursor Motions
+Edit Command
+Window Motion
+
+Insert Mode
+Visual Mode
+Search and Replace
+
+
+Basic usage
+Replace
+Regular Expression
+Vim 中常用的替换表达式
+
+Ctags and Taglist
+
+
+Ctags Configure
+为Python标准库添加标签
+为C/C&#43;&#43;系统函数添加标签
+Taglist Configure
+
+">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="//www.gravatar.com/avatar/3c21a901526ad8ccb4e92dd5c571b204?s=640">
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://xumi1993.github.io/blog/css/style-fpbzgxsy0kgmdvyrj5ykkg6ratccrk3gocmaqn4xpcjywmv5dteilzucro4f.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://xumi1993.github.io/blog/">Note to Tech</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://xumi1993.github.io/blog/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="//www.gravatar.com/avatar/3c21a901526ad8ccb4e92dd5c571b204?s=90" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://xumi1993.github.io/blog/#about">
+          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/3c21a901526ad8ccb4e92dd5c571b204?s=110" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Mijian Xu</h4>
+        
+          <h5 class="sidebar-profile-bio">千里之行始于足下</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://xumi1993.github.io/blog/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://xumi1993.github.io/blog/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://xumi1993.github.io/blog/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://xumi1993.github.io/blog/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://xumi1993.github.io/blog/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/xumi1993" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://xumi1993.github.io/blog/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Vim 使用笔记
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-11-01T14:21:22&#43;08:00">
+        
+  十一月 1, 2017
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://xumi1993.github.io/blog/categories/linux">Linux</a>
+    
+  
+
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <h2 id="目录">目录</h2>
+
+<ul>
+<li><strong><a href="#command-mode">Command Mode</a></strong>
+
+<ul>
+<li><a href="#cursor-motions">Cursor Motions</a></li>
+<li><a href="#edit-command">Edit Command</a></li>
+<li><a href="#window-motion">Window Motion</a></li>
+</ul></li>
+<li><strong><a href="#insert-mode">Insert Mode</a></strong></li>
+<li><strong><a href="#visual-mode">Visual Mode</a></strong></li>
+<li><strong><a href="#search-and-replace">Search and Replace</a></strong>
+
+<ul>
+<li><a href="#basic-usage">Basic usage</a></li>
+<li><a href="#replace">Replace</a></li>
+<li><a href="#regular-expression">Regular Expression</a></li>
+<li><a href="#vim-中常用的替换表达式">Vim 中常用的替换表达式</a></li>
+</ul></li>
+<li><strong><a href="#ctags-and-taglist">Ctags and Taglist</a></strong>
+
+<ul>
+<li><a href="#ctags-configure">Ctags Configure</a></li>
+<li><a href="#pythontag">为Python标准库添加标签</a></li>
+<li><a href="#systag">为C/C++系统函数添加标签</a></li>
+<li><a href="#taglist-configure">Taglist Configure</a></li>
+</ul></li>
+</ul>
+
+<h2 id="command-mode">Command Mode</h2>
+
+<h3 id="cursor-motions">Cursor Motions</h3>
+
+<ul>
+<li><code>^</code>: 回到行首</li>
+<li><code>$</code>: 回到行尾</li>
+<li><code>l</code>: 向前移动一个单词</li>
+<li><code>w</code>: 向后移动一个单词
+&gt; Note: <code>w</code>通常表示一个单词，如<code>dw</code>删除一个单词， <code>yw</code>复制一个单词，<code>cw</code>替换一个单词。</li>
+</ul>
+
+<h3 id="edit-command">Edit Command</h3>
+
+<h4 id="deletion">Deletion</h4>
+
+<ul>
+<li><code>x</code>: 删除一个字符</li>
+<li><code>dd</code>: 删除一行</li>
+<li><code>ndd</code>: 删除n行</li>
+<li><code>dw</code>: 删除一个单词</li>
+<li><code>D</code>: 删除至行尾
+&gt;  Note: 这里的删除类似于剪切，可以粘贴。</li>
+</ul>
+
+<h4 id="copy-and-paste">Copy and Paste</h4>
+
+<ul>
+<li><code>yy</code>: 复制一行</li>
+<li><code>yw</code>: 复制一个单词</li>
+<li><code>p</code>: 在光标后复制</li>
+<li><code>P</code>: 在 光标前复制</li>
+</ul>
+
+<h4 id="undo-and-redo">Undo and Redo</h4>
+
+<ul>
+<li><code>u</code>: 撤销</li>
+<li><code>&lt;ctrl&gt;r</code>: 恢复</li>
+</ul>
+
+<h3 id="window-motion">Window Motion</h3>
+
+<ul>
+<li><code>&lt;ctrl&gt;f</code> or <code>&lt;Page Down&gt;</code>: 向下翻页</li>
+<li><code>&lt;ctrl&gt;b</code> or <code>&lt;Page Up&gt;</code>: 向上翻页</li>
+<li><code>&lt;ctrl&gt;d</code>: 下滚（向下翻半页）</li>
+<li><code>&lt;ctrl&gt;u</code>: 上滚（向上翻半页）</li>
+<li><code>G</code>: 定位文件最后一行</li>
+<li><code>:n</code>: 定位到第n行</li>
+</ul>
+
+<h2 id="insert-mode">Insert Mode</h2>
+
+<ul>
+<li><code>a</code>: 光标后插入</li>
+<li><code>i</code>: 光标前插入</li>
+<li><code>:r file</code>: 在当前行之后插入文件内容</li>
+</ul>
+
+<h2 id="visual-mode">Visual Mode</h2>
+
+<ul>
+<li><code>v</code>: 进入可视模式</li>
+<li><code>V</code>: 进入可视行模式</li>
+<li><code>&lt;ctrl&gt;v</code>: 进入可视块模式</li>
+</ul>
+
+<h2 id="search-and-replace">Search and Replace</h2>
+
+<h3 id="basic-usage">Basic usage</h3>
+
+<ol>
+<li>在Command Mode 下输入<code>/xxxx</code> 后按<code>&lt;Enter&gt;</code>可在光标后搜索内容为xxxx的字段。</li>
+<li><code>n</code>: 跳转下一个字段，<code>N</code>: 跳转上一个字段。</li>
+</ol>
+
+<h3 id="replace">Replace</h3>
+
+<pre><code>Syntax:[addr]s/源字符串/目的字符串/[option]
+</code></pre>
+
+<ul>
+<li><code>addr</code>: 表示搜索范围</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>.</code></td>
+<td align="center">当前行</td>
+</tr>
+
+<tr>
+<td><code>n</code></td>
+<td align="center">第n行</td>
+</tr>
+
+<tr>
+<td><code>$</code></td>
+<td align="center">最后一行</td>
+</tr>
+
+<tr>
+<td><code>%</code></td>
+<td align="center">全文</td>
+</tr>
+
+<tr>
+<td>[addr1],[addr2]</td>
+<td align="center">指定一个范围</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>我们常用的范围有<code>%</code>（全文），<code>n1,n2</code>（从第n1行到n2行）。</p>
+</blockquote>
+
+<ul>
+<li><code>option</code></li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>g</code></td>
+<td align="center">全局替换</td>
+</tr>
+
+<tr>
+<td><code>c</code></td>
+<td align="center">替换时进行确认</td>
+</tr>
+
+<tr>
+<td><code>i</code></td>
+<td align="center">忽略大小写</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="regular-expression">Regular Expression</h3>
+
+<p>正则表达式是一种<strong>按一定规则匹配一系列文本</strong>的字符串表达式。
+&gt;&ldquo;正则表达式是烦琐的，但它是强大的，学会之后的应用会让你除了提高效率外，会给你带来绝对的成就感。&rdquo;</p>
+
+<p>这里推荐一个网站来学习正则表达式：<a href="http://www.runoob.com/regexp/regexp-tutorial.html">http://www.runoob.com/regexp/regexp-tutorial.html</a>
+Vim中的搜索和替换同样支持正则表达式。大部分语法与其他正则表达式语法相同，但有一小部分略有区别。这里列出一些规则供参考。</p>
+
+<ul>
+<li>元字符</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>.</code></td>
+<td align="center">匹配任意字符</td>
+</tr>
+
+<tr>
+<td><code>[abc]</code></td>
+<td align="center">匹配方括号中的任意一个字符，可用-表示字符范围。如<code>[a-z0-9]</code>匹配小写字母和数字</td>
+</tr>
+
+<tr>
+<td><code>[^abc]</code></td>
+<td align="center">匹配除方括号中字符之外的任意字符</td>
+</tr>
+
+<tr>
+<td><code>\d</code></td>
+<td align="center">匹配阿拉伯数字，等同于<code>[0-9]</code></td>
+</tr>
+
+<tr>
+<td><code>\D</code></td>
+<td align="center">匹配阿拉伯数字之外的任意字符，等同于<code>[^0-9]</code></td>
+</tr>
+
+<tr>
+<td><code>\x</code></td>
+<td align="center">匹配十六进制数字，等同于<code>[0-9A-Fa-f]</code></td>
+</tr>
+
+<tr>
+<td><code>\X</code></td>
+<td align="center">匹配十六进制数字之外的任意字符，等同于<code>[^0-9A-Fa-f]</code></td>
+</tr>
+
+<tr>
+<td><code>\l</code></td>
+<td align="center">匹配<code>[a-z]</code></td>
+</tr>
+
+<tr>
+<td><code>\L</code></td>
+<td align="center">匹配<code>[^a-z]</code></td>
+</tr>
+
+<tr>
+<td><code>\u</code></td>
+<td align="center">匹配<code>[A-Z]</code></td>
+</tr>
+
+<tr>
+<td><code>\U</code></td>
+<td align="center">匹配<code>[^A-Z]</code></td>
+</tr>
+
+<tr>
+<td><code>\w</code></td>
+<td align="center">匹配单词字母，等同于<code>[0-9A-Za-z_]</code></td>
+</tr>
+
+<tr>
+<td><code>\W</code></td>
+<td align="center">匹配单词字母之外的任意字符，等同于<code>[^0-9A-Za-z_]</code></td>
+</tr>
+
+<tr>
+<td><code>\t</code></td>
+<td align="center">匹配<code>&lt;tab&gt;</code>字符</td>
+</tr>
+
+<tr>
+<td><code>\s</code></td>
+<td align="center">匹配空白字符，等同于<code>[\t]</code></td>
+</tr>
+
+<tr>
+<td><code>\S</code></td>
+<td align="center">匹配非空白字符，等同于<code>[^\t]</code></td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>普通字符需转意</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>\*</code></td>
+<td align="center">匹配<code>*</code>字符</td>
+</tr>
+
+<tr>
+<td><code>\.</code></td>
+<td align="center">匹配<code>.</code> 字符</td>
+</tr>
+
+<tr>
+<td><code>\/</code></td>
+<td align="center">匹配 <code>/</code> 字符</td>
+</tr>
+
+<tr>
+<td><code>\\</code></td>
+<td align="center">匹配 <code>\</code> 字符</td>
+</tr>
+
+<tr>
+<td><code>\[</code></td>
+<td align="center">匹配 <code>[</code> 字符</td>
+</tr>
+
+<tr>
+<td><code>\]</code></td>
+<td align="center">匹配 <code>]</code> 字符</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>表示数量的元字符</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>*</code></td>
+<td align="center">匹配0-任意个</td>
+</tr>
+
+<tr>
+<td><code>\+</code></td>
+<td align="center">匹配1-任意个</td>
+</tr>
+
+<tr>
+<td><code>\?</code></td>
+<td align="center">匹配0-1个</td>
+</tr>
+
+<tr>
+<td><code>\{n,m}</code></td>
+<td align="center">匹配n-m个</td>
+</tr>
+
+<tr>
+<td><code>\{n}</code></td>
+<td align="center">匹配n个</td>
+</tr>
+
+<tr>
+<td><code>\{n,}</code></td>
+<td align="center">匹配n-任意个</td>
+</tr>
+
+<tr>
+<td><code>\{,m}</code></td>
+<td align="center">匹配0-m个</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>表示位置的元字符</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>$</code></td>
+<td align="center">匹配行尾</td>
+</tr>
+
+<tr>
+<td><code>^</code></td>
+<td align="center">匹配行首</td>
+</tr>
+
+<tr>
+<td><code>\&lt;</code></td>
+<td align="center">匹配单词词首</td>
+</tr>
+
+<tr>
+<td><code>\&gt;</code></td>
+<td align="center">匹配单词词尾</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="vim-中常用的替换表达式">Vim 中常用的替换表达式</h3>
+
+<h4 id="简单替换表达式">简单替换表达式</h4>
+
+<ul>
+<li><p>替换命令可以在全文中用一个单词替换另一个单词：</p>
+
+<pre><code>:%s/four/4/g
+</code></pre></li>
+
+<li><p>如果你有一个象 &ldquo;thirtyfour&rdquo; 这样的单词，上面的命令会出错。这种情况下，这个单词会被替换成&rdquo;thirty4&rdquo;。要解决这个问题，用 &ldquo;&lt;&rdquo; 来指定匹配单词开头：</p>
+
+<pre><code>:%s/\&lt;four/4/g
+</code></pre></li>
+
+<li><p>显然，这样在处理 &ldquo;fourty&rdquo; 的时候还是会出错。用 &ldquo;&gt;&rdquo; 来解决这个问题：</p>
+
+<pre><code>:%s/\&lt;four\&gt;/4/g
+</code></pre></li>
+
+<li><p>如果你在编码，你可能只想替换注释中的 &ldquo;four&rdquo;，而保留代码中的。由于这很难指定，可以在替换命令中加一个 &ldquo;c&rdquo; 标记，这样，Vim 会在每次替换前提示你：</p>
+
+<pre><code>:%s/\&lt;four\&gt;/4/gc
+</code></pre></li>
+</ul>
+
+<h4 id="删除多余的空格">删除多余的空格</h4>
+
+<ul>
+<li>要删除这些每行后面多余的空格，可以执行如下命令：
+<code>:%s/\s\+$//</code>
+匹配模式为<code>\s\+$</code>，这表示行末（<code>$</code>）前的一个或者多个（<code>\+</code>）空格（<code>\s</code>）。替换命令的部分是空的：<code>//</code>。</li>
+</ul>
+
+<h4 id="匹配重复性">匹配重复性</h4>
+
+<ul>
+<li>星号项 <code>*</code> 规定在它前面的项可以重复任意次。因此:<br />
+<code>
+/a*
+</code><br />
+匹配 &ldquo;a&rdquo;，&rdquo;aa&rdquo;，&rdquo;aaa&rdquo;，等等。但也匹配 &ldquo;&rdquo; (空字串)，因为零次也包含在内。星号 <code>*</code> 仅仅应用于那个紧邻在它前面的项。因此 <code>ab*</code> 匹配 &ldquo;a&rdquo;，&rdquo;ab&rdquo;，&rdquo;abb&rdquo;,&ldquo;abbb&rdquo;，等等。如要多次重复整个字符串，那么该字符串必须被组成一个项。组成一项的方法就是在它前面加 <code>\(</code>，后面加 <code>\)</code>。因此这个命令:<br />
+<code>
+/\(ab\)*
+</code><br />
+匹配: &ldquo;ab&rdquo;，&rdquo;abab&rdquo;，&rdquo;ababab&rdquo;，等等。而且也匹配 &ldquo;&ldquo;。要避免匹配空字串，使用 <code>\+</code>。这表示前面一项可以被匹配一次或多次。<br />
+<code>
+/ab\+
+</code><br />
+匹配 &ldquo;ab&rdquo;，&rdquo;abb&rdquo;，&rdquo;abbb&rdquo;，等等。它不匹配 后面没有跟随 &ldquo;b&rdquo; 的 &ldquo;a&rdquo;。</li>
+</ul>
+
+<h4 id="指定重复次数">指定重复次数</h4>
+
+<ul>
+<li>要匹配某一项的特定次数重复，使用 <code>\{n,m}</code> 这样的形式。其中 &ldquo;n&rdquo; 和 &ldquo;m&rdquo; 都是数字。在它前面的那个项将被重复 &ldquo;n&rdquo; 到 &ldquo;m&rdquo; 次 (包含 &ldquo;n&rdquo; 和 &ldquo;m&rdquo;)。例如:<br />
+<code>
+/ab\{3,5}
+</code><br />
+匹配 &ldquo;abbb&rdquo;，&rdquo;abbbb&rdquo; 以及 &ldquo;abbbbb&rdquo;。
+当 &ldquo;n&rdquo; 省略时，被默认为零。当 &ldquo;m&rdquo; 省略时，被默认为无限大。当 &ldquo;,m&rdquo; 省略时，就表示重复正好 &ldquo;n&rdquo; 次。例如:</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th align="center">匹配次数		</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>\{,4}</code></td>
+<td align="center">0，1，2，3 或 4</td>
+</tr>
+
+<tr>
+<td><code>\{3,}</code></td>
+<td align="center">3，4，5，等等</td>
+</tr>
+
+<tr>
+<td><code>\{0,1}</code></td>
+<td align="center">0 或 1</td>
+</tr>
+
+<tr>
+<td><code>\{0,}</code></td>
+<td align="center">0 或 更多，同 *</td>
+</tr>
+
+<tr>
+<td><code>\{1,}</code></td>
+<td align="center">1 或 更多，同 +</td>
+</tr>
+
+<tr>
+<td><code>\{3}</code></td>
+<td align="center">3</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="多选一匹配">多选一匹配</h4>
+
+<ul>
+<li>在一个查找模式中，&rdquo;或&rdquo; 运算符是 <code>\\|</code>。例如:<br />
+<code>
+/foo\|bar
+</code><br />
+这个命令匹配了 <code>foo</code> 或 <code>bar</code>。更多的抉择可以连在后面:<br />
+<code>
+/one\|two\|three
+</code><br />
+匹配 <code>one</code>，<code>two</code> 或 <code>three</code>。
+如要匹配其多次重复，那么整个抉择结构须置于 <code>\(</code> 和 <code>\)</code> 之间:<br />
+<code>
+/\(foo\|bar\)\+
+</code><br />
+这个命令匹配 <code>foo</code>，<code>foobar</code>，<code>foofoo</code>，<code>barfoobar</code>，等等。</li>
+</ul>
+
+<h4 id="变量替换">变量替换</h4>
+
+<ul>
+<li>置于 <code>\(</code> 和 <code>\)</code> 之间的字符串可以作为变量在替换是引用，例如<code>xxxx this is that xxxx</code>，我们想将这段文本中的<code>this</code>和<code>that</code>进行换位变成<code>xxxx that is this xxxx</code>，Vim的替换命令应该这样写：<code>:.s/\( this \) is \(that\)/\2 is \1/</code>
+其中<code>\1</code>表示<code>this</code>，<code>\2</code>表示<code>that</code>。</li>
+</ul>
+
+<h2 id="ctags-and-taglist">Ctags and Taglist</h2>
+
+<p>Ctags可以定义项目目录下的文件所包含的结构体、函数类型、变量类型、函数名所在位置，并可以他们之间跳转。</p>
+
+<h3 id="ctags-configure">Ctags Configure</h3>
+
+<ol>
+<li>在项目目录下生成tags文件，文件记录了函数、变量等的位置和类型。<br />
+<code>
+cd /path/to/project
+ctags -R *
+</code></li>
+<li>在<code>~/.vimrc</code>中设置<br />
+<code>
+set tags=tags
+</code></li>
+<li>打开项目中的文件</li>
+<li><code>&lt;ctrl&gt;]</code>: 进入光标所指的标识符的定义</li>
+<li><code>&lt;ctrl&gt;t</code>: 回到前一个标签处</li>
+</ol>
+
+<h1 id="pythontag"></h1>
+
+<h3 id="为python标准库添加标签">为Python标准库添加标签</h3>
+
+<ol>
+<li>假设Python标准库的位置是<code>/usr/lib/python3.6</code><br />
+<code>
+ctags -R -f ~/.python.tags /usr/lib/python3.6
+</code></li>
+<li>在<code>~/.vimrc</code>中添加设置<br />
+<code>
+set tags+=~/.python.tags
+</code></li>
+</ol>
+
+<h2 id="systag"></h2>
+
+<h3 id="为c-c-系统函数添加标签">为C/C++系统函数添加标签</h3>
+
+<ol>
+<li>设置系统头文件标签<br />
+<code>
+ctags -R -f ~/.sys.tags /usr/include /usr/local/include
+</code></li>
+<li>在<code>~/.vimrc</code>中添加设置<br />
+<code>
+set tags+=~/.sys.tags
+</code></li>
+</ol>
+
+<h3 id="taglist-configure">Taglist Configure</h3>
+
+<ol>
+<li>安装Taglist，在<a href="http://vim-taglist.sourceforge.net/">Taglist</a>官网下载插件，并解压到<code>~/.vim/</code>目录中，保证该目录下存在：<br />
+<code>
+plugin/taglist.vim
+doc/taglist.txt
+</code></li>
+<li>打开项目中的文件，在Command Mode下输入<br />
+<code>
+:Tilst
+</code></li>
+<li>Taglist中常用快捷键</li>
+</ol>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>&lt;ctrl&gt;ww</code></td>
+<td align="center">在文本窗口和Taglist窗口间切换</td>
+</tr>
+
+<tr>
+<td><code>o</code></td>
+<td align="center">在一个新打开的窗口中显示光标下tag</td>
+</tr>
+
+<tr>
+<td><code>s</code></td>
+<td align="center">更改排序方式，在按名字排序和按出现顺序排序间切换</td>
+</tr>
+
+<tr>
+<td><code>+</code></td>
+<td align="center">打开一个折叠，同zo</td>
+</tr>
+
+<tr>
+<td><code>-</code></td>
+<td align="center">将tag折叠起来，同zc</td>
+</tr>
+
+<tr>
+<td><code>*</code></td>
+<td align="center">打开所有的折叠，同zR</td>
+</tr>
+
+<tr>
+<td><code>=</code></td>
+<td align="center">将所有tag折叠起来，同zM</td>
+</tr>
+
+<tr>
+<td><code>[[</code></td>
+<td align="center">跳到前一个文件</td>
+</tr>
+
+<tr>
+<td><code>]]</code></td>
+<td align="center">跳到后一个文件</td>
+</tr>
+
+<tr>
+<td><code>q</code></td>
+<td align="center">关闭taglist窗口</td>
+</tr>
+</tbody>
+</table>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://xumi1993.github.io/blog/tags/development/">Development</a>
+
+  <a class="tag tag--primary tag--small" href="https://xumi1993.github.io/blog/tags/vim/">Vim</a>
+
+  <a class="tag tag--primary tag--small" href="https://xumi1993.github.io/blog/tags/linux/">Linux</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://xumi1993.github.io/blog/2019/01/mpipool-mpi4py/" data-tooltip="Mpipool Mpi4py">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://xumi1993.github.io/blog/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" data-tooltip="配置Vim开发环境">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://xumi1993.github.io/blog/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://xumi1993.github.io/blog/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://xumi1993.github.io/blog/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Mijian Xu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://xumi1993.github.io/blog/2019/01/mpipool-mpi4py/" data-tooltip="Mpipool Mpi4py">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://xumi1993.github.io/blog/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" data-tooltip="配置Vim开发环境">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://xumi1993.github.io/blog/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://xumi1993.github.io/blog/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://xumi1993.github.io/blog/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fxumi1993.github.io%2Fblog%2F2017%2F11%2Fvim-%25E4%25BD%25BF%25E7%2594%25A8%25E7%25AC%2594%25E8%25AE%25B0%2F">
+          <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fxumi1993.github.io%2Fblog%2F2017%2F11%2Fvim-%25E4%25BD%25BF%25E7%2594%25A8%25E7%25AC%2594%25E8%25AE%25B0%2F">
+          <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fxumi1993.github.io%2Fblog%2F2017%2F11%2Fvim-%25E4%25BD%25BF%25E7%2594%25A8%25E7%25AC%2594%25E8%25AE%25B0%2F">
+          <i class="fa fa-google-plus"></i><span>分享到 Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="//www.gravatar.com/avatar/3c21a901526ad8ccb4e92dd5c571b204?s=110" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Mijian Xu</h4>
+    
+      <div id="about-card-bio">千里之行始于足下</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Ph.D in Seismology, Nanjing University
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+Nanjing
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="搜索" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center"></div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://xumi1993.github.io/blog/2019/02/hhkb%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/">
+                <h3 class="media-heading">Hhkb使用心得</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p><img src="https://xumi1993.github.io/blog/img/kb/hhkb.png" alt="" />
+图片来自<a href="http://www.pfu.com.cn/HHKB/">HHKB官网</a></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://xumi1993.github.io/blog/2019/02/%E6%9C%BA%E6%A2%B0%E9%94%AE%E7%9B%98%E8%BD%B4%E4%BD%93%E5%B0%8F%E8%AE%B0%E4%B8%80cherry/">
+                <h3 class="media-heading">机械键盘轴体小记（一）：Cherry</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p><img src="https://xumi1993.github.io/blog/img/kb/teaser.jpg" alt="" /></p>
+
+<p>Varmilo VA88M 双彩虹RGB，来自<a href="https://www.cherrymx.de/en/blog/VARMILO-VA88M-DOUBLE-RAINBOW-RGB-INTRODUCTION.html">Cherry官方博客</a>。</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://xumi1993.github.io/blog/2019/01/mpipool-mpi4py/">
+                <h3 class="media-heading">Mpipool Mpi4py</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p><a href="http://mpi4py.readthedocs.io/en/stable/index.html">mpi4py</a> is a python API for MPI. <strong>MPIPoolExecutor</strong> is a subclass of <code>mpi4py.futures</code> to create MPI processes to execute calls asynchronously</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://xumi1993.github.io/blog/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">
+                <h3 class="media-heading">Vim 使用笔记</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><h2 id="目录">目录</h2>
+
+<ul>
+<li><strong><a href="#command-mode">Command Mode</a></strong>
+
+<ul>
+<li><a href="#cursor-motions">Cursor Motions</a></li>
+<li><a href="#edit-command">Edit Command</a></li>
+<li><a href="#window-motion">Window Motion</a></li>
+</ul></li>
+<li><strong><a href="#insert-mode">Insert Mode</a></strong></li>
+<li><strong><a href="#visual-mode">Visual Mode</a></strong></li>
+<li><strong><a href="#search-and-replace">Search and Replace</a></strong>
+
+<ul>
+<li><a href="#basic-usage">Basic usage</a></li>
+<li><a href="#replace">Replace</a></li>
+<li><a href="#regular-expression">Regular Expression</a></li>
+<li><a href="#vim-中常用的替换表达式">Vim 中常用的替换表达式</a></li>
+</ul></li>
+<li><strong><a href="#ctags-and-taglist">Ctags and Taglist</a></strong>
+
+<ul>
+<li><a href="#ctags-configure">Ctags Configure</a></li>
+<li><a href="#pythontag">为Python标准库添加标签</a></li>
+<li><a href="#systag">为C/C++系统函数添加标签</a></li>
+<li><a href="#taglist-configure">Taglist Configure</a></li>
+</ul></li>
+</ul></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://xumi1993.github.io/blog/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
+                <h3 class="media-heading">配置Vim开发环境</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>配置一个优秀个开发环境可以极大地提高开发效率，在Linux里Vim是最常用的开发环境之一（emacs也是相当不错的，但鄙人是Vim的忠实粉丝），我们一般所说的开发环境包括了</p>
+
+<ul>
+<li>代码高亮</li>
+<li>文件树</li>
+<li>配色方案</li>
+<li>自动缩进</li>
+<li>代码补全</li>
+</ul>
+
+<p>这里就Linux中配置这些功能做一个简单的介绍</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://xumi1993.github.io/blog/2017/10/fedora26%E4%B8%AD%E5%AE%89%E8%A3%85google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/">
+                <h3 class="media-heading">Fedora26中安装Google拼音输入法</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>在Fedora25的时候sogou拼音出现了一些不兼容的情况，从而使我转而使用Google拼音。如今操作系统已经换成了Fedora26，这里就记录下安装Google拼音的过程。</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://xumi1993.github.io/blog/2017/10/ssh-%E9%9A%A7%E9%81%93%E4%B8%8E%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/">
+                <h3 class="media-heading">SSH 隧道与端口转发</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>中文可以称为SSH隧道，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。通过建立这条隧道，用户可以从客户端直接访问服务器端基于TCP协议的服务如HTTP。</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://xumi1993.github.io/blog/2017/10/%E5%8F%91%E5%B8%83%E4%BB%A3%E7%A0%81%E5%88%B0pypi/">
+                <h3 class="media-heading">发布代码到PyPI</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>作为开发者我们希望自己开发的Python模块可以被更多人使用，为了方便使用，<a href="https://pypi.python.org/pypi">PyPI</a>是管理Python模块最好用的工具之一。所以我们也希望把自己的代码放到PyPI上，以后就可以通过<code>pip install module</code>的方式安装模块了。</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://xumi1993.github.io/blog/post/">
+                <h3 class="media-heading">Posts</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero=""
+         data-message-one=""
+         data-message-other="">
+         9 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://xumi1993.github.io/blog/images/nanjing.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" integrity="sha256-IFHWFEbU2/+wNycDECKgjIRSirRNIDp2acEB5fvdVRU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js" integrity="sha256-+mpyNVJsNt4rVXCw0F+pAOiB3YxmHgrbJsx4ecPuUaI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js" integrity="sha256-vMxgR/7FtLovVA+IPrR7+xTgIgARH7y9VZQnmmi0HDI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js" integrity="sha256-N0qFUh7/9vLvia87dDndewmsgsyYoNkdA212tPc+2NI=" crossorigin="anonymous"></script>
+
+
+<script src="https://xumi1993.github.io/blog/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/xumi1993.github.io\/blog\/2017\/11\/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0\/';
+          
+            this.page.identifier = '\/2017\/11\/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+  </body>
+</html>
+

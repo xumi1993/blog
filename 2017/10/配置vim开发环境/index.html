@@ -1,0 +1,1051 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+  
+
+
+  
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.53 with theme Tranquilpeak 0.4.1-BETA">
+    <title>配置Vim开发环境</title>
+    <meta name="author" content="Mijian Xu">
+    <meta name="keywords" content="">
+
+    <link rel="icon" href="https://xumi1993.github.io/blog/favicon.png">
+    
+
+    
+    <meta name="description" content="配置一个优秀个开发环境可以极大地提高开发效率，在Linux里Vim是最常用的开发环境之一（emacs也是相当不错的，但鄙人是Vim的忠实粉丝），我们一般所说的开发环境包括了
+
+
+代码高亮
+文件树
+配色方案
+自动缩进
+代码补全
+
+
+这里就Linux中配置这些功能做一个简单的介绍">
+    <meta property="og:description" content="配置一个优秀个开发环境可以极大地提高开发效率，在Linux里Vim是最常用的开发环境之一（emacs也是相当不错的，但鄙人是Vim的忠实粉丝），我们一般所说的开发环境包括了
+
+
+代码高亮
+文件树
+配色方案
+自动缩进
+代码补全
+
+
+这里就Linux中配置这些功能做一个简单的介绍">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="配置Vim开发环境">
+    <meta property="og:url" content="/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
+    <meta property="og:site_name" content="Note to Tech">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Note to Tech">
+    <meta name="twitter:description" content="配置一个优秀个开发环境可以极大地提高开发效率，在Linux里Vim是最常用的开发环境之一（emacs也是相当不错的，但鄙人是Vim的忠实粉丝），我们一般所说的开发环境包括了
+
+
+代码高亮
+文件树
+配色方案
+自动缩进
+代码补全
+
+
+这里就Linux中配置这些功能做一个简单的介绍">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="//www.gravatar.com/avatar/3c21a901526ad8ccb4e92dd5c571b204?s=640">
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://xumi1993.github.io/blog/css/style-fpbzgxsy0kgmdvyrj5ykkg6ratccrk3gocmaqn4xpcjywmv5dteilzucro4f.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://xumi1993.github.io/blog/">Note to Tech</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://xumi1993.github.io/blog/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="//www.gravatar.com/avatar/3c21a901526ad8ccb4e92dd5c571b204?s=90" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://xumi1993.github.io/blog/#about">
+          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/3c21a901526ad8ccb4e92dd5c571b204?s=110" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">Mijian Xu</h4>
+        
+          <h5 class="sidebar-profile-bio">千里之行始于足下</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://xumi1993.github.io/blog/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://xumi1993.github.io/blog/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://xumi1993.github.io/blog/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://xumi1993.github.io/blog/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://xumi1993.github.io/blog/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/xumi1993" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://xumi1993.github.io/blog/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      配置Vim开发环境
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-10-29T21:51:29&#43;08:00">
+        
+  十月 29, 2017
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://xumi1993.github.io/blog/categories/linux">Linux</a>
+    
+  
+
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>配置一个优秀个开发环境可以极大地提高开发效率，在Linux里Vim是最常用的开发环境之一（emacs也是相当不错的，但鄙人是Vim的忠实粉丝），我们一般所说的开发环境包括了</p>
+
+<ul>
+<li>代码高亮</li>
+<li>文件树</li>
+<li>配色方案</li>
+<li>自动缩进</li>
+<li>代码补全</li>
+</ul>
+
+<p>这里就Linux中配置这些功能做一个简单的介绍</p>
+
+<p>Vim中配置这些功能主要分为两种方式：1. 安装插件; 2. 修改配置文件。所以第一件事就是安装插件管理器，因为以后所有的插件都将通过它来安装</p>
+
+<h2 id="插件管理器-vundle">插件管理器：vundle</h2>
+
+<p>vim中很多软件可以通过vundle安装，简化了插件的安装过程，vundle的安装也十分简单。</br>
+项目主页：<a href="https://github.com/VundleVim/Vundle.vim">https://github.com/VundleVim/Vundle.vim</a></p>
+
+<h3 id="安装vundle">安装vundle</h3>
+
+<p>在命令行中输入</p>
+
+<pre><code>git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+</code></pre>
+
+<h3 id="配置vundle">配置vundle</h3>
+
+<p>在<code>~/.vimrc</code>文件顶部输入一下代码，配置vundle</p>
+
+<pre><code class="language-Vim">set nocompatible              &quot; be iMproved, required
+filetype off                  &quot; required
+
+&quot; set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
+&quot; 这里放置其他插件
+&quot; 格式为 Plugin 'username/Plugin_name'
+
+call vundle#end()            &quot; required
+filetype plugin indent on    &quot; required
+</code></pre>
+
+<h3 id="安装插件">安装插件</h3>
+
+<p>在刚才输入的代码段<code>call vundle#begin()</code>和<code>call vundle#end()</code>之间放置插件，插入以下代码。</p>
+
+<pre><code class="language-vim">Plugin 'git_name/plugin_name'
+</code></pre>
+
+<blockquote>
+<p>Note: <code>git_name</code>是该插件github的用户名，<code>plugin_name</code>是该插件github的项目名，通常就是插件的名字。
+如果这里不写<code>git_name</code>，vundle默认在<a href="https://github.com/vim-scripts">vim-scripts</a>用户中搜索插件。</p>
+</blockquote>
+
+<p>然后进入Command Mode输入（按Esc键）</p>
+
+<pre><code class="language-vim">:PluginInstall
+</code></pre>
+
+<p>vundle会自动下载安装之前写在<code>~/.vimrc</code>中的插件。</p>
+
+<h2 id="文件树形结构插件-nerdtree">文件树形结构插件：NERDTree</h2>
+
+<p>NERDTree可以让Vim想大多数IDLE一样在窗口一侧显示文件树形结构。Vim中使用窗口分割的方式实现的。分割窗口的切换可以通过<code>&lt;Ctrl-ww&gt;</code>完成。
+项目主页: <a href="https://github.com/scrooloose/nerdtree">https://github.com/scrooloose/nerdtree</a></p>
+
+<h3 id="安装插件-1">安装插件</h3>
+
+<ul>
+<li>在<code>~/.vimrc</code>的<code>vundle</code>段中添加</li>
+</ul>
+
+<pre><code class="language-vim">Plugin 'scrooloose/nerdtree'
+</code></pre>
+
+<ul>
+<li>在command mode下输入</li>
+</ul>
+
+<pre><code class="language-vim">:PluginInstall
+</code></pre>
+
+<h3 id="配置nerdtree">配置NERDTree</h3>
+
+<p>在<code>~/.vimrc</code>中添加语句可以配置NERDTree。这些语句请根据个人喜好选择性添加</p>
+
+<pre><code class="language-vim">&quot; 打开NERDTree快捷键，设置为&lt;F2&gt;
+map &lt;F2&gt; :NERDTreeToggle&lt;CR&gt;
+
+&quot; 显示行号
+let NERDTreeShowLineNumbers=1
+let NERDTreeAutoCenter=1
+&quot; 是否显示隐藏文件
+let NERDTreeShowHidden=1
+&quot; 设置宽度
+let NERDTreeWinSize=30
+&quot; 在终端启动vim时，共享NERDTree
+let g:nerdtree_tabs_open_on_console_startup=1
+&quot; 忽略以下文件的显示
+let NERDTreeIgnore=['\.pyc','\~$','\.swp']
+&quot; 显示书签列表
+let NERDTreeShowBookmarks=1
+
+&quot; 当vim中没有其他文件，值剩下nerdtree的时候，自动关闭窗口
+autocmd bufenter * if (winnr(&quot;$&quot;) == 1 &amp;&amp; exists(&quot;b:NERDTree&quot;) &amp;&amp; b:NERDTree.isTabTree()) | q | endif
+</code></pre>
+
+<h3 id="使用nerdtree">使用NERDTree</h3>
+
+<p>将窗口切换至NERDTree，可以通过快捷键对文件树进行操作。</p>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>o</td>
+<td align="center">打开关闭文件或者目录</td>
+</tr>
+
+<tr>
+<td>t</td>
+<td align="center">在标签页中打开</td>
+</tr>
+
+<tr>
+<td>T</td>
+<td align="center">在后台标签页中打开</td>
+</tr>
+
+<tr>
+<td>!</td>
+<td align="center">执行此文件</td>
+</tr>
+
+<tr>
+<td>p</td>
+<td align="center">到上层目录</td>
+</tr>
+
+<tr>
+<td>P</td>
+<td align="center">到根目录</td>
+</tr>
+
+<tr>
+<td>K</td>
+<td align="center">到第一个节点</td>
+</tr>
+
+<tr>
+<td>J</td>
+<td align="center">到最后一个节点</td>
+</tr>
+
+<tr>
+<td>u</td>
+<td align="center">打开上层目录</td>
+</tr>
+
+<tr>
+<td>m</td>
+<td align="center">显示文件系统菜单（添加、删除、移动操作）</td>
+</tr>
+
+<tr>
+<td>?</td>
+<td align="center">帮助</td>
+</tr>
+
+<tr>
+<td>q</td>
+<td align="center">关闭</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="自动注释与段注释插件-nerdcommenter">自动注释与段注释插件：NerdCommenter</h2>
+
+<p>这是一个对代码进行快速注释的插件。在很多图形化IDE中<code>&lt;Ctrl-/&gt;</code>经常用来表示对光标所在行或选中行的注释。NerdCommenter可以帮助我们在vim中使用这些功能。<br />
+项目主页：<a href="https://github.com/scrooloose/nerdcommenter">https://github.com/scrooloose/nerdcommenter</a></p>
+
+<h3 id="安装插件-2">安装插件</h3>
+
+<ul>
+<li>在<code>~/.vimrc</code>的<code>vundle</code>段中添加</li>
+</ul>
+
+<pre><code class="language-vim">Plugin 'scrooloose/nerdcommenter'
+</code></pre>
+
+<ul>
+<li>在command mode下输入</li>
+</ul>
+
+<pre><code class="language-vim">:PluginInstall
+</code></pre>
+
+<h3 id="初次使用nerdcommenter">初次使用NerdCommenter</h3>
+
+<p>在没有任何配置的情况下插件已经可以使用了。具体说明可以查看<code>:help NERDCommenter</code>。最简单的注释/取消注释是通过<code>&lt;Leader&gt;c&lt;Space&gt;</code>实现的。</p>
+
+<blockquote>
+<p>vim的<code>&lt;Leader&gt;</code>键默认是<code>\</code>。</p>
+</blockquote>
+
+<h3 id="配置nerdcommenter">配置NerdCommenter</h3>
+
+<p>其实这个插件做的很不错了，几乎不需要太多的配置我只是根据个人习惯做了些小修改:</p>
+
+<pre><code>let g:NERDSpaceDelims = 1
+imap &lt;D-/&gt; &lt;Esc&gt;&lt;leader&gt;c&lt;Space&gt;a
+imap &lt;C-_&gt; &lt;Esc&gt;&lt;leader&gt;c&lt;Space&gt;a
+map &lt;C-_&gt; &lt;Leader&gt;c&lt;Space&gt;
+vmap &lt;C-_&gt; &lt;Leader&gt;c&lt;Space&gt;
+</code></pre>
+
+<ul>
+<li>第一行：在代码和注释间加一个空格。</li>
+<li>第二行：应为我用的是Mac电脑所以对于单行注释空<code>&lt;cmd-/&gt;</code>代替。</li>
+<li>第三～五行：用<code>&lt;Ctrl-_&gt;</code>进行单行或多行注释。</li>
+</ul>
+
+<blockquote>
+<ul>
+<li><code>&lt;cmd-/&gt;</code>只能进行单行注释的原因是这个快捷键有可能被图像窗口（MacVim或终端）的快捷键冲突。</li>
+<li>这里不用<code>&lt;Ctrl-/&gt;</code>的原因是这个快捷键被Vim本身注册了。详见：<a href="https://stackoverflow.com/questions/9051837/how-to-map-c-to-toggle-comments-in-vim">How to map <code>&lt;C-/&gt;</code> to toggle comments in vim?</a></li>
+</ul>
+</blockquote>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://xumi1993.github.io/blog/tags/development/">Development</a>
+
+  <a class="tag tag--primary tag--small" href="https://xumi1993.github.io/blog/tags/vim/">Vim</a>
+
+  <a class="tag tag--primary tag--small" href="https://xumi1993.github.io/blog/tags/linux/">Linux</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://xumi1993.github.io/blog/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" data-tooltip="Vim 使用笔记">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://xumi1993.github.io/blog/2017/10/fedora26%E4%B8%AD%E5%AE%89%E8%A3%85google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/" data-tooltip="Fedora26中安装Google拼音输入法">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://xumi1993.github.io/blog/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://xumi1993.github.io/blog/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://xumi1993.github.io/blog/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Mijian Xu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://xumi1993.github.io/blog/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" data-tooltip="Vim 使用笔记">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://xumi1993.github.io/blog/2017/10/fedora26%E4%B8%AD%E5%AE%89%E8%A3%85google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/" data-tooltip="Fedora26中安装Google拼音输入法">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://xumi1993.github.io/blog/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://xumi1993.github.io/blog/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://xumi1993.github.io/blog/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fxumi1993.github.io%2Fblog%2F2017%2F10%2F%25E9%2585%258D%25E7%25BD%25AEvim%25E5%25BC%2580%25E5%258F%2591%25E7%258E%25AF%25E5%25A2%2583%2F">
+          <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fxumi1993.github.io%2Fblog%2F2017%2F10%2F%25E9%2585%258D%25E7%25BD%25AEvim%25E5%25BC%2580%25E5%258F%2591%25E7%258E%25AF%25E5%25A2%2583%2F">
+          <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fxumi1993.github.io%2Fblog%2F2017%2F10%2F%25E9%2585%258D%25E7%25BD%25AEvim%25E5%25BC%2580%25E5%258F%2591%25E7%258E%25AF%25E5%25A2%2583%2F">
+          <i class="fa fa-google-plus"></i><span>分享到 Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="//www.gravatar.com/avatar/3c21a901526ad8ccb4e92dd5c571b204?s=110" alt="作者的图片" />
+    
+    <h4 id="about-card-name">Mijian Xu</h4>
+    
+      <div id="about-card-bio">千里之行始于足下</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Ph.D in Seismology, Nanjing University
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+Nanjing
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="搜索" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center"></div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://xumi1993.github.io/blog/2019/02/hhkb%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/">
+                <h3 class="media-heading">Hhkb使用心得</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p><img src="https://xumi1993.github.io/blog/img/kb/hhkb.png" alt="" />
+图片来自<a href="http://www.pfu.com.cn/HHKB/">HHKB官网</a></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://xumi1993.github.io/blog/2019/02/%E6%9C%BA%E6%A2%B0%E9%94%AE%E7%9B%98%E8%BD%B4%E4%BD%93%E5%B0%8F%E8%AE%B0%E4%B8%80cherry/">
+                <h3 class="media-heading">机械键盘轴体小记（一）：Cherry</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p><img src="https://xumi1993.github.io/blog/img/kb/teaser.jpg" alt="" /></p>
+
+<p>Varmilo VA88M 双彩虹RGB，来自<a href="https://www.cherrymx.de/en/blog/VARMILO-VA88M-DOUBLE-RAINBOW-RGB-INTRODUCTION.html">Cherry官方博客</a>。</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://xumi1993.github.io/blog/2019/01/mpipool-mpi4py/">
+                <h3 class="media-heading">Mpipool Mpi4py</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p><a href="http://mpi4py.readthedocs.io/en/stable/index.html">mpi4py</a> is a python API for MPI. <strong>MPIPoolExecutor</strong> is a subclass of <code>mpi4py.futures</code> to create MPI processes to execute calls asynchronously</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://xumi1993.github.io/blog/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">
+                <h3 class="media-heading">Vim 使用笔记</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Nov 11, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><h2 id="目录">目录</h2>
+
+<ul>
+<li><strong><a href="#command-mode">Command Mode</a></strong>
+
+<ul>
+<li><a href="#cursor-motions">Cursor Motions</a></li>
+<li><a href="#edit-command">Edit Command</a></li>
+<li><a href="#window-motion">Window Motion</a></li>
+</ul></li>
+<li><strong><a href="#insert-mode">Insert Mode</a></strong></li>
+<li><strong><a href="#visual-mode">Visual Mode</a></strong></li>
+<li><strong><a href="#search-and-replace">Search and Replace</a></strong>
+
+<ul>
+<li><a href="#basic-usage">Basic usage</a></li>
+<li><a href="#replace">Replace</a></li>
+<li><a href="#regular-expression">Regular Expression</a></li>
+<li><a href="#vim-中常用的替换表达式">Vim 中常用的替换表达式</a></li>
+</ul></li>
+<li><strong><a href="#ctags-and-taglist">Ctags and Taglist</a></strong>
+
+<ul>
+<li><a href="#ctags-configure">Ctags Configure</a></li>
+<li><a href="#pythontag">为Python标准库添加标签</a></li>
+<li><a href="#systag">为C/C++系统函数添加标签</a></li>
+<li><a href="#taglist-configure">Taglist Configure</a></li>
+</ul></li>
+</ul></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://xumi1993.github.io/blog/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
+                <h3 class="media-heading">配置Vim开发环境</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>配置一个优秀个开发环境可以极大地提高开发效率，在Linux里Vim是最常用的开发环境之一（emacs也是相当不错的，但鄙人是Vim的忠实粉丝），我们一般所说的开发环境包括了</p>
+
+<ul>
+<li>代码高亮</li>
+<li>文件树</li>
+<li>配色方案</li>
+<li>自动缩进</li>
+<li>代码补全</li>
+</ul>
+
+<p>这里就Linux中配置这些功能做一个简单的介绍</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://xumi1993.github.io/blog/2017/10/fedora26%E4%B8%AD%E5%AE%89%E8%A3%85google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/">
+                <h3 class="media-heading">Fedora26中安装Google拼音输入法</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>在Fedora25的时候sogou拼音出现了一些不兼容的情况，从而使我转而使用Google拼音。如今操作系统已经换成了Fedora26，这里就记录下安装Google拼音的过程。</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://xumi1993.github.io/blog/2017/10/ssh-%E9%9A%A7%E9%81%93%E4%B8%8E%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/">
+                <h3 class="media-heading">SSH 隧道与端口转发</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>中文可以称为SSH隧道，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。通过建立这条隧道，用户可以从客户端直接访问服务器端基于TCP协议的服务如HTTP。</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://xumi1993.github.io/blog/2017/10/%E5%8F%91%E5%B8%83%E4%BB%A3%E7%A0%81%E5%88%B0pypi/">
+                <h3 class="media-heading">发布代码到PyPI</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>作为开发者我们希望自己开发的Python模块可以被更多人使用，为了方便使用，<a href="https://pypi.python.org/pypi">PyPI</a>是管理Python模块最好用的工具之一。所以我们也希望把自己的代码放到PyPI上，以后就可以通过<code>pip install module</code>的方式安装模块了。</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://xumi1993.github.io/blog/post/">
+                <h3 class="media-heading">Posts</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero=""
+         data-message-one=""
+         data-message-other="">
+         9 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://xumi1993.github.io/blog/images/nanjing.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" integrity="sha256-IFHWFEbU2/+wNycDECKgjIRSirRNIDp2acEB5fvdVRU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js" integrity="sha256-+mpyNVJsNt4rVXCw0F+pAOiB3YxmHgrbJsx4ecPuUaI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js" integrity="sha256-vMxgR/7FtLovVA+IPrR7+xTgIgARH7y9VZQnmmi0HDI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js" integrity="sha256-N0qFUh7/9vLvia87dDndewmsgsyYoNkdA212tPc+2NI=" crossorigin="anonymous"></script>
+
+
+<script src="https://xumi1993.github.io/blog/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/xumi1993.github.io\/blog\/2017\/10\/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83\/';
+          
+            this.page.identifier = '\/2017\/10\/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+  </body>
+</html>
+

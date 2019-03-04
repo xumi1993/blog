@@ -1,40 +1,103 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Mijian Xu</title>
-    <link>https://xumi1993.github.io/home/tags/</link>
-    <description>Recent content in Tags on Mijian Xu</description>
+    <title>Tags on Note to Tech</title>
+    <link>https://xumi1993.github.io/blog/tags/</link>
+    <description>Recent content in Tags on Note to Tech</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 03 Mar 2019 22:24:27 +0800</lastBuildDate>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 01 Nov 2017 14:21:22 +0800</lastBuildDate>
     
-	<atom:link href="https://xumi1993.github.io/home/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://xumi1993.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Crustal Structure</title>
-      <link>https://xumi1993.github.io/home/tags/crustal-structure/</link>
-      <pubDate>Sun, 03 Mar 2019 22:24:27 +0800</pubDate>
+      <title>Development</title>
+      <link>https://xumi1993.github.io/blog/tags/development/</link>
+      <pubDate>Wed, 01 Nov 2017 14:21:22 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/home/tags/crustal-structure/</guid>
+      <guid>https://xumi1993.github.io/blog/tags/development/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Mantle Transition Zone</title>
-      <link>https://xumi1993.github.io/home/tags/mantle-transition-zone/</link>
-      <pubDate>Sun, 03 Mar 2019 21:49:32 +0800</pubDate>
+      <title>Fedora</title>
+      <link>https://xumi1993.github.io/blog/tags/fedora/</link>
+      <pubDate>Fri, 27 Oct 2017 12:26:29 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/home/tags/mantle-transition-zone/</guid>
+      <guid>https://xumi1993.github.io/blog/tags/fedora/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Software</title>
-      <link>https://xumi1993.github.io/home/tags/software/</link>
-      <pubDate>Sun, 03 Mar 2019 22:33:40 +0800</pubDate>
+      <title>Hhkb</title>
+      <link>https://xumi1993.github.io/blog/tags/hhkb/</link>
+      <pubDate>Sun, 03 Feb 2019 12:54:38 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/home/tags/software/</guid>
+      <guid>https://xumi1993.github.io/blog/tags/hhkb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Keyboard</title>
+      <link>https://xumi1993.github.io/blog/tags/keyboard/</link>
+      <pubDate>Fri, 01 Feb 2019 17:57:29 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/blog/tags/keyboard/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://xumi1993.github.io/blog/tags/linux/</link>
+      <pubDate>Wed, 01 Nov 2017 14:21:22 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/blog/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mpi</title>
+      <link>https://xumi1993.github.io/blog/tags/mpi/</link>
+      <pubDate>Thu, 03 Jan 2019 13:31:58 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/blog/tags/mpi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://xumi1993.github.io/blog/tags/python/</link>
+      <pubDate>Thu, 03 Jan 2019 13:31:58 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/blog/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ssh</title>
+      <link>https://xumi1993.github.io/blog/tags/ssh/</link>
+      <pubDate>Thu, 26 Oct 2017 21:51:29 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/blog/tags/ssh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tools</title>
+      <link>https://xumi1993.github.io/blog/tags/tools/</link>
+      <pubDate>Fri, 27 Oct 2017 12:26:29 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/blog/tags/tools/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vim</title>
+      <link>https://xumi1993.github.io/blog/tags/vim/</link>
+      <pubDate>Wed, 01 Nov 2017 14:21:22 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/blog/tags/vim/</guid>
       <description></description>
     </item>
     
