@@ -1,5 +1,9 @@
 
 
+  
+    
+  
+
 
   
 
@@ -53,25 +57,29 @@ code.has-jax {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.37.1 with theme Tranquilpeak 0.4.1-BETA">
-    <title>Development</title>
+    <title>用sshfs远程挂载路径到本地</title>
     <meta name="author" content="Mijian Xu">
     <meta name="keywords" content="">
 
-    <link rel="icon" href="../../favicon.png">
-    
-      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://xumi1993.github.io/blog/tags/development/index.xml">
+    <link rel="icon" href="../../../favicon.png">
     
 
     
-    <meta name="description" content="Mijian&#39;s Blog">
-    <meta property="og:description" content="Mijian&#39;s Blog">
+    <meta name="description" content="ssh是常用的远程登陆服务，我们经常使用scp、sftp等工具与远程服务器进行文件交互。如果是常用的服务器这样工具相对麻烦，如果我们可以像打开本地文件一样打开服务器上的文件就十分方便了。sshfs可以将远程服务器上的路径作为文件系统挂载到本地。
+
+">
+    <meta property="og:description" content="ssh是常用的远程登陆服务，我们经常使用scp、sftp等工具与远程服务器进行文件交互。如果是常用的服务器这样工具相对麻烦，如果我们可以像打开本地文件一样打开服务器上的文件就十分方便了。sshfs可以将远程服务器上的路径作为文件系统挂载到本地。
+
+">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Development">
-    <meta property="og:url" content="/tags/development/">
+    <meta property="og:title" content="用sshfs远程挂载路径到本地">
+    <meta property="og:url" content="/2019/03/%E7%94%A8sshfs%E8%BF%9C%E7%A8%8B%E6%8C%82%E8%BD%BD%E8%B7%AF%E5%BE%84%E5%88%B0%E6%9C%AC%E5%9C%B0/">
     <meta property="og:site_name" content="Note to Tech">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Note to Tech">
-    <meta name="twitter:description" content="Mijian&#39;s Blog">
+    <meta name="twitter:description" content="ssh是常用的远程登陆服务，我们经常使用scp、sftp等工具与远程服务器进行文件交互。如果是常用的服务器这样工具相对麻烦，如果我们可以像打开本地文件一样打开服务器上的文件就十分方便了。sshfs可以将远程服务器上的路径作为文件系统挂载到本地。
+
+">
     
     
 
@@ -94,7 +102,7 @@ code.has-jax {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="../../css/style-fpbzgxsy0kgmdvyrj5ykkg6ratccrk3gocmaqn4xpcjywmv5dteilzucro4f.min.css" />
+    <link rel="stylesheet" href="../../../css/style-fpbzgxsy0kgmdvyrj5ykkg6ratccrk3gocmaqn4xpcjywmv5dteilzucro4f.min.css" />
     
     
 
@@ -106,15 +114,15 @@ code.has-jax {
 
   <body>
     <div id="blog">
-      <header id="header" data-behavior="2">
+      <header id="header" data-behavior="5">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="../../">Note to Tech</a>
+    <a class="header-title-link" href="../../../">Note to Tech</a>
   </div>
   
     
       <a class="header-right-picture "
-         href="../../#about">
+         href="../../../#about">
     
     
     
@@ -126,11 +134,11 @@ code.has-jax {
   
 </header>
 
-      <nav id="sidebar" data-behavior="2">
+      <nav id="sidebar" data-behavior="5">
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <a href="../../#about">
+        <a href="../../../#about">
           <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/3c21a901526ad8ccb4e92dd5c571b204?s=110" alt="作者的图片" />
         </a>
         <h4 class="sidebar-profile-name">Mijian Xu</h4>
@@ -143,7 +151,7 @@ code.has-jax {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="../../">
+      <a class="sidebar-button-link " href="../../../">
     
       <i class="sidebar-button-icon fa fa-lg fa-home"></i>
       
@@ -153,7 +161,7 @@ code.has-jax {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="../../categories">
+      <a class="sidebar-button-link " href="../../../categories">
     
       <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
       
@@ -163,7 +171,7 @@ code.has-jax {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="../../tags">
+      <a class="sidebar-button-link " href="../../../tags">
     
       <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
       
@@ -173,7 +181,7 @@ code.has-jax {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="../../archives">
+      <a class="sidebar-button-link " href="../../../archives">
     
       <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
       
@@ -183,7 +191,7 @@ code.has-jax {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="../../#about">
+      <a class="sidebar-button-link " href="../../../#about">
     
       <i class="sidebar-button-icon fa fa-lg fa-question"></i>
       
@@ -211,7 +219,7 @@ code.has-jax {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="../../index.xml">
+      <a class="sidebar-button-link " href="../../../index.xml">
     
       <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
       
@@ -225,44 +233,26 @@ code.has-jax {
 </nav>
 
       
-        
 
-      
-      <div id="main" data-behavior="2"
+      <div id="main" data-behavior="5"
         class="
                hasCoverMetaIn
                ">
-        
-          <section class="postShorten-group main-content-wrap">
-            
-            
-              
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
   
-    
-      
-        
-      
-    
+    <h1 class="post-title" itemprop="headline">
+      用sshfs远程挂载路径到本地
+    </h1>
   
-
-
   
-
-<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://xumi1993.github.io/blog/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">
-          Vim 使用笔记
-        </a>
-      </h1>
-      
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2017-11-01T14:21:22&#43;08:00">
+      <time itemprop="datePublished" datetime="2019-03-21T13:54:42&#43;08:00">
         
-  十一月 1, 2017
+  三月 21, 2019
 
       </time>
     
@@ -271,237 +261,150 @@ code.has-jax {
   
     <span>发布在</span>
     
-      <a class="category-link" href="../../categories/linux">Linux</a>
+      <a class="category-link" href="../../../categories/linux">Linux</a>
     
   
 
 
   </div>
 
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      <h2 id="目录">目录</h2>
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p><strong>ssh</strong>是常用的远程登陆服务，我们经常使用<strong>scp</strong>、<strong>sftp</strong>等工具与远程服务器进行文件交互。如果是常用的服务器这样工具相对麻烦，如果我们可以像打开本地文件一样打开服务器上的文件就十分方便了。<strong>sshfs可以将远程服务器上的路径作为文件系统挂载到本地。</strong></p>
+
+<p></p>
+
+<h2 id="1-安装sshfs">1. 安装sshfs</h2>
+
+<p>先安装<strong>sshfs</strong>和<strong>fuse</strong></p>
+
+<pre><code>sudo dnf install fuse sshfs
+</code></pre>
+
+<h2 id="2-临时挂载">2. 临时挂载</h2>
+
+<h3 id="设置本地挂载路径">设置本地挂载路径</h3>
+
+<p>在本地新建一个路径用于挂载，按照Linux的规则挂载路径通常在<code>/mnt</code>下。同时我们还要对新建的路径赋予用户可操作的权限。为了防止其他用户访问我们挂载的路径，这里最好选择修改权限所有者或修改ACL权限。</p>
+
+<pre><code>sudo mkdir /mnt/xxx
+sudo setfacl -m u:user:rwx /mnt/xxx
+</code></pre>
+
+<h3 id="挂载远程路径">挂载远程路径</h3>
+
+<p>下面就可以用sshfs进行挂载</p>
+
+<pre><code>sudo sshfs -o allow_other -o reconnect -o transform_symlinks -o follow_symlinks -o cache=yes remote_user@server:/path/to/mount /mnt/xxx
+</code></pre>
 
 <ul>
-<li><strong><a href="#command-mode">Command Mode</a></strong>
-
-<ul>
-<li><a href="#cursor-motions">Cursor Motions</a></li>
-<li><a href="#edit-command">Edit Command</a></li>
-<li><a href="#window-motion">Window Motion</a></li>
-</ul></li>
-<li><strong><a href="#insert-mode">Insert Mode</a></strong></li>
-<li><strong><a href="#visual-mode">Visual Mode</a></strong></li>
-<li><strong><a href="#search-and-replace">Search and Replace</a></strong>
-
-<ul>
-<li><a href="#basic-usage">Basic usage</a></li>
-<li><a href="#replace">Replace</a></li>
-<li><a href="#regular-expression">Regular Expression</a></li>
-<li><a href="#vim-中常用的替换表达式">Vim 中常用的替换表达式</a></li>
-</ul></li>
-<li><strong><a href="#ctags-and-taglist">Ctags and Taglist</a></strong>
-
-<ul>
-<li><a href="#ctags-configure">Ctags Configure</a></li>
-<li><a href="#pythontag">为Python标准库添加标签</a></li>
-<li><a href="#systag">为C/C++系统函数添加标签</a></li>
-<li><a href="#taglist-configure">Taglist Configure</a>
-      <p>
-        <a href="https://xumi1993.github.io/blog/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" class="postShorten-excerpt_link link">阅读全文</a>
-        
-      </p>
-    </div>
-  </div>
-  
-</article>
-
-            
-              
-  
-    
-      
-        
-      
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://xumi1993.github.io/blog/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
-          配置Vim开发环境
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2017-10-29T21:51:29&#43;08:00">
-        
-  十月 29, 2017
-
-      </time>
-    
-    
-  
-  
-    <span>发布在</span>
-    
-      <a class="category-link" href="../../categories/linux">Linux</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>配置一个优秀个开发环境可以极大地提高开发效率，在Linux里Vim是最常用的开发环境之一（emacs也是相当不错的，但鄙人是Vim的忠实粉丝），我们一般所说的开发环境包括了</p>
-
-<ul>
-<li>代码高亮</li>
-<li>文件树</li>
-<li>配色方案</li>
-<li>自动缩进</li>
-<li>代码补全</li>
+<li><code>allow_other</code> 允许userid与服务器上userid不同的用户访问（<strong>非常重要</strong>）</li>
+<li><code>reconnect</code> 断线重联</li>
+<li><code>transform_symlinks</code> 表示转换绝对链接符号为相对链接符号</li>
+<li><code>follow_symlinks</code> 沿用服务器上的链接符号</li>
 </ul>
 
-<p>这里就Linux中配置这些功能做一个简单的介绍</p>
+<h3 id="使用公私钥对登陆">使用公私钥对登陆</h3>
 
-<p></p>
-      <p>
-        <a href="https://xumi1993.github.io/blog/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="postShorten-excerpt_link link">阅读全文</a>
+<p>这里和ssh有些不一样，我在配置了公私钥对的情况下，在尝试挂载时还是要求输入密码。所与需要在挂载时使用选项<code>-o IdentityFile=/path/to/id_rsa</code></p>
+
+<h3 id="卸载路径">卸载路径</h3>
+
+<p>和普通的硬盘卸载一样使用</p>
+
+<pre><code>sudo umount /mnt/xxx
+</code></pre>
+
+<h2 id="3-开机自动挂载">3. 开机自动挂载</h2>
+
+<p>开机自动挂载的方式和普通的硬盘一样在<code>/etc/fstab</code>中添加</p>
+
+<pre><code class="language-fstab">sshfs#xu_mijian@114.212.112.63:/path/to/mount /mnt/xxx	fuse	defaults,auto,IdentityFile=/home/user/.ssh/id_rsa,allow_other,reconnect,transform_symlinks,follow_symlinks	0	0
+</code></pre>
+
+<p>然后在命令行中挂载</p>
+
+<pre><code>sudo mount -a
+</code></pre>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://xumi1993.github.io/blog/tags/ssh/">SSH</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2019/02/hhkb%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/" data-tooltip="Hhkb使用心得">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
         
-      </p>
-    </div>
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
   </div>
-  
-</article>
+
 
             
               
-  
-    
-      
-        
-      
-    
-  
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
 
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://xumi1993.github.io/blog/2017/10/ssh-%E9%9A%A7%E9%81%93%E4%B8%8E%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/">
-          SSH 隧道与端口转发
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2017-10-26T21:51:29&#43;08:00">
-        
-  十月 26, 2017
-
-      </time>
-    
-    
-  
-  
-    <span>发布在</span>
-    
-      <a class="category-link" href="../../categories/linux">Linux</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>中文可以称为SSH隧道，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。通过建立这条隧道，用户可以从客户端直接访问服务器端基于TCP协议的服务如HTTP。</p>
-
-<p></p>
-      <p>
-        <a href="https://xumi1993.github.io/blog/2017/10/ssh-%E9%9A%A7%E9%81%93%E4%B8%8E%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/" class="postShorten-excerpt_link link">阅读全文</a>
-        
-      </p>
-    </div>
-  </div>
-  
-</article>
-
-            
               
-  
-    
-      
-        
-      
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://xumi1993.github.io/blog/2017/10/%E5%8F%91%E5%B8%83%E4%BB%A3%E7%A0%81%E5%88%B0pypi/">
-          发布代码到PyPI
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2017-10-23T21:51:29&#43;08:00">
-        
-  十月 23, 2017
-
-      </time>
-    
-    
-  
-  
-    <span>发布在</span>
-    
-      <a class="category-link" href="../../categories/python">Python</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>作为开发者我们希望自己开发的Python模块可以被更多人使用，为了方便使用，<a href="https://pypi.python.org/pypi">PyPI</a>是管理Python模块最好用的工具之一。所以我们也希望把自己的代码放到PyPI上，以后就可以通过<code>pip install module</code>的方式安装模块了。</p>
-
-<p></p>
-      <p>
-        <a href="https://xumi1993.github.io/blog/2017/10/%E5%8F%91%E5%B8%83%E4%BB%A3%E7%A0%81%E5%88%B0pypi/" class="postShorten-excerpt_link link">阅读全文</a>
-        
-      </p>
-    </div>
-  </div>
-  
-</article>
-
             
-            
-
-          </section>
-        
+          </div>
+        </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
     &copy; 2019 Mijian Xu. All Rights Reserved
@@ -509,6 +412,64 @@ code.has-jax {
 </footer>
 
       </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2019/02/hhkb%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/" data-tooltip="Hhkb使用心得">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
     </div>
     
     <div id="about">
@@ -590,7 +551,7 @@ Nanjing
                   Feb 2, 2019
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p><img src="../../img/kb/hhkb.png" alt="" />
+              <div class="media-content hide-xs font-merryweather"><p><img src="../../../img/kb/hhkb.png" alt="" />
 图片来自<a href="http://www.pfu.com.cn/HHKB/">HHKB官网</a>
 </p></div>
             </div>
@@ -609,7 +570,7 @@ Nanjing
                   Feb 2, 2019
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p><img src="../../img/kb/teaser.jpg" alt="" /></p>
+              <div class="media-content hide-xs font-merryweather"><p><img src="../../../img/kb/teaser.jpg" alt="" /></p>
 
 <p>Varmilo VA88M 双彩虹RGB，来自<a href="https://www.cherrymx.de/en/blog/VARMILO-VA88M-DOUBLE-RAINBOW-RGB-INTRODUCTION.html">Cherry官方博客</a>。</p></div>
             </div>
@@ -807,7 +768,7 @@ Nanjing
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js" integrity="sha256-N0qFUh7/9vLvia87dDndewmsgsyYoNkdA212tPc+2NI=" crossorigin="anonymous"></script>
 
 
-<script src="../../js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+<script src="../../../js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
 
 
 <script>
@@ -821,6 +782,32 @@ $(document).ready(function() {
   });
 });
 </script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/xumi1993.github.io\/blog\/2019\/03\/%E7%94%A8sshfs%E8%BF%9C%E7%A8%8B%E6%8C%82%E8%BD%BD%E8%B7%AF%E5%BE%84%E5%88%B0%E6%9C%AC%E5%9C%B0\/';
+          
+            this.page.identifier = '\/2019\/03\/%E7%94%A8sshfs%E8%BF%9C%E7%A8%8B%E6%8C%82%E8%BD%BD%E8%B7%AF%E5%BE%84%E5%88%B0%E6%9C%AC%E5%9C%B0\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'xumi1993';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
 
 
 

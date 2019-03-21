@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Note to Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 03 Feb 2019 12:54:38 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 21 Mar 2019 13:54:42 +0800</lastBuildDate>
     
 	<atom:link href="https://xumi1993.github.io/blog/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>用sshfs远程挂载路径到本地</title>
+      <link>https://xumi1993.github.io/blog/2019/03/%E7%94%A8sshfs%E8%BF%9C%E7%A8%8B%E6%8C%82%E8%BD%BD%E8%B7%AF%E5%BE%84%E5%88%B0%E6%9C%AC%E5%9C%B0/</link>
+      <pubDate>Thu, 21 Mar 2019 13:54:42 +0800</pubDate>
+      
+      <guid>https://xumi1993.github.io/blog/2019/03/%E7%94%A8sshfs%E8%BF%9C%E7%A8%8B%E6%8C%82%E8%BD%BD%E8%B7%AF%E5%BE%84%E5%88%B0%E6%9C%AC%E5%9C%B0/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;ssh&lt;/strong&gt;是常用的远程登陆服务，我们经常使用&lt;strong&gt;scp&lt;/strong&gt;、&lt;strong&gt;sftp&lt;/strong&gt;等工具与远程服务器进行文件交互。如果是常用的服务器这样工具相对麻烦，如果我们可以像打开本地文件一样打开服务器上的文件就十分方便了。&lt;strong&gt;sshfs可以将远程服务器上的路径作为文件系统挂载到本地。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Hhkb使用心得</title>
@@ -17,8 +28,9 @@
       <pubDate>Sun, 03 Feb 2019 12:54:38 +0800</pubDate>
       
       <guid>https://xumi1993.github.io/blog/2019/02/hhkb%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://xumi1993.github.io/blog/img/kb/hhkb.png&#34; alt=&#34;&#34; /&gt;
-图片来自&lt;a href=&#34;http://www.pfu.com.cn/HHKB/&#34;&gt;HHKB官网&lt;/a&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;img src=&#34;../img/kb/hhkb.png&#34; alt=&#34;&#34; /&gt;
+图片来自&lt;a href=&#34;http://www.pfu.com.cn/HHKB/&#34;&gt;HHKB官网&lt;/a&gt;
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -27,7 +39,7 @@
       <pubDate>Fri, 01 Feb 2019 17:57:29 +0800</pubDate>
       
       <guid>https://xumi1993.github.io/blog/2019/02/%E6%9C%BA%E6%A2%B0%E9%94%AE%E7%9B%98%E8%BD%B4%E4%BD%93%E5%B0%8F%E8%AE%B0%E4%B8%80cherry/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://xumi1993.github.io/blog/img/kb/teaser.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;../img/kb/teaser.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Varmilo VA88M 双彩虹RGB，来自&lt;a href=&#34;https://www.cherrymx.de/en/blog/VARMILO-VA88M-DOUBLE-RAINBOW-RGB-INTRODUCTION.html&#34;&gt;Cherry官方博客&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
@@ -38,7 +50,8 @@
       <pubDate>Thu, 03 Jan 2019 13:31:58 +0800</pubDate>
       
       <guid>https://xumi1993.github.io/blog/2019/01/mpipool-mpi4py/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;http://mpi4py.readthedocs.io/en/stable/index.html&#34;&gt;mpi4py&lt;/a&gt; is a python API for MPI. &lt;strong&gt;MPIPoolExecutor&lt;/strong&gt; is a subclass of &lt;code&gt;mpi4py.futures&lt;/code&gt; to create MPI processes to execute calls asynchronously&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;a href=&#34;http://mpi4py.readthedocs.io/en/stable/index.html&#34;&gt;mpi4py&lt;/a&gt; is a python API for MPI. &lt;strong&gt;MPIPoolExecutor&lt;/strong&gt; is a subclass of &lt;code&gt;mpi4py.futures&lt;/code&gt; to create MPI processes to execute calls asynchronously
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -73,9 +86,7 @@
 &lt;li&gt;&lt;a href=&#34;#ctags-configure&#34;&gt;Ctags Configure&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#pythontag&#34;&gt;为Python标准库添加标签&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#systag&#34;&gt;为C/C++系统函数添加标签&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#taglist-configure&#34;&gt;Taglist Configure&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;</description>
+&lt;li&gt;&lt;a href=&#34;#taglist-configure&#34;&gt;Taglist Configure&lt;/a&gt;</description>
     </item>
     
     <item>
@@ -94,7 +105,9 @@
 &lt;li&gt;代码补全&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;这里就Linux中配置这些功能做一个简单的介绍&lt;/p&gt;</description>
+&lt;p&gt;这里就Linux中配置这些功能做一个简单的介绍&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -103,7 +116,9 @@
       <pubDate>Fri, 27 Oct 2017 12:26:29 +0800</pubDate>
       
       <guid>https://xumi1993.github.io/blog/2017/10/fedora26%E4%B8%AD%E5%AE%89%E8%A3%85google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/</guid>
-      <description>&lt;p&gt;在Fedora25的时候sogou拼音出现了一些不兼容的情况，从而使我转而使用Google拼音。如今操作系统已经换成了Fedora26，这里就记录下安装Google拼音的过程。&lt;/p&gt;</description>
+      <description>&lt;p&gt;在Fedora25的时候sogou拼音出现了一些不兼容的情况，从而使我转而使用Google拼音。如今操作系统已经换成了Fedora26，这里就记录下安装Google拼音的过程。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -112,7 +127,9 @@
       <pubDate>Thu, 26 Oct 2017 21:51:29 +0800</pubDate>
       
       <guid>https://xumi1993.github.io/blog/2017/10/ssh-%E9%9A%A7%E9%81%93%E4%B8%8E%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/</guid>
-      <description>&lt;p&gt;中文可以称为SSH隧道，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。通过建立这条隧道，用户可以从客户端直接访问服务器端基于TCP协议的服务如HTTP。&lt;/p&gt;</description>
+      <description>&lt;p&gt;中文可以称为SSH隧道，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。通过建立这条隧道，用户可以从客户端直接访问服务器端基于TCP协议的服务如HTTP。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -121,7 +138,9 @@
       <pubDate>Mon, 23 Oct 2017 21:51:29 +0800</pubDate>
       
       <guid>https://xumi1993.github.io/blog/2017/10/%E5%8F%91%E5%B8%83%E4%BB%A3%E7%A0%81%E5%88%B0pypi/</guid>
-      <description>&lt;p&gt;作为开发者我们希望自己开发的Python模块可以被更多人使用，为了方便使用，&lt;a href=&#34;https://pypi.python.org/pypi&#34;&gt;PyPI&lt;/a&gt;是管理Python模块最好用的工具之一。所以我们也希望把自己的代码放到PyPI上，以后就可以通过&lt;code&gt;pip install module&lt;/code&gt;的方式安装模块了。&lt;/p&gt;</description>
+      <description>&lt;p&gt;作为开发者我们希望自己开发的Python模块可以被更多人使用，为了方便使用，&lt;a href=&#34;https://pypi.python.org/pypi&#34;&gt;PyPI&lt;/a&gt;是管理Python模块最好用的工具之一。所以我们也希望把自己的代码放到PyPI上，以后就可以通过&lt;code&gt;pip install module&lt;/code&gt;的方式安装模块了。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

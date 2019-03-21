@@ -43,9 +43,7 @@
 &lt;li&gt;&lt;a href=&#34;#ctags-configure&#34;&gt;Ctags Configure&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#pythontag&#34;&gt;为Python标准库添加标签&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#systag&#34;&gt;为C/C++系统函数添加标签&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#taglist-configure&#34;&gt;Taglist Configure&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;</description>
+&lt;li&gt;&lt;a href=&#34;#taglist-configure&#34;&gt;Taglist Configure&lt;/a&gt;</description>
     </item>
     
     <item>
@@ -64,7 +62,9 @@
 &lt;li&gt;代码补全&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;这里就Linux中配置这些功能做一个简单的介绍&lt;/p&gt;</description>
+&lt;p&gt;这里就Linux中配置这些功能做一个简单的介绍&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -73,7 +73,9 @@
       <pubDate>Fri, 27 Oct 2017 12:26:29 +0800</pubDate>
       
       <guid>https://xumi1993.github.io/blog/2017/10/fedora26%E4%B8%AD%E5%AE%89%E8%A3%85google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/</guid>
-      <description>&lt;p&gt;在Fedora25的时候sogou拼音出现了一些不兼容的情况，从而使我转而使用Google拼音。如今操作系统已经换成了Fedora26，这里就记录下安装Google拼音的过程。&lt;/p&gt;</description>
+      <description>&lt;p&gt;在Fedora25的时候sogou拼音出现了一些不兼容的情况，从而使我转而使用Google拼音。如今操作系统已经换成了Fedora26，这里就记录下安装Google拼音的过程。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -82,7 +84,9 @@
       <pubDate>Thu, 26 Oct 2017 21:51:29 +0800</pubDate>
       
       <guid>https://xumi1993.github.io/blog/2017/10/ssh-%E9%9A%A7%E9%81%93%E4%B8%8E%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/</guid>
-      <description>&lt;p&gt;中文可以称为SSH隧道，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。通过建立这条隧道，用户可以从客户端直接访问服务器端基于TCP协议的服务如HTTP。&lt;/p&gt;</description>
+      <description>&lt;p&gt;中文可以称为SSH隧道，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。通过建立这条隧道，用户可以从客户端直接访问服务器端基于TCP协议的服务如HTTP。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

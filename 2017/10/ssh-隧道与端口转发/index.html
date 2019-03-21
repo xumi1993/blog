@@ -56,24 +56,30 @@ code.has-jax {
 </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.53 with theme Tranquilpeak 0.4.1-BETA">
+    <meta name="generator" content="Hugo 0.37.1 with theme Tranquilpeak 0.4.1-BETA">
     <title>SSH 隧道与端口转发</title>
     <meta name="author" content="Mijian Xu">
     <meta name="keywords" content="">
 
-    <link rel="icon" href="https://xumi1993.github.io/blog/favicon.png">
+    <link rel="icon" href="../../../favicon.png">
     
 
     
-    <meta name="description" content="中文可以称为SSH隧道，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。通过建立这条隧道，用户可以从客户端直接访问服务器端基于TCP协议的服务如HTTP。">
-    <meta property="og:description" content="中文可以称为SSH隧道，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。通过建立这条隧道，用户可以从客户端直接访问服务器端基于TCP协议的服务如HTTP。">
+    <meta name="description" content="中文可以称为SSH隧道，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。通过建立这条隧道，用户可以从客户端直接访问服务器端基于TCP协议的服务如HTTP。
+
+">
+    <meta property="og:description" content="中文可以称为SSH隧道，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。通过建立这条隧道，用户可以从客户端直接访问服务器端基于TCP协议的服务如HTTP。
+
+">
     <meta property="og:type" content="blog">
     <meta property="og:title" content="SSH 隧道与端口转发">
     <meta property="og:url" content="/2017/10/ssh-%E9%9A%A7%E9%81%93%E4%B8%8E%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/">
     <meta property="og:site_name" content="Note to Tech">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Note to Tech">
-    <meta name="twitter:description" content="中文可以称为SSH隧道，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。通过建立这条隧道，用户可以从客户端直接访问服务器端基于TCP协议的服务如HTTP。">
+    <meta name="twitter:description" content="中文可以称为SSH隧道，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。通过建立这条隧道，用户可以从客户端直接访问服务器端基于TCP协议的服务如HTTP。
+
+">
     
     
 
@@ -96,7 +102,7 @@ code.has-jax {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="https://xumi1993.github.io/blog/css/style-fpbzgxsy0kgmdvyrj5ykkg6ratccrk3gocmaqn4xpcjywmv5dteilzucro4f.min.css" />
+    <link rel="stylesheet" href="../../../css/style-fpbzgxsy0kgmdvyrj5ykkg6ratccrk3gocmaqn4xpcjywmv5dteilzucro4f.min.css" />
     
     
 
@@ -111,12 +117,12 @@ code.has-jax {
       <header id="header" data-behavior="5">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="https://xumi1993.github.io/blog/">Note to Tech</a>
+    <a class="header-title-link" href="../../../">Note to Tech</a>
   </div>
   
     
       <a class="header-right-picture "
-         href="https://xumi1993.github.io/blog/#about">
+         href="../../../#about">
     
     
     
@@ -132,7 +138,7 @@ code.has-jax {
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <a href="https://xumi1993.github.io/blog/#about">
+        <a href="../../../#about">
           <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/3c21a901526ad8ccb4e92dd5c571b204?s=110" alt="作者的图片" />
         </a>
         <h4 class="sidebar-profile-name">Mijian Xu</h4>
@@ -145,7 +151,7 @@ code.has-jax {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://xumi1993.github.io/blog/">
+      <a class="sidebar-button-link " href="../../../">
     
       <i class="sidebar-button-icon fa fa-lg fa-home"></i>
       
@@ -155,7 +161,7 @@ code.has-jax {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://xumi1993.github.io/blog/categories">
+      <a class="sidebar-button-link " href="../../../categories">
     
       <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
       
@@ -165,7 +171,7 @@ code.has-jax {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://xumi1993.github.io/blog/tags">
+      <a class="sidebar-button-link " href="../../../tags">
     
       <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
       
@@ -175,7 +181,7 @@ code.has-jax {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://xumi1993.github.io/blog/archives">
+      <a class="sidebar-button-link " href="../../../archives">
     
       <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
       
@@ -185,7 +191,7 @@ code.has-jax {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://xumi1993.github.io/blog/#about">
+      <a class="sidebar-button-link " href="../../../#about">
     
       <i class="sidebar-button-icon fa fa-lg fa-question"></i>
       
@@ -213,7 +219,7 @@ code.has-jax {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://xumi1993.github.io/blog/index.xml">
+      <a class="sidebar-button-link " href="../../../index.xml">
     
       <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
       
@@ -255,7 +261,7 @@ code.has-jax {
   
     <span>发布在</span>
     
-      <a class="category-link" href="https://xumi1993.github.io/blog/categories/linux">Linux</a>
+      <a class="category-link" href="../../../categories/linux">Linux</a>
     
   
 
@@ -267,6 +273,8 @@ code.has-jax {
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
               <p>中文可以称为SSH隧道，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。通过建立这条隧道，用户可以从客户端直接访问服务器端基于TCP协议的服务如HTTP。</p>
+
+<p></p>
 
 <p>举个例子如果有一台接入教育网的服务器，同时我们又可以从公网访问之，那么我们可以从无法接入教育网的客户端与服务器端建立SSH Tunnel。这样客户端也可以访问教育网。这个过程分为两个步骤：<br />
 1. 建立SSHTunnel<br />
@@ -285,16 +293,16 @@ code.has-jax {
 
 <p>Windows操作系统中需要通过客户端建立SSH Tunnel。例如Xshell、Putty。这里以Putty为例<br />
 1. 在Session面板中输入Host Name 或 IP Address<br />
-<img src="https://xumi1993.github.io/blog/img/ssh-tunnel/fig1.png" alt="" /><br />
+<img src="../../../img/ssh-tunnel/fig1.png" alt="" /><br />
 2. 在左侧边栏SSH/Tunnels面板设置本地端口号和动态转发<br />
-<img src="https://xumi1993.github.io/blog/img/ssh-tunnel/fig2.png" alt="" /></p>
+<img src="../../../img/ssh-tunnel/fig2.png" alt="" /></p>
 
 <p>最后保存配置并连接服务器即可。</p>
 
 <h3 id="设置本地代理服务器">设置本地代理服务器</h3>
 
 <p>这个过程和任何设置代理服务器的方式一样，可以使用IE中默认的代理配置工具，也可以使用各种浏览器的代理工具，这里以Chrome浏览器中SwitchyOmega为例
-<img src="https://xumi1993.github.io/blog/img/ssh-tunnel/fig3.png" alt="" /></p>
+<img src="../../../img/ssh-tunnel/fig3.png" alt="" /></p>
 
 <h2 id="通过中间服务器远程连接内网服务器">通过中间服务器远程连接内网服务器</h2>
 
@@ -352,7 +360,7 @@ code.has-jax {
         <ul class="post-actions post-action-nav">
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://xumi1993.github.io/blog/2017/10/fedora26%E4%B8%AD%E5%AE%89%E8%A3%85google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/" data-tooltip="Fedora26中安装Google拼音输入法">
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2017/10/fedora26%E4%B8%AD%E5%AE%89%E8%A3%85google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/" data-tooltip="Fedora26中安装Google拼音输入法">
               
                 <i class="fa fa-angle-left"></i>
                 <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -360,7 +368,7 @@ code.has-jax {
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://xumi1993.github.io/blog/2017/10/%E5%8F%91%E5%B8%83%E4%BB%A3%E7%A0%81%E5%88%B0pypi/" data-tooltip="发布代码到PyPI">
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2017/10/%E5%8F%91%E5%B8%83%E4%BB%A3%E7%A0%81%E5%88%B0pypi/" data-tooltip="发布代码到PyPI">
               
                 <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                 <i class="fa fa-angle-right"></i>
@@ -375,24 +383,6 @@ code.has-jax {
             <i class="fa fa-share-alt"></i>
           </a>
         </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://xumi1993.github.io/blog/2017/10/ssh-%E9%9A%A7%E9%81%93%E4%B8%8E%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/">
-              <i class="fa fa-facebook-official"></i>
-            </a>
-          </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://xumi1993.github.io/blog/2017/10/ssh-%E9%9A%A7%E9%81%93%E4%B8%8E%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/">
-              <i class="fa fa-twitter"></i>
-            </a>
-          </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://xumi1993.github.io/blog/2017/10/ssh-%E9%9A%A7%E9%81%93%E4%B8%8E%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/">
-              <i class="fa fa-google-plus"></i>
-            </a>
-          </li>
         
       
       
@@ -418,6 +408,7 @@ code.has-jax {
                 <div id="disqus_thread">
   <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
+
               
             
           </div>
@@ -436,7 +427,7 @@ code.has-jax {
         <ul class="post-actions post-action-nav">
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://xumi1993.github.io/blog/2017/10/fedora26%E4%B8%AD%E5%AE%89%E8%A3%85google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/" data-tooltip="Fedora26中安装Google拼音输入法">
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2017/10/fedora26%E4%B8%AD%E5%AE%89%E8%A3%85google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/" data-tooltip="Fedora26中安装Google拼音输入法">
               
                 <i class="fa fa-angle-left"></i>
                 <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -444,7 +435,7 @@ code.has-jax {
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://xumi1993.github.io/blog/2017/10/%E5%8F%91%E5%B8%83%E4%BB%A3%E7%A0%81%E5%88%B0pypi/" data-tooltip="发布代码到PyPI">
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2017/10/%E5%8F%91%E5%B8%83%E4%BB%A3%E7%A0%81%E5%88%B0pypi/" data-tooltip="发布代码到PyPI">
               
                 <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                 <i class="fa fa-angle-right"></i>
@@ -459,24 +450,6 @@ code.has-jax {
             <i class="fa fa-share-alt"></i>
           </a>
         </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://xumi1993.github.io/blog/2017/10/ssh-%E9%9A%A7%E9%81%93%E4%B8%8E%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/">
-              <i class="fa fa-facebook-official"></i>
-            </a>
-          </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://xumi1993.github.io/blog/2017/10/ssh-%E9%9A%A7%E9%81%93%E4%B8%8E%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/">
-              <i class="fa fa-twitter"></i>
-            </a>
-          </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://xumi1993.github.io/blog/2017/10/ssh-%E9%9A%A7%E9%81%93%E4%B8%8E%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/">
-              <i class="fa fa-google-plus"></i>
-            </a>
-          </li>
         
       
       
@@ -501,24 +474,6 @@ code.has-jax {
       <div id="share-options-bar" class="share-options-bar" data-behavior="5">
   <i id="btn-close-shareoptions" class="fa fa-close"></i>
   <ul class="share-options">
-    
-      <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fxumi1993.github.io%2Fblog%2F2017%2F10%2Fssh-%25E9%259A%25A7%25E9%2581%2593%25E4%25B8%258E%25E7%25AB%25AF%25E5%258F%25A3%25E8%25BD%25AC%25E5%258F%2591%2F">
-          <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
-        </a>
-      </li>
-    
-      <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fxumi1993.github.io%2Fblog%2F2017%2F10%2Fssh-%25E9%259A%25A7%25E9%2581%2593%25E4%25B8%258E%25E7%25AB%25AF%25E5%258F%25A3%25E8%25BD%25AC%25E5%258F%2591%2F">
-          <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
-        </a>
-      </li>
-    
-      <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Fxumi1993.github.io%2Fblog%2F2017%2F10%2Fssh-%25E9%259A%25A7%25E9%2581%2593%25E4%25B8%258E%25E7%25AB%25AF%25E5%258F%25A3%25E8%25BD%25AC%25E5%258F%2591%2F">
-          <i class="fa fa-google-plus"></i><span>分享到 Google&#43;</span>
-        </a>
-      </li>
     
   </ul>
 </div>
@@ -577,6 +532,25 @@ Nanjing
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="https://xumi1993.github.io/blog/2019/03/%E7%94%A8sshfs%E8%BF%9C%E7%A8%8B%E6%8C%82%E8%BD%BD%E8%B7%AF%E5%BE%84%E5%88%B0%E6%9C%AC%E5%9C%B0/">
+                <h3 class="media-heading">用sshfs远程挂载路径到本地</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p><strong>ssh</strong>是常用的远程登陆服务，我们经常使用<strong>scp</strong>、<strong>sftp</strong>等工具与远程服务器进行文件交互。如果是常用的服务器这样工具相对麻烦，如果我们可以像打开本地文件一样打开服务器上的文件就十分方便了。<strong>sshfs可以将远程服务器上的路径作为文件系统挂载到本地。</strong></p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="https://xumi1993.github.io/blog/2019/02/hhkb%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/">
                 <h3 class="media-heading">Hhkb使用心得</h3>
               </a>
@@ -585,8 +559,9 @@ Nanjing
                   Feb 2, 2019
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p><img src="https://xumi1993.github.io/blog/img/kb/hhkb.png" alt="" />
-图片来自<a href="http://www.pfu.com.cn/HHKB/">HHKB官网</a></p></div>
+              <div class="media-content hide-xs font-merryweather"><p><img src="../../../img/kb/hhkb.png" alt="" />
+图片来自<a href="http://www.pfu.com.cn/HHKB/">HHKB官网</a>
+</p></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -603,7 +578,7 @@ Nanjing
                   Feb 2, 2019
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p><img src="https://xumi1993.github.io/blog/img/kb/teaser.jpg" alt="" /></p>
+              <div class="media-content hide-xs font-merryweather"><p><img src="../../../img/kb/teaser.jpg" alt="" /></p>
 
 <p>Varmilo VA88M 双彩虹RGB，来自<a href="https://www.cherrymx.de/en/blog/VARMILO-VA88M-DOUBLE-RAINBOW-RGB-INTRODUCTION.html">Cherry官方博客</a>。</p></div>
             </div>
@@ -622,7 +597,8 @@ Nanjing
                   Jan 1, 2019
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p><a href="http://mpi4py.readthedocs.io/en/stable/index.html">mpi4py</a> is a python API for MPI. <strong>MPIPoolExecutor</strong> is a subclass of <code>mpi4py.futures</code> to create MPI processes to execute calls asynchronously</p></div>
+              <div class="media-content hide-xs font-merryweather"><p><a href="http://mpi4py.readthedocs.io/en/stable/index.html">mpi4py</a> is a python API for MPI. <strong>MPIPoolExecutor</strong> is a subclass of <code>mpi4py.futures</code> to create MPI processes to execute calls asynchronously
+</p></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -665,9 +641,7 @@ Nanjing
 <li><a href="#ctags-configure">Ctags Configure</a></li>
 <li><a href="#pythontag">为Python标准库添加标签</a></li>
 <li><a href="#systag">为C/C++系统函数添加标签</a></li>
-<li><a href="#taglist-configure">Taglist Configure</a></li>
-</ul></li>
-</ul></div>
+<li><a href="#taglist-configure">Taglist Configure</a></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -694,7 +668,9 @@ Nanjing
 <li>代码补全</li>
 </ul>
 
-<p>这里就Linux中配置这些功能做一个简单的介绍</p></div>
+<p>这里就Linux中配置这些功能做一个简单的介绍</p>
+
+<p></p></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -711,7 +687,9 @@ Nanjing
                   Oct 10, 2017
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p>在Fedora25的时候sogou拼音出现了一些不兼容的情况，从而使我转而使用Google拼音。如今操作系统已经换成了Fedora26，这里就记录下安装Google拼音的过程。</p></div>
+              <div class="media-content hide-xs font-merryweather"><p>在Fedora25的时候sogou拼音出现了一些不兼容的情况，从而使我转而使用Google拼音。如今操作系统已经换成了Fedora26，这里就记录下安装Google拼音的过程。</p>
+
+<p></p></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -728,7 +706,9 @@ Nanjing
                   Oct 10, 2017
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p>中文可以称为SSH隧道，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。通过建立这条隧道，用户可以从客户端直接访问服务器端基于TCP协议的服务如HTTP。</p></div>
+              <div class="media-content hide-xs font-merryweather"><p>中文可以称为SSH隧道，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。通过建立这条隧道，用户可以从客户端直接访问服务器端基于TCP协议的服务如HTTP。</p>
+
+<p></p></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -745,7 +725,9 @@ Nanjing
                   Oct 10, 2017
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p>作为开发者我们希望自己开发的Python模块可以被更多人使用，为了方便使用，<a href="https://pypi.python.org/pypi">PyPI</a>是管理Python模块最好用的工具之一。所以我们也希望把自己的代码放到PyPI上，以后就可以通过<code>pip install module</code>的方式安装模块了。</p></div>
+              <div class="media-content hide-xs font-merryweather"><p>作为开发者我们希望自己开发的Python模块可以被更多人使用，为了方便使用，<a href="https://pypi.python.org/pypi">PyPI</a>是管理Python模块最好用的工具之一。所以我们也希望把自己的代码放到PyPI上，以后就可以通过<code>pip install module</code>的方式安装模块了。</p>
+
+<p></p></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -759,7 +741,7 @@ Nanjing
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  Feb 2, 2019
+                  Mar 3, 2019
                 </span>
               </span>
               <div class="media-content hide-xs font-merryweather"></div>
@@ -775,7 +757,7 @@ Nanjing
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         9 posts found
+         10 posts found
       </p>
     </div>
   </div>
@@ -794,7 +776,7 @@ Nanjing
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js" integrity="sha256-N0qFUh7/9vLvia87dDndewmsgsyYoNkdA212tPc+2NI=" crossorigin="anonymous"></script>
 
 
-<script src="https://xumi1993.github.io/blog/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+<script src="../../../js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
 
 
 <script>
@@ -825,7 +807,7 @@ $(document).ready(function() {
             return;
           }
           var d = document, s = d.createElement('script');
-          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          var disqus_shortname = 'xumi1993';
           s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 
           s.setAttribute('data-timestamp', +new Date());
