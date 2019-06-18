@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://xumi1993.github.io/blog/2019/06/%E5%9C%A8vscode%E4%B8%AD%E4%BD%BF%E7%94%A8remote-ssh%E8%BF%9B%E8%A1%8C%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/</loc>
+    <lastmod>2019-06-18T12:30:12+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://xumi1993.github.io/blog/2019/03/%E7%94%A8fuse%E5%92%8Cntfs-3g%E5%9C%A8macos%E4%B8%8B%E6%89%93%E9%80%A0%E5%85%8D%E8%B4%B9%E7%9A%84ntfs%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
     <lastmod>2019-03-25T20:55:03+08:00</lastmod>
   </url>
@@ -100,13 +105,13 @@
   
   <url>
     <loc>https://xumi1993.github.io/blog/tags/linux/</loc>
-    <lastmod>2019-03-21T13:54:42+08:00</lastmod>
+    <lastmod>2019-06-18T12:30:12+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://xumi1993.github.io/blog/categories/linux/</loc>
-    <lastmod>2019-03-21T13:54:42+08:00</lastmod>
+    <lastmod>2019-06-18T12:30:12+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -124,13 +129,13 @@
   
   <url>
     <loc>https://xumi1993.github.io/blog/</loc>
-    <lastmod>2019-03-25T20:55:03+08:00</lastmod>
+    <lastmod>2019-06-18T12:30:12+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://xumi1993.github.io/blog/post/</loc>
-    <lastmod>2019-03-25T20:55:03+08:00</lastmod>
+    <lastmod>2019-06-18T12:30:12+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -148,7 +153,13 @@
   
   <url>
     <loc>https://xumi1993.github.io/blog/tags/ssh/</loc>
-    <lastmod>2019-03-21T13:54:42+08:00</lastmod>
+    <lastmod>2019-06-18T12:30:12+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xumi1993.github.io/blog/categories/subcategory/</loc>
+    <lastmod>2019-06-18T12:30:12+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -167,6 +178,12 @@
   <url>
     <loc>https://xumi1993.github.io/blog/tags/vim/</loc>
     <lastmod>2017-11-01T14:21:22+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://xumi1993.github.io/blog/tags/vscode/</loc>
+    <lastmod>2019-06-18T12:30:12+08:00</lastmod>
     <priority>0</priority>
   </url>
   

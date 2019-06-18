@@ -1,5 +1,9 @@
 
 
+  
+    
+  
+
 
   
 
@@ -53,25 +57,26 @@ code.has-jax {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.54.0 with theme Tranquilpeak 0.4.1-BETA">
-    <title>Tools</title>
+    <title>在VSCode中使用Remote-SSH进行远程开发</title>
     <meta name="author" content="Mijian Xu">
-    <meta name="keywords" content="">
+    <meta name="keywords" content="tech">
 
-    <link rel="icon" href="../../favicon.png">
-    
-      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://xumi1993.github.io/blog/tags/tools/index.xml">
+    <link rel="icon" href="../../../favicon.png">
     
 
     
-    <meta name="description" content="Mijian&#39;s Blog">
-    <meta property="og:description" content="Mijian&#39;s Blog">
+    <meta name="description" content="
+动图来自官网">
+    <meta property="og:description" content="
+动图来自官网">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Tools">
-    <meta property="og:url" content="/tags/tools/">
+    <meta property="og:title" content="在VSCode中使用Remote-SSH进行远程开发">
+    <meta property="og:url" content="/2019/06/%E5%9C%A8vscode%E4%B8%AD%E4%BD%BF%E7%94%A8remote-ssh%E8%BF%9B%E8%A1%8C%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/">
     <meta property="og:site_name" content="Note to Tech">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Note to Tech">
-    <meta name="twitter:description" content="Mijian&#39;s Blog">
+    <meta name="twitter:description" content="
+动图来自官网">
     
     
 
@@ -94,7 +99,7 @@ code.has-jax {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="../../css/style-fpbzgxsy0kgmdvyrj5ykkg6ratccrk3gocmaqn4xpcjywmv5dteilzucro4f.min.css" />
+    <link rel="stylesheet" href="../../../css/style-fpbzgxsy0kgmdvyrj5ykkg6ratccrk3gocmaqn4xpcjywmv5dteilzucro4f.min.css" />
     
     
 
@@ -106,15 +111,15 @@ code.has-jax {
 
   <body>
     <div id="blog">
-      <header id="header" data-behavior="2">
+      <header id="header" data-behavior="5">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="../../">Note to Tech</a>
+    <a class="header-title-link" href="../../../">Note to Tech</a>
   </div>
   
     
       <a class="header-right-picture "
-         href="../../#about">
+         href="../../../#about">
     
     
     
@@ -126,11 +131,11 @@ code.has-jax {
   
 </header>
 
-      <nav id="sidebar" data-behavior="2">
+      <nav id="sidebar" data-behavior="5">
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <a href="../../#about">
+        <a href="../../../#about">
           <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/3c21a901526ad8ccb4e92dd5c571b204?s=110" alt="作者的图片" />
         </a>
         <h4 class="sidebar-profile-name">Mijian Xu</h4>
@@ -143,7 +148,7 @@ code.has-jax {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="../../">
+      <a class="sidebar-button-link " href="../../../">
     
       <i class="sidebar-button-icon fa fa-lg fa-home"></i>
       
@@ -153,7 +158,7 @@ code.has-jax {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="../../categories">
+      <a class="sidebar-button-link " href="../../../categories">
     
       <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
       
@@ -163,7 +168,7 @@ code.has-jax {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="../../tags">
+      <a class="sidebar-button-link " href="../../../tags">
     
       <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
       
@@ -173,7 +178,7 @@ code.has-jax {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="../../archives">
+      <a class="sidebar-button-link " href="../../../archives">
     
       <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
       
@@ -183,7 +188,7 @@ code.has-jax {
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="../../#about">
+      <a class="sidebar-button-link " href="../../../#about">
     
       <i class="sidebar-button-icon fa fa-lg fa-question"></i>
       
@@ -211,7 +216,7 @@ code.has-jax {
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="../../index.xml">
+      <a class="sidebar-button-link " href="../../../index.xml">
     
       <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
       
@@ -225,44 +230,26 @@ code.has-jax {
 </nav>
 
       
-        
 
-      
-      <div id="main" data-behavior="2"
+      <div id="main" data-behavior="5"
         class="
                hasCoverMetaIn
                ">
-        
-          <section class="postShorten-group main-content-wrap">
-            
-            
-              
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
   
-    
-      
-        
-      
-    
+    <h1 class="post-title" itemprop="headline">
+      在VSCode中使用Remote-SSH进行远程开发
+    </h1>
   
-
-
   
-
-<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="https://xumi1993.github.io/blog/2017/10/fedora26%E4%B8%AD%E5%AE%89%E8%A3%85google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/">
-          Fedora26中安装Google拼音输入法
-        </a>
-      </h1>
-      
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2017-10-27T12:26:29&#43;08:00">
+      <time itemprop="datePublished" datetime="2019-06-18T12:30:12&#43;08:00">
         
-  十月 27, 2017
+  六月 18, 2019
 
       </time>
     
@@ -271,30 +258,197 @@ code.has-jax {
   
     <span>发布在</span>
     
-      <a class="category-link" href="../../categories/linux">Linux</a>
+      <a class="category-link" href="../../../categories/linux">Linux</a>, 
+    
+      <a class="category-link" href="../../../categories/subcategory">subcategory</a>
     
   
 
 
   </div>
 
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>在Fedora25的时候sogou拼音出现了一些不兼容的情况，从而使我转而使用Google拼音。如今操作系统已经换成了Fedora26，这里就记录下安装Google拼音的过程。</p>
-      <p>
-        <a href="https://xumi1993.github.io/blog/2017/10/fedora26%E4%B8%AD%E5%AE%89%E8%A3%85google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/" class="postShorten-excerpt_link link">阅读全文</a>
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p><img src="https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif" alt="" />
+动图来自<a href="https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif">官网</a></p>
+
+<h2 id="overview">Overview</h2>
+
+<p>远程开发对于开发者尤其是Linux开发者来说是一种迫切的需求，我们所需求的远程开发工具通常需要具备以下几个功能：</p>
+
+<ul>
+<li><strong>在本地对服务器端代码进行编辑</strong></li>
+<li><strong>能在本地对服务器端代码用服务器端环境进行编译和调试</strong></li>
+<li><strong>代码高亮和补全要满足服务器端环境</strong></li>
+<li><strong>较低的成本</strong></li>
+</ul>
+
+<p>那么现有的解决方案有以下几种：</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">方式</th>
+<th align="center">优点</th>
+<th align="center">缺点</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">通过终端远程登录，用<strong><em>Vim</em></strong>、<strong><em>Emacs</em></strong>等编辑。</td>
+<td align="center">直接在服务器端运行易于编译调试，通过插件和配置可以获得代码高亮和补全</td>
+<td align="center">Vim 没有图形化，在开发大型项目时难以使用</td>
+</tr>
+
+<tr>
+<td align="center">使用<a href="http://www.jetbrains.com/">JetBrains</a>套件中的远程开发功能</td>
+<td align="center">可以满足前三个功能</td>
+<td align="center">太贵了，对个人用户是一个负担。而社区版则没有这个功能</td>
+</tr>
+
+<tr>
+<td align="center">使用VSCode中<code>rmate</code>插件</td>
+<td align="center">在VSCode中编辑服务器端文件</td>
+<td align="center">只能编辑，不能编译和调试。而且使用不便。代码补全也是基于本地环境的</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="安装">安装</h2>
+
+<p>好在最近有<strong><em>Microsoft</em></strong>发布的VSCode插件<a href="https://aka.ms/vscode-remote/download/extension">Remote Development</a>解决了这些问题。首先我们做一些准备工作：</p>
+
+<ol>
+<li>一台开启<code>open-ssh</code>的Linux服务器，一台可以远程登录的客户端。</li>
+<li>客户端需要版本高于<code>1.35</code>的VSCode。</li>
+<li>在VSCode中安装<a href="https://aka.ms/vscode-remote/download/extension">Remote Development</a></li>
+</ol>
+
+<h2 id="配置">配置</h2>
+
+<p>我们需要对客户端和服务器端（不需要管理员权限）进行一些配置：</p>
+
+<ol>
+<li>客户端和服务器端需要进行公私要配对，Remote Development不支持单纯的密码登录，但密码可以作为两步认证的密码登录。</li>
+<li>在<code>$HOME/.ssh/config</code>或者<code>/etc/ssh/ssh_config</code>中配置服务器名称和登录信息。在VSCode的命令板中输入<code>Remote-SSH: Open Configuration File...</code>，选择要修改的文件，打开文件后输入服务器名称和登录信息。例如：</li>
+</ol>
+
+<pre><code>Host example-remote-linux-machine
+    User your-user-name-here
+    HostName host-fqdn-or-ip-goes-here
+
+Host example-remote-linux-machine-with-identity-file
+    User your-user-name-on-host
+    HostName another-host-fqdn-or-ip-goes-here
+    IdentityFile ~/.ssh/id_rsa-remote-ssh
+</code></pre>
+
+<blockquote>
+<p>只在自己的Mac上测试过，详细安装方法见<a href="https://code.visualstudio.com/docs/remote/ssh#_getting-started">官方文档</a></p>
+</blockquote>
+
+<h2 id="连接服务器">连接服务器</h2>
+
+<p>在命令板中输入<code>Remote-SSH: Connect to Host...</code>，然后选择配置过的服务器名就可以链接服务器。
+<img src="../../../img/vscode-ssh/connect-cmd.png" alt="" /></p>
+
+<p>或者在左侧工具栏中找到配置过的服务器名就，右键点击连接服务器。
+<img src="../../../img/vscode-ssh/connect-ui.png" alt="" /></p>
+
+<h2 id="安装远程插件">安装远程插件</h2>
+
+<p>现在我们还没有安装远程插件，也就是说编译、调试等功能还不能在远程使用。Remote Development提供了远程插件，为SSH主机上的给定工作区安装任何所需的扩展。例如
+<img src="../../../img/vscode-ssh/ssh-installed-remote-indicator.png" alt="" /></p>
+
+<h2 id="使用">使用</h2>
+
+<p>连接服务器之后，再打开文件，这时会询问你服务器上的路径，如图
+<img src="../../../img/vscode-ssh/enter-path.png" alt="" /></p>
+
+<p>打开项目后和本地一样设置编译器调试即可。</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://xumi1993.github.io/blog/tags/vscode/">vscode</a>
+
+  <a class="tag tag--primary tag--small" href="https://xumi1993.github.io/blog/tags/ssh/">SSH</a>
+
+  <a class="tag tag--primary tag--small" href="https://xumi1993.github.io/blog/tags/linux/">Linux</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2019/03/%E7%94%A8fuse%E5%92%8Cntfs-3g%E5%9C%A8macos%E4%B8%8B%E6%89%93%E9%80%A0%E5%85%8D%E8%B4%B9%E7%9A%84ntfs%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" data-tooltip="用FUSE和ntfs-3g在MacOS下打造免费的NTFS解决方案">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
         
-      </p>
-    </div>
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
   </div>
-  
-</article>
+
 
             
-            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
 
-          </section>
-        
+              
+            
+          </div>
+        </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
     &copy; 2019 Mijian Xu. All Rights Reserved
@@ -302,6 +456,64 @@ code.has-jax {
 </footer>
 
       </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="../../../2019/03/%E7%94%A8fuse%E5%92%8Cntfs-3g%E5%9C%A8macos%E4%B8%8B%E6%89%93%E9%80%A0%E5%85%8D%E8%B4%B9%E7%9A%84ntfs%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" data-tooltip="用FUSE和ntfs-3g在MacOS下打造免费的NTFS解决方案">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
     </div>
     
     <div id="about">
@@ -418,7 +630,7 @@ Nanjing
                   Feb 2, 2019
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p><img src="../../img/kb/hhkb.png" alt="" />
+              <div class="media-content hide-xs font-merryweather"><p><img src="../../../img/kb/hhkb.png" alt="" />
 图片来自<a href="http://www.pfu.com.cn/HHKB/">HHKB官网</a></p></div>
             </div>
             <div style="clear:both;"></div>
@@ -436,7 +648,7 @@ Nanjing
                   Feb 2, 2019
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p><img src="../../img/kb/teaser.jpg" alt="" /></p>
+              <div class="media-content hide-xs font-merryweather"><p><img src="../../../img/kb/teaser.jpg" alt="" /></p>
 
 <p>Varmilo VA88M 双彩虹RGB，来自<a href="https://www.cherrymx.de/en/blog/VARMILO-VA88M-DOUBLE-RAINBOW-RGB-INTRODUCTION.html">Cherry官方博客</a>。</p></div>
             </div>
@@ -593,7 +805,7 @@ Nanjing
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js" integrity="sha256-N0qFUh7/9vLvia87dDndewmsgsyYoNkdA212tPc+2NI=" crossorigin="anonymous"></script>
 
 
-<script src="../../js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+<script src="../../../js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
 
 
 <script>
@@ -607,6 +819,32 @@ $(document).ready(function() {
   });
 });
 </script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/xumi1993.github.io\/blog\/2019\/06\/%E5%9C%A8vscode%E4%B8%AD%E4%BD%BF%E7%94%A8remote-ssh%E8%BF%9B%E8%A1%8C%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91\/';
+          
+            this.page.identifier = '\/2019\/06\/%E5%9C%A8vscode%E4%B8%AD%E4%BD%BF%E7%94%A8remote-ssh%E8%BF%9B%E8%A1%8C%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'xumi1993';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
 
 
 
