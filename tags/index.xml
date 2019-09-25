@@ -2,129 +2,129 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Note to Tech</title>
-    <link>https://xumi1993.github.io/blog/tags/</link>
+    <link>https://blog.xumijian.me/tags/</link>
     <description>Recent content in Tags on Note to Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 01 Nov 2017 14:21:22 +0800</lastBuildDate>
     
-	<atom:link href="https://xumi1993.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.xumijian.me/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Development</title>
-      <link>https://xumi1993.github.io/blog/tags/development/</link>
+      <link>https://blog.xumijian.me/tags/development/</link>
       <pubDate>Wed, 01 Nov 2017 14:21:22 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/blog/tags/development/</guid>
+      <guid>https://blog.xumijian.me/tags/development/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Fedora</title>
-      <link>https://xumi1993.github.io/blog/tags/fedora/</link>
+      <link>https://blog.xumijian.me/tags/fedora/</link>
       <pubDate>Fri, 27 Oct 2017 12:26:29 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/blog/tags/fedora/</guid>
+      <guid>https://blog.xumijian.me/tags/fedora/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Fuse</title>
-      <link>https://xumi1993.github.io/blog/tags/fuse/</link>
+      <link>https://blog.xumijian.me/tags/fuse/</link>
       <pubDate>Mon, 25 Mar 2019 20:55:03 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/blog/tags/fuse/</guid>
+      <guid>https://blog.xumijian.me/tags/fuse/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hhkb</title>
-      <link>https://xumi1993.github.io/blog/tags/hhkb/</link>
+      <link>https://blog.xumijian.me/tags/hhkb/</link>
       <pubDate>Sun, 03 Feb 2019 12:54:38 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/blog/tags/hhkb/</guid>
+      <guid>https://blog.xumijian.me/tags/hhkb/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Keyboard</title>
-      <link>https://xumi1993.github.io/blog/tags/keyboard/</link>
+      <link>https://blog.xumijian.me/tags/keyboard/</link>
       <pubDate>Fri, 01 Feb 2019 17:57:29 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/blog/tags/keyboard/</guid>
+      <guid>https://blog.xumijian.me/tags/keyboard/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Linux</title>
-      <link>https://xumi1993.github.io/blog/tags/linux/</link>
+      <link>https://blog.xumijian.me/tags/linux/</link>
       <pubDate>Tue, 18 Jun 2019 12:30:12 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/blog/tags/linux/</guid>
+      <guid>https://blog.xumijian.me/tags/linux/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Mpi</title>
-      <link>https://xumi1993.github.io/blog/tags/mpi/</link>
+      <link>https://blog.xumijian.me/tags/mpi/</link>
       <pubDate>Thu, 03 Jan 2019 13:31:58 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/blog/tags/mpi/</guid>
+      <guid>https://blog.xumijian.me/tags/mpi/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python</title>
-      <link>https://xumi1993.github.io/blog/tags/python/</link>
+      <link>https://blog.xumijian.me/tags/python/</link>
       <pubDate>Thu, 03 Jan 2019 13:31:58 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/blog/tags/python/</guid>
+      <guid>https://blog.xumijian.me/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ssh</title>
-      <link>https://xumi1993.github.io/blog/tags/ssh/</link>
+      <link>https://blog.xumijian.me/tags/ssh/</link>
       <pubDate>Tue, 18 Jun 2019 12:30:12 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/blog/tags/ssh/</guid>
+      <guid>https://blog.xumijian.me/tags/ssh/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tools</title>
-      <link>https://xumi1993.github.io/blog/tags/tools/</link>
+      <link>https://blog.xumijian.me/tags/tools/</link>
       <pubDate>Fri, 27 Oct 2017 12:26:29 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/blog/tags/tools/</guid>
+      <guid>https://blog.xumijian.me/tags/tools/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Vim</title>
-      <link>https://xumi1993.github.io/blog/tags/vim/</link>
+      <link>https://blog.xumijian.me/tags/vim/</link>
       <pubDate>Wed, 01 Nov 2017 14:21:22 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/blog/tags/vim/</guid>
+      <guid>https://blog.xumijian.me/tags/vim/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Vscode</title>
-      <link>https://xumi1993.github.io/blog/tags/vscode/</link>
+      <link>https://blog.xumijian.me/tags/vscode/</link>
       <pubDate>Tue, 18 Jun 2019 12:30:12 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/blog/tags/vscode/</guid>
+      <guid>https://blog.xumijian.me/tags/vscode/</guid>
       <description></description>
     </item>
     
     <item>
       <title>文件系统</title>
-      <link>https://xumi1993.github.io/blog/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</link>
+      <link>https://blog.xumijian.me/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</link>
       <pubDate>Mon, 25 Mar 2019 20:55:03 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/blog/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</guid>
+      <guid>https://blog.xumijian.me/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</guid>
       <description></description>
     </item>
     

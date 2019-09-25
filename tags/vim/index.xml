@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vim on Note to Tech</title>
-    <link>https://xumi1993.github.io/blog/tags/vim/</link>
+    <link>https://blog.xumijian.me/tags/vim/</link>
     <description>Recent content in Vim on Note to Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 01 Nov 2017 14:21:22 +0800</lastBuildDate>
     
-	<atom:link href="https://xumi1993.github.io/blog/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.xumijian.me/tags/vim/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Vim 使用笔记</title>
-      <link>https://xumi1993.github.io/blog/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</link>
+      <link>https://blog.xumijian.me/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Wed, 01 Nov 2017 14:21:22 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/blog/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://blog.xumijian.me/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</guid>
       <description>&lt;h2 id=&#34;目录&#34;&gt;目录&lt;/h2&gt;
 
 &lt;ul&gt;
@@ -50,10 +50,10 @@
     
     <item>
       <title>配置Vim开发环境</title>
-      <link>https://xumi1993.github.io/blog/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
+      <link>https://blog.xumijian.me/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
       <pubDate>Sun, 29 Oct 2017 21:51:29 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/blog/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
+      <guid>https://blog.xumijian.me/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
       <description>&lt;p&gt;配置一个优秀个开发环境可以极大地提高开发效率，在Linux里Vim是最常用的开发环境之一（emacs也是相当不错的，但鄙人是Vim的忠实粉丝），我们一般所说的开发环境包括了&lt;/p&gt;
 
 &lt;ul&gt;

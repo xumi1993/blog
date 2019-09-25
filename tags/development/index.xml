@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Development on Note to Tech</title>
-    <link>https://xumi1993.github.io/blog/tags/development/</link>
+    <link>https://blog.xumijian.me/tags/development/</link>
     <description>Recent content in Development on Note to Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 01 Nov 2017 14:21:22 +0800</lastBuildDate>
     
-	<atom:link href="https://xumi1993.github.io/blog/tags/development/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.xumijian.me/tags/development/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Vim 使用笔记</title>
-      <link>https://xumi1993.github.io/blog/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</link>
+      <link>https://blog.xumijian.me/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Wed, 01 Nov 2017 14:21:22 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/blog/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://blog.xumijian.me/2017/11/vim-%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</guid>
       <description>&lt;h2 id=&#34;目录&#34;&gt;目录&lt;/h2&gt;
 
 &lt;ul&gt;
@@ -50,10 +50,10 @@
     
     <item>
       <title>配置Vim开发环境</title>
-      <link>https://xumi1993.github.io/blog/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
+      <link>https://blog.xumijian.me/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
       <pubDate>Sun, 29 Oct 2017 21:51:29 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/blog/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
+      <guid>https://blog.xumijian.me/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
       <description>&lt;p&gt;配置一个优秀个开发环境可以极大地提高开发效率，在Linux里Vim是最常用的开发环境之一（emacs也是相当不错的，但鄙人是Vim的忠实粉丝），我们一般所说的开发环境包括了&lt;/p&gt;
 
 &lt;ul&gt;
@@ -69,10 +69,10 @@
     
     <item>
       <title>发布代码到PyPI</title>
-      <link>https://xumi1993.github.io/blog/2017/10/%E5%8F%91%E5%B8%83%E4%BB%A3%E7%A0%81%E5%88%B0pypi/</link>
+      <link>https://blog.xumijian.me/2017/10/%E5%8F%91%E5%B8%83%E4%BB%A3%E7%A0%81%E5%88%B0pypi/</link>
       <pubDate>Mon, 23 Oct 2017 21:51:29 +0800</pubDate>
       
-      <guid>https://xumi1993.github.io/blog/2017/10/%E5%8F%91%E5%B8%83%E4%BB%A3%E7%A0%81%E5%88%B0pypi/</guid>
+      <guid>https://blog.xumijian.me/2017/10/%E5%8F%91%E5%B8%83%E4%BB%A3%E7%A0%81%E5%88%B0pypi/</guid>
       <description>&lt;p&gt;作为开发者我们希望自己开发的Python模块可以被更多人使用，为了方便使用，&lt;a href=&#34;https://pypi.python.org/pypi&#34;&gt;PyPI&lt;/a&gt;是管理Python模块最好用的工具之一。所以我们也希望把自己的代码放到PyPI上，以后就可以通过&lt;code&gt;pip install module&lt;/code&gt;的方式安装模块了。&lt;/p&gt;</description>
     </item>
     
