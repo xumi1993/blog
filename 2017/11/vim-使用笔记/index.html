@@ -56,7 +56,7 @@ code.has-jax {
 </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.53 with theme Tranquilpeak 0.4.1-BETA">
+    <meta name="generator" content="Hugo 0.55.6 with theme Tranquilpeak 0.4.1-BETA">
     <title>Vim 使用笔记</title>
     <meta name="author" content="Mijian Xu">
     <meta name="keywords" content="">
@@ -806,164 +806,125 @@ Vim中的搜索和替换同样支持正则表达式。大部分语法与其他�
 <h4 id="匹配重复性">匹配重复性</h4>
 
 <ul>
-<li>星号项 <code>*</code> 规定在它前面的项可以重复任意次。因此:<br />
-<code>
-/a*
-</code><br />
-匹配 &ldquo;a&rdquo;，&rdquo;aa&rdquo;，&rdquo;aaa&rdquo;，等等。但也匹配 &ldquo;&rdquo; (空字串)，因为零次也包含在内。星号 <code>*</code> 仅仅应用于那个紧邻在它前面的项。因此 <code>ab*</code> 匹配 &ldquo;a&rdquo;，&rdquo;ab&rdquo;，&rdquo;abb&rdquo;,&ldquo;abbb&rdquo;，等等。如要多次重复整个字符串，那么该字符串必须被组成一个项。组成一项的方法就是在它前面加 <code>\(</code>，后面加 <code>\)</code>。因此这个命令:<br />
-<code>
-/\(ab\)*
-</code><br />
-匹配: &ldquo;ab&rdquo;，&rdquo;abab&rdquo;，&rdquo;ababab&rdquo;，等等。而且也匹配 &ldquo;&ldquo;。要避免匹配空字串，使用 <code>\+</code>。这表示前面一项可以被匹配一次或多次。<br />
-<code>
-/ab\+
-</code><br />
-匹配 &ldquo;ab&rdquo;，&rdquo;abb&rdquo;，&rdquo;abbb&rdquo;，等等。它不匹配 后面没有跟随 &ldquo;b&rdquo; 的 &ldquo;a&rdquo;。</li>
+<li><p>星号项 <code>*</code> 规定在它前面的项可以重复任意次。因此:\</p>
+
+<pre><code>/a*
+```\\
+匹配 &quot;a&quot;，&quot;aa&quot;，&quot;aaa&quot;，等等。但也匹配 &quot;&quot; (空字串)，因为零次也包含在内。星号 `*` 仅仅应用于那个紧邻在它前面的项。因此 `ab*` 匹配 &quot;a&quot;，&quot;ab&quot;，&quot;abb&quot;,&quot;abbb&quot;，等等。如要多次重复整个字符串，那么该字符串必须被组成一个项。组成一项的方法就是在它前面加 `\(`，后面加 `\)`。因此这个命令:\\
+</code></pre>
+
+<p>/(ab)*</p>
+
+<pre><code class="language-\\">匹配: &quot;ab&quot;，&quot;abab&quot;，&quot;ababab&quot;，等等。而且也匹配 &quot;&quot;。要避免匹配空字串，使用 `\+`。这表示前面一项可以被匹配一次或多次。\\
+</code></pre>
+
+<p>/ab+</p>
+
+<pre><code class="language-\\">匹配 &quot;ab&quot;，&quot;abb&quot;，&quot;abbb&quot;，等等。它不匹配 后面没有跟随 &quot;b&quot; 的 &quot;a&quot;。
+
+#### 指定重复次数
+- 要匹配某一项的特定次数重复，使用 `\{n,m}` 这样的形式。其中 &quot;n&quot; 和 &quot;m&quot; 都是数字。在它前面的那个项将被重复 &quot;n&quot; 到 &quot;m&quot; 次 (包含 &quot;n&quot; 和 &quot;m&quot;)。例如:\\
+</code></pre></li>
 </ul>
 
-<h4 id="指定重复次数">指定重复次数</h4>
+<p>/ab{3,5}</p>
 
-<ul>
-<li>要匹配某一项的特定次数重复，使用 <code>\{n,m}</code> 这样的形式。其中 &ldquo;n&rdquo; 和 &ldquo;m&rdquo; 都是数字。在它前面的那个项将被重复 &ldquo;n&rdquo; 到 &ldquo;m&rdquo; 次 (包含 &ldquo;n&rdquo; 和 &ldquo;m&rdquo;)。例如:<br />
-<code>
-/ab\{3,5}
-</code><br />
-匹配 &ldquo;abbb&rdquo;，&rdquo;abbbb&rdquo; 以及 &ldquo;abbbbb&rdquo;。
-当 &ldquo;n&rdquo; 省略时，被默认为零。当 &ldquo;m&rdquo; 省略时，被默认为无限大。当 &ldquo;,m&rdquo; 省略时，就表示重复正好 &ldquo;n&rdquo; 次。例如:</li>
-</ul>
+<pre><code class="language-\\">匹配 &quot;abbb&quot;，&quot;abbbb&quot; 以及 &quot;abbbbb&quot;。
+当 &quot;n&quot; 省略时，被默认为零。当 &quot;m&quot; 省略时，被默认为无限大。当 &quot;,m&quot; 省略时，就表示重复正好 &quot;n&quot; 次。例如:
 
-<table>
-<thead>
-<tr>
-<th>模式</th>
-<th align="center">匹配次数		</th>
-</tr>
-</thead>
+| 模式          | 匹配次数		|
+| ------------- |:-------------:|
+| `\{,4}`      |  0，1，2，3 或 4 |
+| `\{3,}`       | 3，4，5，等等   |  
+|   `\{0,1}`      |   0 或 1      |
+|  `\{0,}`     |    0 或 更多，同 *
+|`\{1,}`      |    1 或 更多，同 \+
+|    `\{3}`       |    3
 
-<tbody>
-<tr>
-<td><code>\{,4}</code></td>
-<td align="center">0，1，2，3 或 4</td>
-</tr>
 
-<tr>
-<td><code>\{3,}</code></td>
-<td align="center">3，4，5，等等</td>
-</tr>
+#### 多选一匹配
+- 在一个查找模式中，&quot;或&quot; 运算符是 `\\|`。例如:\\
+</code></pre>
 
-<tr>
-<td><code>\{0,1}</code></td>
-<td align="center">0 或 1</td>
-</tr>
+<p>/foo|bar</p>
 
-<tr>
-<td><code>\{0,}</code></td>
-<td align="center">0 或 更多，同 *</td>
-</tr>
+<pre><code class="language-\\">这个命令匹配了 `foo` 或 `bar`。更多的抉择可以连在后面:\\
+</code></pre>
 
-<tr>
-<td><code>\{1,}</code></td>
-<td align="center">1 或 更多，同 +</td>
-</tr>
+<p>/one|two|three</p>
 
-<tr>
-<td><code>\{3}</code></td>
-<td align="center">3</td>
-</tr>
-</tbody>
-</table>
+<pre><code class="language-\\">匹配 `one`，`two` 或 `three`。
+如要匹配其多次重复，那么整个抉择结构须置于 `\(` 和 `\)` 之间:\\
+</code></pre>
 
-<h4 id="多选一匹配">多选一匹配</h4>
+<p>/(foo|bar)+</p>
 
-<ul>
-<li>在一个查找模式中，&rdquo;或&rdquo; 运算符是 <code>\\|</code>。例如:<br />
-<code>
-/foo\|bar
-</code><br />
-这个命令匹配了 <code>foo</code> 或 <code>bar</code>。更多的抉择可以连在后面:<br />
-<code>
-/one\|two\|three
-</code><br />
-匹配 <code>one</code>，<code>two</code> 或 <code>three</code>。
-如要匹配其多次重复，那么整个抉择结构须置于 <code>\(</code> 和 <code>\)</code> 之间:<br />
-<code>
-/\(foo\|bar\)\+
-</code><br />
-这个命令匹配 <code>foo</code>，<code>foobar</code>，<code>foofoo</code>，<code>barfoobar</code>，等等。</li>
-</ul>
+<pre><code class="language-\\">这个命令匹配 `foo`，`foobar`，`foofoo`，`barfoobar`，等等。
 
-<h4 id="变量替换">变量替换</h4>
+#### 变量替换
+- 置于 `\(` 和 `\)` 之间的字符串可以作为变量在替换是引用，例如`xxxx this is that xxxx`，我们想将这段文本中的`this`和`that`进行换位变成`xxxx that is this xxxx`，Vim的替换命令应该这样写：`:.s/\( this \) is \(that\)/\2 is \1/`
+其中`\1`表示`this`，`\2`表示`that`。
 
-<ul>
-<li>置于 <code>\(</code> 和 <code>\)</code> 之间的字符串可以作为变量在替换是引用，例如<code>xxxx this is that xxxx</code>，我们想将这段文本中的<code>this</code>和<code>that</code>进行换位变成<code>xxxx that is this xxxx</code>，Vim的替换命令应该这样写：<code>:.s/\( this \) is \(that\)/\2 is \1/</code>
-其中<code>\1</code>表示<code>this</code>，<code>\2</code>表示<code>that</code>。</li>
-</ul>
 
-<h2 id="ctags-and-taglist">Ctags and Taglist</h2>
+## Ctags and Taglist
+Ctags可以定义项目目录下的文件所包含的结构体、函数类型、变量类型、函数名所在位置，并可以他们之间跳转。
+### Ctags Configure
+1. 在项目目录下生成tags文件，文件记录了函数、变量等的位置和类型。\\
+</code></pre>
 
-<p>Ctags可以定义项目目录下的文件所包含的结构体、函数类型、变量类型、函数名所在位置，并可以他们之间跳转。</p>
+<p>cd /path/to/project
+ctags -R *</p>
 
-<h3 id="ctags-configure">Ctags Configure</h3>
+<pre><code>2. 在`~/.vimrc`中设置\\
+</code></pre>
 
-<ol>
-<li>在项目目录下生成tags文件，文件记录了函数、变量等的位置和类型。<br />
-<code>
-cd /path/to/project
-ctags -R *
-</code></li>
-<li>在<code>~/.vimrc</code>中设置<br />
-<code>
-set tags=tags
-</code></li>
-<li>打开项目中的文件</li>
-<li><code>&lt;ctrl&gt;]</code>: 进入光标所指的标识符的定义</li>
-<li><code>&lt;ctrl&gt;t</code>: 回到前一个标签处</li>
-</ol>
+<p>set tags=tags</p>
 
-<h1 id="pythontag"></h1>
+<pre><code>3. 打开项目中的文件
+- `&lt;ctrl&gt;]`: 进入光标所指的标识符的定义
+- `&lt;ctrl&gt;t`: 回到前一个标签处
 
-<h3 id="为python标准库添加标签">为Python标准库添加标签</h3>
+&lt;h1 id=&quot;pythontag&quot;&gt;&lt;/h1&gt;
 
-<ol>
-<li>假设Python标准库的位置是<code>/usr/lib/python3.6</code><br />
-<code>
-ctags -R -f ~/.python.tags /usr/lib/python3.6
-</code></li>
-<li>在<code>~/.vimrc</code>中添加设置<br />
-<code>
-set tags+=~/.python.tags
-</code></li>
-</ol>
+### 为Python标准库添加标签
+1. 假设Python标准库的位置是`/usr/lib/python3.6`\\
+</code></pre>
 
-<h2 id="systag"></h2>
+<p>ctags -R -f ~/.python.tags /usr/lib/python3.6</p>
 
-<h3 id="为c-c-系统函数添加标签">为C/C++系统函数添加标签</h3>
+<pre><code>2. 在`~/.vimrc`中添加设置\\
+</code></pre>
 
-<ol>
-<li>设置系统头文件标签<br />
-<code>
-ctags -R -f ~/.sys.tags /usr/include /usr/local/include
-</code></li>
-<li>在<code>~/.vimrc</code>中添加设置<br />
-<code>
-set tags+=~/.sys.tags
-</code></li>
-</ol>
+<p>set tags+=~/.python.tags</p>
 
-<h3 id="taglist-configure">Taglist Configure</h3>
+<pre><code>
+&lt;h2 id=&quot;systag&quot;&gt;&lt;/h2&gt;
 
-<ol>
-<li>安装Taglist，在<a href="http://vim-taglist.sourceforge.net/">Taglist</a>官网下载插件，并解压到<code>~/.vim/</code>目录中，保证该目录下存在：<br />
-<code>
-plugin/taglist.vim
-doc/taglist.txt
-</code></li>
-<li>打开项目中的文件，在Command Mode下输入<br />
-<code>
-:Tilst
-</code></li>
-<li>Taglist中常用快捷键</li>
-</ol>
+### 为C/C++系统函数添加标签
+1. 设置系统头文件标签\\
+</code></pre>
+
+<p>ctags -R -f ~/.sys.tags /usr/include /usr/local/include</p>
+
+<pre><code>2. 在`~/.vimrc`中添加设置\\
+</code></pre>
+
+<p>set tags+=~/.sys.tags</p>
+
+<pre><code>
+### Taglist Configure
+1. 安装Taglist，在[Taglist](http://vim-taglist.sourceforge.net/)官网下载插件，并解压到`~/.vim/`目录中，保证该目录下存在：\\
+</code></pre>
+
+<p>plugin/taglist.vim
+doc/taglist.txt</p>
+
+<pre><code>2. 打开项目中的文件，在Command Mode下输入\\
+</code></pre>
+
+<p>:Tilst
+```
+3. Taglist中常用快捷键</p>
 
 <table>
 <thead>
@@ -1224,6 +1185,40 @@ Nanjing
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="https://blog.xumijian.me/post/">
+                <h3 class="media-heading">Posts</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://blog.xumijian.me/2019/10/%E5%88%A4%E6%96%AD%E7%82%B9%E6%98%AF%E5%90%A6%E5%9C%A8%E5%A4%9A%E8%BE%B9%E5%BD%A2%E5%86%85%E7%9A%84python%E5%AE%9E%E7%8E%B0/">
+                <h3 class="media-heading">判断点是否在多边形内的Python实现</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="https://blog.xumijian.me/2019/06/%E5%9C%A8vscode%E4%B8%AD%E4%BD%BF%E7%94%A8remote-ssh%E8%BF%9B%E8%A1%8C%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/">
                 <h3 class="media-heading">在VSCode中使用Remote-SSH进行远程开发</h3>
               </a>
@@ -1401,40 +1396,6 @@ Nanjing
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://blog.xumijian.me/2017/10/fedora26%E4%B8%AD%E5%AE%89%E8%A3%85google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/">
-                <h3 class="media-heading">Fedora26中安装Google拼音输入法</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Oct 10, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>在Fedora25的时候sogou拼音出现了一些不兼容的情况，从而使我转而使用Google拼音。如今操作系统已经换成了Fedora26，这里就记录下安装Google拼音的过程。</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://blog.xumijian.me/2017/10/ssh-%E9%9A%A7%E9%81%93%E4%B8%8E%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91/">
-                <h3 class="media-heading">SSH 隧道与端口转发</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Oct 10, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>中文可以称为SSH隧道，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。通过建立这条隧道，用户可以从客户端直接访问服务器端基于TCP协议的服务如HTTP。</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -1442,7 +1403,7 @@ Nanjing
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         12 posts found
+         13 posts found
       </p>
     </div>
   </div>
