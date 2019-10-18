@@ -380,10 +380,6 @@ URL          : https://fcitx-im.org/wiki/Googlepinyin
 
 
             
-            
-              
-              
-            
           </div>
         </article>
         <footer id="footer" class="main-content-wrap">
@@ -445,6 +441,23 @@ URL          : https://fcitx-im.org/wiki/Googlepinyin
   </ul>
 </div>
 <div id="share-options-mask" class="share-options-mask"></div>
+      <div id="gitalk-container"></div>
+      </div>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+      <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+      <script type="text/javascript">
+            var gitalk = new Gitalk({
+              id: '2017-10-27 12:26:29 \x2b0800 \x2b0800',
+              title: 'Fedora26中安装Google拼音输入法',
+              clientID: '3a3b190b1de92a4f6922',
+              clientSecret: '19f7856d5352fd8ae126ac92a43ac7897fb9a4e3',
+              repo: 'blog-comment',
+              owner: 'xumi1993',
+              admin: ['xumi1993'],
+              body: decodeURI(location.href),
+            });
+            gitalk.render('gitalk-container');
+      </script>
     </div>
     
     <div id="about">
@@ -760,4 +773,5 @@ $(document).ready(function() {
     
   </body>
 </html>
+
 
