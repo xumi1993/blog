@@ -12,11 +12,20 @@
     
     
     <item>
-      <title>地震学技术</title>
-      <link>https://blog.xumijian.me/categories/%E5%9C%B0%E9%9C%87%E5%AD%A6%E6%8A%80%E6%9C%AF/</link>
+      <title>Seismology</title>
+      <link>https://blog.xumijian.me/categories/seismology/</link>
       <pubDate>Sat, 11 Jan 2020 21:17:48 +0800</pubDate>
       
-      <guid>https://blog.xumijian.me/categories/%E5%9C%B0%E9%9C%87%E5%AD%A6%E6%8A%80%E6%9C%AF/</guid>
+      <guid>https://blog.xumijian.me/categories/seismology/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Seimology</title>
+      <link>https://blog.xumijian.me/categories/seimology/</link>
+      <pubDate>Tue, 08 Oct 2019 21:05:16 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/categories/seimology/</guid>
       <description></description>
     </item>
     
@@ -26,15 +35,6 @@
       <pubDate>Tue, 18 Jun 2019 12:30:12 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/categories/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>subcategory</title>
-      <link>https://blog.xumijian.me/categories/subcategory/</link>
-      <pubDate>Tue, 18 Jun 2019 12:30:12 +0800</pubDate>
-      
-      <guid>https://blog.xumijian.me/categories/subcategory/</guid>
       <description></description>
     </item>
     

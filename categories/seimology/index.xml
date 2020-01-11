@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Seimology on Note to Tech</title>
+    <link>https://blog.xumijian.me/categories/seimology/</link>
+    <description>Recent content in Seimology on Note to Tech</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 08 Oct 2019 21:05:16 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.xumijian.me/categories/seimology/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>判断地理坐标点是否在多边形内的Python实现</title>
+      <link>https://blog.xumijian.me/2019/10/%E5%88%A4%E6%96%AD%E5%9C%B0%E7%90%86%E5%9D%90%E6%A0%87%E7%82%B9%E6%98%AF%E5%90%A6%E5%9C%A8%E5%A4%9A%E8%BE%B9%E5%BD%A2%E5%86%85%E7%9A%84python%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Tue, 08 Oct 2019 21:05:16 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/2019/10/%E5%88%A4%E6%96%AD%E5%9C%B0%E7%90%86%E5%9D%90%E6%A0%87%E7%82%B9%E6%98%AF%E5%90%A6%E5%9C%A8%E5%A4%9A%E8%BE%B9%E5%BD%A2%E5%86%85%E7%9A%84python%E5%AE%9E%E7%8E%B0/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
