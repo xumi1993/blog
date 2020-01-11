@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Note to Tech</title>
@@ -6,7 +6,7 @@
     <description>Recent content in Categories on Note to Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 08 Oct 2019 21:05:16 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 11 Jan 2020 21:17:48 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.xumijian.me/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>地震学技术</title>
       <link>https://blog.xumijian.me/categories/%E5%9C%B0%E9%9C%87%E5%AD%A6%E6%8A%80%E6%9C%AF/</link>
-      <pubDate>Tue, 08 Oct 2019 21:05:16 +0800</pubDate>
+      <pubDate>Sat, 11 Jan 2020 21:17:48 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/categories/%E5%9C%B0%E9%9C%87%E5%AD%A6%E6%8A%80%E6%9C%AF/</guid>
       <description></description>

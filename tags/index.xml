@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Note to Tech</title>
@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Note to Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 08 Oct 2019 21:05:16 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 11 Jan 2020 21:17:48 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.xumijian.me/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,27 @@
     <item>
       <title>Geophysics</title>
       <link>https://blog.xumijian.me/tags/geophysics/</link>
-      <pubDate>Tue, 08 Oct 2019 21:05:16 +0800</pubDate>
+      <pubDate>Sat, 11 Jan 2020 21:17:48 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/tags/geophysics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>差值</title>
+      <link>https://blog.xumijian.me/tags/%E5%B7%AE%E5%80%BC/</link>
+      <pubDate>Sat, 11 Jan 2020 21:17:48 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/tags/%E5%B7%AE%E5%80%BC/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>网格化</title>
+      <link>https://blog.xumijian.me/tags/%E7%BD%91%E6%A0%BC%E5%8C%96/</link>
+      <pubDate>Sat, 11 Jan 2020 21:17:48 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/tags/%E7%BD%91%E6%A0%BC%E5%8C%96/</guid>
       <description></description>
     </item>
     

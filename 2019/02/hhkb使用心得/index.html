@@ -56,7 +56,7 @@ code.has-jax {
 </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.55.6 with theme Tranquilpeak 0.4.1-BETA">
+    <meta name="generator" content="Hugo 0.61.0 with theme Tranquilpeak 0.4.1-BETA">
     <title>Hhkb使用心得</title>
     <meta name="author" content="Mijian Xu">
     <meta name="keywords" content="">
@@ -269,60 +269,54 @@ code.has-jax {
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p><img src="../../../img/kb/hhkb.png" alt="" />
+              <p><img src="../../../img/kb/hhkb.png" alt="">
 图片来自<a href="http://www.pfu.com.cn/HHKB/">HHKB官网</a></p>
-
-<h2 id="起因">起因</h2>
-
+<h2 id="heading">起因</h2>
 <p>有一天我攒了一把客制化键盘，手感还不错，早上便拿到公司准备炫耀一把。在一家软件公司键盘的好坏就像身份地位的象征。我刚到座位上，有一位同事过来掏出一把HHKB Pro2，让我试试手感。当时虽然没用过HHKB，但其在圈内的影响力巨巨巨巨巨大，号称键盘里的橙装，所以我只好慢慢收起我的紫装。所以我立志要买一把HHKB，其实我一直没买HHKB的原因是对HHKB有些疑虑：</p>
-
 <ol>
 <li>方向键要用组合键。在公司里常用GUI IDE进行开发，所以方向键还是会经常用的。</li>
 <li><code>control</code>键的位置。很多快捷键都会用到control，位置改了不知道会不会不习惯。我并不担心没有大写锁定，不写Fortran平时基本上用不到。</li>
 <li><code>Esc</code>和<code>Delete</code>键的位置。这两个键影响其实较小，因为在右上角有被<code>Esc</code>替代的<code>~</code>键，对于一个类Unix重度依赖者来说这很重要。这也是为什么我不会买GK64的原因。</li>
 </ol>
-
 <p>这是我的一些疑虑，其他朋友还有一些其他的疑虑：</p>
-
 <ol>
 <li>没有F区</li>
 <li>没有小键盘数字键</li>
 <li>手感不习惯</li>
 </ol>
-
-<h2 id="体验">体验</h2>
-
+<h2 id="heading-1">体验</h2>
 <p>终于在深思熟虑半年后，入手了HHKB Pro BT，有让我很惊艳的地方也有些让我不满意的地方。</p>
-
-<h3 id="优点">优点</h3>
-
+<h3 id="heading-2">优点</h3>
 <ol>
-<li>手感很优秀，这里说的手感优秀不是说塔它比某个机械轴或者比某个机械键盘好用，毕竟手感各有所爱，现在用HHKB时间多了之后也会换机械键盘，换换口味。这里说的优秀是指HHKB可以吧每个按键的手感都做到几乎一样，这很不容易，尤其是大键。我们知道对机械键盘，为了让大键的手感不肉，会对卫星轴进行一系列调教，就算这样也不能完全保证每个键的手感一致。但HHKB作为一个工业级产品做到这一点很不容易。</li>
-
-<li><p>配列非常合理，这里其实就解决了之前的所有疑惑。先说下我的使用环境：</p>
-
+<li>
+<p>手感很优秀，这里说的手感优秀不是说塔它比某个机械轴或者比某个机械键盘好用，毕竟手感各有所爱，现在用HHKB时间多了之后也会换机械键盘，换换口味。这里说的优秀是指HHKB可以吧每个按键的手感都做到几乎一样，这很不容易，尤其是大键。我们知道对机械键盘，为了让大键的手感不肉，会对卫星轴进行一系列调教，就算这样也不能完全保证每个键的手感一致。但HHKB作为一个工业级产品做到这一点很不容易。</p>
+</li>
+<li>
+<p>配列非常合理，这里其实就解决了之前的所有疑惑。先说下我的使用环境：</p>
 <ul>
 <li>操作系统：MacOS和Linux</li>
 <li>常用软件：Vim, Pycharm, VSCode，Terminal和Word
-<img src="../../../img/kb/keymap.png" alt="" /></li>
-</ul></li>
-</ol>
-
-<ul>
-<li><p>不得不说HHKB对MacOS的支持相当的好，<code>cmd</code>和<code>opt</code>的位置和mac原生键盘的一样，对于一个Mac用户来说不会有任何不适应。相反，对于Win用户来说可能就需要适应一下了。对于Linux，首先如果不用图形化那就没有任何影响，如果用图形化的话键位都可以自定义，我把Gnome的快捷键都改成和Mac一样了。</p></li>
-
-<li><p>再来解释几个键位和在不同IDE中使用的问题。</p>
-
-<ul>
-<li><p>方向键问题：</p>
-
-<ul>
-<li>Vim里不需要方向键。</li>
-<li>通过<code>fn</code>+<code>[</code>, <code>/</code>, <code>;</code>, <code>'</code>实现⬆️，⬇️，⬅️，➡️比想象中要省劲，只要不是游戏中的操作，对于光标定位来说还是很简单的。</li>
-<li>Mac自带Emacs的光标定位快捷键，Linux一样也可以改。而对于Mac终端和Gnome终端，都默认这些快捷键。
-<br /></li>
+<img src="../../../img/kb/keymap.png" alt=""></li>
 </ul>
-
+</li>
+</ol>
+<ul>
+<li>
+<p>不得不说HHKB对MacOS的支持相当的好，<code>cmd</code>和<code>opt</code>的位置和mac原生键盘的一样，对于一个Mac用户来说不会有任何不适应。相反，对于Win用户来说可能就需要适应一下了。对于Linux，首先如果不用图形化那就没有任何影响，如果用图形化的话键位都可以自定义，我把Gnome的快捷键都改成和Mac一样了。</p>
+</li>
+<li>
+<p>再来解释几个键位和在不同IDE中使用的问题。</p>
+<ul>
+<li>方向键问题：
+<ul>
+<li>
+<p>Vim里不需要方向键。</p>
+</li>
+<li>
+<p>通过<code>fn</code>+<code>[</code>, <code>/</code>, <code>;</code>, <code>'</code>实现⬆️，⬇️，⬅️，➡️比想象中要省劲，只要不是游戏中的操作，对于光标定位来说还是很简单的。</p>
+</li>
+<li>
+<p>Mac自带Emacs的光标定位快捷键，Linux一样也可以改。而对于Mac终端和Gnome终端，都默认这些快捷键。</p>
 <table>
 <thead>
 <tr>
@@ -330,63 +324,60 @@ code.has-jax {
 <th align="center">功能</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
-<td align="center"><code>Ctrl</code>+<code>p</code></td>
-<td align="center">⬆️</td>
+<td align="center"><code>Ctrl</code>+<code>p</code>| ⬆️</td>
+<td></td>
 </tr>
-
 <tr>
-<td align="center"><code>Ctrl</code>+<code>n</code></td>
-<td align="center">⬇️</td>
+<td align="center"><code>Ctrl</code>+<code>n</code>| ⬇️</td>
+<td></td>
 </tr>
-
 <tr>
-<td align="center"><code>Ctrl</code>+<code>b</code></td>
-<td align="center">⬅️</td>
+<td align="center"><code>Ctrl</code>+<code>b</code>| ⬅️</td>
+<td></td>
 </tr>
-
 <tr>
-<td align="center"><code>Ctrl</code>+<code>f</code></td>
-<td align="center">➡️</td>
+<td align="center"><code>Ctrl</code>+<code>f</code>| ➡️</td>
+<td></td>
 </tr>
-
 <tr>
-<td align="center"><code>Ctrl</code>+<code>a</code></td>
-<td align="center"><code>Home</code></td>
+<td align="center"><code>Ctrl</code>+<code>a</code>|<code>Home</code>|</td>
+<td></td>
 </tr>
-
 <tr>
-<td align="center"><code>Ctrl</code>+<code>e</code></td>
-<td align="center"><code>End</code></td>
+<td align="center"><code>Ctrl</code>+<code>e</code>|<code>End</code>|</td>
+<td></td>
 </tr>
 </tbody>
 </table>
-
 <p>这种替代也有好有坏，好处是在进行光标定位时手几乎不需要离开字母区，熟练的情况下效率很高。坏处是如果在用这个键盘之前不是Emacs用户还是有一定学习成本的。如果不会盲打，这种操作简直就是噩梦。</p>
-
-<ul>
-<li>Pycharm, VSCode（包括 Vim）等IDE都可以修改键盘映射，可以修改成上述映射，或者用<code>fn</code>+<code>[</code>, <code>/</code>, <code>;</code>, <code>'</code>，也不麻烦。</li>
-<li>Word好像不能修改键盘映射，只能用<code>fn</code>组合键。所以我的替代方案是不用Word，完全使用Markdown和Latex</li>
-</ul></li>
-
-<li><p><code>Control</code>键的位置是比较惊艳的，这比在左下角的<code>Control</code>按上去要舒服很多，所以适应这个键位不是什么问题，<code>Delete</code>的位置也是一样。</p></li>
-</ul></li>
+</li>
+<li>
+<p>Pycharm, VSCode（包括 Vim）等IDE都可以修改键盘映射，可以修改成上述映射，或者用<code>fn</code>+<code>[</code>, <code>/</code>, <code>;</code>, <code>'</code>，也不麻烦。</p>
+</li>
+<li>
+<p>Word好像不能修改键盘映射，只能用<code>fn</code>组合键。所以我的替代方案是不用Word，完全使用Markdown和Latex</p>
+</li>
 </ul>
-
-<h3 id="缺点">缺点</h3>
-
-<ul>
-<li><p><strong>我不应该买蓝牙版</strong>，看看大F的蓝牙版以及那些薄膜键盘的蓝牙版，多设备之间一键切换。而HHKB要先按<code>fn</code>+<code>q</code>进入设备搜索模式，与当前设备断开，再在另一台设备上选择HHKB点连接，才能完成切换。而且键盘有时会断联，我不清楚这是电脑的问题还是键盘的问题。但如果是有线的就不会有这些问题无疑。</p></li>
-
-<li><p>不会盲打，而且不想学盲打的同学就别买了。由于键位的改变很多组合键需要低头找，就很影响效率。</p></li>
-
-<li><p>可玩性不高，除了换换键帽没什么可玩性，毕竟这只是一个生产力工具，想玩键盘还是客制化比较好玩。</p></li>
+</li>
+<li><code>Control</code>键的位置是比较惊艳的，这比在左下角的<code>Control</code>按上去要舒服很多，所以适应这个键位不是什么问题，<code>Delete</code>的位置也是一样。</li>
 </ul>
-
-<h2 id="总结">总结</h2>
-
+</li>
+</ul>
+<h3 id="heading-3">缺点</h3>
+<ul>
+<li>
+<p><strong>我不应该买蓝牙版</strong>，看看大F的蓝牙版以及那些薄膜键盘的蓝牙版，多设备之间一键切换。而HHKB要先按<code>fn</code>+<code>q</code>进入设备搜索模式，与当前设备断开，再在另一台设备上选择HHKB点连接，才能完成切换。而且键盘有时会断联，我不清楚这是电脑的问题还是键盘的问题。但如果是有线的就不会有这些问题无疑。</p>
+</li>
+<li>
+<p>不会盲打，而且不想学盲打的同学就别买了。由于键位的改变很多组合键需要低头找，就很影响效率。</p>
+</li>
+<li>
+<p>可玩性不高，除了换换键帽没什么可玩性，毕竟这只是一个生产力工具，想玩键盘还是客制化比较好玩。</p>
+</li>
+</ul>
+<h2 id="heading-4">总结</h2>
 <p>网上很多人对HHKB的评价褒贬不一，我是非常能理解的。但只是对于一个不用Windows、常用命令行的码农来说还是很适合的。</p>
               
             </div>
@@ -469,7 +460,7 @@ code.has-jax {
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2019 Mijian Xu. All Rights Reserved
+    &copy; 2020 Mijian Xu. All Rights Reserved
   </span>
 </footer>
 
@@ -586,10 +577,27 @@ Nanjing
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  Oct 10, 2019
+                  Jan 1, 2020
                 </span>
               </span>
               <div class="media-content hide-xs font-merryweather"></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://blog.xumijian.me/2020/01/%E4%B8%89%E7%BB%B4%E6%95%B0%E6%8D%AE%E4%BD%93%E7%94%9F%E6%88%90%E4%B8%8E%E5%88%87%E7%89%87/">
+                <h3 class="media-heading">三维数据体生成与切片</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2020
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>我们在计算得到的数据通常是非等间隔网格，为了用GMT进行2D可视化，需要将数据网格化后进行差值。</p></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -623,7 +631,7 @@ Nanjing
                   Jun 6, 2019
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p><img src="https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif" alt="" />
+              <div class="media-content hide-xs font-merryweather"><p><img src="https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif" alt="">
 动图来自<a href="https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif">官网</a></p></div>
             </div>
             <div style="clear:both;"></div>
@@ -642,7 +650,6 @@ Nanjing
                 </span>
               </span>
               <div class="media-content hide-xs font-merryweather"><p><a href="https://www.paragon-software.com/home/ntfs-mac/">Paragon NTFS for Mac</a>和<a href="https://www.tuxera.com/products/tuxera-ntfs-for-mac/">Tuxera</a>是MacOS下常用的NTFS解决方案，但这些软件都是商业软件，而且价格不菲。这些软件除了实现NTFS的读写功能外，还有一些磁盘监测、卸载快捷键等功能，也有很好看的图形界面。但是这些额外功能对我来说都不是必须的，那么有没有一种解决方案可以免费实现最简单的NTFS读写功能呢？</p>
-
 <p>那么这里将介绍通过FUSE和ntfs-3g实现NTFS读写功能</p></div>
             </div>
             <div style="clear:both;"></div>
@@ -677,7 +684,7 @@ Nanjing
                   Feb 2, 2019
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p><img src="../../../img/kb/hhkb.png" alt="" />
+              <div class="media-content hide-xs font-merryweather"><p><img src="../../../img/kb/hhkb.png" alt="">
 图片来自<a href="http://www.pfu.com.cn/HHKB/">HHKB官网</a></p></div>
             </div>
             <div style="clear:both;"></div>
@@ -695,8 +702,7 @@ Nanjing
                   Feb 2, 2019
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><p><img src="../../../img/kb/teaser.jpg" alt="" /></p>
-
+              <div class="media-content hide-xs font-merryweather"><p><img src="../../../img/kb/teaser.jpg" alt=""></p>
 <p>Varmilo VA88M 双彩虹RGB，来自<a href="https://www.cherrymx.de/en/blog/VARMILO-VA88M-DOUBLE-RAINBOW-RGB-INTRODUCTION.html">Cherry官方博客</a>。</p></div>
             </div>
             <div style="clear:both;"></div>
@@ -731,62 +737,34 @@ Nanjing
                   Nov 11, 2017
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"><h2 id="目录">目录</h2>
-
+              <div class="media-content hide-xs font-merryweather"><h2 id="heading">目录</h2>
 <ul>
 <li><strong><a href="#command-mode">Command Mode</a></strong>
-
 <ul>
 <li><a href="#cursor-motions">Cursor Motions</a></li>
 <li><a href="#edit-command">Edit Command</a></li>
 <li><a href="#window-motion">Window Motion</a></li>
-</ul></li>
+</ul>
+</li>
 <li><strong><a href="#insert-mode">Insert Mode</a></strong></li>
 <li><strong><a href="#visual-mode">Visual Mode</a></strong></li>
 <li><strong><a href="#search-and-replace">Search and Replace</a></strong>
-
 <ul>
 <li><a href="#basic-usage">Basic usage</a></li>
 <li><a href="#replace">Replace</a></li>
 <li><a href="#regular-expression">Regular Expression</a></li>
-<li><a href="#vim-中常用的替换表达式">Vim 中常用的替换表达式</a></li>
-</ul></li>
+<li><a href="#vim-%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%9B%BF%E6%8D%A2%E8%A1%A8%E8%BE%BE%E5%BC%8F">Vim 中常用的替换表达式</a></li>
+</ul>
+</li>
 <li><strong><a href="#ctags-and-taglist">Ctags and Taglist</a></strong>
-
 <ul>
 <li><a href="#ctags-configure">Ctags Configure</a></li>
 <li><a href="#pythontag">为Python标准库添加标签</a></li>
 <li><a href="#systag">为C/C++系统函数添加标签</a></li>
 <li><a href="#taglist-configure">Taglist Configure</a></li>
-</ul></li>
-</ul></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="https://blog.xumijian.me/2017/10/%E9%85%8D%E7%BD%AEvim%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
-                <h3 class="media-heading">配置Vim开发环境</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Oct 10, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>配置一个优秀个开发环境可以极大地提高开发效率，在Linux里Vim是最常用的开发环境之一（emacs也是相当不错的，但鄙人是Vim的忠实粉丝），我们一般所说的开发环境包括了</p>
-
-<ul>
-<li>代码高亮</li>
-<li>文件树</li>
-<li>配色方案</li>
-<li>自动缩进</li>
-<li>代码补全</li>
 </ul>
-
-<p>这里就Linux中配置这些功能做一个简单的介绍</p></div>
+</li>
+</ul></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -799,7 +777,7 @@ Nanjing
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         13 posts found
+         14 posts found
       </p>
     </div>
   </div>

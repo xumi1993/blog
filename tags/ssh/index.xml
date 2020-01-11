@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>SSH on Note to Tech</title>
@@ -17,7 +17,7 @@
       <pubDate>Tue, 18 Jun 2019 12:30:12 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/2019/06/%E5%9C%A8vscode%E4%B8%AD%E4%BD%BF%E7%94%A8remote-ssh%E8%BF%9B%E8%A1%8C%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif&#34; alt=&#34;&#34; /&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif&#34; alt=&#34;&#34;&gt;
 动图来自&lt;a href=&#34;https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif&#34;&gt;官网&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
