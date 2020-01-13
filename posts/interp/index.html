@@ -47,7 +47,7 @@
 
     <title>三维数据体生成与切片 | Note to Tech</title>
 
-    <link rel="stylesheet" href="/css/meme.min.0506703718e39024509757a24297c6ceddeacdef0076c67ea57f318d9d1caf13.css" integrity="sha256-BQZwNxjjkCRQl1eiQpfGzt3qze8AdsZ+pX8xjZ0crxM=" data-instant-track />
+    <link rel="stylesheet" href="/css/meme.min.0f1003fed8dcea8551d07b14768d39f0b8e9f9f076e58808dd40704cd9c5ab7d.css" integrity="sha256-DxAD/tjc6oVR0HsUdo058Ljp+fB25YgI3UBwTNnFq30=" data-instant-track />
 
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif:400,400i,500,700,700i|Source+Code+Pro:400,400i,700,700i|Comfortaa:700&display=swap" rel="stylesheet" />
 
@@ -646,6 +646,22 @@
 
 
         
+    
+
+        <div class="load-comments">
+            <div id="load-comments" onclick="loadComments()">Load Comments?</div>
+        </div>
+
+        
+
+        
+            <div id="vcomments"></div>
+        
+
+        
+
+    
+
 
     </div>
 </main>
@@ -720,6 +736,62 @@
 
 
 
+
+    
+
+        
+
+        
+            <script>
+    function loadComments() {
+        document.querySelector('#load-comments').style = "display:none";
+        if (typeof Valine === 'undefined') {
+            var getScript = (options) => {
+                var script = document.createElement('script');
+                script.defer = true;
+                script.crossOrigin = 'anonymous';
+                Object.keys(options).forEach((key) => {
+                    script[key] = options[key];
+                });
+                document.body.appendChild(script);
+            };
+            getScript({
+                src: 'https://unpkg.com/valine/dist/Valine.min.js',
+                onload: () => {
+                    newValine();
+                }
+            });
+        } else {
+            newValine();
+        }
+    }
+    function newValine() {
+        new Valine({
+            el: '#vcomments',
+            appId: '',
+            appKey: '',
+            placeholder: 'Pls say something',
+            notify:  false ,
+            verify:  false ,
+            path: location.pathname,
+            avatar: 'mm',
+            meta: ["nick","mail","link"],
+            pageSize:  10 ,
+            lang: 'en',
+            visitor:  true ,
+            highlight:  true ,
+            avatarForce:  false ,
+            recordIP:  false ,
+            serverURLs: ''
+        });
+    }
+</script>
+
+        
+
+        
+
+    
 
 
 
