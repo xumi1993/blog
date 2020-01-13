@@ -9,19 +9,19 @@
     <channel>
         <title>Note to Tech</title>
         <link>https://blog.xumijian.me/</link>
-        <description>Mijian's Blogs</description>
+        <description></description>
         <generator>Hugo 0.61.0 https://gohugo.io/</generator>
         
             <language>en-US</language>
         
         
-            <managingEditor>gomijianxu@gmail.com (Mijian)</managingEditor>
+            <managingEditor>gomijianxu@gmail.com (Mijian Xu)</managingEditor>
         
         
-            <webMaster>gomijianxu@gmail.com (Mijian)</webMaster>
+            <webMaster>gomijianxu@gmail.com (Mijian Xu)</webMaster>
         
         
-        <lastBuildDate>Mon, 13 Jan 2020 15:57:47 +0000</lastBuildDate>
+        <lastBuildDate>Mon, 13 Jan 2020 18:21:30 +0000</lastBuildDate>
         
             <atom:link rel="self" type="application/rss+xml" href="https://blog.xumijian.me/rss.xml" />
         
@@ -32,11 +32,11 @@
                 <guid isPermaLink="true">https://blog.xumijian.me/posts/interp/</guid>
                 <pubDate>Sat, 11 Jan 2020 21:17:48 +0800</pubDate>
                 
-                    <author>gomijianxu@gmail.com (Mijian)</author>
+                    <author>gomijianxu@gmail.com (Mijian Xu)</author>
                 
                 
                 
-                    <description><![CDATA[<p>我们在计算得到的数据通常是非等间隔网格，为了用GMT进行2D可视化，需要将数据网格化后进行差值。</p>
+                    <description><![CDATA[<p>我们在计算得到的数据通常是非等间隔网格，为了用GMT进行2D可视化，需要将数据网格化后进行插值。</p>
 <h2 id="1-">1. 将文本文件转换为三维数据体</h2>
 <p>我们拿到的原始文件是包含经度、纬度、深度、和每个数据点的数据（速度、温度、密度等）组成的文本格式文件，以这次的数据为例，我将Excel文件直接复制到文本中形成了以空格为分隔符的文本文件，以下列出部分行：</p>
 <pre><code>10.55467676	108.4399258	175.207137	0.01217283	-0.015367995	-9.20E-05	1681.16272	3291.964844	5848311808	1.00E+21
@@ -49,7 +49,7 @@
 10.25585045	108.1031426	116.804997	0.013968474	-0.01280891	-1.20E-05	1596.835083	3300.313232	3924829952	1.00E+21
 9.998090145	108.4348529	116.8293289	0.013916044	-0.012845078	-5.31E-06	1600.383762	3299.961929	3924717946	1.00E+21
 </code></pre><h2 id="heading">网格化说明</h2>
-<p>由于这样的数据点是非等间隔的，没有办法进行切片时所需要的差值操作，所以我先将数据进行了三维网格化。这里我选用了Python语言和它的科学计算模块Numpy、Scipy进行网格化。Matlab也可以实现类似功能，核心函数也叫<code>griddata</code>。</p>
+<p>由于这样的数据点是非等间隔的，没有办法进行切片时所需要的插值操作，所以我先将数据进行了三维网格化。这里我选用了Python语言和它的科学计算模块Numpy、Scipy进行网格化。Matlab也可以实现类似功能，核心函数也叫<code>griddata</code>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -113,7 +113,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="2-">2. 平面和剖面的切片</h2>
-<p>用GMT绘制二维图像需要从上一步网格好的数据文件中对某个平面或剖面进行切片。对平面的切片简单一些，对剖面的切片则需要先对大圆弧路径进行差值，生成数据点坐标，再用这些坐标对三维数据体进行差值。</p>
+<p>用GMT绘制二维图像需要从上一步网格好的数据文件中对某个平面或剖面进行切片。对平面的切片简单一些，对剖面的切片则需要先对大圆弧路径进行插值，生成数据点坐标，再用这些坐标对三维数据体进行插值。</p>
 <h3 id="21---cut-planepy">2.1 对数据的平面切片  (<code>cut_plane.py</code>)</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -150,7 +150,7 @@
 <pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interpn</span>
 
-<span class="c1"># 在指定的区域内生成数据点坐标，理论上说这些点也可以是不等间隔的，但是GMT绘图时依旧需要网格化，所以这里还是使用等间隔差值。</span>
+<span class="c1"># 在指定的区域内生成数据点坐标，理论上说这些点也可以是不等间隔的，但是GMT绘图时依旧需要网格化，所以这里还是使用等间隔插值。</span>
 <span class="k">def</span> <span class="nf">init_plane</span><span class="p">(</span><span class="n">lat1</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">lon1</span><span class="o">=</span><span class="mi">65</span><span class="p">,</span> <span class="n">lat2</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">lon2</span><span class="o">=</span><span class="mi">140</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span><span class="p">:</span>
     <span class="n">lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
     <span class="n">lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">lon1</span><span class="p">,</span> <span class="n">lon2</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
@@ -160,12 +160,12 @@
             <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="p">[</span><span class="n">depth</span><span class="p">,</span> <span class="n">la</span><span class="p">,</span> <span class="n">lo</span><span class="p">]</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
 
-<span class="c1"># 生成的数据点对三维数据体差值</span>
+<span class="c1"># 生成的数据点对三维数据体插值</span>
 <span class="k">def</span> <span class="nf">interall</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span><span class="p">:</span>
     <span class="n">inter_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="p">[</span><span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="p">)</span>
     <span class="n">inter_data</span><span class="p">[</span><span class="p">:</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">interpn</span><span class="p">(</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">dep</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">lat</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">lon</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">)</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">vew</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">bounds_error</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
     <span class="n">inter_data</span><span class="p">[</span><span class="p">:</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">interpn</span><span class="p">(</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">dep</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">lat</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">lon</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">)</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">vns</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">bounds_error</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-    <span class="c1"># 返回时同时将数据点坐标那三列于差值得到的数据拼贴后一起输出</span>
+    <span class="c1"># 返回时同时将数据点坐标那三列于插值得到的数据拼贴后一起输出</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="p">:</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="p">,</span> <span class="n">inter_data</span><span class="p">)</span><span class="p">)</span>
 
 
@@ -269,11 +269,11 @@
     <span class="k">return</span> <span class="n">vr</span><span class="p">,</span> <span class="n">vt</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="heading-3">数据差值</h4>
-<p>差值和平面切片是类似的。只有以下几点不同：</p>
+</div><h4 id="heading-3">数据插值</h4>
+<p>插值和平面切片是类似的。只有以下几点不同：</p>
 <ul>
 <li>速度为坐标系转化后的速度。</li>
-<li>需要对垂直方向速度，温度和密度等进行差值。</li>
+<li>需要对垂直方向速度，温度和密度等进行插值。</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -339,6 +339,8 @@
                                 
                                 
                                 
+                                    <category domain="https://blog.xumijian.me/categories/seismology/">Seismology</category>
+                                
                             
                         
                     
@@ -347,13 +349,19 @@
                                 
                                 
                                 
-                            
-                                
-                                
+                                    <category domain="https://blog.xumijian.me/tags/geophysics/">Geophysics</category>
                                 
                             
                                 
                                 
+                                
+                                    <category domain="https://blog.xumijian.me/tags/%E6%8F%92%E5%80%BC/">插值</category>
+                                
+                            
+                                
+                                
+                                
+                                    <category domain="https://blog.xumijian.me/tags/%E7%BD%91%E6%A0%BC%E5%8C%96/">网格化</category>
                                 
                             
                         
@@ -367,7 +375,7 @@
                 <guid isPermaLink="true">https://blog.xumijian.me/posts/points-in-polygon/</guid>
                 <pubDate>Tue, 08 Oct 2019 21:05:16 +0800</pubDate>
                 
-                    <author>gomijianxu@gmail.com (Mijian)</author>
+                    <author>gomijianxu@gmail.com (Mijian Xu)</author>
                 
                 
                 
@@ -441,6 +449,8 @@
                                 
                                 
                                 
+                                    <category domain="https://blog.xumijian.me/categories/seismology/">Seismology</category>
+                                
                             
                         
                     
@@ -449,9 +459,13 @@
                                 
                                 
                                 
+                                    <category domain="https://blog.xumijian.me/tags/geophysics/">Geophysics</category>
+                                
                             
                                 
                                 
+                                
+                                    <category domain="https://blog.xumijian.me/tags/python/">Python</category>
                                 
                             
                         
@@ -465,7 +479,7 @@
                 <guid isPermaLink="true">https://blog.xumijian.me/posts/vscode-ssh/</guid>
                 <pubDate>Tue, 18 Jun 2019 12:30:12 +0800</pubDate>
                 
-                    <author>gomijianxu@gmail.com (Mijian)</author>
+                    <author>gomijianxu@gmail.com (Mijian Xu)</author>
                 
                 
                 
@@ -553,6 +567,8 @@ Host example-remote-linux-machine-with-identity-file
                                 
                                 
                                 
+                                    <category domain="https://blog.xumijian.me/categories/linux/">Linux</category>
+                                
                             
                         
                     
@@ -561,13 +577,19 @@ Host example-remote-linux-machine-with-identity-file
                                 
                                 
                                 
-                            
-                                
-                                
+                                    <category domain="https://blog.xumijian.me/tags/vscode/">vscode</category>
                                 
                             
                                 
                                 
+                                
+                                    <category domain="https://blog.xumijian.me/tags/ssh/">SSH</category>
+                                
+                            
+                                
+                                
+                                
+                                    <category domain="https://blog.xumijian.me/tags/linux/">Linux</category>
                                 
                             
                         
@@ -581,7 +603,7 @@ Host example-remote-linux-machine-with-identity-file
                 <guid isPermaLink="true">https://blog.xumijian.me/posts/fuse/</guid>
                 <pubDate>Mon, 25 Mar 2019 20:55:03 +0800</pubDate>
                 
-                    <author>gomijianxu@gmail.com (Mijian)</author>
+                    <author>gomijianxu@gmail.com (Mijian Xu)</author>
                 
                 
                 
@@ -634,6 +656,8 @@ sudo /usr/local/bin/ntfs-3g /dev/disk1s1 /Volumes/NTFS -olocal -oallow_other
                                 
                                 
                                 
+                                    <category domain="https://blog.xumijian.me/categories/mac/">Mac</category>
+                                
                             
                         
                     
@@ -642,9 +666,13 @@ sudo /usr/local/bin/ntfs-3g /dev/disk1s1 /Volumes/NTFS -olocal -oallow_other
                                 
                                 
                                 
+                                    <category domain="https://blog.xumijian.me/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">文件系统</category>
+                                
                             
                                 
                                 
+                                
+                                    <category domain="https://blog.xumijian.me/tags/fuse/">Fuse</category>
                                 
                             
                         
@@ -658,7 +686,7 @@ sudo /usr/local/bin/ntfs-3g /dev/disk1s1 /Volumes/NTFS -olocal -oallow_other
                 <guid isPermaLink="true">https://blog.xumijian.me/posts/sshfs/</guid>
                 <pubDate>Thu, 21 Mar 2019 13:54:42 +0800</pubDate>
                 
-                    <author>gomijianxu@gmail.com (Mijian)</author>
+                    <author>gomijianxu@gmail.com (Mijian Xu)</author>
                 
                 
                 
@@ -702,6 +730,8 @@ sudo setfacl -m u:user:rwx /mnt/xxx
                                 
                                 
                                 
+                                    <category domain="https://blog.xumijian.me/categories/linux/">Linux</category>
+                                
                             
                         
                     
@@ -710,13 +740,19 @@ sudo setfacl -m u:user:rwx /mnt/xxx
                                 
                                 
                                 
-                            
-                                
-                                
+                                    <category domain="https://blog.xumijian.me/tags/ssh/">SSH</category>
                                 
                             
                                 
                                 
+                                
+                                    <category domain="https://blog.xumijian.me/tags/linux/">Linux</category>
+                                
+                            
+                                
+                                
+                                
+                                    <category domain="https://blog.xumijian.me/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">文件系统</category>
                                 
                             
                         
@@ -730,7 +766,7 @@ sudo setfacl -m u:user:rwx /mnt/xxx
                 <guid isPermaLink="true">https://blog.xumijian.me/posts/hhkb/</guid>
                 <pubDate>Sun, 03 Feb 2019 12:54:38 +0800</pubDate>
                 
-                    <author>gomijianxu@gmail.com (Mijian)</author>
+                    <author>gomijianxu@gmail.com (Mijian Xu)</author>
                 
                 
                 
@@ -855,6 +891,8 @@ sudo setfacl -m u:user:rwx /mnt/xxx
                                 
                                 
                                 
+                                    <category domain="https://blog.xumijian.me/categories/keyboard/">keyboard</category>
+                                
                             
                         
                     
@@ -862,6 +900,8 @@ sudo setfacl -m u:user:rwx /mnt/xxx
                             
                                 
                                 
+                                
+                                    <category domain="https://blog.xumijian.me/tags/hhkb/">hhkb</category>
                                 
                             
                         
@@ -875,7 +915,7 @@ sudo setfacl -m u:user:rwx /mnt/xxx
                 <guid isPermaLink="true">https://blog.xumijian.me/posts/mech-kb/</guid>
                 <pubDate>Fri, 01 Feb 2019 17:57:29 +0800</pubDate>
                 
-                    <author>gomijianxu@gmail.com (Mijian)</author>
+                    <author>gomijianxu@gmail.com (Mijian Xu)</author>
                 
                 
                 
@@ -1046,6 +1086,8 @@ sudo setfacl -m u:user:rwx /mnt/xxx
                                 
                                 
                                 
+                                    <category domain="https://blog.xumijian.me/categories/keyboard/">keyboard</category>
+                                
                             
                         
                     
@@ -1053,6 +1095,8 @@ sudo setfacl -m u:user:rwx /mnt/xxx
                             
                                 
                                 
+                                
+                                    <category domain="https://blog.xumijian.me/tags/keyboard/">keyboard</category>
                                 
                             
                         
@@ -1066,7 +1110,7 @@ sudo setfacl -m u:user:rwx /mnt/xxx
                 <guid isPermaLink="true">https://blog.xumijian.me/posts/mpipool-mpi4py/</guid>
                 <pubDate>Thu, 03 Jan 2019 13:31:58 +0800</pubDate>
                 
-                    <author>gomijianxu@gmail.com (Mijian)</author>
+                    <author>gomijianxu@gmail.com (Mijian Xu)</author>
                 
                 
                 
@@ -1168,6 +1212,8 @@ sudo setfacl -m u:user:rwx /mnt/xxx
                                 
                                 
                                 
+                                    <category domain="https://blog.xumijian.me/categories/python/">Python</category>
+                                
                             
                         
                     
@@ -1176,9 +1222,13 @@ sudo setfacl -m u:user:rwx /mnt/xxx
                                 
                                 
                                 
+                                    <category domain="https://blog.xumijian.me/tags/python/">Python</category>
+                                
                             
                                 
                                 
+                                
+                                    <category domain="https://blog.xumijian.me/tags/mpi/">Mpi</category>
                                 
                             
                         
@@ -1192,7 +1242,7 @@ sudo setfacl -m u:user:rwx /mnt/xxx
                 <guid isPermaLink="true">https://blog.xumijian.me/posts/vim-intro/</guid>
                 <pubDate>Wed, 01 Nov 2017 14:21:22 +0800</pubDate>
                 
-                    <author>gomijianxu@gmail.com (Mijian)</author>
+                    <author>gomijianxu@gmail.com (Mijian Xu)</author>
                 
                 
                 
@@ -1667,6 +1717,8 @@ doc/taglist.txt</p>
                                 
                                 
                                 
+                                    <category domain="https://blog.xumijian.me/categories/linux/">Linux</category>
+                                
                             
                         
                     
@@ -1675,13 +1727,19 @@ doc/taglist.txt</p>
                                 
                                 
                                 
-                            
-                                
-                                
+                                    <category domain="https://blog.xumijian.me/tags/development/">Development</category>
                                 
                             
                                 
                                 
+                                
+                                    <category domain="https://blog.xumijian.me/tags/vim/">Vim</category>
+                                
+                            
+                                
+                                
+                                
+                                    <category domain="https://blog.xumijian.me/tags/linux/">Linux</category>
                                 
                             
                         
@@ -1695,7 +1753,7 @@ doc/taglist.txt</p>
                 <guid isPermaLink="true">https://blog.xumijian.me/posts/vim-plugin/</guid>
                 <pubDate>Sun, 29 Oct 2017 21:51:29 +0800</pubDate>
                 
-                    <author>gomijianxu@gmail.com (Mijian)</author>
+                    <author>gomijianxu@gmail.com (Mijian Xu)</author>
                 
                 
                 
@@ -1967,6 +2025,8 @@ vmap &lt;C-_&gt; &lt;Leader&gt;c&lt;Space&gt;
                                 
                                 
                                 
+                                    <category domain="https://blog.xumijian.me/categories/linux/">Linux</category>
+                                
                             
                         
                     
@@ -1975,13 +2035,19 @@ vmap &lt;C-_&gt; &lt;Leader&gt;c&lt;Space&gt;
                                 
                                 
                                 
-                            
-                                
-                                
+                                    <category domain="https://blog.xumijian.me/tags/development/">Development</category>
                                 
                             
                                 
                                 
+                                
+                                    <category domain="https://blog.xumijian.me/tags/vim/">Vim</category>
+                                
+                            
+                                
+                                
+                                
+                                    <category domain="https://blog.xumijian.me/tags/linux/">Linux</category>
                                 
                             
                         
@@ -1995,7 +2061,7 @@ vmap &lt;C-_&gt; &lt;Leader&gt;c&lt;Space&gt;
                 <guid isPermaLink="true">https://blog.xumijian.me/posts/google-pinyin/</guid>
                 <pubDate>Fri, 27 Oct 2017 12:26:29 +0800</pubDate>
                 
-                    <author>gomijianxu@gmail.com (Mijian)</author>
+                    <author>gomijianxu@gmail.com (Mijian Xu)</author>
                 
                 
                 
@@ -2043,6 +2109,8 @@ URL          : https://fcitx-im.org/wiki/Googlepinyin
                                 
                                 
                                 
+                                    <category domain="https://blog.xumijian.me/categories/linux/">Linux</category>
+                                
                             
                         
                     
@@ -2051,13 +2119,19 @@ URL          : https://fcitx-im.org/wiki/Googlepinyin
                                 
                                 
                                 
-                            
-                                
-                                
+                                    <category domain="https://blog.xumijian.me/tags/tools/">Tools</category>
                                 
                             
                                 
                                 
+                                
+                                    <category domain="https://blog.xumijian.me/tags/fedora/">Fedora</category>
+                                
+                            
+                                
+                                
+                                
+                                    <category domain="https://blog.xumijian.me/tags/linux/">Linux</category>
                                 
                             
                         
@@ -2071,7 +2145,7 @@ URL          : https://fcitx-im.org/wiki/Googlepinyin
                 <guid isPermaLink="true">https://blog.xumijian.me/posts/ssh-tunnel/</guid>
                 <pubDate>Thu, 26 Oct 2017 21:51:29 +0800</pubDate>
                 
-                    <author>gomijianxu@gmail.com (Mijian)</author>
+                    <author>gomijianxu@gmail.com (Mijian Xu)</author>
                 
                 
                 
@@ -2142,6 +2216,8 @@ URL          : https://fcitx-im.org/wiki/Googlepinyin
                                 
                                 
                                 
+                                    <category domain="https://blog.xumijian.me/categories/linux/">Linux</category>
+                                
                             
                         
                     
@@ -2150,9 +2226,13 @@ URL          : https://fcitx-im.org/wiki/Googlepinyin
                                 
                                 
                                 
+                                    <category domain="https://blog.xumijian.me/tags/ssh/">SSH</category>
+                                
                             
                                 
                                 
+                                
+                                    <category domain="https://blog.xumijian.me/tags/linux/">Linux</category>
                                 
                             
                         
@@ -2166,7 +2246,7 @@ URL          : https://fcitx-im.org/wiki/Googlepinyin
                 <guid isPermaLink="true">https://blog.xumijian.me/posts/publish-pypi/</guid>
                 <pubDate>Mon, 23 Oct 2017 21:51:29 +0800</pubDate>
                 
-                    <author>gomijianxu@gmail.com (Mijian)</author>
+                    <author>gomijianxu@gmail.com (Mijian Xu)</author>
                 
                 
                 
@@ -2309,6 +2389,8 @@ twine upload dist/*
                                 
                                 
                                 
+                                    <category domain="https://blog.xumijian.me/categories/python/">Python</category>
+                                
                             
                         
                     
@@ -2317,9 +2399,13 @@ twine upload dist/*
                                 
                                 
                                 
+                                    <category domain="https://blog.xumijian.me/tags/development/">Development</category>
+                                
                             
                                 
                                 
+                                
+                                    <category domain="https://blog.xumijian.me/tags/python/">Python</category>
                                 
                             
                         
