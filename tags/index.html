@@ -82,7 +82,7 @@
         "@context": "https://schema.org",
         "@type": "WebPage",
         "datePublished": "1969-07-20T20:17:43+00:00",
-        "dateModified": "2020-01-13T18:21:24+00:00",
+        "dateModified": "2020-01-14T03:51:23+00:00",
         "url": "https://blog.xumijian.me/tags/",
         "name": "Tags",
         "description": "",
@@ -124,6 +124,21 @@
 <meta property="og:site_name" content="Note to Tech" />
 <meta property="og:locale" content="en-US" /><meta property="og:image" content="https://blog.xumijian.me/icons/apple-touch-icon.png" />
     <meta property="og:type" content="website" />
+        
+
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=219936562"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '219936562');
+    </script>
+
+
+
 
     
 </head>
@@ -391,7 +406,14 @@
             }
         });
     </script>
-
+<script data-no-instant>
+            InstantClick.on('change', function () {
+                gtag('config', '219936562', {
+                    'page_path': location.pathname + location.search
+                });
+            });
+        </script>
+    
     
     <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
 
