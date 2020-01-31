@@ -21,10 +21,319 @@
             <webMaster>gomijianxu@gmail.com (Mijian Xu)</webMaster>
         
         
-        <lastBuildDate>Tue, 21 Jan 2020 09:59:24 +0000</lastBuildDate>
+        <lastBuildDate>Fri, 31 Jan 2020 12:22:46 +0000</lastBuildDate>
         
             <atom:link rel="self" type="application/rss+xml" href="https://blog.xumijian.me/rss.xml" />
         
+        
+            <item>
+                <title>用GMT绘制中国及周边构造分区与GPS速度场</title>
+                <link>https://blog.xumijian.me/posts/gmt-map/</link>
+                <guid isPermaLink="true">https://blog.xumijian.me/posts/gmt-map/</guid>
+                <pubDate>Thu, 30 Jan 2020 23:18:20 +0800</pubDate>
+                
+                    <author>gomijianxu@gmail.com (Mijian Xu)</author>
+                
+                
+                
+                    <description><![CDATA[<p>GMT对地图的处理十分优秀，而且只需要短短几行代码。本文介绍了如何用等距圆锥投影绘制不同范围大小的地形图，以及如何在地形图上绘制断层、文字和矢量等。</p>
+<p><img src="/img/gmt-map/region.png" alt=""></p>
+<p>这种图像通常出现在论文的第一幅图。主要介绍区域构造背景，根据不同的研究需要，可以叠加不同的信息。上图展示了最终图像，其包括了以下几个图层：</p>
+<ul>
+<li>等距圆锥投影底图</li>
+<li>地形起伏</li>
+<li>海岸线和国界</li>
+<li>带有三角标示的汇聚板块边界</li>
+<li>汇聚方向回汇聚速率标示</li>
+<li>中国大陆构造分区</li>
+<li>中国大陆GPS速度场</li>
+</ul>
+<p>以上每一条都是一句或几句GMT命令，将他们按顺序写入脚本即可。</p>
+<h3 id="1-">1. 绘制等距圆锥投影底图</h3>
+<p><a href="https://docs.gmt-china.org/5.4/proj/Jd/">等距圆锥投影</a>在所有经纬线的比例尺上都不会畸变，因此在绘制高纬度地图时通常选用这种投影方式。
+其参数为：</p>
+<pre><code>-JD&lt;lon&gt;/&lt;lat&gt;/&lt;lat1&gt;/&lt;lat2&gt;/&lt;width&gt;
+</code></pre><ul>
+<li><code>&lt;lon&gt;/&lt;lat&gt;</code> 投影中心位置</li>
+<li><code>&lt;lat1&gt;/&lt;lat2&gt;</code> 两条标准纬线</li>
+<li><code>&lt;width&gt;</code> 图像宽度，后面可以跟单位<code>i</code>（英寸）、<code>c</code>（厘米）等</li>
+</ul>
+<p>在这个例子中我们用<code>-R</code>选定绘图范围为</p>
+<pre><code>R=65/140/10/60
+</code></pre><p>这时投影中心位置应设为
+$$
+lon = (65+140)/2 = 102.5;
+lat = (10+60)/2 = 35
+$$
+两条标准纬线决定了圆锥的角度，这个可以根据自己的喜好修改，只需要保证他们的值不超过绘图范围即可。所以投影参数应该设置为</p>
+<pre><code>J=D102.5/35/36/42/7.5i
+</code></pre><p>然后我们用<code>psbasemap</code>绘制底图。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">gmt psbasemap -R<span class="nv">$R</span> -J<span class="nv">$J</span> -Bxa10f5 -Bya10f5 -BWSne -K &gt; <span class="nv">$ps</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="2-">2. 绘制地形起伏</h3>
+<h4 id="heading">截取地形数据</h4>
+<p>绘制地形起伏需要用到地形起伏数据，<a href="https://gmt-china.org/data/">GMT中文社区的数据集</a>提供了不同分辨率的地形区起伏数据链接。由于地形起伏数据是通常是全球范围的，我们需要用到<a href="https://docs.gmt-china.org/5.4/module/grdcut/"><code>grdcut</code></a>先将绘图范围内的地形起伏截取出来。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">etopo</span><span class="o">=</span><span class="nv">$data_dir</span>/etopo1.grd <span class="c1">#确定数据的位置</span>
+gmt grdcut <span class="nv">$etopo</span> -Gtopo.grd -R
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>-G</code>选项指定了截取出来的文件路径。</li>
+<li><code>-R</code>表示截取范围继承上一个命令中的范围，在这里则继承<code>psbasemap</code>中的<code>-R$R</code></li>
+</ul>
+<h4 id="heading-1">绘制地形起伏</h4>
+<p>这一步最重要的是选择一个好看的色标，图中色标是我自定义的一个全球色标，更多色标可以参考<a href="http://soliton.vm.bytemark.co.uk/pub/cpt-city/">cpt-city</a>。有色标之后就可以用<a href="https://docs.gmt-china.org/5.4/module/grdimage/"><code>grdimage</code></a>命令绘制地形起伏</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">topocpt</span><span class="o">=</span><span class="nv">$data_dir</span>/cpt/china.cpt <span class="c1">#确定色标文件的位置</span>
+gmt grdimage topo.grd -R -J -C<span class="nv">$topocpt</span> -O -K &gt;&gt; <span class="nv">$ps</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="heading-2">添加光照效果</h4>
+<p>有时为了使图像更加立体，尤其是为了更好地反应造山带或海沟的特征这是一种很好的方式。这时我们需要先生成一个光照文件，在数学上其实是计算网格文件的方向梯度，所以使用<a href="https://docs.generic-mapping-tools.org/5.4/grdgradient.html"><code>grdgradient</code></a>命令。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">gmt grdgradient topo.grd -Ne0.7 -A50 -Gtopo_i.grd
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>topo.grd</code>是之前截取出的地形起伏文件</li>
+<li><code>-A50</code>表示方向差分沿方位角50˚</li>
+<li><code>-Ne0.7</code>表示对计算后的梯度值做归一化。其这里的归一化公式如下
+$$
+g_n = A(1.0 - e^{\sqrt{2}})
+$$
+这里$A=0.7$为归一化振幅</li>
+<li><code>-Gtopo_i.grd</code>表示输出文件<code>topo_i.grd</code></li>
+</ul>
+<p>现在需要修改上面的<code>grdimage</code>命令，在其中加入生成的光照文件，这时绘制地形起伏命令可以写为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">gmt grdimage topo.grd -R -J -C<span class="nv">$topocpt</span> -O -K -Itopo_i.grd &gt;&gt; <span class="nv">$ps</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="3-">3. 绘制海岸线和国界</h3>
+<p>GMT提供了全球的海岸线数据。也包括了国界，通过<a href="https://docs.gmt-china.org/5.4/module/pscoast/"><code>pscoast</code></a>绘制它们。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">gmt pscoast -R -J -O -K -A100000 -Dl -W0.3p -N1 &gt;&gt; <span class="nv">$ps</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>-A</code>指定了绘制湖泊和岛屿的最小面积，数值越小湖泊越密。这里的数值很大则忽略了绝大部分湖泊</li>
+<li><code>-Dl</code>指定了海岸线的精度为<code>l</code>（low），GMT提供了5个不同精度的版本，从高到低依次为：full、high、intermediate、low和crude对应<code>f|h|i|l|c</code></li>
+<li><code>-W0.3p</code>指定了海岸线的粗细</li>
+<li><code>-N1</code>表示绘制国界（不可作为发表使用）。</li>
+</ul>
+<h3 id="4-">4. 绘制板块边界和构造分区</h3>
+<p>用<a href="https://docs.gmt-china.org/5.4/module/psxy/"><code>psxy</code></a>可以绘制这些信息，类似的数据集可以在<a href="https://gmt-china.org/data/">GMT中文社区</a>中找到</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">block</span><span class="o">=</span><span class="nv">$data_dir</span>/cntectonic.gmt
+<span class="nv">phpb</span><span class="o">=</span><span class="nv">$data_dir</span>/PlateBoundary/Philippine.plate
+<span class="nv">indianbp</span><span class="o">=</span><span class="nv">$data_dir</span>/PlateBoundary/Indian.plate
+
+<span class="c1"># tectonics</span>
+gmt psxy <span class="nv">$block</span> -R -J -O -K -W1.2p,255,-  &gt;&gt; <span class="nv">$ps</span>
+
+<span class="c1"># plate boundary</span>
+gmt psxy <span class="nv">$phpb</span> -R -J -O -K -W1.5p,0/105/167 -Sf0.5c/0.1c+r+t+o0.1 &gt;&gt; <span class="nv">$ps</span>
+gmt psxy <span class="nv">$indianbp</span> -R -J -O -K -W1.5p,0/105/167 -Sf0.5c/0.1c+r+t+o0.1 &gt;&gt; <span class="nv">$ps</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>绘制构造分区时<code>-W1.2p,255,-</code>指定了线型：<code>1.2p</code>粗、白色和虚线</li>
+<li>绘制板块边界时<code>-W1.5p,0/105/167</code>中<code>0/105/167</code>表示用RGB方式指定颜色。</li>
+<li><code>-Sf0.5c/0.1c+r+t+o0.1</code>定义了表示俯冲方向的三角的位置和大小
+<ul>
+<li><code>0.5c/0.1c</code>分别表示相邻符号之间的距离和符号的大小，单位是厘米</li>
+<li><code>+r</code>表示符号绘制在线段右侧</li>
+<li><code>+t</code>表示符号为三角，更多断层符号请参考<a href="https://docs.gmt-china.org/5.4/module/psxy/"><code>psxy</code>说明</a></li>
+<li><code>+o0.1</code>表示线段上的第一个符号距离线段起始偏移0.1</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-gps">5. 绘制GPS速度场</h3>
+<p>GPS数据来源于 Zhao et al. (2015)，分别有以下几列</p>
+<pre><code>#  Velocities of campaign stations with respective to EURASIA plate from 2009-2014
+#  Lon.— Longitude in angle degree
+#  Lat.— Latitude in angle degree
+#  Ve  — Velocity(mm/a) in east component
+#  Vn  — Velocity(mm/a) in north component
+#  sVe — Velocity error(mm/a) in east component
+#  Vn  — Velocity error(mm/a) in north component
+#  Site— station code
+#  Lon.     Lat.    Ve     Vn       sVe     sVn     Site
+   112.6    40.9    4.25   -0.12    0.19    0.21    A002
+   112.4    40.2    4.85   -0.77    0.28    0.17    A004
+   113.1    41.0    5.77   -2.54    0.88    0.70    A005
+   113.2    40.8    3.49   -1.10    0.28    0.27    A006
+......
+</code></pre><p>对于这样的数据格式我们可以用<a href="https://docs.gmt-china.org/5.4/module/psvelo/"><code>psvelo</code></a>并配合<code>awk</code>绘制</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">gps</span><span class="o">=</span><span class="nv">$data_dir</span>/gps_campagin.txt
+
+awk <span class="s1">&#39;{print $1,$2,$3,$4,$5,$6,0}&#39;</span> <span class="nv">$gps</span> <span class="p">|</span> gmt psvelo -J -R -Se0.02c/0.95/0 -A0.15c+e+p0.75p -G255/23/23 -W0.1p,255/23/23 -K -O &gt;&gt; <span class="nv">$ps</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>psvelo</code>中如果要绘制矢量则需要指定<code>-Se</code>，其要求输入有7列，前6列与数据中的前6列一致分别是经度、纬度、东西方向速度、南北方向速度、东西方向速度误差和南北方向速度误差（误差用于绘制置信椭圆）。第7列为两个方向的相关性。所以这里用<code>awk</code>输出数据表的前6列并将第7列设为0</li>
+<li><code>-Se0.02c/0.95/0</code>表示绘制矢量，<code>0.02c</code>表示矢量的缩放比例，即速度为1时矢量长度为0.02厘米；<code>0.95</code>表示绘制95%的置信椭圆；<code>0</code>设置文本大小，这里没有文本即为0</li>
+<li><code>-A0.15c+e+p0.75p</code>设置了箭头的大小、方向和粗细</li>
+<li><code>-G255/23/23</code>表示矢量填充的颜色</li>
+</ul>
+<h3 id="6-">6. 绘制板块汇聚方向和回汇聚速率标示</h3>
+<h4 id="heading-3">绘制板块汇聚方向示意</h4>
+<p>本质上这是画了一个很粗的箭头。这里画单一箭头用<code>psxy</code>中的绘制矢量标示即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="m">80</span> <span class="m">23</span> <span class="m">15</span> 1c <span class="p">|</span> gmt psxy -R -J -O -K -SV0.5c+e -W4p -G0 &gt;&gt; <span class="nv">$ps</span>
+<span class="nb">echo</span> <span class="m">133</span> <span class="m">22</span> <span class="m">310</span> 1c <span class="p">|</span> gmt psxy -R -J -O -K -SV0.5c+e -W4p -G0 &gt;&gt; <span class="nv">$ps</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>我们用<code>echo</code>命令为<code>psxy</code>输入了4列分别为经度、纬度、方向和矢量长度</li>
+<li><code>-SV0.5c+e</code>表示箭头大小为0.5厘米，箭头绘制在矢量尾端</li>
+<li><code>-W4p</code>矢量粗细为4p</li>
+<li><code>-G0</code>填充黑色</li>
+</ul>
+<h4 id="heading-4">绘制汇聚速率文字标示</h4>
+<p>GMT中<a href="https://docs.gmt-china.org/5.4/module/pstext/"><code>pstext</code></a>用于在图上添加文字。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> <span class="m">80</span> <span class="m">22</span> ~4 cm/yr <span class="p">|</span> gmt pstext -A -R -J -O -K -F+f10p+a105 -G255 &gt;&gt; <span class="nv">$ps</span>
+<span class="nb">echo</span> <span class="m">134</span> 21.8 ~8 cm/yr <span class="p">|</span> gmt pstext -A -R -J -O -K -F+f10p+a40 -G255 &gt;&gt; <span class="nv">$ps</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>输入为三列分别是经度、纬度和文字内容</li>
+<li><code>-A</code>标示旋转角度为水平方向逆时针旋转的角度</li>
+<li><code>-F+f10p+a105</code>用于控制文字的属性
+<ul>
+<li><code>+f10p</code>表示字体大小为10p</li>
+<li><code>a105</code>表示旋转105˚</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-">7. 一些注意事项</h3>
+<p>把这些命令按顺序写在脚本里就可以绘制出完整的图像，但为了脚本的规范我们还需注意</p>
+<ul>
+<li>所有的变量都应该在脚本开头定义，文中为了方便说明才分别定义了每一个变量。</li>
+<li>设置一些GMT参数来美化图像，GMT默认的边框我个人感觉有点粗可以设定其粗细和刻度文字大小
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY <span class="m">10</span> 
+gmt <span class="nb">set</span> MAP_FRAME_WIDTH 0.08 
+gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY 0.08 
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>在所有绘图命令后加一句结尾语句。
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">gmt psxy -R -J -O -T &gt;&gt; <span class="nv">$ps</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>转换图像格式，建议最后将图像转化成一些通用的图像格式如jpg、png、pdf等
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">gmt psconvert -A -P -Tg <span class="nv">$ps</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>在脚本结尾删除中间文件。文中生成的 <code>topo.grd</code>、<code>topo_i.grd</code> 都属于中间文件，要在最后删除。如果进行来图像格式转化，ps文件也要删除。</li>
+</ul>]]></description>
+                
+                
+                
+                
+                
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://blog.xumijian.me/categories/gmt/">GMT</category>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://blog.xumijian.me/tags/gmt/">GMT</category>
+                                
+                            
+                        
+                    
+                
+            </item>
         
             <item>
                 <title>用GMT绘制极坐标剖面</title>
