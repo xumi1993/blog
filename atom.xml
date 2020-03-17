@@ -4,7 +4,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-US">
     <title type="text">Note to Tech</title>
     <subtitle type="html"></subtitle>
-    <updated>2020-01-31T12:22:46+00:00</updated>
+    <updated>2020-03-17T16:15:54+00:00</updated>
     <id>https://blog.xumijian.me/</id>
     <link rel="alternate" type="text/html" href="https://blog.xumijian.me/" />
     <link rel="self" type="application/atom+xml" href="https://blog.xumijian.me/atom.xml" />
@@ -20,7 +20,7 @@
             <title type="text">用GMT绘制中国及周边构造分区与GPS速度场</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/gmt-map/" />
             <id>https://blog.xumijian.me/posts/gmt-map/</id>
-            <updated>2020-01-31T12:22:39+00:00</updated>
+            <updated>2020-03-17T16:15:47+00:00</updated>
             <published>2020-01-30T23:18:20+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -332,7 +332,7 @@ gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY 0.08
             <title type="text">用GMT绘制极坐标剖面</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/gmt-section/" />
             <id>https://blog.xumijian.me/posts/gmt-section/</id>
-            <updated>2020-01-31T12:22:39+00:00</updated>
+            <updated>2020-03-17T16:15:47+00:00</updated>
             <published>2020-01-19T14:42:33+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -776,7 +776,7 @@ awk <span class="s1">&#39;sqrt($5*$5+$7*$7)&gt;0.9{print $4,6371-$1,-1*$7}&#39;<
             <title type="text">三维数据体生成与切片</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/interp/" />
             <id>https://blog.xumijian.me/posts/interp/</id>
-            <updated>2020-01-31T12:22:39+00:00</updated>
+            <updated>2020-03-17T16:15:47+00:00</updated>
             <published>2020-01-11T21:17:48+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -1122,7 +1122,7 @@ awk <span class="s1">&#39;sqrt($5*$5+$7*$7)&gt;0.9{print $4,6371-$1,-1*$7}&#39;<
             <title type="text">判断地理坐标点是否在多边形内的Python实现</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/points-in-polygon/" />
             <id>https://blog.xumijian.me/posts/points-in-polygon/</id>
-            <updated>2020-01-31T12:22:39+00:00</updated>
+            <updated>2020-03-17T16:15:47+00:00</updated>
             <published>2019-10-08T21:05:16+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -1229,7 +1229,7 @@ awk <span class="s1">&#39;sqrt($5*$5+$7*$7)&gt;0.9{print $4,6371-$1,-1*$7}&#39;<
             <title type="text">在VSCode中使用Remote-SSH进行远程开发</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/vscode-ssh/" />
             <id>https://blog.xumijian.me/posts/vscode-ssh/</id>
-            <updated>2020-01-31T12:22:39+00:00</updated>
+            <updated>2020-03-17T16:15:47+00:00</updated>
             <published>2019-06-18T12:30:12+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -1356,7 +1356,7 @@ Host example-remote-linux-machine-with-identity-file
             <title type="text">用FUSE和ntfs-3g在MacOS下打造免费的NTFS解决方案</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/fuse/" />
             <id>https://blog.xumijian.me/posts/fuse/</id>
-            <updated>2020-01-31T12:22:39+00:00</updated>
+            <updated>2020-03-17T16:15:47+00:00</updated>
             <published>2019-03-25T20:55:03+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -1443,7 +1443,7 @@ sudo /usr/local/bin/ntfs-3g /dev/disk1s1 /Volumes/NTFS -olocal -oallow_other
             <title type="text">用sshfs远程挂载路径到本地</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/sshfs/" />
             <id>https://blog.xumijian.me/posts/sshfs/</id>
-            <updated>2020-01-31T12:22:39+00:00</updated>
+            <updated>2020-03-17T16:15:47+00:00</updated>
             <published>2019-03-21T13:54:42+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -1526,7 +1526,7 @@ sudo setfacl -m u:user:rwx /mnt/xxx
             <title type="text">Hhkb使用心得</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/hhkb/" />
             <id>https://blog.xumijian.me/posts/hhkb/</id>
-            <updated>2020-01-31T12:22:39+00:00</updated>
+            <updated>2020-03-17T16:15:47+00:00</updated>
             <published>2019-02-03T12:54:38+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -1678,7 +1678,7 @@ sudo setfacl -m u:user:rwx /mnt/xxx
             <title type="text">机械键盘轴体小记（一）：Cherry</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/mech-kb/" />
             <id>https://blog.xumijian.me/posts/mech-kb/</id>
-            <updated>2020-01-31T12:22:39+00:00</updated>
+            <updated>2020-03-17T16:15:47+00:00</updated>
             <published>2019-02-01T17:57:29+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -1876,7 +1876,7 @@ sudo setfacl -m u:user:rwx /mnt/xxx
             <title type="text">Mpipool Mpi4py</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/mpipool-mpi4py/" />
             <id>https://blog.xumijian.me/posts/mpipool-mpi4py/</id>
-            <updated>2020-01-31T12:22:39+00:00</updated>
+            <updated>2020-03-17T16:15:47+00:00</updated>
             <published>2019-01-03T13:31:58+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -2011,7 +2011,7 @@ sudo setfacl -m u:user:rwx /mnt/xxx
             <title type="text">Vim 使用笔记</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/vim-intro/" />
             <id>https://blog.xumijian.me/posts/vim-intro/</id>
-            <updated>2020-01-31T12:22:39+00:00</updated>
+            <updated>2020-03-17T16:15:47+00:00</updated>
             <published>2017-11-01T14:21:22+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -2525,7 +2525,7 @@ doc/taglist.txt</p>
             <title type="text">配置Vim开发环境</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/vim-plugin/" />
             <id>https://blog.xumijian.me/posts/vim-plugin/</id>
-            <updated>2020-01-31T12:22:39+00:00</updated>
+            <updated>2020-03-17T16:15:47+00:00</updated>
             <published>2017-10-29T21:51:29+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -2837,7 +2837,7 @@ vmap &lt;C-_&gt; &lt;Leader&gt;c&lt;Space&gt;
             <title type="text">Fedora26中安装Google拼音输入法</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/google-pinyin/" />
             <id>https://blog.xumijian.me/posts/google-pinyin/</id>
-            <updated>2020-01-31T12:22:39+00:00</updated>
+            <updated>2020-03-17T16:15:47+00:00</updated>
             <published>2017-10-27T12:26:29+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -2924,7 +2924,7 @@ URL          : https://fcitx-im.org/wiki/Googlepinyin
             <title type="text">SSH 隧道与端口转发</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/ssh-tunnel/" />
             <id>https://blog.xumijian.me/posts/ssh-tunnel/</id>
-            <updated>2020-01-31T12:22:39+00:00</updated>
+            <updated>2020-03-17T16:15:47+00:00</updated>
             <published>2017-10-26T21:51:29+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -3028,7 +3028,7 @@ URL          : https://fcitx-im.org/wiki/Googlepinyin
             <title type="text">发布代码到PyPI</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/publish-pypi/" />
             <id>https://blog.xumijian.me/posts/publish-pypi/</id>
-            <updated>2020-01-31T12:22:39+00:00</updated>
+            <updated>2020-03-17T16:15:47+00:00</updated>
             <published>2017-10-23T21:51:29+08:00</published>
             <author>
                     <name>Mijian Xu</name>
