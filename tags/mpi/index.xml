@@ -20,14 +20,5 @@
       <description>&lt;p&gt;&lt;a href=&#34;http://mpi4py.readthedocs.io/en/stable/index.html&#34;&gt;mpi4py&lt;/a&gt; is a python API for MPI. &lt;strong&gt;MPIPoolExecutor&lt;/strong&gt; is a subclass of &lt;code&gt;mpi4py.futures&lt;/code&gt; to create MPI processes to execute calls asynchronously&lt;/p&gt;</description>
     </item>
     
-    <item>
-      <title>Mpipool Mpi4py</title>
-      <link>https://blog.xumijian.me/posts/mpipool-mpi4py/</link>
-      <pubDate>Thu, 03 Jan 2019 13:31:58 +0800</pubDate>
-      
-      <guid>https://blog.xumijian.me/posts/mpipool-mpi4py/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;http://mpi4py.readthedocs.io/en/stable/index.html&#34;&gt;mpi4py&lt;/a&gt; is a python API for MPI. &lt;strong&gt;MPIPoolExecutor&lt;/strong&gt; is a subclass of &lt;code&gt;mpi4py.futures&lt;/code&gt; to create MPI processes to execute calls asynchronously&lt;/p&gt;</description>
-    </item>
-    
   </channel>
 </rss>

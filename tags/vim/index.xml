@@ -48,64 +48,11 @@
     </item>
     
     <item>
-      <title>Vim 使用笔记</title>
-      <link>https://blog.xumijian.me/posts/vim-intro/</link>
-      <pubDate>Wed, 01 Nov 2017 14:21:22 +0800</pubDate>
-      
-      <guid>https://blog.xumijian.me/posts/vim-intro/</guid>
-      <description>&lt;h2 id=&#34;heading&#34;&gt;目录&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#command-mode&#34;&gt;Command Mode&lt;/a&gt;&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#cursor-motions&#34;&gt;Cursor Motions&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#edit-command&#34;&gt;Edit Command&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#window-motion&#34;&gt;Window Motion&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#insert-mode&#34;&gt;Insert Mode&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#visual-mode&#34;&gt;Visual Mode&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#search-and-replace&#34;&gt;Search and Replace&lt;/a&gt;&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#basic-usage&#34;&gt;Basic usage&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#replace&#34;&gt;Replace&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#regular-expression&#34;&gt;Regular Expression&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#vim-%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%9B%BF%E6%8D%A2%E8%A1%A8%E8%BE%BE%E5%BC%8F&#34;&gt;Vim 中常用的替换表达式&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#ctags-and-taglist&#34;&gt;Ctags and Taglist&lt;/a&gt;&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#ctags-configure&#34;&gt;Ctags Configure&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#pythontag&#34;&gt;为Python标准库添加标签&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#systag&#34;&gt;为C/C++系统函数添加标签&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#taglist-configure&#34;&gt;Taglist Configure&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</description>
-    </item>
-    
-    <item>
       <title>配置Vim开发环境</title>
       <link>https://blog.xumijian.me/post/vim-plugin/</link>
       <pubDate>Sun, 29 Oct 2017 21:51:29 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/post/vim-plugin/</guid>
-      <description>&lt;p&gt;配置一个优秀个开发环境可以极大地提高开发效率，在Linux里Vim是最常用的开发环境之一（emacs也是相当不错的，但鄙人是Vim的忠实粉丝），我们一般所说的开发环境包括了&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;代码高亮&lt;/li&gt;
-&lt;li&gt;文件树&lt;/li&gt;
-&lt;li&gt;配色方案&lt;/li&gt;
-&lt;li&gt;自动缩进&lt;/li&gt;
-&lt;li&gt;代码补全&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这里就Linux中配置这些功能做一个简单的介绍&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>配置Vim开发环境</title>
-      <link>https://blog.xumijian.me/posts/vim-plugin/</link>
-      <pubDate>Sun, 29 Oct 2017 21:51:29 +0800</pubDate>
-      
-      <guid>https://blog.xumijian.me/posts/vim-plugin/</guid>
       <description>&lt;p&gt;配置一个优秀个开发环境可以极大地提高开发效率，在Linux里Vim是最常用的开发环境之一（emacs也是相当不错的，但鄙人是Vim的忠实粉丝），我们一般所说的开发环境包括了&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;代码高亮&lt;/li&gt;

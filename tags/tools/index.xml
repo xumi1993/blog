@@ -20,14 +20,5 @@
       <description>&lt;p&gt;在Fedora25的时候sogou拼音出现了一些不兼容的情况，从而使我转而使用Google拼音。如今操作系统已经换成了Fedora26，这里就记录下安装Google拼音的过程。&lt;/p&gt;</description>
     </item>
     
-    <item>
-      <title>Fedora26中安装Google拼音输入法</title>
-      <link>https://blog.xumijian.me/posts/google-pinyin/</link>
-      <pubDate>Fri, 27 Oct 2017 12:26:29 +0800</pubDate>
-      
-      <guid>https://blog.xumijian.me/posts/google-pinyin/</guid>
-      <description>&lt;p&gt;在Fedora25的时候sogou拼音出现了一些不兼容的情况，从而使我转而使用Google拼音。如今操作系统已经换成了Fedora26，这里就记录下安装Google拼音的过程。&lt;/p&gt;</description>
-    </item>
-    
   </channel>
 </rss>

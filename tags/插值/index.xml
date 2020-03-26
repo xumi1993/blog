@@ -20,14 +20,5 @@
       <description>&lt;p&gt;我们在计算得到的数据通常是非等间隔网格，为了用GMT进行2D可视化，需要将数据网格化后进行插值。&lt;/p&gt;</description>
     </item>
     
-    <item>
-      <title>三维数据体生成与切片</title>
-      <link>https://blog.xumijian.me/posts/interp/</link>
-      <pubDate>Sat, 11 Jan 2020 21:17:48 +0800</pubDate>
-      
-      <guid>https://blog.xumijian.me/posts/interp/</guid>
-      <description>&lt;p&gt;我们在计算得到的数据通常是非等间隔网格，为了用GMT进行2D可视化，需要将数据网格化后进行插值。&lt;/p&gt;</description>
-    </item>
-    
   </channel>
 </rss>

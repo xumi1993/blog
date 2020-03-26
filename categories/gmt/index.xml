@@ -22,30 +22,11 @@
     </item>
     
     <item>
-      <title>用GMT绘制中国及周边构造分区与GPS速度场</title>
-      <link>https://blog.xumijian.me/posts/gmt-map/</link>
-      <pubDate>Thu, 30 Jan 2020 23:18:20 +0800</pubDate>
-      
-      <guid>https://blog.xumijian.me/posts/gmt-map/</guid>
-      <description>&lt;p&gt;GMT对地图的处理十分优秀，而且只需要短短几行代码。本文介绍了如何用等距圆锥投影绘制不同范围大小的地形图，以及如何在地形图上绘制断层、文字和矢量等。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/gmt-map/region.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>用GMT绘制极坐标剖面</title>
       <link>https://blog.xumijian.me/post/gmt-section/</link>
       <pubDate>Sun, 19 Jan 2020 14:42:33 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/post/gmt-section/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/gmt-section/sample.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>用GMT绘制极坐标剖面</title>
-      <link>https://blog.xumijian.me/posts/gmt-section/</link>
-      <pubDate>Sun, 19 Jan 2020 14:42:33 +0800</pubDate>
-      
-      <guid>https://blog.xumijian.me/posts/gmt-section/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/gmt-section/sample.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
     </item>
     

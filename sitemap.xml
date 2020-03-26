@@ -31,13 +31,6 @@
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/posts/</loc>
-    <lastmod>2020-03-26T15:17:48+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.xumijian.me/categories/python/</loc>
     <lastmod>2020-03-26T15:17:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -66,21 +59,14 @@
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/posts/vtk-to-nparray/</loc>
-    <lastmod>2020-03-26T15:17:48+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/tags/gmt/</loc>
+    <loc>https://blog.xumijian.me/categories/gmt/</loc>
     <lastmod>2020-01-30T23:18:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/categories/gmt/</loc>
+    <loc>https://blog.xumijian.me/tags/gmt/</loc>
     <lastmod>2020-01-30T23:18:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -94,21 +80,7 @@
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/posts/gmt-map/</loc>
-    <lastmod>2020-01-30T23:18:20+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.xumijian.me/post/gmt-section/</loc>
-    <lastmod>2020-01-19T14:42:33+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/posts/gmt-section/</loc>
     <lastmod>2020-01-19T14:42:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -143,13 +115,6 @@
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/posts/interp/</loc>
-    <lastmod>2020-01-11T21:17:48+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.xumijian.me/tags/%E6%8F%92%E5%80%BC/</loc>
     <lastmod>2020-01-11T21:17:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -172,13 +137,6 @@
   
   <url>
     <loc>https://blog.xumijian.me/post/points-in-polygon/</loc>
-    <lastmod>2019-10-08T21:05:16+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/posts/points-in-polygon/</loc>
     <lastmod>2019-10-08T21:05:16+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -220,13 +178,6 @@
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/posts/vscode-ssh/</loc>
-    <lastmod>2019-06-18T12:30:12+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.xumijian.me/tags/fuse/</loc>
     <lastmod>2019-03-25T20:55:03+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -255,21 +206,7 @@
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/posts/fuse/</loc>
-    <lastmod>2019-03-25T20:55:03+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.xumijian.me/post/sshfs/</loc>
-    <lastmod>2019-03-21T13:54:42+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/posts/sshfs/</loc>
     <lastmod>2019-03-21T13:54:42+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -284,13 +221,6 @@
   
   <url>
     <loc>https://blog.xumijian.me/post/hhkb/</loc>
-    <lastmod>2019-02-03T12:54:38+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/posts/hhkb/</loc>
     <lastmod>2019-02-03T12:54:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -318,13 +248,6 @@
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/posts/mech-kb/</loc>
-    <lastmod>2019-02-01T17:57:29+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.xumijian.me/tags/mpi/</loc>
     <lastmod>2019-01-03T13:31:58+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -333,13 +256,6 @@
   
   <url>
     <loc>https://blog.xumijian.me/post/mpipool-mpi4py/</loc>
-    <lastmod>2019-01-03T13:31:58+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/posts/mpipool-mpi4py/</loc>
     <lastmod>2019-01-03T13:31:58+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -367,21 +283,7 @@
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/posts/vim-intro/</loc>
-    <lastmod>2017-11-01T14:21:22+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.xumijian.me/post/vim-plugin/</loc>
-    <lastmod>2017-10-29T21:51:29+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/posts/vim-plugin/</loc>
     <lastmod>2017-10-29T21:51:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -402,13 +304,6 @@
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/posts/google-pinyin/</loc>
-    <lastmod>2017-10-27T12:26:29+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.xumijian.me/tags/tools/</loc>
     <lastmod>2017-10-27T12:26:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -423,21 +318,7 @@
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/posts/ssh-tunnel/</loc>
-    <lastmod>2017-10-26T21:51:29+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.xumijian.me/post/publish-pypi/</loc>
-    <lastmod>2017-10-23T21:51:29+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/posts/publish-pypi/</loc>
     <lastmod>2017-10-23T21:51:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

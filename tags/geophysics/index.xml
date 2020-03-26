@@ -21,29 +21,11 @@
     </item>
     
     <item>
-      <title>三维数据体生成与切片</title>
-      <link>https://blog.xumijian.me/posts/interp/</link>
-      <pubDate>Sat, 11 Jan 2020 21:17:48 +0800</pubDate>
-      
-      <guid>https://blog.xumijian.me/posts/interp/</guid>
-      <description>&lt;p&gt;我们在计算得到的数据通常是非等间隔网格，为了用GMT进行2D可视化，需要将数据网格化后进行插值。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>判断地理坐标点是否在多边形内的Python实现</title>
       <link>https://blog.xumijian.me/post/points-in-polygon/</link>
       <pubDate>Tue, 08 Oct 2019 21:05:16 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/post/points-in-polygon/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>判断地理坐标点是否在多边形内的Python实现</title>
-      <link>https://blog.xumijian.me/posts/points-in-polygon/</link>
-      <pubDate>Tue, 08 Oct 2019 21:05:16 +0800</pubDate>
-      
-      <guid>https://blog.xumijian.me/posts/points-in-polygon/</guid>
       <description></description>
     </item>
     
