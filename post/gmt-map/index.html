@@ -35,7 +35,7 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<link href="/dist/even.bafe7e77.min.css" rel="stylesheet">
+<link href="/dist/even.80fdd22f.min.css" rel="stylesheet">
 <link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
 
 
@@ -55,7 +55,7 @@
 
 <meta itemprop="datePublished" content="2020-01-30T23:18:20&#43;08:00" />
 <meta itemprop="dateModified" content="2020-01-30T23:18:20&#43;08:00" />
-<meta itemprop="wordCount" content="2686">
+<meta itemprop="wordCount" content="2688">
 
 
 
@@ -219,12 +219,16 @@
 <pre class="chroma">R=65/140/10/60</pre></td></tr></table>
 </div>
 </div>
-<p>这时投影中心位置应设为
+<p>这时投影中心位置应设为</p>
+
+<p>$$
+lon = (65+140)/2 = 102.5
 $$
-lon = (65+140)/2 = 102.5;
+$$
 lat = (10+60)/2 = 35
-$$
-两条标准纬线决定了圆锥的角度，这个可以根据自己的喜好修改，只需要保证他们的值不超过绘图范围即可。所以投影参数应该设置为</p>
+$$</p>
+
+<p>两条标准纬线决定了圆锥的角度，这个可以根据自己的喜好修改，只需要保证他们的值不超过绘图范围即可。所以投影参数应该设置为</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -289,7 +293,7 @@ gmt grdimage topo.grd -R -J -C<span class="nv">$topocpt</span> -O -K &gt;&gt; <s
 <ul>
 <li><code>topo.grd</code>是之前截取出的地形起伏文件</li>
 <li><code>-A50</code>表示方向差分沿方位角50˚</li>
-<li><code>-Ne0.7</code>表示对计算后的梯度值做归一化。其这里的归一化公式如下
+<li><code>-Ne0.7</code>表示对计算后的梯度值做归一化。其归一化公式如下
 $$
 g_n = A(1.0 - e^{\sqrt{2}})
 $$
@@ -473,21 +477,46 @@ awk <span class="s1">&#39;{print $1,$2,$3,$4,$5,$6,0}&#39;</span> <span class="n
 
 <p>把这些命令按顺序写在脚本里就可以绘制出完整的图像，但为了脚本的规范我们还需注意
 - 所有的变量都应该在脚本开头定义，文中为了方便说明才分别定义了每一个变量。
-- 设置一些GMT参数来美化图像，GMT默认的边框我个人感觉有点粗可以设定其粗细和刻度文字大小
-    <code>bash
-    gmt set FONT_ANNOT_PRIMARY 10 
-    gmt set MAP_FRAME_WIDTH 0.08 
-    gmt set MAP_TICK_LENGTH_PRIMARY 0.08 
-</code>
-- 在所有绘图命令后加一句结尾语句。
-    <code>bash
-    gmt psxy -R -J -O -T &gt;&gt; $ps
-</code>
-- 转换图像格式，建议最后将图像转化成一些通用的图像格式如jpg、png、pdf等
-    <code>bash
-    gmt psconvert -A -P -Tg $ps
-</code>
-- 在脚本结尾删除中间文件。文中生成的 <code>topo.grd</code>、<code>topo_i.grd</code> 都属于中间文件，要在最后删除。如果进行来图像格式转化，ps文件也要删除。</p>
+- 设置一些GMT参数来美化图像，GMT默认的边框我个人感觉有点粗可以设定其粗细和刻度文字大小</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">```bash
+gmt set FONT_ANNOT_PRIMARY 10 
+gmt set MAP_FRAME_WIDTH 0.08 
+gmt set MAP_TICK_LENGTH_PRIMARY 0.08 
+```</pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li><p>在所有绘图命令后加一句结尾语句。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">gmt psxy -R -J -O -T &gt;&gt; <span class="nv">$ps</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>转换图像格式，建议最后将图像转化成一些通用的图像格式如jpg、png、pdf等</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">gmt psconvert -A -P -Tg <span class="nv">$ps</span></code></pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>在脚本结尾删除中间文件。文中生成的 <code>topo.grd</code>、<code>topo_i.grd</code> 都属于中间文件，要在最后删除。如果进行来图像格式转化，ps文件也要删除。</p></li>
+</ul>
     </div>
 
     <div class="post-copyright">
