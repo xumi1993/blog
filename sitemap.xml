@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
@@ -59,14 +59,14 @@
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/tags/gmt/</loc>
+    <loc>https://blog.xumijian.me/categories/gmt/</loc>
     <lastmod>2020-01-30T23:18:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/categories/gmt/</loc>
+    <loc>https://blog.xumijian.me/tags/gmt/</loc>
     <lastmod>2020-01-30T23:18:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -143,14 +143,14 @@
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/tags/linux/</loc>
+    <loc>https://blog.xumijian.me/categories/linux/</loc>
     <lastmod>2019-06-18T12:30:12+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/categories/linux/</loc>
+    <loc>https://blog.xumijian.me/tags/linux/</loc>
     <lastmod>2019-06-18T12:30:12+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

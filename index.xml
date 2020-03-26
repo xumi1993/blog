@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Note to Tech</title>
@@ -17,7 +17,8 @@
       <pubDate>Thu, 26 Mar 2020 15:17:48 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/post/vtk-to-nparray/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/vtk2npz/structured_cube.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/vtk2npz/structured_cube.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
 &lt;p&gt;VTK是用于三维可视化的重要格式。如果我们要对三维可视化数据进行更多自定义的计算，则需要将其转化为适用与科学计算的数据格式。
 （此图由&lt;a href=&#34;https://docs.pyvista.org/&#34;&gt;&lt;em&gt;PyVista&lt;/em&gt;&lt;/a&gt;生成）&lt;/p&gt;</description>
     </item>
@@ -29,7 +30,8 @@
       
       <guid>https://blog.xumijian.me/post/gmt-map/</guid>
       <description>&lt;p&gt;GMT对地图的处理十分优秀，而且只需要短短几行代码。本文介绍了如何用等距圆锥投影绘制不同范围大小的地形图，以及如何在地形图上绘制断层、文字和矢量等。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/gmt-map/region.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
+
+&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/gmt-map/region.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -38,7 +40,7 @@
       <pubDate>Sun, 19 Jan 2020 14:42:33 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/post/gmt-section/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/gmt-section/sample.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/gmt-section/sample.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -65,7 +67,7 @@
       <pubDate>Tue, 18 Jun 2019 12:30:12 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/post/vscode-ssh/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif&#34; alt=&#34;&#34;&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif&#34; alt=&#34;&#34; /&gt;
 动图来自&lt;a href=&#34;https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif&#34;&gt;官网&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
@@ -76,6 +78,7 @@
       
       <guid>https://blog.xumijian.me/post/fuse/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://www.paragon-software.com/home/ntfs-mac/&#34;&gt;Paragon NTFS for Mac&lt;/a&gt;和&lt;a href=&#34;https://www.tuxera.com/products/tuxera-ntfs-for-mac/&#34;&gt;Tuxera&lt;/a&gt;是MacOS下常用的NTFS解决方案，但这些软件都是商业软件，而且价格不菲。这些软件除了实现NTFS的读写功能外，还有一些磁盘监测、卸载快捷键等功能，也有很好看的图形界面。但是这些额外功能对我来说都不是必须的，那么有没有一种解决方案可以免费实现最简单的NTFS读写功能呢？&lt;/p&gt;
+
 &lt;p&gt;那么这里将介绍通过FUSE和ntfs-3g实现NTFS读写功能&lt;/p&gt;</description>
     </item>
     
@@ -94,7 +97,7 @@
       <pubDate>Sun, 03 Feb 2019 12:54:38 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/post/hhkb/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/kb/hhkb.png&#34; alt=&#34;&#34;&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/kb/hhkb.png&#34; alt=&#34;&#34; /&gt;
 图片来自&lt;a href=&#34;http://www.pfu.com.cn/HHKB/&#34;&gt;HHKB官网&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
@@ -104,7 +107,8 @@
       <pubDate>Fri, 01 Feb 2019 17:57:29 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/post/mech-kb/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/kb/teaser.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/kb/teaser.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
 &lt;p&gt;Varmilo VA88M 双彩虹RGB，来自&lt;a href=&#34;https://www.cherrymx.de/en/blog/VARMILO-VA88M-DOUBLE-RAINBOW-RGB-INTRODUCTION.html&#34;&gt;Cherry官方博客&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
     
@@ -124,32 +128,33 @@
       
       <guid>https://blog.xumijian.me/post/vim-intro/</guid>
       <description>&lt;h2 id=&#34;目录&#34;&gt;目录&lt;/h2&gt;
+
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#command-mode&#34;&gt;Command Mode&lt;/a&gt;&lt;/strong&gt;
+
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#cursor-motions&#34;&gt;Cursor Motions&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#edit-command&#34;&gt;Edit Command&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#window-motion&#34;&gt;Window Motion&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#insert-mode&#34;&gt;Insert Mode&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#visual-mode&#34;&gt;Visual Mode&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#search-and-replace&#34;&gt;Search and Replace&lt;/a&gt;&lt;/strong&gt;
+
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#basic-usage&#34;&gt;Basic usage&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#replace&#34;&gt;Replace&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#regular-expression&#34;&gt;Regular Expression&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#vim-%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%9B%BF%E6%8D%A2%E8%A1%A8%E8%BE%BE%E5%BC%8F&#34;&gt;Vim 中常用的替换表达式&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#vim-中常用的替换表达式&#34;&gt;Vim 中常用的替换表达式&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#ctags-and-taglist&#34;&gt;Ctags and Taglist&lt;/a&gt;&lt;/strong&gt;
+
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#ctags-configure&#34;&gt;Ctags Configure&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#pythontag&#34;&gt;为Python标准库添加标签&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#systag&#34;&gt;为C/C++系统函数添加标签&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#taglist-configure&#34;&gt;Taglist Configure&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;</description>
     </item>
     
@@ -160,6 +165,7 @@
       
       <guid>https://blog.xumijian.me/post/vim-plugin/</guid>
       <description>&lt;p&gt;配置一个优秀个开发环境可以极大地提高开发效率，在Linux里Vim是最常用的开发环境之一（emacs也是相当不错的，但鄙人是Vim的忠实粉丝），我们一般所说的开发环境包括了&lt;/p&gt;
+
 &lt;ul&gt;
 &lt;li&gt;代码高亮&lt;/li&gt;
 &lt;li&gt;文件树&lt;/li&gt;
@@ -167,6 +173,7 @@
 &lt;li&gt;自动缩进&lt;/li&gt;
 &lt;li&gt;代码补全&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;p&gt;这里就Linux中配置这些功能做一个简单的介绍&lt;/p&gt;</description>
     </item>
     

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python on Note to Tech</title>
@@ -17,7 +17,8 @@
       <pubDate>Thu, 26 Mar 2020 15:17:48 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/post/vtk-to-nparray/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/vtk2npz/structured_cube.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/vtk2npz/structured_cube.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
 &lt;p&gt;VTK是用于三维可视化的重要格式。如果我们要对三维可视化数据进行更多自定义的计算，则需要将其转化为适用与科学计算的数据格式。
 （此图由&lt;a href=&#34;https://docs.pyvista.org/&#34;&gt;&lt;em&gt;PyVista&lt;/em&gt;&lt;/a&gt;生成）&lt;/p&gt;</description>
     </item>

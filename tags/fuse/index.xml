@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fuse on Note to Tech</title>
@@ -18,6 +18,7 @@
       
       <guid>https://blog.xumijian.me/post/fuse/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://www.paragon-software.com/home/ntfs-mac/&#34;&gt;Paragon NTFS for Mac&lt;/a&gt;和&lt;a href=&#34;https://www.tuxera.com/products/tuxera-ntfs-for-mac/&#34;&gt;Tuxera&lt;/a&gt;是MacOS下常用的NTFS解决方案，但这些软件都是商业软件，而且价格不菲。这些软件除了实现NTFS的读写功能外，还有一些磁盘监测、卸载快捷键等功能，也有很好看的图形界面。但是这些额外功能对我来说都不是必须的，那么有没有一种解决方案可以免费实现最简单的NTFS读写功能呢？&lt;/p&gt;
+
 &lt;p&gt;那么这里将介绍通过FUSE和ntfs-3g实现NTFS读写功能&lt;/p&gt;</description>
     </item>
     

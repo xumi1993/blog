@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>GMT on Note to Tech</title>
@@ -18,7 +18,8 @@
       
       <guid>https://blog.xumijian.me/post/gmt-map/</guid>
       <description>&lt;p&gt;GMT对地图的处理十分优秀，而且只需要短短几行代码。本文介绍了如何用等距圆锥投影绘制不同范围大小的地形图，以及如何在地形图上绘制断层、文字和矢量等。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/gmt-map/region.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
+
+&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/gmt-map/region.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -27,7 +28,7 @@
       <pubDate>Sun, 19 Jan 2020 14:42:33 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/post/gmt-section/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/gmt-section/sample.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/gmt-section/sample.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>
