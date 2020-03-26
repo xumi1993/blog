@@ -4,7 +4,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-US">
     <title type="text">Note to Tech</title>
     <subtitle type="html"></subtitle>
-    <updated>2020-03-17T16:15:54+00:00</updated>
+    <updated>2020-03-26T08:59:08+00:00</updated>
     <id>https://blog.xumijian.me/</id>
     <link rel="alternate" type="text/html" href="https://blog.xumijian.me/" />
     <link rel="self" type="application/atom+xml" href="https://blog.xumijian.me/atom.xml" />
@@ -17,10 +17,160 @@
     
     <generator uri="https://gohugo.io/" version="0.61.0">Hugo</generator>
         <entry>
+            <title type="text">VTK数据的重采样与三维矩阵化</title>
+            <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/vtk-to-nparray/" />
+            <id>https://blog.xumijian.me/posts/vtk-to-nparray/</id>
+            <updated>2020-03-26T08:59:01+00:00</updated>
+            <published>2020-03-26T15:17:48+08:00</published>
+            <author>
+                    <name>Mijian Xu</name>
+                    <uri>https://xumijian.me/</uri>
+                    <email>gomijianxu@gmail.com</email>
+                    </author>
+            <summary type="html"><![CDATA[VTK是用于三维可视化的重要格式。如果我们要对三维可视化数据进行更多自定义的计算，则需要将其转化为适用与科学计算的数据格式。 （此图由PyVista生成）]]></summary>
+            
+                <content type="html"><![CDATA[<p><img src="/img/vtk2npz/structured_cube.png" alt=""></p>
+<p>VTK是用于三维可视化的重要格式。如果我们要对三维可视化数据进行更多自定义的计算，则需要将其转化为适用与科学计算的数据格式。
+（此图由<a href="https://docs.pyvista.org/"><em>PyVista</em></a>生成）</p>
+<h2 id="1-vtk">1. 读取并拼合所有VTK文件</h2>
+<p>VTK文件通常生成与大型并行计算程序，程序有时会将整个网格区域划分为多个子区域进行分布式计算。所以在读取网格同时也要将所有网格拼合在一起，组成完整的网格。我们使用<a href="https://docs.pyvista.org/"><em>PyVista</em></a>模块来进行该处理。首先导入所需模块</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
+<span class="kn">import</span> <span class="nn">pyvista</span> <span class="kn">as</span> <span class="nn">pv</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="vtk">循环读取每个VTK文件</h3>
+<p>我们用列表生成器循环读取每个VTK文件，将其赋给<code>blocks</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">blocks</span> <span class="o">=</span> <span class="p">[</span><span class="n">pv</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">*.vtk</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">)</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="heading">拼合所有区块</h3>
+<p><em>PyVista</em>提供了<code>MultiBlock</code>用于拼合不同区块，输出的<code>mesh</code>为<code>UnstructuredGrid</code>类型，可以用于后续处理</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">points_vtk</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">MultiBlock</span><span class="p">(</span><span class="n">blocks</span><span class="p">)</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">points_vtk</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="2-">2. 对数据网格化并重采样</h2>
+<p>由于网格设计的不同这些网格可能是非均匀的，这样就无法将其赋予一个规则矩阵。<em>PyVista</em>提供了通过重采样进行网格话的方式。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">grid</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">create_grid</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>dimensions</code>定义了在X、Y和Z方向的采样点个数，点数越多重采样的精度越接近原始网格。</li>
+</ul>
+<p>这时<code>image</code>还是<code>UnstructuredGrid</code>类型，但是每个网格已经是均匀的了。我们只需要用<code>np.reshape</code>就可以将其转换成矩阵形式（<code>np.ndarray</code>）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">mat</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">point_arrays</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">values</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="p">:</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="p">)</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>'values'</code>取决于原始数据的键名，如Specfsem生成的网格，数值名为<code>gll_data</code>。</li>
+</ul>
+<p>同时我们可以定义将每个坐标轴也转化为<code>np.ndarray</code>格式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="3-">3. 预览重采样后的结果</h2>
+<p>我们从<code>mat</code>中沿XZ方向切一条剖面，用<code>matplotlib</code>绘制其结果。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mat</span><span class="p">[</span><span class="p">:</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="p">:</span><span class="p">]</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Z (m)</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">X (m)</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/vtk2npz/sec.png" alt=""></p>]]></content>
+            
+            
+            
+            
+            
+                
+                    
+                        
+                            
+                            
+                            
+                                <category scheme="https://blog.xumijian.me/categories/python/" term="Python" label="Python" />
+                            
+                        
+                    
+                
+                    
+                        
+                            
+                            
+                            
+                                <category scheme="https://blog.xumijian.me/tags/vtk/" term="VTK" label="VTK" />
+                            
+                        
+                            
+                            
+                            
+                                <category scheme="https://blog.xumijian.me/tags/grid/" term="Grid" label="Grid" />
+                            
+                        
+                    
+                
+            
+        </entry>
+    
+        <entry>
             <title type="text">用GMT绘制中国及周边构造分区与GPS速度场</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/gmt-map/" />
             <id>https://blog.xumijian.me/posts/gmt-map/</id>
-            <updated>2020-03-17T16:15:47+00:00</updated>
+            <updated>2020-03-26T08:59:01+00:00</updated>
             <published>2020-01-30T23:18:20+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -332,7 +482,7 @@ gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY 0.08
             <title type="text">用GMT绘制极坐标剖面</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/gmt-section/" />
             <id>https://blog.xumijian.me/posts/gmt-section/</id>
-            <updated>2020-03-17T16:15:47+00:00</updated>
+            <updated>2020-03-26T08:59:01+00:00</updated>
             <published>2020-01-19T14:42:33+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -776,7 +926,7 @@ awk <span class="s1">&#39;sqrt($5*$5+$7*$7)&gt;0.9{print $4,6371-$1,-1*$7}&#39;<
             <title type="text">三维数据体生成与切片</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/interp/" />
             <id>https://blog.xumijian.me/posts/interp/</id>
-            <updated>2020-03-17T16:15:47+00:00</updated>
+            <updated>2020-03-26T08:59:01+00:00</updated>
             <published>2020-01-11T21:17:48+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -1122,7 +1272,7 @@ awk <span class="s1">&#39;sqrt($5*$5+$7*$7)&gt;0.9{print $4,6371-$1,-1*$7}&#39;<
             <title type="text">判断地理坐标点是否在多边形内的Python实现</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/points-in-polygon/" />
             <id>https://blog.xumijian.me/posts/points-in-polygon/</id>
-            <updated>2020-03-17T16:15:47+00:00</updated>
+            <updated>2020-03-26T08:59:01+00:00</updated>
             <published>2019-10-08T21:05:16+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -1229,7 +1379,7 @@ awk <span class="s1">&#39;sqrt($5*$5+$7*$7)&gt;0.9{print $4,6371-$1,-1*$7}&#39;<
             <title type="text">在VSCode中使用Remote-SSH进行远程开发</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/vscode-ssh/" />
             <id>https://blog.xumijian.me/posts/vscode-ssh/</id>
-            <updated>2020-03-17T16:15:47+00:00</updated>
+            <updated>2020-03-26T08:59:01+00:00</updated>
             <published>2019-06-18T12:30:12+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -1356,7 +1506,7 @@ Host example-remote-linux-machine-with-identity-file
             <title type="text">用FUSE和ntfs-3g在MacOS下打造免费的NTFS解决方案</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/fuse/" />
             <id>https://blog.xumijian.me/posts/fuse/</id>
-            <updated>2020-03-17T16:15:47+00:00</updated>
+            <updated>2020-03-26T08:59:01+00:00</updated>
             <published>2019-03-25T20:55:03+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -1443,7 +1593,7 @@ sudo /usr/local/bin/ntfs-3g /dev/disk1s1 /Volumes/NTFS -olocal -oallow_other
             <title type="text">用sshfs远程挂载路径到本地</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/sshfs/" />
             <id>https://blog.xumijian.me/posts/sshfs/</id>
-            <updated>2020-03-17T16:15:47+00:00</updated>
+            <updated>2020-03-26T08:59:01+00:00</updated>
             <published>2019-03-21T13:54:42+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -1526,7 +1676,7 @@ sudo setfacl -m u:user:rwx /mnt/xxx
             <title type="text">Hhkb使用心得</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/hhkb/" />
             <id>https://blog.xumijian.me/posts/hhkb/</id>
-            <updated>2020-03-17T16:15:47+00:00</updated>
+            <updated>2020-03-26T08:59:01+00:00</updated>
             <published>2019-02-03T12:54:38+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -1678,7 +1828,7 @@ sudo setfacl -m u:user:rwx /mnt/xxx
             <title type="text">机械键盘轴体小记（一）：Cherry</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/mech-kb/" />
             <id>https://blog.xumijian.me/posts/mech-kb/</id>
-            <updated>2020-03-17T16:15:47+00:00</updated>
+            <updated>2020-03-26T08:59:01+00:00</updated>
             <published>2019-02-01T17:57:29+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -1876,7 +2026,7 @@ sudo setfacl -m u:user:rwx /mnt/xxx
             <title type="text">Mpipool Mpi4py</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/mpipool-mpi4py/" />
             <id>https://blog.xumijian.me/posts/mpipool-mpi4py/</id>
-            <updated>2020-03-17T16:15:47+00:00</updated>
+            <updated>2020-03-26T08:59:01+00:00</updated>
             <published>2019-01-03T13:31:58+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -2011,7 +2161,7 @@ sudo setfacl -m u:user:rwx /mnt/xxx
             <title type="text">Vim 使用笔记</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/vim-intro/" />
             <id>https://blog.xumijian.me/posts/vim-intro/</id>
-            <updated>2020-03-17T16:15:47+00:00</updated>
+            <updated>2020-03-26T08:59:01+00:00</updated>
             <published>2017-11-01T14:21:22+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -2525,7 +2675,7 @@ doc/taglist.txt</p>
             <title type="text">配置Vim开发环境</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/vim-plugin/" />
             <id>https://blog.xumijian.me/posts/vim-plugin/</id>
-            <updated>2020-03-17T16:15:47+00:00</updated>
+            <updated>2020-03-26T08:59:01+00:00</updated>
             <published>2017-10-29T21:51:29+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -2837,7 +2987,7 @@ vmap &lt;C-_&gt; &lt;Leader&gt;c&lt;Space&gt;
             <title type="text">Fedora26中安装Google拼音输入法</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/google-pinyin/" />
             <id>https://blog.xumijian.me/posts/google-pinyin/</id>
-            <updated>2020-03-17T16:15:47+00:00</updated>
+            <updated>2020-03-26T08:59:01+00:00</updated>
             <published>2017-10-27T12:26:29+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -2924,7 +3074,7 @@ URL          : https://fcitx-im.org/wiki/Googlepinyin
             <title type="text">SSH 隧道与端口转发</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/ssh-tunnel/" />
             <id>https://blog.xumijian.me/posts/ssh-tunnel/</id>
-            <updated>2020-03-17T16:15:47+00:00</updated>
+            <updated>2020-03-26T08:59:01+00:00</updated>
             <published>2017-10-26T21:51:29+08:00</published>
             <author>
                     <name>Mijian Xu</name>
@@ -3028,7 +3178,7 @@ URL          : https://fcitx-im.org/wiki/Googlepinyin
             <title type="text">发布代码到PyPI</title>
             <link rel="alternate" type="text/html" href="https://blog.xumijian.me/posts/publish-pypi/" />
             <id>https://blog.xumijian.me/posts/publish-pypi/</id>
-            <updated>2020-03-17T16:15:47+00:00</updated>
+            <updated>2020-03-26T08:59:01+00:00</updated>
             <published>2017-10-23T21:51:29+08:00</published>
             <author>
                     <name>Mijian Xu</name>

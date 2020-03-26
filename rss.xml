@@ -21,10 +21,157 @@
             <webMaster>gomijianxu@gmail.com (Mijian Xu)</webMaster>
         
         
-        <lastBuildDate>Tue, 17 Mar 2020 16:15:54 +0000</lastBuildDate>
+        <lastBuildDate>Thu, 26 Mar 2020 08:59:08 +0000</lastBuildDate>
         
             <atom:link rel="self" type="application/rss+xml" href="https://blog.xumijian.me/rss.xml" />
         
+        
+            <item>
+                <title>VTK数据的重采样与三维矩阵化</title>
+                <link>https://blog.xumijian.me/posts/vtk-to-nparray/</link>
+                <guid isPermaLink="true">https://blog.xumijian.me/posts/vtk-to-nparray/</guid>
+                <pubDate>Thu, 26 Mar 2020 15:17:48 +0800</pubDate>
+                
+                    <author>gomijianxu@gmail.com (Mijian Xu)</author>
+                
+                
+                
+                    <description><![CDATA[<p><img src="/img/vtk2npz/structured_cube.png" alt=""></p>
+<p>VTK是用于三维可视化的重要格式。如果我们要对三维可视化数据进行更多自定义的计算，则需要将其转化为适用与科学计算的数据格式。
+（此图由<a href="https://docs.pyvista.org/"><em>PyVista</em></a>生成）</p>
+<h2 id="1-vtk">1. 读取并拼合所有VTK文件</h2>
+<p>VTK文件通常生成与大型并行计算程序，程序有时会将整个网格区域划分为多个子区域进行分布式计算。所以在读取网格同时也要将所有网格拼合在一起，组成完整的网格。我们使用<a href="https://docs.pyvista.org/"><em>PyVista</em></a>模块来进行该处理。首先导入所需模块</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
+<span class="kn">import</span> <span class="nn">pyvista</span> <span class="kn">as</span> <span class="nn">pv</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="vtk">循环读取每个VTK文件</h3>
+<p>我们用列表生成器循环读取每个VTK文件，将其赋给<code>blocks</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">blocks</span> <span class="o">=</span> <span class="p">[</span><span class="n">pv</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">*.vtk</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">)</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="heading">拼合所有区块</h3>
+<p><em>PyVista</em>提供了<code>MultiBlock</code>用于拼合不同区块，输出的<code>mesh</code>为<code>UnstructuredGrid</code>类型，可以用于后续处理</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">points_vtk</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">MultiBlock</span><span class="p">(</span><span class="n">blocks</span><span class="p">)</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">points_vtk</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="2-">2. 对数据网格化并重采样</h2>
+<p>由于网格设计的不同这些网格可能是非均匀的，这样就无法将其赋予一个规则矩阵。<em>PyVista</em>提供了通过重采样进行网格话的方式。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">grid</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">create_grid</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>dimensions</code>定义了在X、Y和Z方向的采样点个数，点数越多重采样的精度越接近原始网格。</li>
+</ul>
+<p>这时<code>image</code>还是<code>UnstructuredGrid</code>类型，但是每个网格已经是均匀的了。我们只需要用<code>np.reshape</code>就可以将其转换成矩阵形式（<code>np.ndarray</code>）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">mat</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">point_arrays</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">values</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="p">:</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="p">)</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>'values'</code>取决于原始数据的键名，如Specfsem生成的网格，数值名为<code>gll_data</code>。</li>
+</ul>
+<p>同时我们可以定义将每个坐标轴也转化为<code>np.ndarray</code>格式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="3-">3. 预览重采样后的结果</h2>
+<p>我们从<code>mat</code>中沿XZ方向切一条剖面，用<code>matplotlib</code>绘制其结果。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mat</span><span class="p">[</span><span class="p">:</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="p">:</span><span class="p">]</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Z (m)</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">X (m)</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/vtk2npz/sec.png" alt=""></p>]]></description>
+                
+                
+                
+                
+                
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://blog.xumijian.me/categories/python/">Python</category>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://blog.xumijian.me/tags/vtk/">VTK</category>
+                                
+                            
+                                
+                                
+                                
+                                    <category domain="https://blog.xumijian.me/tags/grid/">Grid</category>
+                                
+                            
+                        
+                    
+                
+            </item>
         
             <item>
                 <title>用GMT绘制中国及周边构造分区与GPS速度场</title>

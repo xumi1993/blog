@@ -4,217 +4,232 @@
   
   <url>
     <loc>https://blog.xumijian.me/categories/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/tags/gmt/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/categories/gmt/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
+    <loc>https://blog.xumijian.me/tags/grid/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.xumijian.me/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.xumijian.me/posts/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/tags/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/posts/gmt-map/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/posts/gmt-section/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/about/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/tags/geophysics/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/categories/seismology/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/posts/interp/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/tags/%E6%8F%92%E5%80%BC/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/tags/%E7%BD%91%E6%A0%BC%E5%8C%96/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/tags/python/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/posts/points-in-polygon/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/tags/linux/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/categories/linux/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/tags/ssh/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/tags/vscode/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/posts/vscode-ssh/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/tags/fuse/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/categories/mac/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/posts/fuse/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/posts/sshfs/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/tags/hhkb/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/posts/hhkb/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/categories/keyboard/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/tags/keyboard/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/posts/mech-kb/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/tags/mpi/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/posts/mpipool-mpi4py/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.xumijian.me/categories/python/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/vtk/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/posts/vtk-to-nparray/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/categories/gmt/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/gmt/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/posts/gmt-map/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/posts/gmt-section/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/about/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/geophysics/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/categories/seismology/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/posts/interp/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/%E6%8F%92%E5%80%BC/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/%E7%BD%91%E6%A0%BC%E5%8C%96/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/python/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/posts/points-in-polygon/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/categories/linux/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/linux/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/ssh/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/vscode/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/posts/vscode-ssh/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/fuse/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/categories/mac/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/posts/fuse/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/posts/sshfs/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/hhkb/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/posts/hhkb/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/categories/keyboard/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/keyboard/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/posts/mech-kb/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/mpi/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/posts/mpipool-mpi4py/</loc>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.xumijian.me/tags/development/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.xumijian.me/tags/vim/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.xumijian.me/posts/vim-intro/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.xumijian.me/posts/vim-plugin/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.xumijian.me/tags/fedora/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.xumijian.me/posts/google-pinyin/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.xumijian.me/tags/tools/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.xumijian.me/posts/ssh-tunnel/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.xumijian.me/posts/publish-pypi/</loc>
-    <lastmod>2020-03-17T16:15:47+00:00</lastmod>
+    <lastmod>2020-03-26T08:59:01+00:00</lastmod>
   </url>
   
 </urlset>
