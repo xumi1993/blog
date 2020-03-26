@@ -21,7 +21,7 @@
             <webMaster>gomijianxu@gmail.com (Mijian Xu)</webMaster>
         
         
-        <lastBuildDate>Thu, 26 Mar 2020 08:59:08 +0000</lastBuildDate>
+        <lastBuildDate>Thu, 26 Mar 2020 09:20:31 +0000</lastBuildDate>
         
             <atom:link rel="self" type="application/rss+xml" href="https://blog.xumijian.me/rss.xml" />
         
@@ -46,12 +46,10 @@
 <pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">glob</span>
-<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
 <span class="kn">import</span> <span class="nn">pyvista</span> <span class="kn">as</span> <span class="nn">pv</span>
 </code></pre></td></tr></table>
 </div>
