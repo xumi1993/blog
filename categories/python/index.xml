@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Note to Tech</title>
+    <link>https://blog.xumijian.me/categories/python/</link>
+    <description>Recent content in Python on Note to Tech</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 26 Mar 2020 15:17:48 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.xumijian.me/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>VTK数据的重采样与三维矩阵化</title>
+      <link>https://blog.xumijian.me/post/vtk-to-nparray/</link>
+      <pubDate>Thu, 26 Mar 2020 15:17:48 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/post/vtk-to-nparray/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/vtk2npz/structured_cube.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;VTK是用于三维可视化的重要格式。如果我们要对三维可视化数据进行更多自定义的计算，则需要将其转化为适用与科学计算的数据格式。
+（此图由&lt;a href=&#34;https://docs.pyvista.org/&#34;&gt;&lt;em&gt;PyVista&lt;/em&gt;&lt;/a&gt;生成）&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>VTK数据的重采样与三维矩阵化</title>
+      <link>https://blog.xumijian.me/posts/vtk-to-nparray/</link>
+      <pubDate>Thu, 26 Mar 2020 15:17:48 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/posts/vtk-to-nparray/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/vtk2npz/structured_cube.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;VTK是用于三维可视化的重要格式。如果我们要对三维可视化数据进行更多自定义的计算，则需要将其转化为适用与科学计算的数据格式。
+（此图由&lt;a href=&#34;https://docs.pyvista.org/&#34;&gt;&lt;em&gt;PyVista&lt;/em&gt;&lt;/a&gt;生成）&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mpipool Mpi4py</title>
+      <link>https://blog.xumijian.me/post/mpipool-mpi4py/</link>
+      <pubDate>Thu, 03 Jan 2019 13:31:58 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/post/mpipool-mpi4py/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://mpi4py.readthedocs.io/en/stable/index.html&#34;&gt;mpi4py&lt;/a&gt; is a python API for MPI. &lt;strong&gt;MPIPoolExecutor&lt;/strong&gt; is a subclass of &lt;code&gt;mpi4py.futures&lt;/code&gt; to create MPI processes to execute calls asynchronously&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mpipool Mpi4py</title>
+      <link>https://blog.xumijian.me/posts/mpipool-mpi4py/</link>
+      <pubDate>Thu, 03 Jan 2019 13:31:58 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/posts/mpipool-mpi4py/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://mpi4py.readthedocs.io/en/stable/index.html&#34;&gt;mpi4py&lt;/a&gt; is a python API for MPI. &lt;strong&gt;MPIPoolExecutor&lt;/strong&gt; is a subclass of &lt;code&gt;mpi4py.futures&lt;/code&gt; to create MPI processes to execute calls asynchronously&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>发布代码到PyPI</title>
+      <link>https://blog.xumijian.me/post/publish-pypi/</link>
+      <pubDate>Mon, 23 Oct 2017 21:51:29 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/post/publish-pypi/</guid>
+      <description>&lt;p&gt;作为开发者我们希望自己开发的Python模块可以被更多人使用，为了方便使用，&lt;a href=&#34;https://pypi.python.org/pypi&#34;&gt;PyPI&lt;/a&gt;是管理Python模块最好用的工具之一。所以我们也希望把自己的代码放到PyPI上，以后就可以通过&lt;code&gt;pip install module&lt;/code&gt;的方式安装模块了。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>发布代码到PyPI</title>
+      <link>https://blog.xumijian.me/posts/publish-pypi/</link>
+      <pubDate>Mon, 23 Oct 2017 21:51:29 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/posts/publish-pypi/</guid>
+      <description>&lt;p&gt;作为开发者我们希望自己开发的Python模块可以被更多人使用，为了方便使用，&lt;a href=&#34;https://pypi.python.org/pypi&#34;&gt;PyPI&lt;/a&gt;是管理Python模块最好用的工具之一。所以我们也希望把自己的代码放到PyPI上，以后就可以通过&lt;code&gt;pip install module&lt;/code&gt;的方式安装模块了。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

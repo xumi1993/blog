@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on Note to Tech</title>
+    <link>https://blog.xumijian.me/tags/linux/</link>
+    <description>Recent content in Linux on Note to Tech</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 18 Jun 2019 12:30:12 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.xumijian.me/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>在VSCode中使用Remote-SSH进行远程开发</title>
+      <link>https://blog.xumijian.me/post/vscode-ssh/</link>
+      <pubDate>Tue, 18 Jun 2019 12:30:12 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/post/vscode-ssh/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif&#34; alt=&#34;&#34;&gt;
+动图来自&lt;a href=&#34;https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif&#34;&gt;官网&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>在VSCode中使用Remote-SSH进行远程开发</title>
+      <link>https://blog.xumijian.me/posts/vscode-ssh/</link>
+      <pubDate>Tue, 18 Jun 2019 12:30:12 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/posts/vscode-ssh/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif&#34; alt=&#34;&#34;&gt;
+动图来自&lt;a href=&#34;https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif&#34;&gt;官网&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用sshfs远程挂载路径到本地</title>
+      <link>https://blog.xumijian.me/post/sshfs/</link>
+      <pubDate>Thu, 21 Mar 2019 13:54:42 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/post/sshfs/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;ssh&lt;/strong&gt;是常用的远程登陆服务，我们经常使用&lt;strong&gt;scp&lt;/strong&gt;、&lt;strong&gt;sftp&lt;/strong&gt;等工具与远程服务器进行文件交互。如果是常用的服务器这样工具相对麻烦，如果我们可以像打开本地文件一样打开服务器上的文件就十分方便了。&lt;strong&gt;sshfs可以将远程服务器上的路径作为文件系统挂载到本地。&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用sshfs远程挂载路径到本地</title>
+      <link>https://blog.xumijian.me/posts/sshfs/</link>
+      <pubDate>Thu, 21 Mar 2019 13:54:42 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/posts/sshfs/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;ssh&lt;/strong&gt;是常用的远程登陆服务，我们经常使用&lt;strong&gt;scp&lt;/strong&gt;、&lt;strong&gt;sftp&lt;/strong&gt;等工具与远程服务器进行文件交互。如果是常用的服务器这样工具相对麻烦，如果我们可以像打开本地文件一样打开服务器上的文件就十分方便了。&lt;strong&gt;sshfs可以将远程服务器上的路径作为文件系统挂载到本地。&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Vim 使用笔记</title>
+      <link>https://blog.xumijian.me/post/vim-intro/</link>
+      <pubDate>Wed, 01 Nov 2017 14:21:22 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/post/vim-intro/</guid>
+      <description>&lt;h2 id=&#34;heading&#34;&gt;目录&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#command-mode&#34;&gt;Command Mode&lt;/a&gt;&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#cursor-motions&#34;&gt;Cursor Motions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#edit-command&#34;&gt;Edit Command&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#window-motion&#34;&gt;Window Motion&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#insert-mode&#34;&gt;Insert Mode&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#visual-mode&#34;&gt;Visual Mode&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#search-and-replace&#34;&gt;Search and Replace&lt;/a&gt;&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#basic-usage&#34;&gt;Basic usage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#replace&#34;&gt;Replace&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#regular-expression&#34;&gt;Regular Expression&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#vim-%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%9B%BF%E6%8D%A2%E8%A1%A8%E8%BE%BE%E5%BC%8F&#34;&gt;Vim 中常用的替换表达式&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#ctags-and-taglist&#34;&gt;Ctags and Taglist&lt;/a&gt;&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#ctags-configure&#34;&gt;Ctags Configure&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#pythontag&#34;&gt;为Python标准库添加标签&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#systag&#34;&gt;为C/C++系统函数添加标签&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#taglist-configure&#34;&gt;Taglist Configure&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Vim 使用笔记</title>
+      <link>https://blog.xumijian.me/posts/vim-intro/</link>
+      <pubDate>Wed, 01 Nov 2017 14:21:22 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/posts/vim-intro/</guid>
+      <description>&lt;h2 id=&#34;heading&#34;&gt;目录&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#command-mode&#34;&gt;Command Mode&lt;/a&gt;&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#cursor-motions&#34;&gt;Cursor Motions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#edit-command&#34;&gt;Edit Command&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#window-motion&#34;&gt;Window Motion&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#insert-mode&#34;&gt;Insert Mode&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#visual-mode&#34;&gt;Visual Mode&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#search-and-replace&#34;&gt;Search and Replace&lt;/a&gt;&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#basic-usage&#34;&gt;Basic usage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#replace&#34;&gt;Replace&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#regular-expression&#34;&gt;Regular Expression&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#vim-%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%9B%BF%E6%8D%A2%E8%A1%A8%E8%BE%BE%E5%BC%8F&#34;&gt;Vim 中常用的替换表达式&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#ctags-and-taglist&#34;&gt;Ctags and Taglist&lt;/a&gt;&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#ctags-configure&#34;&gt;Ctags Configure&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#pythontag&#34;&gt;为Python标准库添加标签&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#systag&#34;&gt;为C/C++系统函数添加标签&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#taglist-configure&#34;&gt;Taglist Configure&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>配置Vim开发环境</title>
+      <link>https://blog.xumijian.me/post/vim-plugin/</link>
+      <pubDate>Sun, 29 Oct 2017 21:51:29 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/post/vim-plugin/</guid>
+      <description>&lt;p&gt;配置一个优秀个开发环境可以极大地提高开发效率，在Linux里Vim是最常用的开发环境之一（emacs也是相当不错的，但鄙人是Vim的忠实粉丝），我们一般所说的开发环境包括了&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;代码高亮&lt;/li&gt;
+&lt;li&gt;文件树&lt;/li&gt;
+&lt;li&gt;配色方案&lt;/li&gt;
+&lt;li&gt;自动缩进&lt;/li&gt;
+&lt;li&gt;代码补全&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这里就Linux中配置这些功能做一个简单的介绍&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>配置Vim开发环境</title>
+      <link>https://blog.xumijian.me/posts/vim-plugin/</link>
+      <pubDate>Sun, 29 Oct 2017 21:51:29 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/posts/vim-plugin/</guid>
+      <description>&lt;p&gt;配置一个优秀个开发环境可以极大地提高开发效率，在Linux里Vim是最常用的开发环境之一（emacs也是相当不错的，但鄙人是Vim的忠实粉丝），我们一般所说的开发环境包括了&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;代码高亮&lt;/li&gt;
+&lt;li&gt;文件树&lt;/li&gt;
+&lt;li&gt;配色方案&lt;/li&gt;
+&lt;li&gt;自动缩进&lt;/li&gt;
+&lt;li&gt;代码补全&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这里就Linux中配置这些功能做一个简单的介绍&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Fedora26中安装Google拼音输入法</title>
+      <link>https://blog.xumijian.me/post/google-pinyin/</link>
+      <pubDate>Fri, 27 Oct 2017 12:26:29 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/post/google-pinyin/</guid>
+      <description>&lt;p&gt;在Fedora25的时候sogou拼音出现了一些不兼容的情况，从而使我转而使用Google拼音。如今操作系统已经换成了Fedora26，这里就记录下安装Google拼音的过程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Fedora26中安装Google拼音输入法</title>
+      <link>https://blog.xumijian.me/posts/google-pinyin/</link>
+      <pubDate>Fri, 27 Oct 2017 12:26:29 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/posts/google-pinyin/</guid>
+      <description>&lt;p&gt;在Fedora25的时候sogou拼音出现了一些不兼容的情况，从而使我转而使用Google拼音。如今操作系统已经换成了Fedora26，这里就记录下安装Google拼音的过程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SSH 隧道与端口转发</title>
+      <link>https://blog.xumijian.me/post/ssh-tunnel/</link>
+      <pubDate>Thu, 26 Oct 2017 21:51:29 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/post/ssh-tunnel/</guid>
+      <description>&lt;p&gt;中文可以称为SSH隧道，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。通过建立这条隧道，用户可以从客户端直接访问服务器端基于TCP协议的服务如HTTP。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SSH 隧道与端口转发</title>
+      <link>https://blog.xumijian.me/posts/ssh-tunnel/</link>
+      <pubDate>Thu, 26 Oct 2017 21:51:29 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/posts/ssh-tunnel/</guid>
+      <description>&lt;p&gt;中文可以称为SSH隧道，是SSH的一项非常重要的功能。它可以建立一条安全的SSH通道，并把任意的TCP连接放到这条通道中。通过建立这条隧道，用户可以从客户端直接访问服务器端基于TCP协议的服务如HTTP。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

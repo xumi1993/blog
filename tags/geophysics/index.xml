@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Geophysics on Note to Tech</title>
+    <link>https://blog.xumijian.me/tags/geophysics/</link>
+    <description>Recent content in Geophysics on Note to Tech</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 11 Jan 2020 21:17:48 +0800</lastBuildDate>
+    
+	<atom:link href="https://blog.xumijian.me/tags/geophysics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>三维数据体生成与切片</title>
+      <link>https://blog.xumijian.me/post/interp/</link>
+      <pubDate>Sat, 11 Jan 2020 21:17:48 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/post/interp/</guid>
+      <description>&lt;p&gt;我们在计算得到的数据通常是非等间隔网格，为了用GMT进行2D可视化，需要将数据网格化后进行插值。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>三维数据体生成与切片</title>
+      <link>https://blog.xumijian.me/posts/interp/</link>
+      <pubDate>Sat, 11 Jan 2020 21:17:48 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/posts/interp/</guid>
+      <description>&lt;p&gt;我们在计算得到的数据通常是非等间隔网格，为了用GMT进行2D可视化，需要将数据网格化后进行插值。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>判断地理坐标点是否在多边形内的Python实现</title>
+      <link>https://blog.xumijian.me/post/points-in-polygon/</link>
+      <pubDate>Tue, 08 Oct 2019 21:05:16 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/post/points-in-polygon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>判断地理坐标点是否在多边形内的Python实现</title>
+      <link>https://blog.xumijian.me/posts/points-in-polygon/</link>
+      <pubDate>Tue, 08 Oct 2019 21:05:16 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/posts/points-in-polygon/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
