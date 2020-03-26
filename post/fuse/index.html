@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>用FUSE和ntfs-3g在MacOS下打造免费的NTFS解决方案 - Note to Tech</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Mijian Xu" /><meta name="description" content="Paragon NTFS for Mac和Tuxera是MacOS下常用的NTFS解决方案，但这些软件都是商业软件，而且价格不菲。这些软件除了实现NTFS的读写功能外，还有一些磁盘监测、卸载快捷键等功能，也有很好看的图形界面。但是这些额外功能对我来说都不是必须的，那么有没有一种解决方案可以免费实现最简单的NTFS读写功能呢？
+那么这里将介绍通过FUSE和ntfs-3g实现NTFS读写功能
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.58.3 with theme even" />
+
+
+<link rel="canonical" href="https://blog.xumijian.me/post/fuse/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.3904f84e.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="用FUSE和ntfs-3g在MacOS下打造免费的NTFS解决方案" />
+<meta property="og:description" content="Paragon NTFS for Mac和Tuxera是MacOS下常用的NTFS解决方案，但这些软件都是商业软件，而且价格不菲。这些软件除了实现NTFS的读写功能外，还有一些磁盘监测、卸载快捷键等功能，也有很好看的图形界面。但是这些额外功能对我来说都不是必须的，那么有没有一种解决方案可以免费实现最简单的NTFS读写功能呢？
+
+那么这里将介绍通过FUSE和ntfs-3g实现NTFS读写功能" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.xumijian.me/post/fuse/" />
+<meta property="article:published_time" content="2019-03-25T20:55:03+08:00" />
+<meta property="article:modified_time" content="2019-03-25T20:55:03+08:00" />
+<meta itemprop="name" content="用FUSE和ntfs-3g在MacOS下打造免费的NTFS解决方案">
+<meta itemprop="description" content="Paragon NTFS for Mac和Tuxera是MacOS下常用的NTFS解决方案，但这些软件都是商业软件，而且价格不菲。这些软件除了实现NTFS的读写功能外，还有一些磁盘监测、卸载快捷键等功能，也有很好看的图形界面。但是这些额外功能对我来说都不是必须的，那么有没有一种解决方案可以免费实现最简单的NTFS读写功能呢？
+
+那么这里将介绍通过FUSE和ntfs-3g实现NTFS读写功能">
+
+
+<meta itemprop="datePublished" content="2019-03-25T20:55:03&#43;08:00" />
+<meta itemprop="dateModified" content="2019-03-25T20:55:03&#43;08:00" />
+<meta itemprop="wordCount" content="830">
+
+
+
+<meta itemprop="keywords" content="文件系统,Fuse," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="用FUSE和ntfs-3g在MacOS下打造免费的NTFS解决方案"/>
+<meta name="twitter:description" content="Paragon NTFS for Mac和Tuxera是MacOS下常用的NTFS解决方案，但这些软件都是商业软件，而且价格不菲。这些软件除了实现NTFS的读写功能外，还有一些磁盘监测、卸载快捷键等功能，也有很好看的图形界面。但是这些额外功能对我来说都不是必须的，那么有没有一种解决方案可以免费实现最简单的NTFS读写功能呢？
+
+那么这里将介绍通过FUSE和ntfs-3g实现NTFS读写功能"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Note to Tech</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="https://home.xumijian.me">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Note to Tech</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://home.xumijian.me">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">用FUSE和ntfs-3g在MacOS下打造免费的NTFS解决方案</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-03-25 </span>
+        <div class="post-category">
+            <a href="/categories/mac/"> Mac </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#fuse">FUSE</a></li>
+<li><a href="#ntfs-3g">ntfs-3g</a></li>
+<li><a href="#自动以读写方式挂载ntfs分区">自动以读写方式挂载NTFS分区</a>
+<ul>
+<li><a href="#关闭sip">关闭SIP</a></li>
+<li><a href="#替换自动挂载命令">替换自动挂载命令</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><a href="https://www.paragon-software.com/home/ntfs-mac/">Paragon NTFS for Mac</a>和<a href="https://www.tuxera.com/products/tuxera-ntfs-for-mac/">Tuxera</a>是MacOS下常用的NTFS解决方案，但这些软件都是商业软件，而且价格不菲。这些软件除了实现NTFS的读写功能外，还有一些磁盘监测、卸载快捷键等功能，也有很好看的图形界面。但是这些额外功能对我来说都不是必须的，那么有没有一种解决方案可以免费实现最简单的NTFS读写功能呢？</p>
+
+<p>那么这里将介绍通过FUSE和ntfs-3g实现NTFS读写功能</p>
+
+<h2 id="fuse">FUSE</h2>
+
+<p>FUSE源于Linux中的<a href="http://fuse.sourceforge.net/">FUSE API</a>，它提供了一个用户文件系统的超集，文件系统可以通过FUSE实现。FUSE For MacOS则是FUSE的Mac版本。ntfs-3g也基于FUSE开发，所以要先安装FUSE。
+在<a href="https://osxfuse.github.io/">FUSE For MacOS</a>网站下载<strong><em>.pkg</em></strong>安装包，然后图形化安装即可。</p>
+
+<h2 id="ntfs-3g">ntfs-3g</h2>
+
+<p>ntfs-3g需要在Homebrew下安装，所以要先安装<a href="https://brew.sh/">Homebrew</a>。然后用<code>brew</code>进行安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">brew install ntfs-3g</pre></td></tr></table>
+</div>
+</div>
+<p>安装完成后重启电脑。这时我们已经可以手动挂在NTFS格式文件系统的分区了。假设想要挂在的分区为<code>/dev/disk2s1</code>，下面的命令可以把该分区以读写方式挂在到<code>/Volumes/NTFS</code>下。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">sudo mkdir /Volumes/NTFS
+sudo /usr/local/bin/ntfs-3g /dev/disk1s1 /Volumes/NTFS -olocal -oallow_other</pre></td></tr></table>
+</div>
+</div>
+<h2 id="自动以读写方式挂载ntfs分区">自动以读写方式挂载NTFS分区</h2>
+
+<p>虽然我们已经可以挂载NTFS分区了，但是当我们插入一块NTFS分区的硬盘，依然只能以只读方式自动挂载。这时因为自动挂载时使用的是Mac默认的NTFS挂载命令，即<code>/sbin/mount_ntfs</code>，所以我们要将它替换成ntfs-3g的自动挂载命令。</p>
+
+<h3 id="关闭sip">关闭SIP</h3>
+
+<p>Mac对操作系统下的文件采取的保护机制SIP (System Integrity Protection)，这样我们无法修改<code>/sbin</code>下的文件，所以我们要先关闭SIP。</p>
+
+<ol>
+<li><p>重启，按住<code>command+R</code>，进入保护模式</p></li>
+
+<li><p>在菜单栏中打开终端，输入</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">csrutil disable</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>重启操作系统</p></li>
+</ol>
+
+<p>这时就可以修改<code>/sbin/mount_ntfs</code></p>
+
+<h3 id="替换自动挂载命令">替换自动挂载命令</h3>
+
+<ul>
+<li><p>备份之前的命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">sudo mv &#34;/Volumes/Macintosh HD/sbin/mount_ntfs&#34; &#34;/Volumes/Macintosh HD/sbin/mount_ntfs.orig&#34;</pre></td></tr></table>
+</div>
+</div></li>
+
+<li><p>将ntfs-3g中的自动挂载命令替换为自动</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">sudo ln -s /usr/local/sbin/mount_ntfs &#34;/Volumes/Macintosh HD/sbin/mount_ntfs&#34;</pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+
+<p>再次重启电脑，插入NTFS文件系统的磁盘后就可以自动读写挂载了。</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Mijian Xu</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-03-25
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">文件系统</a>
+          <a href="/tags/fuse/">Fuse</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/vscode-ssh/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">在VSCode中使用Remote-SSH进行远程开发</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/sshfs/">
+            <span class="next-text nav-default">用sshfs远程挂载路径到本地</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'pDTTIwKxG0jJoQFkUaQ1Jeqo-gzGzoHsz',
+        appKey: 'LjDsQoPgO74ji2IoczXTiRM5',
+        notify:  false ,
+        verify:  true ,
+        avatar:'mm',
+        placeholder: '说点什么吧...',
+        visitor:  false 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:gomijianxu@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/xumi1993" class="iconfont icon-github" title="github"></a>
+      <a href="https://git.nju.edu.cn/xumi1993" class="iconfont icon-gitlab" title="gitlab"></a>
+  <a href="https://blog.xumijian.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Mijian Xu</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

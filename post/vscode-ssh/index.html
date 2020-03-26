@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>在VSCode中使用Remote-SSH进行远程开发 - Note to Tech</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Mijian Xu" /><meta name="description" content="动图来自官网
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.58.3 with theme even" />
+
+
+<link rel="canonical" href="https://blog.xumijian.me/post/vscode-ssh/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.3904f84e.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="在VSCode中使用Remote-SSH进行远程开发" />
+<meta property="og:description" content="
+动图来自官网" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.xumijian.me/post/vscode-ssh/" />
+<meta property="article:published_time" content="2019-06-18T12:30:12+08:00" />
+<meta property="article:modified_time" content="2019-06-18T12:30:12+08:00" />
+<meta itemprop="name" content="在VSCode中使用Remote-SSH进行远程开发">
+<meta itemprop="description" content="
+动图来自官网">
+
+
+<meta itemprop="datePublished" content="2019-06-18T12:30:12&#43;08:00" />
+<meta itemprop="dateModified" content="2019-06-18T12:30:12&#43;08:00" />
+<meta itemprop="wordCount" content="965">
+
+
+
+<meta itemprop="keywords" content="vscode,SSH,Linux," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="在VSCode中使用Remote-SSH进行远程开发"/>
+<meta name="twitter:description" content="
+动图来自官网"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Note to Tech</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="https://home.xumijian.me">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Note to Tech</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://home.xumijian.me">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">在VSCode中使用Remote-SSH进行远程开发</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-06-18 </span>
+        <div class="post-category">
+            <a href="/categories/linux/"> Linux </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#安装">安装</a></li>
+<li><a href="#配置">配置</a></li>
+<li><a href="#连接服务器">连接服务器</a></li>
+<li><a href="#安装远程插件">安装远程插件</a></li>
+<li><a href="#使用">使用</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><img src="https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif" alt="" />
+动图来自<a href="https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif">官网</a></p>
+
+<h2 id="overview">Overview</h2>
+
+<p>远程开发对于开发者尤其是Linux开发者来说是一种迫切的需求，我们所需求的远程开发工具通常需要具备以下几个功能：</p>
+
+<ul>
+<li><strong>在本地对服务器端代码进行编辑</strong></li>
+<li><strong>能在本地对服务器端代码用服务器端环境进行编译和调试</strong></li>
+<li><strong>代码高亮和补全要满足服务器端环境</strong></li>
+<li><strong>较低的成本</strong></li>
+</ul>
+
+<p>那么现有的解决方案有以下几种：</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">方式</th>
+<th align="center">优点</th>
+<th align="center">缺点</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">通过终端远程登录，用<strong><em>Vim</em></strong>、<strong><em>Emacs</em></strong>等编辑。</td>
+<td align="center">直接在服务器端运行易于编译调试，通过插件和配置可以获得代码高亮和补全</td>
+<td align="center">Vim 没有图形化，在开发大型项目时难以使用</td>
+</tr>
+
+<tr>
+<td align="center">使用<a href="http://www.jetbrains.com/">JetBrains</a>套件中的远程开发功能</td>
+<td align="center">可以满足前三个功能</td>
+<td align="center">太贵了，对个人用户是一个负担。而社区版则没有这个功能</td>
+</tr>
+
+<tr>
+<td align="center">使用VSCode中<code>rmate</code>插件</td>
+<td align="center">在VSCode中编辑服务器端文件</td>
+<td align="center">只能编辑，不能编译和调试。而且使用不便。代码补全也是基于本地环境的</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="安装">安装</h2>
+
+<p>好在最近有<strong><em>Microsoft</em></strong>发布的VSCode插件<a href="https://aka.ms/vscode-remote/download/extension">Remote Development</a>解决了这些问题。首先我们做一些准备工作：</p>
+
+<ol>
+<li>一台开启<code>open-ssh</code>的Linux服务器，一台可以远程登录的客户端。</li>
+<li>客户端需要版本高于<code>1.35</code>的VSCode。</li>
+<li>在VSCode中安装<a href="https://aka.ms/vscode-remote/download/extension">Remote Development</a></li>
+</ol>
+
+<h2 id="配置">配置</h2>
+
+<p>我们需要对客户端和服务器端（不需要管理员权限）进行一些配置：</p>
+
+<ol>
+<li>客户端和服务器端需要进行公私要配对，Remote Development不支持单纯的密码登录，但密码可以作为两步认证的密码登录。</li>
+
+<li><p>在<code>$HOME/.ssh/config</code>或者<code>/etc/ssh/ssh_config</code>中配置服务器名称和登录信息。在VSCode的命令板中输入<code>Remote-SSH: Open Configuration File...</code>，选择要修改的文件，打开文件后输入服务器名称和登录信息。例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">Host example-remote-linux-machine
+User your-user-name-here
+HostName host-fqdn-or-ip-goes-here
+
+Host example-remote-linux-machine-with-identity-file
+User your-user-name-on-host
+HostName another-host-fqdn-or-ip-goes-here
+IdentityFile ~/.ssh/id_rsa-remote-ssh</pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+
+<blockquote>
+<p>只在自己的Mac上测试过，详细安装方法见<a href="https://code.visualstudio.com/docs/remote/ssh#_getting-started">官方文档</a></p>
+</blockquote>
+
+<h2 id="连接服务器">连接服务器</h2>
+
+<p>在命令板中输入<code>Remote-SSH: Connect to Host...</code>，然后选择配置过的服务器名就可以链接服务器。
+<img src="/img/vscode-ssh/connect-cmd.png" alt="" /></p>
+
+<p>或者在左侧工具栏中找到配置过的服务器名就，右键点击连接服务器。
+<img src="/img/vscode-ssh/connect-ui.png" alt="" /></p>
+
+<h2 id="安装远程插件">安装远程插件</h2>
+
+<p>现在我们还没有安装远程插件，也就是说编译、调试等功能还不能在远程使用。Remote Development提供了远程插件，为SSH主机上的给定工作区安装任何所需的扩展。例如
+<img src="/img/vscode-ssh/ssh-installed-remote-indicator.png" alt="" /></p>
+
+<h2 id="使用">使用</h2>
+
+<p>连接服务器之后，再打开文件，这时会询问你服务器上的路径，如图
+<img src="/img/vscode-ssh/enter-path.png" alt="" /></p>
+
+<p>打开项目后和本地一样设置编译器调试即可。</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Mijian Xu</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-06-18
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/vscode/">vscode</a>
+          <a href="/tags/ssh/">SSH</a>
+          <a href="/tags/linux/">Linux</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/points-in-polygon/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">判断地理坐标点是否在多边形内的Python实现</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/fuse/">
+            <span class="next-text nav-default">用FUSE和ntfs-3g在MacOS下打造免费的NTFS解决方案</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'pDTTIwKxG0jJoQFkUaQ1Jeqo-gzGzoHsz',
+        appKey: 'LjDsQoPgO74ji2IoczXTiRM5',
+        notify:  false ,
+        verify:  true ,
+        avatar:'mm',
+        placeholder: '说点什么吧...',
+        visitor:  false 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:gomijianxu@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/xumi1993" class="iconfont icon-github" title="github"></a>
+      <a href="https://git.nju.edu.cn/xumi1993" class="iconfont icon-gitlab" title="gitlab"></a>
+  <a href="https://blog.xumijian.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Mijian Xu</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

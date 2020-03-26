@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>VTK数据的重采样与三维矩阵化 - Note to Tech</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Mijian Xu" /><meta name="description" content="VTK是用于三维可视化的重要格式。如果我们要对三维可视化数据进行更多自定义的计算，则需要将其转化为适用与科学计算的数据格式。 （此图由PyVista生成）
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.58.3 with theme even" />
+
+
+<link rel="canonical" href="https://blog.xumijian.me/post/vtk-to-nparray/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.3904f84e.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="VTK数据的重采样与三维矩阵化" />
+<meta property="og:description" content="
+
+VTK是用于三维可视化的重要格式。如果我们要对三维可视化数据进行更多自定义的计算，则需要将其转化为适用与科学计算的数据格式。
+（此图由PyVista生成）" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.xumijian.me/post/vtk-to-nparray/" />
+<meta property="article:published_time" content="2020-03-26T15:17:48+08:00" />
+<meta property="article:modified_time" content="2020-03-26T15:17:48+08:00" />
+<meta itemprop="name" content="VTK数据的重采样与三维矩阵化">
+<meta itemprop="description" content="
+
+VTK是用于三维可视化的重要格式。如果我们要对三维可视化数据进行更多自定义的计算，则需要将其转化为适用与科学计算的数据格式。
+（此图由PyVista生成）">
+
+
+<meta itemprop="datePublished" content="2020-03-26T15:17:48&#43;08:00" />
+<meta itemprop="dateModified" content="2020-03-26T15:17:48&#43;08:00" />
+<meta itemprop="wordCount" content="714">
+
+
+
+<meta itemprop="keywords" content="VTK,Grid," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="VTK数据的重采样与三维矩阵化"/>
+<meta name="twitter:description" content="
+
+VTK是用于三维可视化的重要格式。如果我们要对三维可视化数据进行更多自定义的计算，则需要将其转化为适用与科学计算的数据格式。
+（此图由PyVista生成）"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Note to Tech</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="https://home.xumijian.me">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Note to Tech</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://home.xumijian.me">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">VTK数据的重采样与三维矩阵化</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-03-26 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> Python </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#1-读取并拼合所有vtk文件">1. 读取并拼合所有VTK文件</a>
+<ul>
+<li><a href="#循环读取每个vtk文件">循环读取每个VTK文件</a></li>
+<li><a href="#拼合所有区块">拼合所有区块</a></li>
+</ul></li>
+<li><a href="#2-对数据网格化并重采样">2. 对数据网格化并重采样</a></li>
+<li><a href="#3-预览重采样后的结果">3. 预览重采样后的结果</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><img src="/img/vtk2npz/structured_cube.png" alt="" /></p>
+
+<p>VTK是用于三维可视化的重要格式。如果我们要对三维可视化数据进行更多自定义的计算，则需要将其转化为适用与科学计算的数据格式。
+（此图由<a href="https://docs.pyvista.org/"><em>PyVista</em></a>生成）</p>
+
+<h2 id="1-读取并拼合所有vtk文件">1. 读取并拼合所有VTK文件</h2>
+
+<p>VTK文件通常生成与大型并行计算程序，程序有时会将整个网格区域划分为多个子区域进行分布式计算。所以在读取网格同时也要将所有网格拼合在一起，组成完整的网格。我们使用<a href="https://docs.pyvista.org/"><em>PyVista</em></a>模块来进行该处理。首先导入所需模块</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">pyvista</span> <span class="kn">as</span> <span class="nn">pv</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="循环读取每个vtk文件">循环读取每个VTK文件</h3>
+
+<p>我们用列表生成器循环读取每个VTK文件，将其赋给<code>blocks</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">blocks</span> <span class="o">=</span> <span class="p">[</span><span class="n">pv</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*.vtk&#39;</span><span class="p">))]</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="拼合所有区块">拼合所有区块</h3>
+
+<p>*PyVista*提供了<code>MultiBlock</code>用于拼合不同区块，输出的<code>mesh</code>为<code>UnstructuredGrid</code>类型，可以用于后续处理</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">points_vtk</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">MultiBlock</span><span class="p">(</span><span class="n">blocks</span><span class="p">)</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">points_vtk</span><span class="o">.</span><span class="n">combine</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="2-对数据网格化并重采样">2. 对数据网格化并重采样</h2>
+
+<p>由于网格设计的不同这些网格可能是非均匀的，这样就无法将其赋予一个规则矩阵。*PyVista*提供了通过重采样进行网格话的方式。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">grid</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">create_grid</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li><code>dimensions</code>定义了在X、Y和Z方向的采样点个数，点数越多重采样的精度越接近原始网格。
+<br /></li>
+</ul>
+
+<p>这时<code>image</code>还是<code>UnstructuredGrid</code>类型，但是每个网格已经是均匀的了。我们只需要用<code>np.reshape</code>就可以将其转换成矩阵形式（<code>np.ndarray</code>）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">mat</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">point_arrays</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">image</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li><code>'values'</code>取决于原始数据的键名，如Specfsem生成的网格，数值名为<code>gll_data</code>。
+<br /></li>
+</ul>
+
+<p>同时我们可以定义将每个坐标轴也转化为<code>np.ndarray</code>格式</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">image</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">image</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">image</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">image</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">image</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">image</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="3-预览重采样后的结果">3. 预览重采样后的结果</h2>
+
+<p>我们从<code>mat</code>中沿XZ方向切一条剖面，用<code>matplotlib</code>绘制其结果。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">mat</span><span class="p">[:,</span> <span class="mi">15</span><span class="p">,</span> <span class="p">:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Z (m)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X (m)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><img src="/img/vtk2npz/sec.png" alt="" /></p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Mijian Xu</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-03-26
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/vtk/">VTK</a>
+          <a href="/tags/grid/">Grid</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/gmt-map/">
+            <span class="next-text nav-default">用GMT绘制中国及周边构造分区与GPS速度场</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'pDTTIwKxG0jJoQFkUaQ1Jeqo-gzGzoHsz',
+        appKey: 'LjDsQoPgO74ji2IoczXTiRM5',
+        notify:  false ,
+        verify:  true ,
+        avatar:'mm',
+        placeholder: '说点什么吧...',
+        visitor:  false 
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:gomijianxu@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/xumi1993" class="iconfont icon-github" title="github"></a>
+      <a href="https://git.nju.edu.cn/xumi1993" class="iconfont icon-gitlab" title="gitlab"></a>
+  <a href="https://blog.xumijian.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Mijian Xu</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
