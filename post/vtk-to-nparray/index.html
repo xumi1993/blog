@@ -57,7 +57,7 @@ VTK是用于三维可视化的重要格式。如果我们要对三维可视化�
 
 <meta itemprop="datePublished" content="2020-03-26T15:17:48&#43;08:00" />
 <meta itemprop="dateModified" content="2020-03-26T15:17:48&#43;08:00" />
-<meta itemprop="wordCount" content="714">
+<meta itemprop="wordCount" content="712">
 
 
 
@@ -139,7 +139,7 @@ VTK是用于三维可视化的重要格式。如果我们要对三维可视化�
       <div class="post-meta">
         <span class="post-time"> 2020-03-26 </span>
         <div class="post-category">
-            <a href="/categories/python/"> Python </a>
+            <a href="/categories/seismology/"> Seismology </a>
             </div>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -198,7 +198,7 @@ VTK是用于三维可视化的重要格式。如果我们要对三维可视化�
 </div>
 <h3 id="拼合所有区块">拼合所有区块</h3>
 
-<p>*PyVista*提供了<code>MultiBlock</code>用于拼合不同区块，输出的<code>mesh</code>为<code>UnstructuredGrid</code>类型，可以用于后续处理</p>
+<p>PyVista提供了<code>MultiBlock</code>用于拼合不同区块，输出的<code>mesh</code>为<code>UnstructuredGrid</code>类型，可以用于后续处理</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
@@ -211,7 +211,7 @@ VTK是用于三维可视化的重要格式。如果我们要对三维可视化�
 </div>
 <h2 id="2-对数据网格化并重采样">2. 对数据网格化并重采样</h2>
 
-<p>由于网格设计的不同这些网格可能是非均匀的，这样就无法将其赋予一个规则矩阵。*PyVista*提供了通过重采样进行网格话的方式。</p>
+<p>由于网格设计的不同这些网格可能是非均匀的，这样就无法将其赋予一个规则矩阵。PyVista提供了通过重采样进行网格话的方式。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
@@ -237,7 +237,7 @@ VTK是用于三维可视化的重要格式。如果我们要对三维可视化�
 </div>
 </div>
 <ul>
-<li><code>'values'</code>取决于原始数据的键名，如Specfsem生成的网格，数值名为<code>gll_data</code>。
+<li><code>'values'</code>取决于原始数据的键名，如Specfsem3D生成的网格，数值名为<code>gll_data</code>。
 <br /></li>
 </ul>
 
@@ -324,7 +324,7 @@ VTK是用于三维可视化的重要格式。如果我们要对三维可视化�
         el: '#vcomments' ,
         appId: 'pDTTIwKxG0jJoQFkUaQ1Jeqo-gzGzoHsz',
         appKey: 'LjDsQoPgO74ji2IoczXTiRM5',
-        notify: 'false',
+        notify: 'true',
         verify: 'true',
         avatar:'mm',
         placeholder: '说点什么吧...',

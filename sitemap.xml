@@ -30,7 +30,7 @@
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/categories/python/</loc>
+    <loc>https://blog.xumijian.me/categories/seismology/</loc>
     <lastmod>2020-03-26T15:17:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -94,13 +94,6 @@
   
   <url>
     <loc>https://blog.xumijian.me/tags/geophysics/</loc>
-    <lastmod>2020-01-11T21:17:48+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/categories/seismology/</loc>
     <lastmod>2020-01-11T21:17:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -255,6 +248,13 @@
   
   <url>
     <loc>https://blog.xumijian.me/post/mpipool-mpi4py/</loc>
+    <lastmod>2019-01-03T13:31:58+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/categories/python/</loc>
     <lastmod>2019-01-03T13:31:58+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
