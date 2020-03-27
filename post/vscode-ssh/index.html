@@ -307,25 +307,24 @@ IdentityFile ~/.ssh/id_rsa-remote-ssh</pre></td></tr></table>
     </footer>
   </article>
         </div>
-        <div id="gitalk-container"></div>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-    <script type="text/javascript">
-      var gitalk = new Gitalk({
-        id: '2019-06-18 12:30:12 \x2b0800 \x2b0800',
-        title: '在VSCode中使用Remote-SSH进行远程开发',
-        clientID: '83b0e39119b727cd2ba2',
-        clientSecret: '2b6f4a9e1459a3e6bafa8afaaa509d755a7cf744',
-        repo: 'blog.post',
-        owner: 'xumi1993',
-        admin: ['xumi1993'],
-        body: decodeURI(location.href)
-      });
-      gitalk.render('gitalk-container');
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://github.com/gitalk/gitalk">comments powered by gitalk.</a></noscript>
+        
 
   
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'pDTTIwKxG0jJoQFkUaQ1Jeqo-gzGzoHsz',
+        appKey: 'LjDsQoPgO74ji2IoczXTiRM5',
+        notify: 'true',
+        verify: 'true',
+        avatar:'mm',
+        placeholder: '说点什么吧...',
+        visitor: 'false'
+    });
+  </script>
 
   
 
@@ -352,8 +351,8 @@ IdentityFile ~/.ssh/id_rsa-remote-ssh</pre></td></tr></table>
 
   <div class="busuanzi-footer">
     <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
-      <span class="division">|</span>
-    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+      
+    
   </div>
 
   <span class="copyright-year">
