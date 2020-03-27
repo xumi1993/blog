@@ -723,24 +723,25 @@ awk <span class="s1">&#39;sqrt($5*$5+$7*$7)&gt;0.9{print $4,6371-$1,-1*$7}&#39;<
     </footer>
   </article>
         </div>
-        
+        <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitalk = new Gitalk({
+        id: '2020-01-19 14:42:33 \x2b0800 \x2b0800',
+        title: '用GMT绘制极坐标剖面',
+        clientID: '83b0e39119b727cd2ba2',
+        clientSecret: '2b6f4a9e1459a3e6bafa8afaaa509d755a7cf744',
+        repo: 'blog.post',
+        owner: 'xumi1993',
+        admin: ['xumi1993'],
+        body: decodeURI(location.href)
+      });
+      gitalk.render('gitalk-container');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/gitalk/gitalk">comments powered by gitalk.</a></noscript>
 
   
-  <div id="vcomments"></div>
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-  <script type="text/javascript">
-    new Valine({
-        el: '#vcomments' ,
-        appId: 'pDTTIwKxG0jJoQFkUaQ1Jeqo-gzGzoHsz',
-        appKey: 'LjDsQoPgO74ji2IoczXTiRM5',
-        notify: 'true',
-        verify: 'true',
-        avatar:'mm',
-        placeholder: '说点什么吧...',
-        visitor: 'false'
-    });
-  </script>
 
   
 
