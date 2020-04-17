@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2017-10-23T21:51:29&#43;08:00" />
 <meta itemprop="dateModified" content="2017-10-23T21:51:29&#43;08:00" />
-<meta itemprop="wordCount" content="597">
+<meta itemprop="wordCount" content="596">
 
 
 
@@ -158,8 +158,8 @@
 <h2 id="生成一个本地的-python-包">生成一个本地的 Python 包</h2>
 
 <ul>
-<li>在本地python目录中新建<code>setup.py</code>文件。<br /></li>
-<li>将源码放置在一个新建的目录中，目录名为模块名。<br /></li>
+<li>在本地python目录中新建<code>setup.py</code>文件。</li>
+<li>将源码放置在一个新建的目录中，目录名为模块名。</li>
 
 <li><p>在<code>setup.py</code>中写入包的配置信息。</p>
 <div class="highlight"><div class="chroma">
@@ -218,12 +218,12 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &mdash; <code>get_resp.py</code> <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &mdash; ……<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &mdash; <code>setup.py</code><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &mdash;  ……\</p></li>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &mdash;  ……</p></li>
 
 <li><p>由于这个例子只依赖Python标准库，所以如果需要依赖其他第三方模块需要在<code>setup.py</code>中加一个字段：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -237,7 +237,7 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">install_requires</span><span class="o">=</span><span class="p">[</span>
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">install_requires</span><span class="o">=</span><span class="p">[</span>
     <span class="s1">&#39;Twisted&gt;=13.1.0&#39;</span><span class="p">,</span>
     <span class="s1">&#39;w3lib&gt;=1.17.0&#39;</span><span class="p">,</span>
     <span class="s1">&#39;queuelib&#39;</span><span class="p">,</span>
@@ -258,10 +258,10 @@
 <p>使用下面命令打包一个源代码的包</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
-</span></code></pre></td>
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">sdist</span> <span class="n">build</span></code></pre></td></tr></table>
+<pre class="chroma">python setup.py sdist build</pre></td></tr></table>
 </div>
 </div>
 <p>这样在当前目录的dist文件夹下，就会多出一个以tar.gz结尾的包了。</p>
@@ -278,20 +278,20 @@
 <li><p>安装<code>twine</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">twine</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo pip install twine</code></pre></td></tr></table>
 </div>
 </div></li>
 
 <li><p>上传包</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">twine</span> <span class="n">upload</span> <span class="n">dist</span><span class="o">/*</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">twine upload dist/*</code></pre></td></tr></table>
 </div>
 </div></li>
 </ul>
