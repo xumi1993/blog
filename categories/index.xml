@@ -6,10 +6,19 @@
     <description>Recent content in Categories on Note to Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 17 Apr 2020 19:23:46 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jun 2020 16:58:02 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.xumijian.me/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Seismology</title>
+      <link>https://blog.xumijian.me/categories/seismology/</link>
+      <pubDate>Tue, 09 Jun 2020 16:58:02 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/categories/seismology/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Python</title>
@@ -17,15 +26,6 @@
       <pubDate>Fri, 17 Apr 2020 19:23:46 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/categories/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Seismology</title>
-      <link>https://blog.xumijian.me/categories/seismology/</link>
-      <pubDate>Thu, 26 Mar 2020 15:17:48 +0800</pubDate>
-      
-      <guid>https://blog.xumijian.me/categories/seismology/</guid>
       <description></description>
     </item>
     

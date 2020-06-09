@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Note to Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 17 Apr 2020 19:23:46 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jun 2020 16:58:02 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.xumijian.me/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>BQMail</title>
+      <link>https://blog.xumijian.me/tags/bqmail/</link>
+      <pubDate>Tue, 09 Jun 2020 16:58:02 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/tags/bqmail/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://blog.xumijian.me/tags/python/</link>
+      <pubDate>Tue, 09 Jun 2020 16:58:02 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/tags/python/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>GMT</title>
@@ -71,15 +89,6 @@
       <pubDate>Sat, 11 Jan 2020 21:17:48 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/tags/%E7%BD%91%E6%A0%BC%E5%8C%96/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>https://blog.xumijian.me/tags/python/</link>
-      <pubDate>Tue, 08 Oct 2019 21:05:16 +0800</pubDate>
-      
-      <guid>https://blog.xumijian.me/tags/python/</guid>
       <description></description>
     </item>
     

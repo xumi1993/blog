@@ -45,7 +45,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://blog.xumijian.me/" />
 
-<meta property="og:updated_time" content="2020-04-17T19:23:46+08:00" />
+<meta property="og:updated_time" content="2020-06-09T16:58:02+08:00" />
 <meta itemprop="name" content="Note to Tech">
 <meta itemprop="description" content="">
 
@@ -116,6 +116,32 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/bqmail1/">BQMail2.0: 向IRIS DMC发送数据请求的Python模块（数据查询）</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-06-09 </span>
+      <div class="post-category">
+          <a href="/categories/seismology/"> Seismology </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>BQMail是用于向IRIS申请数据的Python模块。2016年我们完成了BQMail 1.0版本，但受限于当时IRIS服务的欠缺，随着时间的发展软件出现了以下不足：
+- 发送命令繁琐
+- 需要本地地震目录
+- 可拓展性差</p>
+
+<p>因此我们重写了BQMail的源码，结合了<a href="http://service.iris.edu/fdsnws/">IRIS DMC Web Services</a>和<a href="http://docs.obspy.org/">ObsPy</a>，实现了地震和台站的快速查询，并能够以Python模块的方式调用来发送数据请求。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/bqmail1/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/mappick/">用Python交互界面在地图上选取测线位置</a></h1>
@@ -202,27 +228,6 @@
     </div>
     <div class="read-more">
       <a href="/post/gmt-section/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/interp/">三维数据体生成与切片</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-01-11 </span>
-      <div class="post-category">
-          <a href="/categories/seismology/"> Seismology </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>我们在计算得到的数据通常是非等间隔网格，为了用GMT进行2D可视化，需要将数据网格化后进行插值。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/interp/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
