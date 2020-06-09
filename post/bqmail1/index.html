@@ -62,7 +62,7 @@
 
 <meta itemprop="datePublished" content="2020-06-09T16:58:02&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-09T16:58:02&#43;08:00" />
-<meta itemprop="wordCount" content="1568">
+<meta itemprop="wordCount" content="1564">
 
 
 
@@ -166,19 +166,11 @@
 </ul></li>
 <li><a href="#地震事件查询">地震事件查询</a>
 <ul>
-<li><a href="#实例">实例</a>
-<ul>
-<li><a href="#1-查询2019年发生的大于7级的地震">1. 查询2019年发生的大于7级的地震</a></li>
-<li><a href="#2-查询发震时刻在2014-1-1至2019-1-1-中心点为23-e-114-n-震中距在30-90-之间-震级大于5-5级的地震">2. 查询发震时刻在2014-1-1至2019-1-1，中心点为23˚E 114˚N，震中距在30˚-90˚之间，震级大于5.5级的地震</a></li>
-</ul></li>
+<li><a href="#实例">实例</a></li>
 </ul></li>
 <li><a href="#台站查询">台站查询</a>
 <ul>
-<li><a href="#实例-1">实例</a>
-<ul>
-<li><a href="#1-查询cb台网下的所有台站">1. 查询CB台网下的所有台站</a></li>
-<li><a href="#2-查询位置在经度98-110-纬度21-36-2003-1-1至今的宽频带台站">2. 查询位置在经度98-110，纬度21-36，2003-1-1至今的宽频带台站</a></li>
-</ul></li>
+<li><a href="#实例-1">实例</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -302,7 +294,8 @@ optional arguments:
 
 <h3 id="实例">实例</h3>
 
-<h4 id="1-查询2019年发生的大于7级的地震">1. 查询2019年发生的大于7级的地震</h4>
+<ol>
+<li><p>查询2019年发生的大于7级的地震</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -310,8 +303,9 @@ optional arguments:
 <td class="lntd">
 <pre class="chroma">get_events -b 20190101 -m 7</pre></td></tr></table>
 </div>
-</div>
-<h4 id="2-查询发震时刻在2014-1-1至2019-1-1-中心点为23-e-114-n-震中距在30-90-之间-震级大于5-5级的地震">2. 查询发震时刻在2014-1-1至2019-1-1，中心点为23˚E 114˚N，震中距在30˚-90˚之间，震级大于5.5级的地震</h4>
+</div></li>
+
+<li><p>查询发震时刻在2014-1-1至2019-1-1，中心点为23˚E 114˚N，震中距在30˚-90˚之间，震级大于5.5级的地震</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -319,7 +313,9 @@ optional arguments:
 <td class="lntd">
 <pre class="chroma">get_events -b 20140101 -e 20190101 -d 23/114/30/90 -m 5.5</pre></td></tr></table>
 </div>
-</div>
+</div></li>
+</ol>
+
 <h2 id="台站查询">台站查询</h2>
 
 <p>同样的方式实现了命令行下对IRIS DMC台站的查询，在命令行输入</p>
@@ -382,7 +378,8 @@ optional arguments:
 
 <h3 id="实例-1">实例</h3>
 
-<h4 id="1-查询cb台网下的所有台站">1. 查询CB台网下的所有台站</h4>
+<ol>
+<li><p>查询CB台网下的所有台站</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -390,8 +387,9 @@ optional arguments:
 <td class="lntd">
 <pre class="chroma">get_stations -n CB</pre></td></tr></table>
 </div>
-</div>
-<h4 id="2-查询位置在经度98-110-纬度21-36-2003-1-1至今的宽频带台站">2. 查询位置在经度98-110，纬度21-36，2003-1-1至今的宽频带台站</h4>
+</div></li>
+
+<li><p>查询位置在经度98-110，纬度21-36，2003-1-1至今的宽频带台站</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt">1
@@ -399,7 +397,8 @@ optional arguments:
 <td class="lntd">
 <pre class="chroma">get_stations -r 98/110/21/36 -b 20030101 -c BHZ</pre></td></tr></table>
 </div>
-</div>
+</div></li>
+</ol>
     </div>
 
     <div class="post-copyright">
