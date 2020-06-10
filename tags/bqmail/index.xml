@@ -17,10 +17,13 @@
       <pubDate>Tue, 09 Jun 2020 16:58:02 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/post/bqmail1/</guid>
-      <description>&lt;p&gt;BQMail是用于向IRIS申请数据的Python模块。2016年我们完成了BQMail 1.0版本，但受限于当时IRIS服务的欠缺，随着时间的发展软件出现了以下不足：
-- 发送命令繁琐
-- 需要本地地震目录
-- 可拓展性差&lt;/p&gt;
+      <description>&lt;p&gt;BQMail是用于向IRIS申请数据的Python模块。2016年我们完成了BQMail 1.0版本，但受限于当时IRIS服务的欠缺，随着时间的发展软件出现了以下不足：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;发送命令繁琐&lt;/li&gt;
+&lt;li&gt;需要本地地震目录&lt;/li&gt;
+&lt;li&gt;可拓展性差&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;因此我们重写了BQMail的源码，结合了&lt;a href=&#34;http://service.iris.edu/fdsnws/&#34;&gt;IRIS DMC Web Services&lt;/a&gt;和&lt;a href=&#34;http://docs.obspy.org/&#34;&gt;ObsPy&lt;/a&gt;，实现了地震和台站的快速查询，并能够以Python模块的方式调用来发送数据请求。&lt;/p&gt;</description>
     </item>
