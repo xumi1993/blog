@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>BQMail2.0: 向IRIS DMC发送数据请求的Python模块（发送申请） - Note to Tech</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Mijian Xu" /><meta name="description" content="在发送数据之前我们需要先查询所需台站和事件。BQMail将根据这些信息发送数据申请。
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.58.3 with theme even" />
+
+
+<link rel="canonical" href="https://blog.xumijian.me/post/bqmail2/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.80fdd22f.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="BQMail2.0: 向IRIS DMC发送数据请求的Python模块（发送申请）" />
+<meta property="og:description" content="在发送数据之前我们需要先查询所需台站和事件。BQMail将根据这些信息发送数据申请。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.xumijian.me/post/bqmail2/" />
+<meta property="article:published_time" content="2020-08-26T11:31:38+08:00" />
+<meta property="article:modified_time" content="2020-08-26T11:31:38+08:00" />
+<meta itemprop="name" content="BQMail2.0: 向IRIS DMC发送数据请求的Python模块（发送申请）">
+<meta itemprop="description" content="在发送数据之前我们需要先查询所需台站和事件。BQMail将根据这些信息发送数据申请。">
+
+
+<meta itemprop="datePublished" content="2020-08-26T11:31:38&#43;08:00" />
+<meta itemprop="dateModified" content="2020-08-26T11:31:38&#43;08:00" />
+<meta itemprop="wordCount" content="1035">
+
+
+
+<meta itemprop="keywords" content="Python,BQMail," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="BQMail2.0: 向IRIS DMC发送数据请求的Python模块（发送申请）"/>
+<meta name="twitter:description" content="在发送数据之前我们需要先查询所需台站和事件。BQMail将根据这些信息发送数据申请。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Note to Tech</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="https://home.xumijian.me">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Note to Tech</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://home.xumijian.me">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">BQMail2.0: 向IRIS DMC发送数据请求的Python模块（发送申请）</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-08-26 </span>
+        <div class="post-category">
+            <a href="/categories/seismology/"> Seismology </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#导入模块">导入模块</a></li>
+<li><a href="#创建bqmail实例">创建BQMail实例</a></li>
+<li><a href="#查询台站信息">查询台站信息</a></li>
+<li><a href="#发送连续数据申请">发送连续数据申请</a></li>
+<li><a href="#发送事件数据申请">发送事件数据申请</a>
+<ul>
+<li><a href="#查询事件信息">查询事件信息</a></li>
+<li><a href="#发送数据申请">发送数据申请</a></li>
+</ul></li>
+<li><a href="#小结">小结</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>在发送数据之前我们需要先查询所需台站和事件。BQMail将根据这些信息发送数据申请。</p>
+
+<p>BQMail将采用调用Python模块的形式，查询和发送数据</p>
+
+<h2 id="导入模块">导入模块</h2>
+
+<p>首先需要导入bqmail和可能用到的模块。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">from</span> <span class="nn">bqmail.mail</span> <span class="kn">import</span> <span class="n">BQMail</span>
+<span class="kn">from</span> <span class="nn">obspy</span> <span class="kn">import</span> <span class="n">UTCDateTime</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>BQMail中所有的时间信息全部遵循<a href="https://docs.obspy.org/tutorial/code_snippets/utc_date_time.html"><code>obspy.UTCDateTime</code></a>格式</li>
+</ul>
+
+<h2 id="创建bqmail实例">创建BQMail实例</h2>
+
+<p>我们首先创建一个BQMail实例。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">bq</span> <span class="o">=</span> <span class="n">BQMail</span><span class="p">(</span><span class="s1">&#39;xxx@xxx.com&#39;</span><span class="p">,</span> <span class="n">server</span><span class="o">=</span><span class="s1">&#39;smtp.xxx.com&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;xxx&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s1">&#39;bqmail&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li><code>'xxx@xxx.com'</code>是发送邮件和接受邮件信息的邮箱</li>
+<li><code>server</code>是发送邮件所用的smtp服务器。默认为<code>localhost</code>。
+&gt; 163邮箱在发送大数据量邮件时可能会被退信，目前测试qq企业邮箱可用。</li>
+<li><code>password</code>是该smtp服务器的密码。</li>
+<li><code>username</code>是IRIS ftp站的用户名。</li>
+</ul>
+
+<h2 id="查询台站信息">查询台站信息</h2>
+
+<p>在发送申请之前我们先查询所需要申请的台站，查询获得台站将全部用于发送数据申请。我们建议先用<code>get_stations</code>命令选择合适的限制条件预先查询，再将准确的限制条件写入脚本中。例如</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">bq</span><span class="o">.</span><span class="n">query_stations</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="s1">&#39;CB&#39;</span><span class="p">,</span> <span class="n">station</span><span class="o">=</span><span class="s1">&#39;LZH&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这里所有的参数信息与<a href="https://service.iris.edu/irisws/fedcatalog/1/">FDSN Client Usage</a>中相同。</p>
+
+<h2 id="发送连续数据申请">发送连续数据申请</h2>
+
+<p>部分研究需要发送连续数据申请，即从默一时刻到另一时，以隔固定的时间间隔作为SAC文件的时长。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">bq</span><span class="o">.</span><span class="n">send_mail</span><span class="p">(</span><span class="n">arrange</span><span class="o">=</span><span class="s1">&#39;continue&#39;</span><span class="p">,</span> <span class="n">starttime</span><span class="o">=</span><span class="n">UTCDateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> 
+             <span class="n">endtime</span><span class="o">=</span><span class="n">UTCDateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">time_val_in_hours</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> 
+             <span class="n">channel</span><span class="o">=</span><span class="s1">&#39;BH?&#39;</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;00&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li><code>arrange='continue'</code>表示发送连续数据申请。</li>
+<li><code>starttime</code>和<code>endtime</code>分别为数据申请的起止时刻。</li>
+<li><code>time_val_in_hours</code>为单位文件的时间长度（时间单位为小时）。</li>
+<li><code>channel</code>和<code>location</code>分别为所申请的通道名和位置名，详见<a href="http://ds.iris.edu/ds/nodes/dmc/manuals/breq_fast/">BREQ_FAST Manuals</a>。</li>
+</ul>
+
+<h2 id="发送事件数据申请">发送事件数据申请</h2>
+
+<p>另一种申请方式为事件数据申请，即根据搜索的地震事件信息，以某一参考时刻为标准发送数据申请。</p>
+
+<h3 id="查询事件信息">查询事件信息</h3>
+
+<p>在发送申请前需要以一定的限制条件获取事件信息，例如</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">bq</span><span class="o">.</span><span class="n">query_events</span><span class="p">(</span><span class="n">starttime</span><span class="o">=</span><span class="n">UTCDateTime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">endtime</span><span class="o">=</span><span class="n">UTCDateTime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                <span class="n">minmagnitude</span><span class="o">=</span><span class="mf">5.5</span><span class="p">,</span> <span class="n">catalog</span><span class="o">=</span><span class="s1">&#39;GCMT&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这里所有的参数信息与<a href="https://service.iris.edu/fdsnws/event/1/">fdsnws-event web service</a>中相同。</p>
+
+<h3 id="发送数据申请">发送数据申请</h3>
+
+<p>获取所需事件信息后，设置截取时窗的标准，即可根据台站和事件发送数据申请。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">bq</span><span class="o">.</span><span class="n">send_mail</span><span class="p">(</span><span class="n">arrange</span><span class="o">=</span><span class="s1">&#39;events&#39;</span><span class="p">,</span> <span class="n">mark</span><span class="o">=</span><span class="s2">&#34;P&#34;</span><span class="p">,</span> <span class="n">time_before</span><span class="o">=-</span><span class="mi">100</span><span class="p">,</span> <span class="n">time_after</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li><code>arrange='events'</code>表示发送事件数据申请。</li>
+<li><code>mark</code>表示参考时刻，这里可以选择以发震时刻作为标准，或以某一震相的到时作为标准。
+
+<ul>
+<li><code>o</code>: 以发震时刻作为标准。</li>
+<li><code>P</code>, <code>S</code>, <code>...</code>: 以指定震相到时作为标准，震相名于Taup相同。</li>
+</ul></li>
+<li><code>time_before</code>和<code>time_after</code>分别表示相对参考时刻前后截取的时长。</li>
+</ul>
+
+<h2 id="小结">小结</h2>
+
+<p>相对于老版本，新版本可以在Python脚本中修改设置，更加灵活。如果有新的建议和意见请在<a href="https://github.com/xumi1993/bqmail/">项目主页</a>中提交Issue。</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Mijian Xu</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-08-26
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python/">Python</a>
+          <a href="/tags/bqmail/">BQMail</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/bqmail1/">
+            <span class="next-text nav-default">BQMail2.0: 向IRIS DMC发送数据请求的Python模块（数据查询）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'pDTTIwKxG0jJoQFkUaQ1Jeqo-gzGzoHsz',
+        appKey: 'LjDsQoPgO74ji2IoczXTiRM5',
+        notify: 'true',
+        verify: 'true',
+        avatar:'mm',
+        placeholder: '说点什么吧...',
+        visitor: 'false'
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:gomijianxu@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/xumi1993" class="iconfont icon-github" title="github"></a>
+      <a href="https://git.nju.edu.cn/xumi1993" class="iconfont icon-gitlab" title="gitlab"></a>
+  <a href="https://blog.xumijian.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      
+    
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Mijian Xu</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
