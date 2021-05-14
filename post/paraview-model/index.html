@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>用GMT、PyVista和Paraview对速度模型、地形起伏、Moho面起伏进行三维可视化 - Note to Tech</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Mijian Xu" /><meta name="description" content="我们通过计算获得了地壳三维速度模型、Moho面起伏，为例对比壳内低速区与Moho面起伏的关系，可以将这些结果用Paraview进行三维可视化。由于数据格式的不同，我们需要借助GMT和PyVista辅助绘制。
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.58.3 with theme even" />
+
+
+<link rel="canonical" href="https://blog.xumijian.me/post/paraview-model/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.80fdd22f.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="用GMT、PyVista和Paraview对速度模型、地形起伏、Moho面起伏进行三维可视化" />
+<meta property="og:description" content="
+我们通过计算获得了地壳三维速度模型、Moho面起伏，为例对比壳内低速区与Moho面起伏的关系，可以将这些结果用Paraview进行三维可视化。由于数据格式的不同，我们需要借助GMT和PyVista辅助绘制。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.xumijian.me/post/paraview-model/" />
+<meta property="article:published_time" content="2021-03-07T05:12:28+08:00" />
+<meta property="article:modified_time" content="2021-03-07T05:12:28+08:00" />
+<meta itemprop="name" content="用GMT、PyVista和Paraview对速度模型、地形起伏、Moho面起伏进行三维可视化">
+<meta itemprop="description" content="
+我们通过计算获得了地壳三维速度模型、Moho面起伏，为例对比壳内低速区与Moho面起伏的关系，可以将这些结果用Paraview进行三维可视化。由于数据格式的不同，我们需要借助GMT和PyVista辅助绘制。">
+
+
+<meta itemprop="datePublished" content="2021-03-07T05:12:28&#43;08:00" />
+<meta itemprop="dateModified" content="2021-03-07T05:12:28&#43;08:00" />
+<meta itemprop="wordCount" content="1876">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="用GMT、PyVista和Paraview对速度模型、地形起伏、Moho面起伏进行三维可视化"/>
+<meta name="twitter:description" content="
+我们通过计算获得了地壳三维速度模型、Moho面起伏，为例对比壳内低速区与Moho面起伏的关系，可以将这些结果用Paraview进行三维可视化。由于数据格式的不同，我们需要借助GMT和PyVista辅助绘制。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Note to Tech</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="https://home.xumijian.me">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Note to Tech</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://home.xumijian.me">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">用GMT、PyVista和Paraview对速度模型、地形起伏、Moho面起伏进行三维可视化</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-03-07 </span>
+        
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#准备工作">准备工作</a>
+<ul>
+<li><a href="#定义一个类">定义一个类</a></li>
+<li><a href="#三维速度模型转vtk网格">三维速度模型转VTK网格</a>
+<ul>
+<li><a href="#将数据表文件网格化为numpy矩阵">将数据表文件网格化为Numpy矩阵</a></li>
+<li><a href="#生成三维速度模型的vtk文件">生成三维速度模型的VTK文件</a></li>
+</ul></li>
+<li><a href="#将moho面起伏转换为vtk多边形">将Moho面起伏转换为VTK多边形</a>
+<ul>
+<li><a href="#将moho面起伏网格化为二维矩阵">将Moho面起伏网格化为二维矩阵</a></li>
+<li><a href="#将moho面二维矩阵转换为多边形网格">将Moho面二维矩阵转换为多边形网格</a></li>
+</ul></li>
+<li><a href="#制作地形起伏数据">制作地形起伏数据</a>
+<ul>
+<li><a href="#通过gmt生成地形起伏数据">通过GMT生成地形起伏数据</a></li>
+<li><a href="#将地形数据转换为多边形网格">将地形数据转换为多边形网格</a></li>
+</ul></li>
+<li><a href="#todo">TODO</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><img src="/img/paraview/model_NW.png" alt="" />
+我们通过计算获得了地壳三维速度模型、Moho面起伏，为例对比壳内低速区与Moho面起伏的关系，可以将这些结果用Paraview进行三维可视化。由于数据格式的不同，我们需要借助GMT和PyVista辅助绘制。</p>
+
+<h1 id="准备工作">准备工作</h1>
+
+<p>原材料包括三维速度模型、Moho面起伏数据以及地形数据、断层数据等，我们需要将这些不同格式的文件转换成Paraview识别的<code>.vtk</code>文件，这里主要用到的工具是<a href="https://www.pyvista.org/">PyVista</a>，这是一个Python与<a href="https://vtk.org/">Visualization Toolkit (VTK)</a>的接口，通过这个模块我们可以将Python常用的<code>np.ndarray</code>数据转换成VTK文件格式。</p>
+
+<h2 id="定义一个类">定义一个类</h2>
+
+<p>我们先定义一个Python类，初始化一些每种数据共用的参数，如经纬度范围，深度范围等。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">griddata</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">ndimage</span>
+<span class="kn">import</span> <span class="nn">scipy.signal</span> <span class="kn">as</span> <span class="nn">signal</span>
+<span class="kn">import</span> <span class="nn">pyvista</span> <span class="kn">as</span> <span class="nn">pv</span>
+<span class="kn">from</span> <span class="nn">netCDF4</span> <span class="kn">import</span> <span class="n">Dataset</span>
+
+<span class="k">class</span> <span class="nc">XYZ2VTK</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lat1</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">lon1</span><span class="o">=</span><span class="mi">99</span><span class="p">,</span> <span class="n">lat2</span><span class="o">=</span><span class="mi">33</span><span class="p">,</span> <span class="n">lon2</span><span class="o">=</span><span class="mi">106</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">maxdep</span><span class="o">=</span><span class="mi">80</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lat1</span> <span class="o">=</span> <span class="n">lat1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lat2</span> <span class="o">=</span> <span class="n">lat2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lon1</span> <span class="o">=</span> <span class="n">lon1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lon2</span> <span class="o">=</span> <span class="n">lon2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lons</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">lon1</span><span class="p">,</span> <span class="n">lon2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">real_dep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">maxdep</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">real_dep</span> <span class="o">/</span> <span class="mi">10</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vs_file</span> <span class="o">=</span> <span class="s1">&#39;ETvs.xyz&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">moho_file</span> <span class="o">=</span> <span class="s1">&#39;../ccp3d/good_moho_ET2020_repick.dat&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">topo_file</span> <span class="o">=</span> <span class="s1">&#39;../figures/topo_resample.grd&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>对于深度范围需要做一些说明，我们需要的深度范围是0-80 km，但水平范围分别是7（<code>lon2-lon1</code>）和8（<code>lat2-lat1</code>）度，两者单位不匹配，但是如果将经纬度换算成大地坐标，深度范围又将远小于水平范围导致图像纵向很扁，难以达到我们想要的效果，这时有两种选择
+- 第一种是将经纬度换算成大地坐标，然后将深度范围人为放大，这时水平方向单位是km。
+- 第二种是直接将深度范围缩小10倍，这样水平范围是7和8，深度范围也是8，比例较合适。</p>
+
+<p>这里经纬度更符合我们的习惯，因此选择类第二种方法。<code>self.real_dep</code>是实际的深度范围，<code>self.dep</code>是缩小10倍后绘图用的深度范围。</p>
+
+<h2 id="三维速度模型转vtk网格">三维速度模型转VTK网格</h2>
+
+<p>原始的三维速度模型是<code>.xyz</code>数据表文件，包括4列：经度、纬度、深度和速度大小，我们现将其转换为VTK文件，共分为以下几步：</p>
+
+<h3 id="将数据表文件网格化为numpy矩阵">将数据表文件网格化为Numpy矩阵</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python">    <span class="k">def</span> <span class="nf">read_xyz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">dep</span><span class="p">,</span> <span class="n">vs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vs_file</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="n">unpack</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">dep</span> <span class="o">/=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">new_lon</span><span class="p">,</span> <span class="n">new_lat</span><span class="p">,</span> <span class="n">new_dep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lons</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lats</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">real_dep</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s1">&#39;ij&#39;</span><span class="p">)</span>
+        <span class="n">grid_data</span> <span class="o">=</span> <span class="n">griddata</span><span class="p">((</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">dep</span><span class="p">),</span> <span class="n">vs</span><span class="p">,</span> <span class="p">(</span><span class="n">new_lon</span><span class="p">,</span> <span class="n">new_lat</span><span class="p">,</span> <span class="n">new_dep</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">grid_data</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li><code>lat</code>, <code>lon</code>, <code>dep</code>, <code>vs</code>是数据文件每列的内容。</li>
+<li><code>grid_data</code>是网格后的的三维矩阵。</li>
+</ul>
+
+<h3 id="生成三维速度模型的vtk文件">生成三维速度模型的VTK文件</h3>
+
+<p>这一步将速度模型的三维矩阵转换为VTK文件并保存。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python">    <span class="k">def</span> <span class="nf">create_vtk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">grid</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">UniformGrid</span><span class="p">()</span>
+        <span class="n">grid_vs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_xyz</span><span class="p">()</span>
+        <span class="n">grid</span><span class="o">.</span><span class="n">dimensions</span> <span class="o">=</span> <span class="n">grid_vs</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">grid</span><span class="o">.</span><span class="n">origin</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lon1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lat1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dep</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">grid</span><span class="o">.</span><span class="n">spacing</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+        <span class="n">grid</span><span class="o">.</span><span class="n">point_arrays</span><span class="p">[</span><span class="s2">&#34;values&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">grid_vs</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="s2">&#34;F&#34;</span><span class="p">)</span>
+        <span class="n">grid</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;ETvs.vtk&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li>首先通过<code>pv.UniformGrid()</code>定义一个用于可视化的三维网格。</li>
+<li><code>grid_vs.shape</code>、<code>grid.origin</code>和<code>grid.spacing</code>分别定义了网格的个数，起始点坐标和网格间隔。</li>
+<li>最后将速度值赋给<code>grid.point_arrays[&quot;values&quot;]</code>并保存至文件<code>ETvs.vtk</code>。</li>
+</ul>
+
+<h2 id="将moho面起伏转换为vtk多边形">将Moho面起伏转换为VTK多边形</h2>
+
+<p>Moho文件也是<code>.xyz</code>文件，包括经度、纬度和深度三列，Paraview中可以通过多边形数据展示界面起伏。</p>
+
+<h3 id="将moho面起伏网格化为二维矩阵">将Moho面起伏网格化为二维矩阵</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python">    <span class="k">def</span> <span class="nf">read_moho</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">moho</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">moho_file</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="n">unpack</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">moho</span><span class="p">)))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">lat</span> <span class="o">=</span> <span class="n">lat</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">lon</span> <span class="o">=</span> <span class="n">lon</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">moho</span> <span class="o">=</span> <span class="o">-</span><span class="n">moho</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">new_lon</span><span class="p">,</span> <span class="n">new_lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lons</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lats</span><span class="p">)</span>
+        <span class="n">grid_data</span> <span class="o">=</span> <span class="n">griddata</span><span class="p">((</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">),</span> <span class="n">moho</span><span class="p">,</span> <span class="p">(</span><span class="n">new_lon</span><span class="p">,</span> <span class="n">new_lat</span><span class="p">))</span>
+        <span class="n">grid_data</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">gaussian_filter</span><span class="p">(</span><span class="n">grid_data</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new_lon</span><span class="p">,</span> <span class="n">new_lat</span><span class="p">,</span> <span class="n">grid_data</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>与速度模型类似，先从<code>.xyz</code>文件中读取Moho面深度数据，再将其网格话为二维矩阵。为了更好地可视化，我们将数据进行了高斯滤波，高斯系数为2。</p>
+
+<h3 id="将moho面二维矩阵转换为多边形网格">将Moho面二维矩阵转换为多边形网格</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python">    <span class="k">def</span> <span class="nf">create_moho_vtk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">moho</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_moho</span><span class="p">()</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ix</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lons</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">jy</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lats</span><span class="p">):</span>
+                <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">points</span><span class="p">,</span> <span class="p">[</span><span class="n">ix</span><span class="p">,</span> <span class="n">jy</span><span class="p">,</span> <span class="n">moho</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]]))</span>
+        <span class="n">grid</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+        <span class="n">grid</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="n">surf</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">delaunay_2d</span><span class="p">()</span>
+        <span class="n">surf</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;moho_real.vtk&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>首先将二维矩阵的Moho面起伏转写为三列数据点格式，分别为经度、纬度和Moho面深度。然后用<code>pv.PolyData(points)</code>定义一个包含这些数据点的多边形实例，再将数值定义为Moho面深度，这时多边形数据只在网格点中有数据，而网格点间的多边形内没有数据，这时我们用PyVista自带的三角剖分算法<code>delaunay_2d</code>，对多边形进行数据填充，最后保存该VTK文件。</p>
+
+<h2 id="制作地形起伏数据">制作地形起伏数据</h2>
+
+<h3 id="通过gmt生成地形起伏数据">通过GMT生成地形起伏数据</h3>
+
+<ol>
+<li>首先用GMT中<code>grdcut</code>截取研究区域的地形起伏。</li>
+<li>由于通常地形数据经度较高，反映大范围的地形变化时可能不直观，因此我们用<code>grdsample</code>命令对生成的网格文件进行减采样。最后保存为<code>netCDF</code>格式文件。</li>
+</ol>
+
+<h3 id="将地形数据转换为多边形网格">将地形数据转换为多边形网格</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python">    <span class="k">def</span> <span class="nf">create_topo_vtk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">topo_file</span><span class="p">)</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">][:]</span><span class="o">.</span><span class="n">data</span> <span class="o">/</span> <span class="mi">10</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ix</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lons</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">jy</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lats</span><span class="p">):</span>
+                <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">points</span><span class="p">,</span> <span class="p">[</span><span class="n">ix</span><span class="p">,</span> <span class="n">jy</span><span class="p">,</span> <span class="n">z</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]]))</span>
+        <span class="n">grid</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+        <span class="n">grid</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="n">surf</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">delaunay_2d</span><span class="p">()</span>
+        <span class="n">surf</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;topo.vtk&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>首先用<code>netcdf4</code>模块读取减采样后的地形数据文件，然后同Moho面起伏，将其转换为多边形网格并保存。</p>
+
+<p>将以上三种数据的VTK文件导入Paraview，即可绘制他们之间的关系。</p>
+
+<h2 id="todo">TODO</h2>
+
+<ul>
+<li>用Pavaview取速度等值面</li>
+<li>用Pavaview将断层投影至地形</li>
+<li>用Pavaview绘制真实深度刻度</li>
+</ul>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Mijian Xu</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-03-07
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/bqmail2/">
+            <span class="next-text nav-default">BQMail2.0: 向IRIS DMC发送数据请求的Python模块（2. 发送申请）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'pDTTIwKxG0jJoQFkUaQ1Jeqo-gzGzoHsz',
+        appKey: 'LjDsQoPgO74ji2IoczXTiRM5',
+        notify: 'true',
+        verify: 'true',
+        avatar:'mm',
+        placeholder: '说点什么吧...',
+        visitor: 'false'
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:gomijianxu@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/xumi1993" class="iconfont icon-github" title="github"></a>
+      <a href="https://git.nju.edu.cn/xumi1993" class="iconfont icon-gitlab" title="gitlab"></a>
+  <a href="https://blog.xumijian.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      
+    
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Mijian Xu</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

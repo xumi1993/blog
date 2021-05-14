@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.xumijian.me/</loc>
+    <lastmod>2021-03-07T05:12:28+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/post/</loc>
+    <lastmod>2021-03-07T05:12:28+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/post/paraview-model/</loc>
+    <lastmod>2021-03-07T05:12:28+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.xumijian.me/tags/bqmail/</loc>
     <lastmod>2020-08-26T11:31:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -17,20 +38,6 @@
   
   <url>
     <loc>https://blog.xumijian.me/categories/</loc>
-    <lastmod>2020-08-26T11:31:38+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/</loc>
-    <lastmod>2020-08-26T11:31:38+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/post/</loc>
     <lastmod>2020-08-26T11:31:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -177,14 +184,14 @@
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/categories/linux/</loc>
+    <loc>https://blog.xumijian.me/tags/linux/</loc>
     <lastmod>2019-06-18T12:30:12+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/tags/linux/</loc>
+    <loc>https://blog.xumijian.me/categories/linux/</loc>
     <lastmod>2019-06-18T12:30:12+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
