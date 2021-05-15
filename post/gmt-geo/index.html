@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>用GMT绘制中国大陆及临区地质图 - Note to Tech</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Mijian Xu" /><meta name="description" content="用GMT绘制绘制地质图一直是一个难题，此前Po-Chin Tseng的博客详细介绍了制作和绘制地质图的过程，并成功绘制了东南亚的地质图。本文将介绍用相似的方法绘制中国大陆及临区的地质图。
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.58.3 with theme even" />
+
+
+<link rel="canonical" href="https://blog.xumijian.me/post/gmt-geo/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.80fdd22f.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="用GMT绘制中国大陆及临区地质图" />
+<meta property="og:description" content="
+用GMT绘制绘制地质图一直是一个难题，此前Po-Chin Tseng的博客详细介绍了制作和绘制地质图的过程，并成功绘制了东南亚的地质图。本文将介绍用相似的方法绘制中国大陆及临区的地质图。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.xumijian.me/post/gmt-geo/" />
+<meta property="article:published_time" content="2021-05-14T16:34:22+08:00" />
+<meta property="article:modified_time" content="2021-05-14T16:34:22+08:00" />
+<meta itemprop="name" content="用GMT绘制中国大陆及临区地质图">
+<meta itemprop="description" content="
+用GMT绘制绘制地质图一直是一个难题，此前Po-Chin Tseng的博客详细介绍了制作和绘制地质图的过程，并成功绘制了东南亚的地质图。本文将介绍用相似的方法绘制中国大陆及临区的地质图。">
+
+
+<meta itemprop="datePublished" content="2021-05-14T16:34:22&#43;08:00" />
+<meta itemprop="dateModified" content="2021-05-14T16:34:22&#43;08:00" />
+<meta itemprop="wordCount" content="619">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="用GMT绘制中国大陆及临区地质图"/>
+<meta name="twitter:description" content="
+用GMT绘制绘制地质图一直是一个难题，此前Po-Chin Tseng的博客详细介绍了制作和绘制地质图的过程，并成功绘制了东南亚的地质图。本文将介绍用相似的方法绘制中国大陆及临区的地质图。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Note to Tech</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="https://home.xumijian.me">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Note to Tech</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://home.xumijian.me">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">用GMT绘制中国大陆及临区地质图</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-05-14 </span>
+        
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#数据来源">数据来源</a>
+<ul>
+<li><a href="#下载链接">下载链接：</a></li>
+</ul></li>
+<li><a href="#gmt脚本">GMT脚本</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><img src="/img/gmt-map/geo3al.png" alt="" />
+用GMT绘制绘制地质图一直是一个难题，此前<a href="https://jimmytseng79.github.io/GMT5_tutorials/geology_map.html">Po-Chin Tseng的博客</a>详细介绍了制作和绘制地质图的过程，并成功绘制了东南亚的地质图。本文将介绍用相似的方法绘制中国大陆及临区的地质图。</p>
+
+<h2 id="数据来源">数据来源</h2>
+
+<p>地质图的数据来自美国USGS（<a href="https://catalog.data.gov/dataset/generalized-geology-of-the-far-east-geo3al">Generalized Geology of the Far East (geo3al)</a>）其分辨率为1:4,000,000。</p>
+
+<p>本文已采用与<a href="https://jimmytseng79.github.io/GMT5_tutorials/geology_map.html">Po-Chin Tseng的博客</a>相同的方法将原始的<code>.shp</code>格式文件转换成了GMT可用的<code>.xyz</code>格式。另外可以从<a href="http://soliton.vm.bytemark.co.uk/pub/cpt-city/heine/index.html">cpt-city</a>不同的色标为地质图填色。</p>
+
+<h3 id="下载链接">下载链接：</h3>
+
+<ul>
+<li><a href="/source/geo3al.xy2">地质年代文件</a></li>
+<li><a href="/source/geoage.cpt">地质年代色标文件（GTS2012）</a></li>
+</ul>
+
+<h2 id="gmt脚本">GMT脚本</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash
+</span><span class="cp"></span><span class="nv">ps</span><span class="o">=</span>geo3al.ps
+<span class="nv">data</span><span class="o">=</span>geo3al.xy2
+<span class="c1"># cpt=GTS2012_epochs.cpt</span>
+<span class="nv">cpt</span><span class="o">=</span>geoage.cpt
+<span class="nv">rocksize</span><span class="o">=</span><span class="m">400</span>
+
+gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY <span class="m">10</span>
+gmt <span class="nb">set</span> MAP_FRAME_WIDTH <span class="m">0</span>.08
+gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY <span class="m">0</span>.08
+
+gmt pscoast -R70/150/15/55 -JM8i -Baf -Dl -G255 -Wthinnest -EAS -K -BWSne &gt; <span class="nv">$ps</span>
+gmt psxy <span class="nv">$data</span> -R -J -C<span class="nv">$cpt</span> -L -K -O &gt;&gt; <span class="nv">$ps</span>
+
+gmt gmtconvert <span class="nv">$data</span> -S<span class="s2">&#34;|v|&#34;</span> &gt; tmp
+awk <span class="s1">&#39;/^[0-9]/{print $1,&#34;p&#39;</span><span class="nv">$rocksize</span><span class="s1">&#39;/28:F100B&#34;$2,$3,&#34;p&#39;</span><span class="nv">$rocksize</span><span class="s1">&#39;/28:F100B&#34;$4}&#39;</span> <span class="nv">$cpt</span> &gt; tmp.cpt
+gmt psxy tmp -R -J -Ctmp.cpt -L -K -O &gt;&gt; <span class="nv">$ps</span>
+
+gmt gmtconvert <span class="nv">$data</span> -S<span class="s2">&#34;|i|&#34;</span> &gt; tmp
+awk <span class="s1">&#39;/^[0-9]/{print $1,&#34;p&#39;</span><span class="nv">$rocksize</span><span class="s1">&#39;/29:F100B&#34;$2,$3,&#34;p&#39;</span><span class="nv">$rocksize</span><span class="s1">&#39;/29:F100B&#34;$4}&#39;</span> <span class="nv">$cpt</span> &gt; tmp.cpt
+gmt psxy tmp -R -J -Ctmp.cpt -L -K -O &gt;&gt; <span class="nv">$ps</span>
+
+gmt gmtconvert <span class="nv">$data</span> -S<span class="s2">&#34;|w|&#34;</span> &gt; tmp
+awk <span class="s1">&#39;/^[0-9]/{print $1,&#34;p&#39;</span><span class="nv">$rocksize</span><span class="s1">&#39;/44:F100B&#34;$2,$3,&#34;p&#39;</span><span class="nv">$rocksize</span><span class="s1">&#39;/44:F100B&#34;$4}&#39;</span> <span class="nv">$cpt</span> &gt; tmp.cpt
+gmt psxy tmp -R -J -Ctmp.cpt -L -K -O &gt;&gt; <span class="nv">$ps</span>
+
+gmt pscoast -R -J -E<span class="o">=</span>AS -O -K -SCADETBLUE1 &gt;&gt; <span class="nv">$ps</span>
+
+<span class="nv">lengsize</span><span class="o">=</span><span class="m">0</span>.15i
+gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 7p
+gmt pslegend -R -J -O -DJBR+w200p/57p+jBR+l1.3 -F+p0.7p+g255 -C3p/3p -K &gt;&gt; <span class="nv">$ps</span><span class="s">&lt;&lt;eof
+</span><span class="s">H 10 3 Age of rock units
+</span><span class="s">G 1p
+</span><span class="s">N 3
+</span><span class="s">S 0.3c r $lengsize 229/204/132 0.3p 0.7c Cambrian
+</span><span class="s">S 0.3c r $lengsize 102/192/146 0.3p 0.7c Ordovician
+</span><span class="s">S 0.3c r $lengsize 179/225/194 0.3p 0.7c Silurian
+</span><span class="s">S 0.3c r $lengsize 241/213/118 0.3p 0.7c Devonian
+</span><span class="s">S 0.3c r $lengsize 153/194/181 0.3p 0.7c Carboniferous
+</span><span class="s">S 0.3c r $lengsize 251/141/118 0.3p 0.7c Permian
+</span><span class="s">S 0.3c r $lengsize 227/185/219 0.3p 0.7c Triassic
+</span><span class="s">S 0.3c r $lengsize 166/221/224 0.3p 0.7c Jurassic
+</span><span class="s">S 0.3c r $lengsize 191/227/93 0.3p 0.7c Cretaceous
+</span><span class="s">S 0.3c r $lengsize 253/192/145 0.3p 0.7c Paleogene
+</span><span class="s">S 0.3c r $lengsize 255/255/115 0.3p 0.7c Neogene
+</span><span class="s">eof</span>
+gmt pslegend -R -J -O -DJBR+w75p/57p+jBR+l1.3+o200p/0p -F+p0.7p+g255 -C3p/3p -K &gt;&gt; <span class="nv">$ps</span><span class="s">&lt;&lt;eof
+</span><span class="s">H 10 3 Rock type
+</span><span class="s">G 5p
+</span><span class="s">S 0.3c r 0.2i p400/28:B255 0.3p 0.7c Volcanic rocks
+</span><span class="s">G 5p
+</span><span class="s">S 0.3c r 0.2i p400/29:B255 0.3p 0.7c Intrusive rocks
+</span><span class="s">eof</span>
+
+gmt psxy -R -J -O -T &gt;&gt; <span class="nv">$ps</span>
+gmt psconvert -A -P -TG <span class="nv">$ps</span>
+rm gmt* <span class="nv">$ps</span> tmp tmp.cpt </code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Mijian Xu</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-05-14
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/paraview-model/">
+            <span class="next-text nav-default">用GMT、PyVista和Paraview对速度模型、地形起伏、Moho面起伏进行三维可视化</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'pDTTIwKxG0jJoQFkUaQ1Jeqo-gzGzoHsz',
+        appKey: 'LjDsQoPgO74ji2IoczXTiRM5',
+        notify: 'true',
+        verify: 'true',
+        avatar:'mm',
+        placeholder: '说点什么吧...',
+        visitor: 'false'
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:gomijianxu@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/xumi1993" class="iconfont icon-github" title="github"></a>
+      <a href="https://git.nju.edu.cn/xumi1993" class="iconfont icon-gitlab" title="gitlab"></a>
+  <a href="https://blog.xumijian.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      
+    
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Mijian Xu</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
