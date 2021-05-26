@@ -53,7 +53,7 @@
 
 <meta itemprop="datePublished" content="2021-05-14T16:34:22&#43;08:00" />
 <meta itemprop="dateModified" content="2021-05-14T16:34:22&#43;08:00" />
-<meta itemprop="wordCount" content="619">
+<meta itemprop="wordCount" content="726">
 
 
 
@@ -162,7 +162,7 @@
 
 <p>地质图的数据来自美国USGS（<a href="https://catalog.data.gov/dataset/generalized-geology-of-the-far-east-geo3al">Generalized Geology of the Far East (geo3al)</a>）其分辨率为1:4,000,000。</p>
 
-<p>本文已采用与<a href="https://jimmytseng79.github.io/GMT5_tutorials/geology_map.html">Po-Chin Tseng的博客</a>相同的方法将原始的<code>.shp</code>格式文件转换成了GMT可用的<code>.xyz</code>格式。另外可以从<a href="http://soliton.vm.bytemark.co.uk/pub/cpt-city/heine/index.html">cpt-city</a>不同的色标为地质图填色。</p>
+<p>本文已采用与<a href="https://jimmytseng79.github.io/GMT5_tutorials/geology_map.html">Po-Chin Tseng的博客</a>相同的方法将原始的<code>.shp</code>格式文件转换成了GMT可用的<code>.xyz</code>格式。另外可以从<a href="http://soliton.vm.bytemark.co.uk/pub/cpt-city/heine/index.html">cpt-city</a>下载不同的色标为地质图填色。</p>
 
 <h3 id="下载链接">下载链接：</h3>
 
@@ -170,6 +170,8 @@
 <li><a href="/source/geo3al.xy2">地质年代文件</a></li>
 <li><a href="/source/geoage.cpt">地质年代色标文件（GTS2012）</a></li>
 </ul>
+
+<p>本文提供的地质年代色标文件最小单位是“纪”，因此在绘制小区域时可能经度较低，有兴趣的读者可以尝试在最小精度为“世”的色标(<a href="http://soliton.vm.bytemark.co.uk/pub/cpt-city/heine/GTS2012_epochs.cpt">GTS2012_epochs</a>)中进行修改，来绘制更精细的图像，但这时图注则需要自行修改。</p>
 
 <h2 id="gmt脚本">GMT脚本</h2>
 <div class="highlight"><div class="chroma">
