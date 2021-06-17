@@ -53,7 +53,7 @@
 
 <meta itemprop="datePublished" content="2021-05-14T16:34:22&#43;08:00" />
 <meta itemprop="dateModified" content="2021-05-14T16:34:22&#43;08:00" />
-<meta itemprop="wordCount" content="1061">
+<meta itemprop="wordCount" content="1057">
 
 
 
@@ -182,9 +182,12 @@
 <pre class="chroma">ogr2ogr -f GMT geo2al.gmt geo3al.shp -t_srs EPSG:4326</pre></td></tr></table>
 </div>
 </div>
-<p>这一步需要注意一下几点
-- 其中<code>.dbf</code>, <code>.prj</code> 和 <code>.shx</code>文件路径需要与该命令的运行路径为同一路径。
-- 确保在安装GMT后所添加的环境变量中包含<code>PROJ_LIB</code>这个变量，请参考<a href="https://docs.gmt-china.org/latest/install/macOS/#gmt">GMT安装说明</a></p>
+<p>这一步需要注意一下几点</p>
+
+<ul>
+<li>其中<code>.dbf</code>, <code>.prj</code> 和 <code>.shx</code>文件路径需要与该命令的运行路径为同一路径。</li>
+<li>确保在安装GMT后所添加的环境变量中包含<code>PROJ_LIB</code>这个变量，请参考<a href="https://docs.gmt-china.org/latest/install/macOS/#gmt">GMT安装说明</a></li>
+</ul>
 
 <h3 id="修改文件头段">修改文件头段</h3>
 
@@ -250,9 +253,12 @@ J     52/178/201 ; Jurassic</pre></td></tr></table>
 </div>
 <h2 id="下载链接">下载链接：</h2>
 
-<p>这里我们提供了已经完成上述步骤的地质年代文件和地质年代色标文件，可以在GMT中直接使用。
-- <a href="/source/geo3al.xy2">地质年代文件</a>
-- <a href="/source/geoage.cpt">地质年代色标文件（GTS2012_periods）</a></p>
+<p>这里我们提供了已经完成上述步骤的地质年代文件和地质年代色标文件，可以在GMT中直接使用。</p>
+
+<ul>
+<li><a href="/source/geo3al.xy2">地质年代文件</a></li>
+<li><a href="/source/geoage.cpt">地质年代色标文件（GTS2012_periods）</a></li>
+</ul>
 
 <h2 id="gmt脚本">GMT脚本</h2>
 <div class="highlight"><div class="chroma">
