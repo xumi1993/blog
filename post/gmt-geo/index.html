@@ -53,7 +53,7 @@
 
 <meta itemprop="datePublished" content="2021-05-14T16:34:22&#43;08:00" />
 <meta itemprop="dateModified" content="2021-05-14T16:34:22&#43;08:00" />
-<meta itemprop="wordCount" content="734">
+<meta itemprop="wordCount" content="1061">
 
 
 
@@ -144,11 +144,15 @@
 <ul>
 <li>
 <ul>
-<li><a href="#数据来源">数据来源</a>
+<li><a href="#数据来源与格式转换">数据来源与格式转换</a>
 <ul>
-<li><a href="#下载链接">下载链接：</a></li>
+<li><a href="#原始数据下载">原始数据下载</a></li>
+<li><a href="#格式转换">格式转换</a></li>
+<li><a href="#修改文件头段">修改文件头段</a></li>
 </ul></li>
+<li><a href="#下载链接">下载链接：</a></li>
 <li><a href="#gmt脚本">GMT脚本</a></li>
+<li><a href="#特别鸣谢">特别鸣谢</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -158,20 +162,97 @@
       <p><img src="/img/gmt-map/geo3al.png" alt="" />
 用GMT绘制绘制地质图一直是一个难题，此前<a href="https://jimmytseng79.github.io/GMT5_tutorials/geology_map.html">Po-Chin Tseng的博客</a>详细介绍了制作和绘制地质图的过程，并成功绘制了东南亚的地质图。本文将介绍用相似的方法绘制中国大陆及临区的地质图。</p>
 
-<h2 id="数据来源">数据来源</h2>
+<h2 id="数据来源与格式转换">数据来源与格式转换</h2>
 
 <p>地质图的数据来自美国USGS（<a href="https://catalog.data.gov/dataset/generalized-geology-of-the-far-east-geo3al">Generalized Geology of the Far East (geo3al)</a>）其分辨率为1:4,000,000。</p>
 
-<p>本文已采用与<a href="https://jimmytseng79.github.io/GMT5_tutorials/geology_map.html">Po-Chin Tseng的博客</a>相同的方法将原始的<code>.shp</code>格式文件转换成了GMT可用的<code>.xyz</code>格式。另外可以从<a href="http://soliton.vm.bytemark.co.uk/pub/cpt-city/heine/index.html">cpt-city</a>下载不同的色标为地质图填色。</p>
+<h3 id="原始数据下载">原始数据下载</h3>
 
-<h3 id="下载链接">下载链接：</h3>
+<p>我们所需要的文件可以从<a href="https://certmapper.cr.usgs.gov/data/we/ofr97470f/spatial/shape/geo3al.zip">这里</a>下载，
+解压该文件后，获得<code>.shp</code>, <code>.dbf</code>, <code>.prj</code> 和 <code>.shx</code>文件。</p>
 
-<ul>
-<li><a href="/source/geo3al.xy2">地质年代文件</a></li>
-<li><a href="/source/geoage.cpt">地质年代色标文件（GTS2012_periods）</a></li>
-</ul>
+<h3 id="格式转换">格式转换</h3>
 
-<p>本文提供的地质年代色标文件最小单位是“纪”，因此在绘制小区域时可能精度较低，有兴趣的读者可以尝试在最小精度为“世”的色标(<a href="http://soliton.vm.bytemark.co.uk/pub/cpt-city/heine/GTS2012_epochs.cpt">GTS2012_epochs</a>)中进行修改，来绘制更精细的图像，但这时图注则需要自行修改。</p>
+<p>GMT提供了命令<a href="https://docs.gmt-china.org/latest/table/ogr2ogr/"><code>ogr2ogr</code></a>来进行地理矢量数据格式之间的转换，也包括这里的<code>.shp</code>格式。解压后的坐标不是我们希望的经纬度坐标，而是大地坐标，这里需要使用<code>ogr2ogr</code>中的<code>-t_srs</code>参数进行坐标转换。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">ogr2ogr -f GMT geo2al.gmt geo3al.shp -t_srs EPSG:4326</pre></td></tr></table>
+</div>
+</div>
+<p>这一步需要注意一下几点
+- 其中<code>.dbf</code>, <code>.prj</code> 和 <code>.shx</code>文件路径需要与该命令的运行路径为同一路径。
+- 确保在安装GMT后所添加的环境变量中包含<code>PROJ_LIB</code>这个变量，请参考<a href="https://docs.gmt-china.org/latest/install/macOS/#gmt">GMT安装说明</a></p>
+
+<h3 id="修改文件头段">修改文件头段</h3>
+
+<p>格式转换后<code>geo2al.gmt</code>文件的头段为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma"># @D21315149832.578|1546682.830|v|J|J
+# @P
+123.121278084975 53.3084236387908
+123.230414901407 53.3161680969698
+123.288482121838 53.3166334127133
+123.328886980316 53.3062394894715
+......</pre></td></tr></table>
+</div>
+</div>
+<p>我们所需要头段的是岩性<code>v</code>（火山岩）和年代<code>J</code>（侏罗系），这里我们用<code>sed</code>和正则表达式修改文件头段</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sed <span class="s1">&#39;s/#[[:space:]]@D[[:digit:]]*.[[:digit:]]*|[[:digit:]]*.[[:digit:]]*|\(.*\)|\(.*\)|\(.*\)/&gt; -Z\2 |\1|\2/g; /^#/d&#39;</span> geo3al.gmt &gt; geo3al.xy2</code></pre></td></tr></table>
+</div>
+</div>
+<p>这时<code>geo3al.xy2</code>文件头段被修改为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">&gt; -ZJ |v|J
+123.121278084975 53.3084236387908
+123.230414901407 53.3161680969698
+123.288482121838 53.3166334127133
+123.328886980316 53.3062394894715
+....</pre></td></tr></table>
+</div>
+</div>
+<p>这里通过<code>-Z</code>指定年代，配合CPT文件和<code>plot -L</code>可以为闭合图形填充颜色，来达到绘制地质图的目的。其中CPT文件格式为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">JK   179/227/238 ; Jurassic-Cretaceous
+J     52/178/201 ; Jurassic</pre></td></tr></table>
+</div>
+</div>
+<h2 id="下载链接">下载链接：</h2>
+
+<p>这里我们提供了已经完成上述步骤的地质年代文件和地质年代色标文件，可以在GMT中直接使用。
+- <a href="/source/geo3al.xy2">地质年代文件</a>
+- <a href="/source/geoage.cpt">地质年代色标文件（GTS2012_periods）</a></p>
 
 <h2 id="gmt脚本">GMT脚本</h2>
 <div class="highlight"><div class="chroma">
@@ -233,67 +314,82 @@
 </span><span class="lnt">55
 </span><span class="lnt">56
 </span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/bash
-</span><span class="cp"></span><span class="nv">ps</span><span class="o">=</span>geo3al.ps
-<span class="nv">data</span><span class="o">=</span>geo3al.xy2
-<span class="c1"># cpt=GTS2012_epochs.cpt</span>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">data</span><span class="o">=</span>geo3al.xy2
 <span class="nv">cpt</span><span class="o">=</span>geoage.cpt
-<span class="nv">rocksize</span><span class="o">=</span><span class="m">400</span>
-
-gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY <span class="m">10</span>
-gmt <span class="nb">set</span> MAP_FRAME_WIDTH <span class="m">0</span>.08
-gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY <span class="m">0</span>.08
-
-gmt pscoast -R70/150/15/55 -JM8i -Baf -Dl -G255 -Wthinnest -EAS -K -BWSne &gt; <span class="nv">$ps</span>
-gmt psxy <span class="nv">$data</span> -R -J -C<span class="nv">$cpt</span> -L -K -O &gt;&gt; <span class="nv">$ps</span>
-
-gmt gmtconvert <span class="nv">$data</span> -S<span class="s2">&#34;|v|&#34;</span> &gt; tmp
-awk <span class="s1">&#39;/^[0-9]/{print $1,&#34;p&#39;</span><span class="nv">$rocksize</span><span class="s1">&#39;/28:F100B&#34;$2,$3,&#34;p&#39;</span><span class="nv">$rocksize</span><span class="s1">&#39;/28:F100B&#34;$4}&#39;</span> <span class="nv">$cpt</span> &gt; tmp.cpt
-gmt psxy tmp -R -J -Ctmp.cpt -L -K -O &gt;&gt; <span class="nv">$ps</span>
-
-gmt gmtconvert <span class="nv">$data</span> -S<span class="s2">&#34;|i|&#34;</span> &gt; tmp
-awk <span class="s1">&#39;/^[0-9]/{print $1,&#34;p&#39;</span><span class="nv">$rocksize</span><span class="s1">&#39;/29:F100B&#34;$2,$3,&#34;p&#39;</span><span class="nv">$rocksize</span><span class="s1">&#39;/29:F100B&#34;$4}&#39;</span> <span class="nv">$cpt</span> &gt; tmp.cpt
-gmt psxy tmp -R -J -Ctmp.cpt -L -K -O &gt;&gt; <span class="nv">$ps</span>
-
-gmt gmtconvert <span class="nv">$data</span> -S<span class="s2">&#34;|w|&#34;</span> &gt; tmp
-awk <span class="s1">&#39;/^[0-9]/{print $1,&#34;p&#39;</span><span class="nv">$rocksize</span><span class="s1">&#39;/44:F100B&#34;$2,$3,&#34;p&#39;</span><span class="nv">$rocksize</span><span class="s1">&#39;/44:F100B&#34;$4}&#39;</span> <span class="nv">$cpt</span> &gt; tmp.cpt
-gmt psxy tmp -R -J -Ctmp.cpt -L -K -O &gt;&gt; <span class="nv">$ps</span>
-
-gmt pscoast -R -J -E<span class="o">=</span>AS -O -K -SCADETBLUE1 &gt;&gt; <span class="nv">$ps</span>
-
+<span class="nv">rocksize</span><span class="o">=</span><span class="m">500</span>
 <span class="nv">lengsize</span><span class="o">=</span><span class="m">0</span>.15i
-gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 7p
-gmt pslegend -R -J -O -DJBR+w200p/57p+jBR+l1.3 -F+p0.7p+g255 -C3p/3p -K &gt;&gt; <span class="nv">$ps</span><span class="s">&lt;&lt;eof
+
+<span class="k">function</span> shp2xyz<span class="o">(){</span>
+    ogr2ogr -f GMT geo2al.gmt geo3al.shp -t_srs EPSG:4326
+    sed <span class="s1">&#39;s/#[[:space:]]@D[[:digit:]]*.[[:digit:]]*|[[:digit:]]*.[[:digit:]]*|\(.*\)|\(.*\)|\(.*\)/&gt; -Z\2 |\1|\2/g; /^#/d&#39;</span> geo3al.gmt &gt; <span class="nv">$data</span>
+<span class="o">}</span>
+
+<span class="k">function</span> plot_age_legend<span class="o">(){</span>
+    cat &gt; tmp <span class="s">&lt;&lt; EOF
 </span><span class="s">H 10 3 Age of rock units
 </span><span class="s">G 1p
 </span><span class="s">N 3
-</span><span class="s">S 0.3c r $lengsize 229/204/132 0.3p 0.7c Cambrian
-</span><span class="s">S 0.3c r $lengsize 102/192/146 0.3p 0.7c Ordovician
-</span><span class="s">S 0.3c r $lengsize 179/225/194 0.3p 0.7c Silurian
-</span><span class="s">S 0.3c r $lengsize 241/213/118 0.3p 0.7c Devonian
-</span><span class="s">S 0.3c r $lengsize 153/194/181 0.3p 0.7c Carboniferous
-</span><span class="s">S 0.3c r $lengsize 251/141/118 0.3p 0.7c Permian
-</span><span class="s">S 0.3c r $lengsize 227/185/219 0.3p 0.7c Triassic
-</span><span class="s">S 0.3c r $lengsize 166/221/224 0.3p 0.7c Jurassic
-</span><span class="s">S 0.3c r $lengsize 191/227/93 0.3p 0.7c Cretaceous
-</span><span class="s">S 0.3c r $lengsize 253/192/145 0.3p 0.7c Paleogene
-</span><span class="s">S 0.3c r $lengsize 255/255/115 0.3p 0.7c Neogene
-</span><span class="s">eof</span>
-gmt pslegend -R -J -O -DJBR+w75p/57p+jBR+l1.3+o200p/0p -F+p0.7p+g255 -C3p/3p -K &gt;&gt; <span class="nv">$ps</span><span class="s">&lt;&lt;eof
-</span><span class="s">H 10 3 Rock type
-</span><span class="s">G 5p
-</span><span class="s">S 0.3c r 0.2i p400/28:B255 0.3p 0.7c Volcanic rocks
-</span><span class="s">G 5p
-</span><span class="s">S 0.3c r 0.2i p400/29:B255 0.3p 0.7c Intrusive rocks
-</span><span class="s">eof</span>
+</span><span class="s">EOF</span>
+    awk <span class="s1">&#39;!/^($|B|F|#)/{print $0}&#39;</span> <span class="nv">$cpt</span> <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> label color period
+    <span class="k">do</span>
+        <span class="k">if</span> <span class="o">[</span> <span class="nv">$label</span> <span class="o">==</span> <span class="s2">&#34;N&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nv">period</span><span class="o">=</span>Neogene<span class="p">;</span> <span class="k">fi</span>
+        <span class="k">if</span> <span class="o">[</span> <span class="nv">$label</span> <span class="o">==</span> <span class="s2">&#34;MZT&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="k">continue</span><span class="p">;</span> <span class="k">fi</span>
+        <span class="nb">echo</span> <span class="s2">&#34;S 0.3c r </span><span class="nv">$lengsize</span><span class="s2"> </span><span class="nv">$color</span><span class="s2"> 0.3p 0.7c </span><span class="nv">$period</span><span class="s2">&#34;</span> &gt;&gt; tmp
+    <span class="k">done</span>
+    gmt legend tmp -DJBR+w300p/157p+jBR+o0c/-100p+l1.3 -F+p0.7p+g255 -C3p/3p
 
-gmt psxy -R -J -O -T &gt;&gt; <span class="nv">$ps</span>
-gmt psconvert -A -P -TG <span class="nv">$ps</span>
-rm gmt* <span class="nv">$ps</span> tmp tmp.cpt </code></pre></td></tr></table>
+    gmt legend -DJBR+w150p/50p+jBR+o0c/57p+l1.9 -F+p0.7p+g255 -C3p/1p <span class="s">&lt;&lt;EOF
+</span><span class="s">H 10 3 Rock type
+</span><span class="s">
+</span><span class="s">N 2
+</span><span class="s">S 0.3c r 0.2i p400/28:B255 0.3p 0.7c Volcanic rocks
+</span><span class="s">S 0.3c r 0.2i p400/29:B255 0.3p 0.7c Intrusive rocks
+</span><span class="s">S 0.3c r 0.2i p400/44:B255 0.3p 0.7c Ultrabasic igneous rock or ophiolites 
+</span><span class="s">EOF</span>
+<span class="o">}</span>
+
+shp2xyz
+gmt begin geo3al png
+    gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY <span class="m">10</span>
+    gmt <span class="nb">set</span> MAP_FRAME_WIDTH <span class="m">0</span>.08
+    gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY <span class="m">0</span>.08
+
+    gmt coast -R70/150/13/55 -JM8.6i -Baf -Df -G255 -BWsNe
+    gmt plot <span class="nv">$data</span> -C<span class="nv">$cpt</span> -L
+
+    gmt gmtconvert <span class="nv">$data</span> -S<span class="s2">&#34;|v|&#34;</span> &gt; tmp
+    awk <span class="s1">&#39;!/^($|B|F|#)/{print $1,&#34;p&#39;</span><span class="nv">$rocksize</span><span class="s1">&#39;/28:F100B&#34;$2}&#39;</span> <span class="nv">$cpt</span> &gt; tmp.cpt
+    gmt plot tmp -Ctmp.cpt -L
+
+    gmt gmtconvert <span class="nv">$data</span> -S<span class="s2">&#34;|i|&#34;</span> &gt; tmp
+    awk <span class="s1">&#39;!/^($|B|F|#)/{print $1,&#34;p&#39;</span><span class="nv">$rocksize</span><span class="s1">&#39;/29:F100B&#34;$2}&#39;</span> <span class="nv">$cpt</span> &gt; tmp.cpt
+    gmt plot tmp -Ctmp.cpt -L
+
+    gmt gmtconvert <span class="nv">$data</span> -S<span class="s2">&#34;|w|&#34;</span> &gt; tmp
+    awk <span class="s1">&#39;!/^($|B|F|#)/{print $1,&#34;p&#39;</span><span class="nv">$rocksize</span><span class="s1">&#39;/44:F100B&#34;$2}&#39;</span> <span class="nv">$cpt</span> &gt; tmp.cpt
+    gmt plot tmp -Ctmp.cpt -L
+
+    gmt coast -SCADETBLUE1
+
+    gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY 7p
+    plot_age_legend 
+
+    rm tmp  tmp.cpt
+gmt end show
+ </code></pre></td></tr></table>
 </div>
 </div>
+<h2 id="特别鸣谢">特别鸣谢</h2>
+
+<p>这次脚本做了大量的修改，非常感谢<a href="https://me.seisman.info/">田冬冬博士</a>、<a href="https://core-man.github.io/academic-homepage/">姚家园博士</a>和<a href="https://docs.gmt-china.org/">GMT中文社区</a>的其他小伙伴的建议和努力，在和他们的讨论中也使我受益匪浅。</p>
     </div>
 
     <div class="post-copyright">

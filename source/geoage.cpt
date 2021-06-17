@@ -1,46 +1,57 @@
 # Geological time scale categorical color scheme
+# Refer to GTS2012 (Gradstein et al. ,2012) 
 #
-# TIMESCALE:  GTS2012 (Gradstein et al., 2012) 
-# 
-# GIVEN ARE TOPS of PERIODS in Milliions of years before present
-#
-# Christian Heine, mailto:christian.heine@sydney.edu.au
-# 
-# LICENSE:
-# This work is licensed under a 
-# Creative Commons Attribution-ShareAlike 3.0 Unported License
-# http://creativecommons.org/licenses/by-sa/3.0/deed.en_US.
+# Mijian Xu, mailto:mijian.xu@smail.nju.edu.cn
+# 17/6/2021 00:10:05 AM
 #
 #-----------------------------------------------------------------------------
 # COLOR_MODEL = RGB
-#
-0.0     255/242/186	    2.588   255/242/186	; Quaternary
-2.588   255/255/115      23.03   255/255/115  ; Neogene
-23.03   253/192/145      66.0    253/192/145  ; Paleogene
-66.0    191/227/93      145.0   191/227/93  ; Cretaceous
-145.0   166/221/224      201.3   166/221/224  ; Jurassic
-201.3   227/185/219      252.2   227/185/219  ; Triassic
-252.2   251/141/118       298.9   251/141/118   ; Permian
-298.9   153/194/181     358.9   153/194/181 ; Carboniferous
-358.9   241/213/118      419.2   241/213/118  ; Devonian
-419.2   179/225/194     443.4   179/225/194 ; Silurian
-443.4   102/192/146       485.4    102/192/146 ; Ordovician
-485.4   179/212/146      541.0   179/212/146  ; Cambrian
-541.0   254/217/106     635     254/217/106 ; Ediacaran
-635     254/204/92      850     254/204/92  ; Cryogenian
-850     254/191/78      1000    254/191/78  ; Tonian
-1000    254/217/154     1200    254/217/154 ; Stenian
-1200    253/204/138     1400    253/204/138 ; Ectasian
-1400    253/192/122     1600    253/192/122 ; Calymmia
-1600    248/117/167     1800    248/117/167 ; Statherian
-1800    247/104/152     2050    247/104/152 ; Orosirian
-2050    247/91/137      2300    247/91/137  ; Rhyacian
-2300    247/79/124      2500    247/79/124  ; Siderian
-2500    249/155/193     2800    249/155/193 ; Neoarchean
-2800    247/104/169     3200    247/104/169 ; Mesoarchean
-3200    244/68/159      3600    244/68/159  ; Paleoarchean
-3600    218/3/127       4000    218/3/127   ; Eoarchean
+
+Q    255/242/186 ; Quaternary
+NQ   255/255/191 ; Neogene-Quaternary
+N    255/230/25
+Pg    253/154/82 ; Paleogene
+TQ   255/217/154 ; Tertiary-Quaternary
+T    242/249/29 ; Tertiary (undivided)
+KT   242/250/140 ; Cretaceous-Tertiary 
+CzMz 166/216/74 ; Mesozoic-Cenozoic
+MZT  166/216/74 ; Mesozoic-Cenozoic
+K    127/198/78  ; Cretaceous
+JK   179/227/238 ; Jurassic-Cretaceous
+J     52/178/201 ; Jurassic
+TrK  227/185/219 ; Triassic-Cretaceous
+TrJ  201/131/191 ; Triassic-Jurassic
+Tr   129/43/146  ; Triassic
+MZ   103/197/202 ; Mesozoic (undivided)
+PTr  252/192/178 ; Permian-Triassic
+PZMZ 251/167/148 ; Paleozoic-Mesozoic
+P      240/64/40 ; Permian
+CTr  204/212/199 ; Carboniferous-Triassic
+CP   166/199/183 ; Carboniferous-Permian 
+PZu  153/180/108 ; Upper Paleozoic
+C    103/165/153 ; Carboniferous
+DC   241/225/157 ; Devonian-Carboniferous
+D     203/140/55 ; Devonian
+SD   230/245/225 ; Silurian-Devonian
+S    179/225/182 ; Silurian
+OS   166/219/171 ; Ordovician-Silurian
+O      0/146/112 ; Ordovician
+CmD  217/240/187 ; Cambrian-Devonian
+CmO  204/235/174 ; Cambrian-Ordovician
+PZl  166/207/134 ; Lower Paleozoic
+Cm    127/160/86 ; Cambrian
+PZ   153/192/141 ; Paleozoic (undivided) 
+PtCm 254/217/106 ; Proterozoic-Cambrian
+PtO   254/204/92 ; Proterozoic-Ordovician
+PtPZ  254/191/78 ; Precambrian-Paleozoic
+Pt     247/53/99 ; Proterozoic
+AP   248/129/181 ; Archean-Proterozoic
+A     240/4/127  ; Archean
+pC   247/67/112  ; Precambrian (undivided)
+
+oth  gray ; Geology not shown
+und  white ; Undetermined age
+H2O  skyblue ; Water
 
 B	black
 F	white
-N   white
