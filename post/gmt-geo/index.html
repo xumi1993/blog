@@ -53,7 +53,7 @@
 
 <meta itemprop="datePublished" content="2021-05-14T16:34:22&#43;08:00" />
 <meta itemprop="dateModified" content="2021-05-14T16:34:22&#43;08:00" />
-<meta itemprop="wordCount" content="1057">
+<meta itemprop="wordCount" content="841">
 
 
 
@@ -148,7 +148,6 @@
 <ul>
 <li><a href="#原始数据下载">原始数据下载</a></li>
 <li><a href="#格式转换">格式转换</a></li>
-<li><a href="#修改文件头段">修改文件头段</a></li>
 </ul></li>
 <li><a href="#下载链接">下载链接：</a></li>
 <li><a href="#gmt脚本">GMT脚本</a></li>
@@ -164,7 +163,7 @@
 
 <h2 id="数据来源与格式转换">数据来源与格式转换</h2>
 
-<p>地质图的数据来自美国USGS（<a href="https://catalog.data.gov/dataset/generalized-geology-of-the-far-east-geo3al">Generalized Geology of the Far East (geo3al)</a>）其分辨率为1:4,000,000。</p>
+<p>地质图的数据来自美国USGS（<a href="https://catalog.data.gov/dataset/generalized-geology-of-the-far-east-geo3al">Generalized Geology of the Far East (geo3al)</a>）其分辨率为1:5,000,000。源数据和引用格式请参考<a href="https://pubs.er.usgs.gov/publication/ofr97470F">这里</a></p>
 
 <h3 id="原始数据下载">原始数据下载</h3>
 
@@ -189,8 +188,6 @@
 <li>确保在安装GMT后所添加的环境变量中包含<code>PROJ_LIB</code>这个变量，请参考<a href="https://docs.gmt-china.org/latest/install/macOS/#gmt">GMT安装说明</a></li>
 </ul>
 
-<h3 id="修改文件头段">修改文件头段</h3>
-
 <p>格式转换后<code>geo3al.gmt</code>文件的头段为</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -212,52 +209,13 @@
 ......</pre></td></tr></table>
 </div>
 </div>
-<p>我们所需要头段的是岩性<code>v</code>（火山岩）和年代<code>J</code>（侏罗系），这里我们用<code>sed</code>和正则表达式修改文件头段</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">sed <span class="s1">&#39;s/#[[:space:]]@D[[:digit:]]*.[[:digit:]]*|[[:digit:]]*.[[:digit:]]*|\(.*\)|\(.*\)|\(.*\)/&gt; -Z\2 |\1|\2/g; /^#/d&#39;</span> geo3al.gmt &gt; geo3al.xy2</code></pre></td></tr></table>
-</div>
-</div>
-<p>这时<code>geo3al.xy2</code>文件头段被修改为</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">&gt; -ZJ |v|J
-123.121278084975 53.3084236387908
-123.230414901407 53.3161680969698
-123.288482121838 53.3166334127133
-123.328886980316 53.3062394894715
-....</pre></td></tr></table>
-</div>
-</div>
-<p>这里通过<code>-Z</code>指定年代，配合CPT文件和<code>plot -L</code>可以为闭合图形填充颜色，来达到绘制地质图的目的。其中CPT文件格式为</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span><span class="lnt">2
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">JK   179/227/238 ; Jurassic-Cretaceous
-J     52/178/201 ; Jurassic</pre></td></tr></table>
-</div>
-</div>
 <h2 id="下载链接">下载链接：</h2>
 
 <p>这里我们提供了已经完成上述步骤的地质年代文件和地质年代色标文件，可以在GMT中直接使用。</p>
 
 <ul>
-<li><a href="/source/geo3al.xy2">地质年代文件</a></li>
-<li><a href="/source/geoage.cpt">地质年代色标文件（GTS2012_periods）</a></li>
+<li><a href="/source/geo3al.gmt">地质年代文件</a></li>
+<li><a href="/source/geoage_GEN_GLG.cpt">地质年代色标文件（GTS2012_periods）</a></li>
 </ul>
 
 <h2 id="gmt脚本">GMT脚本</h2>
@@ -314,28 +272,15 @@ J     52/178/201 ; Jurassic</pre></td></tr></table>
 </span><span class="lnt">49
 </span><span class="lnt">50
 </span><span class="lnt">51
-</span><span class="lnt">52
-</span><span class="lnt">53
-</span><span class="lnt">54
-</span><span class="lnt">55
-</span><span class="lnt">56
-</span><span class="lnt">57
-</span><span class="lnt">58
-</span><span class="lnt">59
-</span><span class="lnt">60
-</span><span class="lnt">61
-</span><span class="lnt">62
-</span><span class="lnt">63
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">data</span><span class="o">=</span>geo3al.xy2
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">data</span><span class="o">=</span>geo3al.gmt
 <span class="nv">cpt</span><span class="o">=</span>geoage.cpt
 <span class="nv">rocksize</span><span class="o">=</span><span class="m">500</span>
 <span class="nv">lengsize</span><span class="o">=</span><span class="m">0</span>.15i
 
 <span class="k">function</span> shp2xyz<span class="o">(){</span>
-    ogr2ogr -f GMT geo2al.gmt geo3al.shp -t_srs EPSG:4326
-    sed <span class="s1">&#39;s/#[[:space:]]@D[[:digit:]]*.[[:digit:]]*|[[:digit:]]*.[[:digit:]]*|\(.*\)|\(.*\)|\(.*\)/&gt; -Z\2 |\1|\2/g; /^#/d&#39;</span> geo3al.gmt &gt; <span class="nv">$data</span>
+    ogr2ogr -f GMT <span class="nv">$data</span> geo3al.shp -t_srs EPSG:4326
 <span class="o">}</span>
 
 <span class="k">function</span> plot_age_legend<span class="o">(){</span>
@@ -344,13 +289,11 @@ J     52/178/201 ; Jurassic</pre></td></tr></table>
 </span><span class="s">G 1p
 </span><span class="s">N 3
 </span><span class="s">EOF</span>
-    awk <span class="s1">&#39;!/^($|B|F|#)/{print $0}&#39;</span> <span class="nv">$cpt</span> <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> label color period
+    awk <span class="s1">&#39;!/^($|B|F|N|#)/{print $0}&#39;</span> <span class="nv">$cpt</span> <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> label color period
     <span class="k">do</span>
-        <span class="k">if</span> <span class="o">[</span> <span class="nv">$label</span> <span class="o">==</span> <span class="s2">&#34;N&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="nv">period</span><span class="o">=</span>Neogene<span class="p">;</span> <span class="k">fi</span>
-        <span class="k">if</span> <span class="o">[</span> <span class="nv">$label</span> <span class="o">==</span> <span class="s2">&#34;MZT&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="k">continue</span><span class="p">;</span> <span class="k">fi</span>
         <span class="nb">echo</span> <span class="s2">&#34;S 0.3c r </span><span class="nv">$lengsize</span><span class="s2"> </span><span class="nv">$color</span><span class="s2"> 0.3p 0.7c </span><span class="nv">$period</span><span class="s2">&#34;</span> &gt;&gt; tmp
     <span class="k">done</span>
-    gmt legend tmp -DJBR+w300p/157p+jBR+o0c/-100p+l1.3 -F+p0.7p+g255 -C3p/3p
+    gmt legend tmp -DJBR+w300p/140p+jBR+o0c/-83p+l1.3 -F+p0.7p+g255 -C3p/3p
 
     gmt legend -DJBR+w150p/50p+jBR+o0c/57p+l1.9 -F+p0.7p+g255 -C3p/1p <span class="s">&lt;&lt;EOF
 </span><span class="s">H 10 3 Rock type
@@ -369,19 +312,10 @@ gmt begin geo3al png
     gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY <span class="m">0</span>.08
 
     gmt coast -R70/150/13/55 -JM8.6i -Baf -Df -G255 -BWsNe
-    gmt plot <span class="nv">$data</span> -C<span class="nv">$cpt</span> -L
-
-    gmt gmtconvert <span class="nv">$data</span> -S<span class="s2">&#34;|v|&#34;</span> &gt; tmp
-    awk <span class="s1">&#39;!/^($|B|F|#)/{print $1,&#34;p&#39;</span><span class="nv">$rocksize</span><span class="s1">&#39;/28:F100B&#34;$2}&#39;</span> <span class="nv">$cpt</span> &gt; tmp.cpt
-    gmt plot tmp -Ctmp.cpt -L
-
-    gmt gmtconvert <span class="nv">$data</span> -S<span class="s2">&#34;|i|&#34;</span> &gt; tmp
-    awk <span class="s1">&#39;!/^($|B|F|#)/{print $1,&#34;p&#39;</span><span class="nv">$rocksize</span><span class="s1">&#39;/29:F100B&#34;$2}&#39;</span> <span class="nv">$cpt</span> &gt; tmp.cpt
-    gmt plot tmp -Ctmp.cpt -L
-
-    gmt gmtconvert <span class="nv">$data</span> -S<span class="s2">&#34;|w|&#34;</span> &gt; tmp
-    awk <span class="s1">&#39;!/^($|B|F|#)/{print $1,&#34;p&#39;</span><span class="nv">$rocksize</span><span class="s1">&#39;/44:F100B&#34;$2}&#39;</span> <span class="nv">$cpt</span> &gt; tmp.cpt
-    gmt plot tmp -Ctmp.cpt -L
+    gmt plot <span class="nv">$data</span> -C<span class="nv">$cpt</span> -aZ<span class="o">=</span><span class="s2">&#34;GEN_GLG&#34;</span> -G+z -L
+    gmt convert <span class="nv">$data</span> -aI<span class="o">=</span><span class="s2">&#34;TYPE&#34;</span> -S<span class="s2">&#34;-Iv&#34;</span> <span class="p">|</span> gmt plot -Gp28+r500+f100+b-
+    gmt convert <span class="nv">$data</span> -aI<span class="o">=</span><span class="s2">&#34;TYPE&#34;</span> -S<span class="s2">&#34;-Ii&#34;</span> <span class="p">|</span> gmt plot -Gp29+r500+f100+b-
+    gmt convert <span class="nv">$data</span> -aI<span class="o">=</span><span class="s2">&#34;TYPE&#34;</span> -S<span class="s2">&#34;-Iw&#34;</span> <span class="p">|</span> gmt plot -Gp44+r500+f100+b-
 
     gmt coast -SCADETBLUE1
 
