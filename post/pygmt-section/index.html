@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>数据切片与绘制的PyGMT实现 - Note to Tech</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Mijian Xu" /><meta name="description" content="在GMT绘图前经常需要计算数据并保存到本地，再用GMT调用本地数据文件进行绘图。对数据可视化造成了不便。随着PyGMT的出现，我们可以在Python脚本中先进行数据计算，后进行绘图。这不仅提高了数据可视化的效率，也解决了Python对地图绘制能力弱的问题。
+这里我们介绍用Python从3D数据结构体中进行数据切片，同时用PyGMT绘图的实例。
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.58.3 with theme even" />
+
+
+<link rel="canonical" href="https://blog.xumijian.me/post/pygmt-section/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.80fdd22f.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="数据切片与绘制的PyGMT实现" />
+<meta property="og:description" content="在GMT绘图前经常需要计算数据并保存到本地，再用GMT调用本地数据文件进行绘图。对数据可视化造成了不便。随着PyGMT的出现，我们可以在Python脚本中先进行数据计算，后进行绘图。这不仅提高了数据可视化的效率，也解决了Python对地图绘制能力弱的问题。
+
+这里我们介绍用Python从3D数据结构体中进行数据切片，同时用PyGMT绘图的实例。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.xumijian.me/post/pygmt-section/" />
+<meta property="article:published_time" content="2021-11-30T20:13:09+08:00" />
+<meta property="article:modified_time" content="2021-11-30T20:13:09+08:00" />
+<meta itemprop="name" content="数据切片与绘制的PyGMT实现">
+<meta itemprop="description" content="在GMT绘图前经常需要计算数据并保存到本地，再用GMT调用本地数据文件进行绘图。对数据可视化造成了不便。随着PyGMT的出现，我们可以在Python脚本中先进行数据计算，后进行绘图。这不仅提高了数据可视化的效率，也解决了Python对地图绘制能力弱的问题。
+
+这里我们介绍用Python从3D数据结构体中进行数据切片，同时用PyGMT绘图的实例。">
+
+
+<meta itemprop="datePublished" content="2021-11-30T20:13:09&#43;08:00" />
+<meta itemprop="dateModified" content="2021-11-30T20:13:09&#43;08:00" />
+<meta itemprop="wordCount" content="1053">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="数据切片与绘制的PyGMT实现"/>
+<meta name="twitter:description" content="在GMT绘图前经常需要计算数据并保存到本地，再用GMT调用本地数据文件进行绘图。对数据可视化造成了不便。随着PyGMT的出现，我们可以在Python脚本中先进行数据计算，后进行绘图。这不仅提高了数据可视化的效率，也解决了Python对地图绘制能力弱的问题。
+
+这里我们介绍用Python从3D数据结构体中进行数据切片，同时用PyGMT绘图的实例。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Note to Tech</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="https://home.xumijian.me">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Note to Tech</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://home.xumijian.me">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">数据切片与绘制的PyGMT实现</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-11-30 </span>
+        
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#绘图需求">绘图需求</a></li>
+<li><a href="#绘制测线位置">绘制测线位置</a>
+<ul>
+<li><a href="#初始化测线">初始化测线</a></li>
+<li><a href="#绘制地形图和测线位置">绘制地形图和测线位置</a></li>
+</ul></li>
+<li><a href="#根据测线位置进行数据切片">根据测线位置进行数据切片</a>
+<ul>
+<li><a href="#读取模型数据">读取模型数据</a></li>
+<li><a href="#生成插值所需的网格点坐标">生成插值所需的网格点坐标</a></li>
+<li><a href="#线性插值与网格化">线性插值与网格化</a></li>
+</ul></li>
+<li><a href="#绘制速度切片">绘制速度切片</a>
+<ul>
+<li><a href="#绘制剖面的地形起伏">绘制剖面的地形起伏</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>在GMT绘图前经常需要计算数据并保存到本地，再用GMT调用本地数据文件进行绘图。对数据可视化造成了不便。随着<a href="https://www.pygmt.org/latest/index.html">PyGMT</a>的出现，我们可以在Python脚本中先进行数据计算，后进行绘图。这不仅提高了数据可视化的效率，也解决了Python对地图绘制能力弱的问题。</p>
+
+<p>这里我们介绍用Python从3D数据结构体中进行数据切片，同时用PyGMT绘图的实例。</p>
+
+<h2 id="绘图需求">绘图需求</h2>
+
+<p><a href="http://ds.iris.edu/ds/products/emc-fwea18/">FWEA18</a>是通过全波形反演获得的东亚3D速度模型，我们将选取一条测线，从模型中切片并绘制该测线的P波速度。</p>
+
+<p>我们用到的Python模块包括</p>
+
+<ul>
+<li><a href="https://scipy.org/">scipy</a></li>
+<li><a href="https://numpy.org/">numpy</a></li>
+<li><a href="http://xarray.pydata.org/">xarray</a></li>
+<li><a href="https://www.pygmt.org/">pygmt</a></li>
+</ul>
+
+<p>首先在Python脚本中导入这些模块</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pygmt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="kn">as</span> <span class="nn">xr</span>
+<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interpn</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="绘制测线位置">绘制测线位置</h2>
+
+<p>我们选取了经过日本岛弧、朝鲜半岛、渤海湾-华北盆地的测线，首先需要在地图上绘制测线位置。</p>
+
+<h3 id="初始化测线">初始化测线</h3>
+
+<p>PyGMT继承了GMT中<code>project</code>命令，通过定义测线端点位置来初始化测线，这个函数的返回值为<code>pandas.DataFrame</code>类型。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">lon1</span><span class="p">,</span> <span class="n">lon2</span><span class="p">,</span> <span class="n">lat1</span><span class="p">,</span> <span class="n">lat2</span> <span class="o">=</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">142</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">35</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">pygmt</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="s1">&#39;{}/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lon1</span><span class="p">,</span> <span class="n">lat1</span><span class="p">),</span>
+                       <span class="n">endpoint</span><span class="o">=</span><span class="s1">&#39;{}/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lon2</span><span class="p">,</span> <span class="n">lat2</span><span class="p">),</span>
+                       <span class="n">generate</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="绘制地形图和测线位置">绘制地形图和测线位置</h3>
+
+<p>首先下载高程数据，在PyGMT中可以将高程数据保持在一个Python变量中，这样可以减少中间文件的生成也方便后续计算。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">grid_topo</span> <span class="o">=</span> <span class="n">pygmt</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">load_earth_relief</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="s2">&#34;05m&#34;</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="p">[</span><span class="mi">108</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">53</span><span class="p">])</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>然后绘制底图和测线，这里用到，<code>coast</code>、<code>grdimage</code>和<code>plot</code>，<code>coast</code>绘制的海岸线被地形图覆盖了，这里只做备忘录功能。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">fig_map</span> <span class="o">=</span> <span class="n">pygmt</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+<span class="n">fig_map</span><span class="o">.</span><span class="n">coast</span><span class="p">(</span>
+    <span class="n">region</span><span class="o">=</span><span class="p">[</span><span class="mi">108</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">53</span><span class="p">],</span>
+    <span class="n">projection</span><span class="o">=</span><span class="s2">&#34;M15c&#34;</span><span class="p">,</span>
+    <span class="n">frame</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">borders</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">area_thresh</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span>
+    <span class="n">shorelines</span><span class="o">=</span><span class="s2">&#34;0.25p,black&#34;</span><span class="p">,</span>
+    <span class="n">land</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">water</span><span class="o">=</span><span class="s2">&#34;skyblue&#34;</span>
+<span class="p">)</span>
+<span class="n">fig_map</span><span class="o">.</span><span class="n">grdimage</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="n">grid_topo</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;globe&#39;</span><span class="p">)</span>
+<span class="n">fig_map</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">points</span><span class="o">.</span><span class="n">values</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">pen</span><span class="o">=</span><span class="s1">&#39;2p,255/23/23&#39;</span><span class="p">)</span>
+<span class="n">fig_map</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><td><center><img src="/img/pygmt/region.png" width=70%/></center></td></p>
+
+<h2 id="根据测线位置进行数据切片">根据测线位置进行数据切片</h2>
+
+<h3 id="读取模型数据">读取模型数据</h3>
+
+<p>模型可以在<a href="http://ds.iris.edu/files/products/emc/emc-files/FWEA18_kmps.nc">这里</a>下载，模型为netcdf格式这里可以用<code>xarray.open_dataset</code>读取。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">raw_data</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="s1">&#39;FWEA18_kmps.nc&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="生成插值所需的网格点坐标">生成插值所需的网格点坐标</h3>
+
+<p>先前我们用<code>pygmt.project</code>生成了测线的经纬度，先在需要延展到深度维度，形成一个2D切片。这一步将生产<code>points2d</code>，定义了切片上每个经纬度点的坐标 (<code>lon</code>, <code>lat</code>, <code>distance</code>, <code>depth</code>)。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">depth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">800</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">points2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">points</span><span class="o">.</span><span class="n">values</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">depth</span><span class="p">):</span>
+        <span class="n">points2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">points2d</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="p">)))</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="线性插值与网格化">线性插值与网格化</h3>
+
+<p>先用生成的数据点在三维速度模型中插值，返回一系列散点，再用<code>pygmt.surface</code>进行网格化。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">points_value</span> <span class="o">=</span> <span class="n">interpn</span><span class="p">((</span><span class="n">raw_data</span><span class="o">.</span><span class="n">depth</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">raw_data</span><span class="o">.</span><span class="n">latitude</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">raw_data</span><span class="o">.</span><span class="n">longitude</span><span class="o">.</span><span class="n">values</span><span class="p">),</span>
+                       <span class="n">raw_data</span><span class="o">.</span><span class="n">vpv</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">points2d</span><span class="p">[:,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">pygmt</span><span class="o">.</span><span class="n">surface</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">points2d</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">points2d</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">z</span><span class="o">=</span><span class="n">points_value</span><span class="p">,</span>
+              <span class="n">region</span><span class="o">=</span><span class="p">[</span><span class="n">lon1</span><span class="p">,</span> <span class="n">lon2</span><span class="p">,</span> <span class="n">depth</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">depth</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">spacing</span><span class="o">=</span><span class="s1">&#39;0.2/2&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="绘制速度切片">绘制速度切片</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">fig_sec</span> <span class="o">=</span> <span class="n">pygmt</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+<span class="n">fig_sec</span><span class="o">.</span><span class="n">basemap</span><span class="p">(</span><span class="n">frame</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;WSne&#34;</span><span class="p">,</span> <span class="s1">&#39;xaf+l&#34;Longitude (</span><span class="se">\\</span><span class="s1">260)&#34;&#39;</span><span class="p">,</span> <span class="s1">&#39;yaf+l&#34;Depth (km)&#34;&#39;</span><span class="p">],</span>
+                <span class="n">region</span><span class="o">=</span><span class="p">[</span><span class="mi">111</span><span class="p">,</span> <span class="mi">142</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">800</span><span class="p">],</span>
+                <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;X15c/-8c&#39;</span><span class="p">)</span>
+<span class="n">pygmt</span><span class="o">.</span><span class="n">grd2cpt</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;seis&#39;</span><span class="p">,</span> <span class="n">continuous</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">fig_sec</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="s2">&#34;JMR+o0.5c/0c+w7c/0.5c&#34;</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;xaf+l</span><span class="se">\&#34;</span><span class="s2">Vp (km/s)</span><span class="se">\&#34;</span><span class="s2">&#34;</span><span class="p">])</span>
+<span class="n">fig_sec</span><span class="o">.</span><span class="n">grdimage</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c1"># 将下一张图的锚点上移8.25cm</span>
+<span class="n">fig_sec</span><span class="o">.</span><span class="n">shift_origin</span><span class="p">(</span><span class="n">yshift</span><span class="o">=</span><span class="s2">&#34;8.25c&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<blockquote>
+<p>⚠️注意
+引号、反斜杠等需要转义。</p>
+</blockquote>
+
+<h3 id="绘制剖面的地形起伏">绘制剖面的地形起伏</h3>
+
+<p><code>grdtrack</code> 从高程文件中截取地形数据，与GMT不同，这里均可以使用先前生成的Python变量作为输入，而不需要调用本地文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">ele</span> <span class="o">=</span> <span class="n">pygmt</span><span class="o">.</span><span class="n">grdtrack</span><span class="p">(</span><span class="n">points</span><span class="o">=</span><span class="n">points</span><span class="o">.</span><span class="n">values</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">grid</span><span class="o">=</span><span class="n">grid_topo</span><span class="p">)</span>
+<span class="n">ele</span><span class="o">.</span><span class="n">values</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">/=</span> <span class="mi">1000</span>
+<span class="n">fig_sec</span><span class="o">.</span><span class="n">basemap</span><span class="p">(</span><span class="n">frame</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="s1">&#39;yaf+l&#34;Elev. (km)&#34;&#39;</span><span class="p">],</span>
+                <span class="n">region</span><span class="o">=</span><span class="p">[</span><span class="n">lon1</span><span class="p">,</span> <span class="n">lon2</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+                <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;X15c/2c&#39;</span><span class="p">)</span>
+<span class="n">fig_sec</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">ele</span><span class="o">.</span><span class="n">values</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">ele</span><span class="o">.</span><span class="n">values</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">pen</span><span class="o">=</span><span class="s1">&#39;0.1p&#39;</span><span class="p">,</span>
+             <span class="n">close</span><span class="o">=</span><span class="s1">&#39;+y0&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">fig_sec</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><img src="/img/pygmt/sec.png" alt="" /></p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Mijian Xu</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-11-30
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/gmt-geo/">
+            <span class="next-text nav-default">用GMT绘制中国大陆及邻区地质年代图</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+  <div id="vcomments"></div>
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script type="text/javascript">
+    new Valine({
+        el: '#vcomments' ,
+        appId: 'pDTTIwKxG0jJoQFkUaQ1Jeqo-gzGzoHsz',
+        appKey: 'LjDsQoPgO74ji2IoczXTiRM5',
+        notify: 'true',
+        verify: 'true',
+        avatar:'mm',
+        placeholder: '说点什么吧...',
+        visitor: 'false'
+    });
+  </script>
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:gomijianxu@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/xumi1993" class="iconfont icon-github" title="github"></a>
+      <a href="https://git.nju.edu.cn/xumi1993" class="iconfont icon-gitlab" title="gitlab"></a>
+  <a href="https://blog.xumijian.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      
+    
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2021
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Mijian Xu</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
