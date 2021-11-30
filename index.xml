@@ -6,10 +6,21 @@
     <description>Recent content on Note to Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 14 May 2021 16:34:22 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 30 Nov 2021 20:13:09 +0800</lastBuildDate>
     
 	<atom:link href="https://blog.xumijian.me/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>数据切片与绘制的PyGMT实现</title>
+      <link>https://blog.xumijian.me/post/pygmt-section/</link>
+      <pubDate>Tue, 30 Nov 2021 20:13:09 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/post/pygmt-section/</guid>
+      <description>&lt;p&gt;在GMT绘图前经常需要计算数据并保存到本地，再用GMT调用本地数据文件进行绘图。对数据可视化造成了不便。随着&lt;a href=&#34;https://www.pygmt.org/latest/index.html&#34;&gt;PyGMT&lt;/a&gt;的出现，我们可以在Python脚本中先进行数据计算，后进行绘图。这不仅提高了数据可视化的效率，也解决了Python对地图绘制能力弱的问题。&lt;/p&gt;
+
+&lt;p&gt;这里我们介绍用Python从3D数据结构体中进行数据切片，同时用PyGMT绘图的实例。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>用GMT绘制中国大陆及邻区地质年代图</title>

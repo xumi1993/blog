@@ -45,7 +45,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://blog.xumijian.me/" />
 
-<meta property="og:updated_time" content="2021-05-14T16:34:22+08:00" />
+<meta property="og:updated_time" content="2021-11-30T20:13:09+08:00" />
 <meta itemprop="name" content="Note to Tech">
 <meta itemprop="description" content="">
 
@@ -116,6 +116,27 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/pygmt-section/">数据切片与绘制的PyGMT实现</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2021-11-30 </span>
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>在GMT绘图前经常需要计算数据并保存到本地，再用GMT调用本地数据文件进行绘图。对数据可视化造成了不便。随着<a href="https://www.pygmt.org/latest/index.html">PyGMT</a>的出现，我们可以在Python脚本中先进行数据计算，后进行绘图。这不仅提高了数据可视化的效率，也解决了Python对地图绘制能力弱的问题。</p>
+
+<p>这里我们介绍用Python从3D数据结构体中进行数据切片，同时用PyGMT绘图的实例。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/pygmt-section/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/gmt-geo/">用GMT绘制中国大陆及邻区地质年代图</a></h1>
@@ -202,28 +223,6 @@
     </div>
     <div class="read-more">
       <a href="/post/bqmail1/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/mappick/">用Python交互界面在地图上选取测线位置</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-04-17 </span>
-      <div class="post-category">
-          <a href="/categories/python/"> Python </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p><img src="/img/mappick/mappick.gif" alt="" />
-虽然GMT有强大的绘图功能，但是只能生成静态图像。在地震学研究中通常需要在地图上选取测线，获得测线端点的坐标。我们利用Matplotlib的交互界面实现了这一功能。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/mappick/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
