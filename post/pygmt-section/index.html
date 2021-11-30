@@ -56,7 +56,7 @@
 
 <meta itemprop="datePublished" content="2021-11-30T20:13:09&#43;08:00" />
 <meta itemprop="dateModified" content="2021-11-30T20:13:09&#43;08:00" />
-<meta itemprop="wordCount" content="1053">
+<meta itemprop="wordCount" content="1113">
 
 
 
@@ -164,6 +164,7 @@
 <ul>
 <li><a href="#绘制剖面的地形起伏">绘制剖面的地形起伏</a></li>
 </ul></li>
+<li><a href="#下载jupyter-notebook-source-plot-section-ipynb"><a href="/source/plot_section.ipynb">下载Jupyter-notebook</a></a></li>
 </ul></li>
 </ul>
 </nav>
@@ -303,7 +304,7 @@
 </div>
 <h3 id="线性插值与网格化">线性插值与网格化</h3>
 
-<p>先用生成的数据点在三维速度模型中插值，返回一系列散点，再用<code>pygmt.surface</code>进行网格化。</p>
+<p>先用生成的数据点在三维速度模型中插值，返回一系列散点，再用<code>pygmt.surface</code>进行网格化。我们选用经度作为横坐标，所以<code>surface</code>中设置<code>x=points2d[:, 0], y=points2d[:, 3]</code>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
@@ -374,6 +375,8 @@
 </div>
 </div>
 <p><img src="/img/pygmt/sec.png" alt="" /></p>
+
+<h2 id="下载jupyter-notebook-source-plot-section-ipynb"><a href="/source/plot_section.ipynb">下载Jupyter-notebook</a></h2>
     </div>
 
     <div class="post-copyright">
