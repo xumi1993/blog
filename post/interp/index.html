@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3 with theme even" />
+<meta name="generator" content="Hugo 0.91.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.xumijian.me/post/interp/" />
@@ -42,21 +42,15 @@
 <meta property="og:title" content="三维数据体生成与切片" />
 <meta property="og:description" content="我们在计算得到的数据通常是非等间隔网格，为了用GMT进行2D可视化，需要将数据网格化后进行插值。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.xumijian.me/post/interp/" />
+<meta property="og:url" content="https://blog.xumijian.me/post/interp/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-01-11T21:17:48+08:00" />
 <meta property="article:modified_time" content="2020-01-11T21:17:48+08:00" />
+
 <meta itemprop="name" content="三维数据体生成与切片">
-<meta itemprop="description" content="我们在计算得到的数据通常是非等间隔网格，为了用GMT进行2D可视化，需要将数据网格化后进行插值。">
-
-
-<meta itemprop="datePublished" content="2020-01-11T21:17:48&#43;08:00" />
-<meta itemprop="dateModified" content="2020-01-11T21:17:48&#43;08:00" />
-<meta itemprop="wordCount" content="1979">
-
-
-
-<meta itemprop="keywords" content="Geophysics,插值,网格化," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="description" content="我们在计算得到的数据通常是非等间隔网格，为了用GMT进行2D可视化，需要将数据网格化后进行插值。"><meta itemprop="datePublished" content="2020-01-11T21:17:48+08:00" />
+<meta itemprop="dateModified" content="2020-01-11T21:17:48+08:00" />
+<meta itemprop="wordCount" content="1977">
+<meta itemprop="keywords" content="Geophysics,插值,网格化," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="三维数据体生成与切片"/>
 <meta name="twitter:description" content="我们在计算得到的数据通常是非等间隔网格，为了用GMT进行2D可视化，需要将数据网格化后进行插值。"/>
 
@@ -140,36 +134,30 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#1-将文本文件转换为三维数据体">1. 将文本文件转换为三维数据体</a></li>
-<li><a href="#网格化说明">网格化说明</a></li>
-<li><a href="#2-平面和剖面的切片">2. 平面和剖面的切片</a>
-<ul>
-<li><a href="#2-1-对数据的平面切片-cut-plane-py">2.1 对数据的平面切片  (<code>cut_plane.py</code>)</a></li>
-<li><a href="#2-2-对数据的剖面切片-cut-sec-py">2.2 对数据的剖面切片 (<code>cut_sec.py</code>)</a>
-<ul>
-<li><a href="#生成数据点">生成数据点</a></li>
-<li><a href="#对矢量数据进行坐标系旋转">对矢量数据进行坐标系旋转</a></li>
-<li><a href="#数据插值">数据插值</a></li>
-<li><a href="#这个脚本中一些其他小技巧">这个脚本中一些其他小技巧</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-将文本文件转换为三维数据体">1. 将文本文件转换为三维数据体</a></li>
+        <li><a href="#网格化说明">网格化说明</a></li>
+        <li><a href="#2-平面和剖面的切片">2. 平面和剖面的切片</a>
+          <ul>
+            <li><a href="#21-对数据的平面切片--cut_planepy">2.1 对数据的平面切片  (<code>cut_plane.py</code>)</a></li>
+            <li><a href="#22-对数据的剖面切片-cut_secpy">2.2 对数据的剖面切片 (<code>cut_sec.py</code>)</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p>我们在计算得到的数据通常是非等间隔网格，为了用GMT进行2D可视化，需要将数据网格化后进行插值。</p>
-
 <h2 id="1-将文本文件转换为三维数据体">1. 将文本文件转换为三维数据体</h2>
-
 <p>我们拿到的原始文件是包含经度、纬度、深度、和每个数据点的数据（速度、温度、密度等）组成的文本格式文件，以这次的数据为例，我将Excel文件直接复制到文本中形成了以空格为分隔符的文本文件，以下列出部分行：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -178,9 +166,9 @@
 </span><span class="lnt">7
 </span><span class="lnt">8
 </span><span class="lnt">9
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">10.55467676	108.4399258	175.207137	0.01217283	-0.015367995	-9.20E-05	1681.16272	3291.964844	5848311808	1.00E+21
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">10.55467676	108.4399258	175.207137	0.01217283	-0.015367995	-9.20E-05	1681.16272	3291.964844	5848311808	1.00E+21
 10.55113868	107.7219827	175.2071289	0.012363088	-0.01525117	-0.00010885	1675.885254	3292.487305	5847836672	1.00E+21
 10.25584183	108.1032219	146.0060139	0.012991064	-0.014229504	-9.73E-05	1679.978882	3292.082031	4886236672	1.00E+21
 9.998090145	108.4349265	146.030284	0.01289901	-0.014223722	-8.98E-05	1681.883859	3291.893512	4886096558	1.00E+21
@@ -188,15 +176,14 @@
 10.55468488	108.439848	146.0060673	0.012965109	-0.014302315	-7.66E-05	1684.43457	3291.640869	4887052800	1.00E+21
 10.5511462	107.7219104	146.0062614	0.013087932	-0.014204981	-0.000102527	1677.521362	3292.325439	4886397440	1.00E+21
 10.25585045	108.1031426	116.804997	0.013968474	-0.01280891	-1.20E-05	1596.835083	3300.313232	3924829952	1.00E+21
-9.998090145	108.4348529	116.8293289	0.013916044	-0.012845078	-5.31E-06	1600.383762	3299.961929	3924717946	1.00E+21</pre></td></tr></table>
+9.998090145	108.4348529	116.8293289	0.013916044	-0.012845078	-5.31E-06	1600.383762	3299.961929	3924717946	1.00E+21
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="网格化说明">网格化说明</h2>
-
+</div><h2 id="网格化说明">网格化说明</h2>
 <p>由于这样的数据点是非等间隔的，没有办法进行切片时所需要的插值操作，所以我先将数据进行了三维网格化。这里我选用了Python语言和它的科学计算模块Numpy、Scipy进行网格化。Matlab也可以实现类似功能，核心函数也叫<code>griddata</code>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -226,44 +213,42 @@
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">griddata</span>
 
 <span class="k">def</span>  <span class="nf">read_dat</span><span class="p">(</span><span class="n">fname</span><span class="p">):</span>
-	<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-	<span class="n">data</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">*=</span>  <span class="mi">100</span>
-	<span class="n">data</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">*=</span>  <span class="mi">100</span>
-	<span class="n">data</span><span class="p">[:,</span> <span class="mi">5</span><span class="p">]</span> <span class="o">*=</span>  <span class="mi">100</span>
-	<span class="k">return</span> <span class="n">data</span>
+   <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+   <span class="n">data</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">*=</span>  <span class="mi">100</span>
+   <span class="n">data</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">*=</span>  <span class="mi">100</span>
+   <span class="n">data</span><span class="p">[:,</span> <span class="mi">5</span><span class="p">]</span> <span class="o">*=</span>  <span class="mi">100</span>
+   <span class="k">return</span> <span class="n">data</span>
 
 <span class="k">def</span> <span class="nf">dat2npz</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">latmin</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">latmax</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">lonmin</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">lonmax</span><span class="o">=</span><span class="mi">140</span><span class="p">,</span> <span class="n">depmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">depmax</span><span class="o">=</span><span class="mi">700</span><span class="p">):</span>
-	<span class="c1"># 在三个纬度上设置研究区域和网格间隔，网格间隔根据需要选取。</span>
-	<span class="n">lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">latmin</span><span class="p">,</span> <span class="n">latmax</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-	<span class="n">lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">lonmin</span><span class="p">,</span> <span class="n">lonmax</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-	<span class="n">dep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">depmin</span><span class="p">,</span> <span class="n">depmax</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-	<span class="n">new_dep</span><span class="p">,</span> <span class="n">new_lat</span><span class="p">,</span> <span class="n">new_lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">dep</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s1">&#39;ij&#39;</span><span class="p">)</span>
-	<span class="c1"># 读取数据列表</span>
-	<span class="n">data</span> <span class="o">=</span>  <span class="n">read_dat</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-	<span class="c1"># 设置原始数据点位置</span>
-	<span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
-	<span class="c1"># 对每一种数据进行网格化</span>
-	<span class="n">vew</span> <span class="o">=</span>  <span class="n">griddata</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">(</span><span class="n">new_dep</span><span class="p">,</span> <span class="n">new_lat</span><span class="p">,</span> <span class="n">new_lon</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
-	<span class="n">vns</span> <span class="o">=</span>  <span class="n">griddata</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">(</span><span class="n">new_dep</span><span class="p">,</span> <span class="n">new_lat</span><span class="p">,</span> <span class="n">new_lon</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
-	<span class="n">vrad</span> <span class="o">=</span>  <span class="n">griddata</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">(</span><span class="n">new_dep</span><span class="p">,</span> <span class="n">new_lat</span><span class="p">,</span> <span class="n">new_lon</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
-	<span class="n">t</span> <span class="o">=</span>  <span class="n">griddata</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">(</span><span class="n">new_dep</span><span class="p">,</span> <span class="n">new_lat</span><span class="p">,</span> <span class="n">new_lon</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
-	<span class="n">dens</span> <span class="o">=</span>  <span class="n">griddata</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">(</span><span class="n">new_dep</span><span class="p">,</span> <span class="n">new_lat</span><span class="p">,</span> <span class="n">new_lon</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
-	<span class="c1"># 将网格化后每个维度坐标和数据保存在一个.npz文件中</span>
-	<span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="s1">&#39;data_0.1.npz&#39;</span><span class="p">,</span> <span class="n">dep</span><span class="o">=</span><span class="n">dep</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="n">lon</span><span class="p">,</span> <span class="n">vew</span><span class="o">=</span><span class="n">vew</span><span class="p">,</span> <span class="n">vns</span><span class="o">=</span><span class="n">vns</span><span class="p">,</span> <span class="n">vrad</span><span class="o">=</span><span class="n">vrad</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">dens</span><span class="o">=</span><span class="n">dens</span><span class="p">)</span></code></pre></td></tr></table>
+   <span class="c1"># 在三个纬度上设置研究区域和网格间隔，网格间隔根据需要选取。</span>
+   <span class="n">lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">latmin</span><span class="p">,</span> <span class="n">latmax</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+   <span class="n">lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">lonmin</span><span class="p">,</span> <span class="n">lonmax</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+   <span class="n">dep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">depmin</span><span class="p">,</span> <span class="n">depmax</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+   <span class="n">new_dep</span><span class="p">,</span> <span class="n">new_lat</span><span class="p">,</span> <span class="n">new_lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">dep</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s1">&#39;ij&#39;</span><span class="p">)</span>
+   <span class="c1"># 读取数据列表</span>
+   <span class="n">data</span> <span class="o">=</span>  <span class="n">read_dat</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+   <span class="c1"># 设置原始数据点位置</span>
+   <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+   <span class="c1"># 对每一种数据进行网格化</span>
+   <span class="n">vew</span> <span class="o">=</span>  <span class="n">griddata</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">(</span><span class="n">new_dep</span><span class="p">,</span> <span class="n">new_lat</span><span class="p">,</span> <span class="n">new_lon</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+   <span class="n">vns</span> <span class="o">=</span>  <span class="n">griddata</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">(</span><span class="n">new_dep</span><span class="p">,</span> <span class="n">new_lat</span><span class="p">,</span> <span class="n">new_lon</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+   <span class="n">vrad</span> <span class="o">=</span>  <span class="n">griddata</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">(</span><span class="n">new_dep</span><span class="p">,</span> <span class="n">new_lat</span><span class="p">,</span> <span class="n">new_lon</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+   <span class="n">t</span> <span class="o">=</span>  <span class="n">griddata</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">(</span><span class="n">new_dep</span><span class="p">,</span> <span class="n">new_lat</span><span class="p">,</span> <span class="n">new_lon</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+   <span class="n">dens</span> <span class="o">=</span>  <span class="n">griddata</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">(</span><span class="n">new_dep</span><span class="p">,</span> <span class="n">new_lat</span><span class="p">,</span> <span class="n">new_lon</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+   <span class="c1"># 将网格化后每个维度坐标和数据保存在一个.npz文件中</span>
+   <span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="s1">&#39;data_0.1.npz&#39;</span><span class="p">,</span> <span class="n">dep</span><span class="o">=</span><span class="n">dep</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="n">lon</span><span class="p">,</span> <span class="n">vew</span><span class="o">=</span><span class="n">vew</span><span class="p">,</span> <span class="n">vns</span><span class="o">=</span><span class="n">vns</span><span class="p">,</span> <span class="n">vrad</span><span class="o">=</span><span class="n">vrad</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">dens</span><span class="o">=</span><span class="n">dens</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="2-平面和剖面的切片">2. 平面和剖面的切片</h2>
-
+</div><h2 id="2-平面和剖面的切片">2. 平面和剖面的切片</h2>
 <p>用GMT绘制二维图像需要从上一步网格好的数据文件中对某个平面或剖面进行切片。对平面的切片简单一些，对剖面的切片则需要先对大圆弧路径进行插值，生成数据点坐标，再用这些坐标对三维数据体进行插值。</p>
-
-<h3 id="2-1-对数据的平面切片-cut-plane-py">2.1 对数据的平面切片  (<code>cut_plane.py</code>)</h3>
+<h3 id="21-对数据的平面切片--cut_planepy">2.1 对数据的平面切片  (<code>cut_plane.py</code>)</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -293,7 +278,7 @@
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interpn</span>
 
 <span class="c1"># 在指定的区域内生成数据点坐标，理论上说这些点也可以是不等间隔的，但是GMT绘图时依旧需要网格化，所以这里还是使用等间隔插值。</span>
@@ -309,8 +294,8 @@
 <span class="c1"># 生成的数据点对三维数据体插值</span>
 <span class="k">def</span> <span class="nf">interall</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
     <span class="n">inter_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">])</span>
-    <span class="n">inter_data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">interpn</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dep&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]),</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;vew&#39;</span><span class="p">],</span> <span class="n">points</span><span class="p">,</span> <span class="n">bounds_error</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-    <span class="n">inter_data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">interpn</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dep&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]),</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;vns&#39;</span><span class="p">],</span> <span class="n">points</span><span class="p">,</span> <span class="n">bounds_error</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+    <span class="n">inter_data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">interpn</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dep&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]),</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;vew&#39;</span><span class="p">],</span> <span class="n">points</span><span class="p">,</span> <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">inter_data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">interpn</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dep&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]),</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;vns&#39;</span><span class="p">],</span> <span class="n">points</span><span class="p">,</span> <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="c1"># 返回时同时将数据点坐标那三列于插值得到的数据拼贴后一起输出</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">inter_data</span><span class="p">))</span>
 
@@ -320,24 +305,20 @@
     <span class="n">points</span> <span class="o">=</span> <span class="n">init_plane</span><span class="p">()</span>
     <span class="n">inter_data</span> <span class="o">=</span> <span class="n">interall</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
     <span class="c1"># 最后输出到一个文本文本文件</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s1">&#39;vel_200.dat&#39;</span><span class="p">,</span> <span class="n">inter_data</span><span class="p">)</span></code></pre></td></tr></table>
+    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s1">&#39;vel_200.dat&#39;</span><span class="p">,</span> <span class="n">inter_data</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>那么这时输出的数据包括了4列，依次为经度，纬度，南北方向的速度和东西方向的速度。</p>
-
-<h3 id="2-2-对数据的剖面切片-cut-sec-py">2.2 对数据的剖面切片 (<code>cut_sec.py</code>)</h3>
-
+</div><p>那么这时输出的数据包括了4列，依次为经度，纬度，南北方向的速度和东西方向的速度。</p>
+<h3 id="22-对数据的剖面切片-cut_secpy">2.2 对数据的剖面切片 (<code>cut_sec.py</code>)</h3>
 <p>虽热都是对数据体的切片，但是剖面的切片要更复杂一些。主要的难点是：</p>
-
 <ul>
 <li>对大圆弧路径的等距离划分。其中要考虑球面三角函数和椭球矫正（有现成<a href="http://www.seis.sc.edu/software/distaz/">代码</a>）。但是这里为了方便直接调用了GMT里的<a href="https://docs.gmt-china.org/5.4/module/project/"><code>project</code></a>命令，直接生成横向网格，更加方便。</li>
 <li>对原先的南北和东西分量进行坐标旋转，旋转角度是剖面两个端点之间的方位角（请参考<a href="http://service.iris.edu/irisws/rotation/docs/1/help/">IRIS 的一个教程</a>）。</li>
 </ul>
-
 <p>那么先导入函数库</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -345,20 +326,19 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interpn</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">seispy_distaz</span> <span class="kn">import</span> <span class="o">*</span></code></pre></td></tr></table>
+<span class="kn">from</span> <span class="nn">seispy_distaz</span> <span class="kn">import</span> <span class="o">*</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h4 id="生成数据点">生成数据点</h4>
-
+</div><h4 id="生成数据点">生成数据点</h4>
 <p>以下是生成据点的函数。需要说明的是<code>gmt project</code>是GMT内一个用于投影点的命令，这里直接在Python中调用了，这条命令的具体说明请参考<a href="https://docs.gmt-china.org/5.4/module/project/">GMT中文手册</a>。所以如果系统中没有GMT，就只能尝试用别的方法了。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -374,11 +354,11 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="k">def</span> <span class="nf">gen_points</span><span class="p">(</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">depmax</span><span class="o">=</span><span class="mi">700</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="k">def</span> <span class="nf">gen_points</span><span class="p">(</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">depmax</span><span class="o">=</span><span class="mi">700</span><span class="p">):</span>
 	<span class="c1"># 生成GMT命令字符串</span>
-    <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;gmt project -C{}/{} -E{}/{} -G{} -Q&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lon1</span><span class="p">,</span> <span class="n">lat1</span><span class="p">,</span> <span class="n">lon2</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;gmt project -C</span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1"> -E</span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1"> -G</span><span class="si">{}</span><span class="s1"> -Q&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lon1</span><span class="p">,</span> <span class="n">lat1</span><span class="p">,</span> <span class="n">lon2</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
 	<span class="c1"># 开启一个命令行子进程，并将cmd传入</span>
-    <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
 	<span class="c1"># 读取网格点经纬度和相对第一个点的距离</span>
     <span class="n">line_pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
     <span class="n">points</span> <span class="o">=</span> <span class="p">[]</span>
@@ -387,15 +367,14 @@
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">line_pos</span><span class="p">:</span>
 			<span class="c1"># 生成数据列表，这里/111是将千米转化为度</span>
             <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">dep</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="mi">111</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">points</span><span class="p">)</span></code></pre></td></tr></table>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h4 id="对矢量数据进行坐标系旋转">对矢量数据进行坐标系旋转</h4>
-
+</div><h4 id="对矢量数据进行坐标系旋转">对矢量数据进行坐标系旋转</h4>
 <p>大部分都是标准公式。需要一提的是<code>distaz</code>来自<code>seispy_distaz.py</code>，一个在原版<code>distaz</code>基础上改进过的版本，说不定以后做其他处理还能用的上。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -408,7 +387,7 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="n">vew</span><span class="p">,</span> <span class="n">vns</span><span class="p">,</span> <span class="n">baz</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="n">vew</span><span class="p">,</span> <span class="n">vns</span><span class="p">,</span> <span class="n">baz</span><span class="p">):</span>
     <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">baz</span><span class="o">+</span><span class="mi">180</span><span class="p">,</span> <span class="mi">360</span><span class="p">)</span>
     <span class="n">vr</span> <span class="o">=</span> <span class="n">vns</span><span class="o">*</span><span class="n">cosd</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">+</span> <span class="n">vew</span><span class="o">*</span><span class="n">sind</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
     <span class="n">vt</span> <span class="o">=</span> <span class="n">vew</span><span class="o">*</span><span class="n">cosd</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">-</span> <span class="n">vns</span><span class="o">*</span><span class="n">sind</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
@@ -418,20 +397,18 @@
 <span class="k">def</span> <span class="nf">velproj</span><span class="p">(</span><span class="n">vew</span><span class="p">,</span> <span class="n">vns</span><span class="p">,</span> <span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">):</span>
     <span class="n">baz</span> <span class="o">=</span> <span class="n">distaz</span><span class="p">(</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">)</span><span class="o">.</span><span class="n">baz</span>
     <span class="n">vr</span><span class="p">,</span> <span class="n">vt</span> <span class="o">=</span> <span class="n">rotate</span><span class="p">(</span><span class="n">vew</span><span class="p">,</span> <span class="n">vns</span><span class="p">,</span> <span class="n">baz</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">vr</span><span class="p">,</span> <span class="n">vt</span></code></pre></td></tr></table>
+    <span class="k">return</span> <span class="n">vr</span><span class="p">,</span> <span class="n">vt</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h4 id="数据插值">数据插值</h4>
-
+</div><h4 id="数据插值">数据插值</h4>
 <p>插值和平面切片是类似的。只有以下几点不同：</p>
-
 <ul>
 <li>速度为坐标系转化后的速度。</li>
-
-<li><p>需要对垂直方向速度，温度和密度等进行插值。</p>
+<li>需要对垂直方向速度，温度和密度等进行插值。</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -441,41 +418,39 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="k">def</span> <span class="nf">interall</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">vr</span><span class="p">,</span> <span class="n">vt</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
-<span class="n">inter_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">5</span><span class="p">])</span>
-<span class="n">inter_data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">interpn</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dep&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]),</span> <span class="n">vr</span><span class="p">,</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">bounds_error</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-<span class="n">inter_data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">interpn</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dep&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]),</span> <span class="n">vt</span><span class="p">,</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">bounds_error</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-<span class="n">inter_data</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">interpn</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dep&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]),</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;vrad&#39;</span><span class="p">],</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">bounds_error</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-<span class="n">inter_data</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">interpn</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dep&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]),</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">],</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">bounds_error</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-<span class="n">inter_data</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">interpn</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dep&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]),</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;dens&#39;</span><span class="p">],</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">bounds_error</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-<span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">points</span><span class="p">,</span> <span class="n">inter_data</span><span class="p">))</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="k">def</span> <span class="nf">interall</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">vr</span><span class="p">,</span> <span class="n">vt</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
+    <span class="n">inter_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">5</span><span class="p">])</span>
+    <span class="n">inter_data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">interpn</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dep&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]),</span> <span class="n">vr</span><span class="p">,</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">inter_data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">interpn</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dep&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]),</span> <span class="n">vt</span><span class="p">,</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">inter_data</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">interpn</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dep&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]),</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;vrad&#39;</span><span class="p">],</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">inter_data</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">interpn</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dep&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]),</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">],</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">inter_data</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">interpn</span><span class="p">((</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dep&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]),</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;dens&#39;</span><span class="p">],</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">points</span><span class="p">,</span> <span class="n">inter_data</span><span class="p">))</span>
+</code></pre></td></tr></table>
 </div>
-</div></li>
-</ul>
-
-<h4 id="这个脚本中一些其他小技巧">这个脚本中一些其他小技巧</h4>
-
+</div><h4 id="这个脚本中一些其他小技巧">这个脚本中一些其他小技巧</h4>
 <p>由于剖面不止一条，所以我按照我在地震学上的处理方式做了一个剖面列表，给每个剖面编上序号，切剖面和画剖面时只需要改动剖面编号。剖面列表<code>lines.lst</code>内容如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span></pre></td>
+</span><span class="lnt">4
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">25 80 45 87 a
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">25 80 45 87 a
 24 85 25 113 b
-25 80 40 118 c</pre></td></tr></table>
+25 80 40 118 c
+
+</code></pre></td></tr></table>
 </div>
-</div>
-<blockquote>
+</div><blockquote>
 <p>最后最好空一行，否则有的语言读取可能会有bug。</p>
 </blockquote>
-
 <p>所以在剖面切片的脚本中就加入了输入剖面编号，剖面切片的功能。以下是输入编号输出对应剖面经纬度的函数：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -484,13 +459,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="k">def</span> <span class="nf">load_line</span><span class="p">(</span><span class="n">line_name</span><span class="p">,</span> <span class="n">line_file</span><span class="o">=</span><span class="s1">&#39;lines.lst&#39;</span><span class="p">):</span>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="k">def</span> <span class="nf">load_line</span><span class="p">(</span><span class="n">line_name</span><span class="p">,</span> <span class="n">line_file</span><span class="o">=</span><span class="s1">&#39;lines.lst&#39;</span><span class="p">):</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">line_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">line_content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">line_str</span> <span class="ow">in</span> <span class="n">line_content</span><span class="p">:</span>
         <span class="n">line_str</span> <span class="o">=</span> <span class="n">line_str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">line_str</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">line_name</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">line_str</span><span class="o">.</span><span class="n">split</span><span class="p">()[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span></code></pre></td></tr></table>
+            <span class="k">return</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">line_str</span><span class="o">.</span><span class="n">split</span><span class="p">()[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+</code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -536,7 +512,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
     <script type="text/javascript">
       var gitalk = new Gitalk({
-        id: '2020-01-11 21:17:48 \x2b0800 \x2b0800',
+        id: '2020-01-11 21:17:48 \u002b0800 \u002b0800',
         title: '三维数据体生成与切片',
         clientID: '83b0e39119b727cd2ba2',
         clientSecret: '2b6f4a9e1459a3e6bafa8afaaa509d755a7cf744',

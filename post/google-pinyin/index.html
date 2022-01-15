@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3 with theme even" />
+<meta name="generator" content="Hugo 0.91.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.xumijian.me/post/google-pinyin/" />
@@ -42,21 +42,15 @@
 <meta property="og:title" content="Fedora26中安装Google拼音输入法" />
 <meta property="og:description" content="在Fedora25的时候sogou拼音出现了一些不兼容的情况，从而使我转而使用Google拼音。如今操作系统已经换成了Fedora26，这里就记录下安装Google拼音的过程。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.xumijian.me/post/google-pinyin/" />
+<meta property="og:url" content="https://blog.xumijian.me/post/google-pinyin/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2017-10-27T12:26:29+08:00" />
 <meta property="article:modified_time" content="2017-10-27T12:26:29+08:00" />
+
 <meta itemprop="name" content="Fedora26中安装Google拼音输入法">
-<meta itemprop="description" content="在Fedora25的时候sogou拼音出现了一些不兼容的情况，从而使我转而使用Google拼音。如今操作系统已经换成了Fedora26，这里就记录下安装Google拼音的过程。">
-
-
-<meta itemprop="datePublished" content="2017-10-27T12:26:29&#43;08:00" />
-<meta itemprop="dateModified" content="2017-10-27T12:26:29&#43;08:00" />
-<meta itemprop="wordCount" content="583">
-
-
-
-<meta itemprop="keywords" content="Tools,Fedora,Linux," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="description" content="在Fedora25的时候sogou拼音出现了一些不兼容的情况，从而使我转而使用Google拼音。如今操作系统已经换成了Fedora26，这里就记录下安装Google拼音的过程。"><meta itemprop="datePublished" content="2017-10-27T12:26:29+08:00" />
+<meta itemprop="dateModified" content="2017-10-27T12:26:29+08:00" />
+<meta itemprop="wordCount" content="582">
+<meta itemprop="keywords" content="Tools,Fedora,Linux," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Fedora26中安装Google拼音输入法"/>
 <meta name="twitter:description" content="在Fedora25的时候sogou拼音出现了一些不兼容的情况，从而使我转而使用Google拼音。如今操作系统已经换成了Fedora26，这里就记录下安装Google拼音的过程。"/>
 
@@ -140,34 +134,33 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#输入法和输入源">输入法和输入源</a></li>
-<li><a href="#安装软件源">安装软件源</a></li>
-<li><a href="#安装google拼音">安装Google拼音</a></li>
-<li><a href="#切换输入源">切换输入源</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#输入法和输入源">输入法和输入源</a></li>
+        <li><a href="#安装软件源">安装软件源</a></li>
+        <li><a href="#安装google拼音">安装Google拼音</a></li>
+        <li><a href="#切换输入源">切换输入源</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p>在Fedora25的时候sogou拼音出现了一些不兼容的情况，从而使我转而使用Google拼音。如今操作系统已经换成了Fedora26，这里就记录下安装Google拼音的过程。</p>
-
 <h2 id="输入法和输入源">输入法和输入源</h2>
-
-<p>在Linux系统中，常用的输入源有ibus和fcitx两种，输入法又会被安装在输入源中（Google拼音在fcitx里）。这两种输入源也是不可以同时使用的。Fedora26默认的输入源是ibus（大部分Linux都是），这里带有拼音输入法，但是非常难用。所以要安装Google拼音就需要安装fcitx，并且能停用ibus。这里需要安装的主要工具有：<br />
-- fcitx
-- Googlepinyin
-- im-chooser</p>
-
+<p>在Linux系统中，常用的输入源有ibus和fcitx两种，输入法又会被安装在输入源中（Google拼音在fcitx里）。这两种输入源也是不可以同时使用的。Fedora26默认的输入源是ibus（大部分Linux都是），这里带有拼音输入法，但是非常难用。所以要安装Google拼音就需要安装fcitx，并且能停用ibus。这里需要安装的主要工具有：\</p>
+<ul>
+<li>fcitx</li>
+<li>Googlepinyin</li>
+<li>im-chooser</li>
+</ul>
 <h2 id="安装软件源">安装软件源</h2>
-
 <p><a href="https://repo.fdzh.org/">FZUG</a>是fedora的中文源，其中提供了Google拼音，详细信息如下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -179,9 +172,10 @@
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
-</span></pre></td>
+</span><span class="lnt">13
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">名称         : fcitx-googlepinyin
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">名称         : fcitx-googlepinyin
 版本         : 0.1.6
 发布         : 3.git6536e18.fc26
 架构         : x86_64
@@ -192,42 +186,41 @@ Source       : fcitx-googlepinyin-0.1.6-3.git6536e18.fc26.src.rpm
 小结         : Googlepinyin module for fcitx
 URL          : https://fcitx-im.org/wiki/Googlepinyin
 协议         : GPLv3
-描述         : fcitx-googlepinyin is a Googlepinyin module for fcitx.</pre></td></tr></table>
+描述         : fcitx-googlepinyin is a Googlepinyin module for fcitx.
+
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>所以先使用如下命令安装FZUG源</p>
+</div><p>所以先使用如下命令安装FZUG源</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">dnf install https://repo.fdzh.org/FZUG/free/26/x86_64/fzug-release-26-0.2.noarch.rpm</pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dnf install https://repo.fdzh.org/FZUG/free/26/x86_64/fzug-release-26-0.2.noarch.rpm
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="安装google拼音">安装Google拼音</h2>
-
+</div><h2 id="安装google拼音">安装Google拼音</h2>
 <p>直接用<code>dnf</code>安装会同时安装Google拼音的依赖，比如fcitx。但是装好之后会发现没办法在fcitx和ibus直接切换，所以还需要安装im-chooser。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">sudo dnf install fcitx-googlepinyin im-chooser</pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">sudo dnf install fcitx-googlepinyin im-chooser
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="切换输入源">切换输入源</h2>
-
+</div><h2 id="切换输入源">切换输入源</h2>
 <p>im-chooser的功能是切换系统的输入源，这时我们要停用ibus，启用fcitx，在终端输入：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">im-chooser</pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">im-chooser
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>出现输入法选择器窗口，选择fcitx，<strong>注销后即可生效</strong>
-<img src="/img/google-pinyin/im-chooser.png" alt="" /></p>
+</div><p>出现输入法选择器窗口，选择fcitx，<strong>注销后即可生效</strong>
+<img src="/img/google-pinyin/im-chooser.png" alt=""></p>
     </div>
 
     <div class="post-copyright">
@@ -271,7 +264,7 @@ URL          : https://fcitx-im.org/wiki/Googlepinyin
     <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
     <script type="text/javascript">
       var gitalk = new Gitalk({
-        id: '2017-10-27 12:26:29 \x2b0800 \x2b0800',
+        id: '2017-10-27 12:26:29 \u002b0800 \u002b0800',
         title: 'Fedora26中安装Google拼音输入法',
         clientID: '83b0e39119b727cd2ba2',
         clientSecret: '2b6f4a9e1459a3e6bafa8afaaa509d755a7cf744',

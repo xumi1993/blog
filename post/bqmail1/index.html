@@ -25,7 +25,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3 with theme even" />
+<meta name="generator" content="Hugo 0.91.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.xumijian.me/post/bqmail1/" />
@@ -43,45 +43,33 @@
 <meta property="og:title" content="BQMail2.0: 向IRIS DMC发送数据请求的Python模块（1. 数据查询）" />
 <meta property="og:description" content="BQMail是用于向IRIS申请数据的Python模块。2016年我们完成了BQMail 1.0版本，但受限于当时IRIS服务的欠缺，随着时间的发展软件出现了以下不足：
 
-
 发送命令繁琐
 需要本地地震目录
 可拓展性差
-
 
 因此我们重写了BQMail的源码，结合了IRIS DMC Web Services和ObsPy，实现了地震和台站的快速查询，并能够以Python模块的方式调用来发送数据请求。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.xumijian.me/post/bqmail1/" />
+<meta property="og:url" content="https://blog.xumijian.me/post/bqmail1/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-06-09T16:58:02+08:00" />
 <meta property="article:modified_time" content="2020-06-09T16:58:02+08:00" />
+
 <meta itemprop="name" content="BQMail2.0: 向IRIS DMC发送数据请求的Python模块（1. 数据查询）">
 <meta itemprop="description" content="BQMail是用于向IRIS申请数据的Python模块。2016年我们完成了BQMail 1.0版本，但受限于当时IRIS服务的欠缺，随着时间的发展软件出现了以下不足：
 
-
 发送命令繁琐
 需要本地地震目录
 可拓展性差
 
-
-因此我们重写了BQMail的源码，结合了IRIS DMC Web Services和ObsPy，实现了地震和台站的快速查询，并能够以Python模块的方式调用来发送数据请求。">
-
-
-<meta itemprop="datePublished" content="2020-06-09T16:58:02&#43;08:00" />
-<meta itemprop="dateModified" content="2020-06-09T16:58:02&#43;08:00" />
+因此我们重写了BQMail的源码，结合了IRIS DMC Web Services和ObsPy，实现了地震和台站的快速查询，并能够以Python模块的方式调用来发送数据请求。"><meta itemprop="datePublished" content="2020-06-09T16:58:02+08:00" />
+<meta itemprop="dateModified" content="2020-06-09T16:58:02+08:00" />
 <meta itemprop="wordCount" content="1581">
-
-
-
-<meta itemprop="keywords" content="Python,BQMail," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Python,BQMail," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="BQMail2.0: 向IRIS DMC发送数据请求的Python模块（1. 数据查询）"/>
 <meta name="twitter:description" content="BQMail是用于向IRIS申请数据的Python模块。2016年我们完成了BQMail 1.0版本，但受限于当时IRIS服务的欠缺，随着时间的发展软件出现了以下不足：
 
-
 发送命令繁琐
 需要本地地震目录
 可拓展性差
-
 
 因此我们重写了BQMail的源码，结合了IRIS DMC Web Services和ObsPy，实现了地震和台站的快速查询，并能够以Python模块的方式调用来发送数据请求。"/>
 
@@ -165,90 +153,86 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#安装">安装</a>
-<ul>
-<li><a href="#通过pypi安装">通过PyPI安装</a></li>
-<li><a href="#通过源码安装">通过源码安装</a></li>
-</ul></li>
-<li><a href="#地震事件查询">地震事件查询</a>
-<ul>
-<li><a href="#实例">实例</a></li>
-</ul></li>
-<li><a href="#台站查询">台站查询</a>
-<ul>
-<li><a href="#实例-1">实例</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#安装">安装</a>
+          <ul>
+            <li><a href="#通过pypi安装">通过PyPI安装</a></li>
+            <li><a href="#通过源码安装">通过源码安装</a></li>
+          </ul>
+        </li>
+        <li><a href="#地震事件查询">地震事件查询</a>
+          <ul>
+            <li><a href="#实例">实例</a></li>
+          </ul>
+        </li>
+        <li><a href="#台站查询">台站查询</a>
+          <ul>
+            <li><a href="#实例-1">实例</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p>BQMail是用于向IRIS申请数据的Python模块。2016年我们完成了BQMail 1.0版本，但受限于当时IRIS服务的欠缺，随着时间的发展软件出现了以下不足：</p>
-
 <ul>
 <li>发送命令繁琐</li>
 <li>需要本地地震目录</li>
 <li>可拓展性差</li>
 </ul>
-
 <p>因此我们重写了BQMail的源码，结合了<a href="http://service.iris.edu/fdsnws/">IRIS DMC Web Services</a>和<a href="http://docs.obspy.org/">ObsPy</a>，实现了地震和台站的快速查询，并能够以Python模块的方式调用来发送数据请求。</p>
-
 <h2 id="安装">安装</h2>
-
 <p>新版的BQMail除了可以源码安装还可以通过PyPI安装</p>
-
 <h3 id="通过pypi安装">通过PyPI安装</h3>
-
 <p>对于普通用户我们推荐这种安装方式：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">pip install bqmail</pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pip install bqmail
+</code></pre></td></tr></table>
 </div>
-</div>
-<h3 id="通过源码安装">通过源码安装</h3>
-
+</div><h3 id="通过源码安装">通过源码安装</h3>
 <p>BQMail的源码目前托管在Github上，先克隆该项目到本地：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">git clone https://github.com/xumi1993/bqmail.git bqmail</pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git clone https://github.com/xumi1993/bqmail.git bqmail
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>然后进入目录并安装</p>
+</div><p>然后进入目录并安装</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">cd bqmail
-pip install .</pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">cd bqmail
+pip install .
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="地震事件查询">地震事件查询</h2>
-
+</div><h2 id="地震事件查询">地震事件查询</h2>
 <p>我们调用ObsPy中的IRIS客户端实现了命令行下的地震时间快速查询，安装BQMail后在命令行输入</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">get_events -h</pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">get_events -h
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>获取详细的帮助信息。</p>
+</div><p>获取详细的帮助信息。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -262,9 +246,9 @@ pip install .</pre></td></tr></table>
 </span><span class="lnt">12
 </span><span class="lnt">13
 </span><span class="lnt">14
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">usage: get_events [-h] [-b B] [-e E] [-d D] [-r R] [-m M] [-p P] [-c C]
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">usage: get_events [-h] [-b B] [-e E] [-d D] [-r R] [-m M] [-p P] [-c C]
 
 Get seismic events from IRIS WS
 
@@ -277,72 +261,69 @@ optional arguments:
   -r R        Box range with &lt;lon1&gt;/&lt;lon2&gt;/&lt;lat1&gt;/&lt;lat2&gt;
   -m M        Magnitude &lt;minmagnitude&gt;[/&lt;maxmagnitude&gt;]
   -p P        Focal depth &lt;mindepth&gt;[/&lt;maxdepth&gt;]
-  -c C        Catalog</pre></td></tr></table>
+  -c C        Catalog
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
+</div><ul>
 <li><code>-b &lt;starttime&gt;</code>：地震目录的开始时间，格式与<a href="http://docs.obspy.org/packages/autogen/obspy.core.utcdatetime.UTCDateTime.html#obspy.core.utcdatetime.UTCDateTime"><code>obspy.UTCDateTime</code></a>的一致。</li>
 <li><code>-e &lt;endtime&gt;</code>：地震目录的结束时间，格式同上。</li>
 <li><code>-d &lt;lat&gt;/&lt;lon&gt;/&lt;minradius&gt;/&lt;maxradius&gt;</code>：以中心点个半径限制发震位置
-
 <ul>
 <li><code>lat</code>：中心点纬度</li>
 <li><code>lon</code>：中心点经度</li>
 <li><code>minradius</code>：距中心点的最小半径</li>
 <li><code>maxradius</code>：距中心点的最大半径</li>
-</ul></li>
+</ul>
+</li>
 <li><code>-r &lt;lon1&gt;/&lt;lon2&gt;/&lt;lat1&gt;/&lt;lat2&gt;</code>：以矩形范围限制发震位置
-
 <ul>
 <li><code>lon1</code>：最小经度</li>
 <li><code>lon2</code>：最大经度</li>
 <li><code>lat1</code>：最小纬度</li>
 <li><code>lat2</code>：最大纬度</li>
-</ul></li>
+</ul>
+</li>
 <li><code>-m &lt;minmagnitude&gt;[/&lt;maxmagnitude&gt;]</code>：震级范围，如果只有一个参数则只指定最小震级。</li>
 <li><code>-p &lt;mindepth&gt;[/&lt;maxdepth&gt;]</code>：震源深度范围，如果只有一个参数只指定最小震源深度。</li>
 <li><code>-c &lt;catalog&gt;</code>：地震目录的提供者，可选<code>GCMT|PDE|ISC</code>。</li>
 </ul>
-
 <h3 id="实例">实例</h3>
-
 <ol>
-<li><p>查询2019年发生的大于7级的地震</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">get_events -b 20190101 -m 7</pre></td></tr></table>
-</div>
-</div></li>
-
-<li><p>查询发震时刻在2014-1-1至2019-1-1，中心点为23˚E 114˚N，震中距在30˚-90˚之间，震级大于5.5级的地震</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">get_events -b 20140101 -e 20190101 -d 23/114/30/90 -m 5.5</pre></td></tr></table>
-</div>
-</div></li>
+<li>查询2019年发生的大于7级的地震</li>
 </ol>
-
-<h2 id="台站查询">台站查询</h2>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">get_events -b 20190101 -m 7
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>查询发震时刻在2014-1-1至2019-1-1，中心点为23˚E 114˚N，震中距在30˚-90˚之间，震级大于5.5级的地震</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">get_events -b 20140101 -e 20190101 -d 23/114/30/90 -m 5.5
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="台站查询">台站查询</h2>
 <p>同样的方式实现了命令行下对IRIS DMC台站的查询，在命令行输入</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">get_stations -h</pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">get_stations -h
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>可以获取帮助</p>
+</div><p>可以获取帮助</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -356,9 +337,9 @@ optional arguments:
 </span><span class="lnt">12
 </span><span class="lnt">13
 </span><span class="lnt">14
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">usage: get_stations [-h] [-n N] [-s S] [-r R] [-d D] [-b B] [-e E] [-c C]
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">usage: get_stations [-h] [-n N] [-s S] [-r R] [-d D] [-b B] [-e E] [-c C]
 
 Get stations from IRIS WS
 
@@ -371,10 +352,10 @@ optional arguments:
               &lt;lat&gt;/&lt;lon&gt;/&lt;minradius&gt;/&lt;maxradius&gt;
   -b B        Start time
   -e E        End time
-  -c C        Channel</pre></td></tr></table>
+  -c C        Channel
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
+</div><ul>
 <li><code>-n &lt;network&gt;</code>：台网名</li>
 <li><code>-s &lt;station&gt;</code>：台站名</li>
 <li><code>-r &lt;lon1&gt;/&lt;lon2&gt;/&lt;lat1&gt;/&lt;lat2&gt;</code>：以矩形范围限制台站位置，用法与<code>get_events</code>相同。</li>
@@ -383,38 +364,34 @@ optional arguments:
 <li><code>-e &lt;endtime&gt;</code>：数据记录的结束时间，用法与<code>get_events</code>相同。</li>
 <li><code>-c &lt;channel&gt;</code>：通道名</li>
 </ul>
-
 <div class="admonition note"><p class="admonition-title">⚠️注意</p>
-  
-台网名、台站名和通道名支持通配符。
-
+<p>台网名、台站名和通道名支持通配符。</p>
 </div>
-
 <!-- >⚠️注意：台网名、台站名和通道名支持通配符。 -->
-
 <h3 id="实例-1">实例</h3>
-
 <ol>
-<li><p>查询CB台网下的所有台站</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">get_stations -n CB</pre></td></tr></table>
-</div>
-</div></li>
-
-<li><p>查询位置在经度98-110，纬度21-36，2003-1-1至今的宽频带台站</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">get_stations -r 98/110/21/36 -b 20030101 -c BHZ</pre></td></tr></table>
-</div>
-</div></li>
+<li>查询CB台网下的所有台站</li>
 </ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">get_stations -n CB
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>查询位置在经度98-110，纬度21-36，2003-1-1至今的宽频带台站</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">get_stations -r 98/110/21/36 -b 20030101 -c BHZ
+</code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     <div class="post-copyright">
@@ -457,7 +434,7 @@ optional arguments:
     <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
     <script type="text/javascript">
       var gitalk = new Gitalk({
-        id: '2020-06-09 16:58:02 \x2b0800 \x2b0800',
+        id: '2020-06-09 16:58:02 \u002b0800 \u002b0800',
         title: 'BQMail2.0: 向IRIS DMC发送数据请求的Python模块（1. 数据查询）',
         clientID: '83b0e39119b727cd2ba2',
         clientSecret: '2b6f4a9e1459a3e6bafa8afaaa509d755a7cf744',

@@ -198,14 +198,14 @@
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/categories/linux/</loc>
+    <loc>https://blog.xumijian.me/tags/linux/</loc>
     <lastmod>2019-06-18T12:30:12+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/tags/linux/</loc>
+    <loc>https://blog.xumijian.me/categories/linux/</loc>
     <lastmod>2019-06-18T12:30:12+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

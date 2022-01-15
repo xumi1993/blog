@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3 with theme even" />
+<meta name="generator" content="Hugo 0.91.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.xumijian.me/post/vscode-ssh/" />
@@ -43,22 +43,16 @@
 <meta property="og:description" content="
 动图来自官网" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.xumijian.me/post/vscode-ssh/" />
+<meta property="og:url" content="https://blog.xumijian.me/post/vscode-ssh/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2019-06-18T12:30:12+08:00" />
 <meta property="article:modified_time" content="2019-06-18T12:30:12+08:00" />
+
 <meta itemprop="name" content="在VSCode中使用Remote-SSH进行远程开发">
 <meta itemprop="description" content="
-动图来自官网">
-
-
-<meta itemprop="datePublished" content="2019-06-18T12:30:12&#43;08:00" />
-<meta itemprop="dateModified" content="2019-06-18T12:30:12&#43;08:00" />
+动图来自官网"><meta itemprop="datePublished" content="2019-06-18T12:30:12+08:00" />
+<meta itemprop="dateModified" content="2019-06-18T12:30:12+08:00" />
 <meta itemprop="wordCount" content="965">
-
-
-
-<meta itemprop="keywords" content="vscode,SSH,Linux," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="vscode,SSH,Linux," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="在VSCode中使用Remote-SSH进行远程开发"/>
 <meta name="twitter:description" content="
 动图来自官网"/>
@@ -143,88 +137,75 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#overview">Overview</a></li>
-<li><a href="#安装">安装</a></li>
-<li><a href="#配置">配置</a></li>
-<li><a href="#连接服务器">连接服务器</a></li>
-<li><a href="#安装远程插件">安装远程插件</a></li>
-<li><a href="#使用">使用</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#安装">安装</a></li>
+        <li><a href="#配置">配置</a></li>
+        <li><a href="#连接服务器">连接服务器</a></li>
+        <li><a href="#安装远程插件">安装远程插件</a></li>
+        <li><a href="#使用">使用</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <p><img src="https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif" alt="" />
+      <p><img src="https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif" alt="">
 动图来自<a href="https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif">官网</a></p>
-
 <h2 id="overview">Overview</h2>
-
 <p>远程开发对于开发者尤其是Linux开发者来说是一种迫切的需求，我们所需求的远程开发工具通常需要具备以下几个功能：</p>
-
 <ul>
 <li><strong>在本地对服务器端代码进行编辑</strong></li>
 <li><strong>能在本地对服务器端代码用服务器端环境进行编译和调试</strong></li>
 <li><strong>代码高亮和补全要满足服务器端环境</strong></li>
 <li><strong>较低的成本</strong></li>
 </ul>
-
 <p>那么现有的解决方案有以下几种：</p>
-
 <table>
 <thead>
 <tr>
-<th align="center">方式</th>
-<th align="center">优点</th>
-<th align="center">缺点</th>
+<th style="text-align:center">方式</th>
+<th style="text-align:center">优点</th>
+<th style="text-align:center">缺点</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
-<td align="center">通过终端远程登录，用<strong><em>Vim</em></strong>、<strong><em>Emacs</em></strong>等编辑。</td>
-<td align="center">直接在服务器端运行易于编译调试，通过插件和配置可以获得代码高亮和补全</td>
-<td align="center">Vim 没有图形化，在开发大型项目时难以使用</td>
+<td style="text-align:center">通过终端远程登录，用<em><strong>Vim</strong></em>、<em><strong>Emacs</strong></em>等编辑。</td>
+<td style="text-align:center">直接在服务器端运行易于编译调试，通过插件和配置可以获得代码高亮和补全</td>
+<td style="text-align:center">Vim 没有图形化，在开发大型项目时难以使用</td>
 </tr>
-
 <tr>
-<td align="center">使用<a href="http://www.jetbrains.com/">JetBrains</a>套件中的远程开发功能</td>
-<td align="center">可以满足前三个功能</td>
-<td align="center">太贵了，对个人用户是一个负担。而社区版则没有这个功能</td>
+<td style="text-align:center">使用<a href="http://www.jetbrains.com/">JetBrains</a>套件中的远程开发功能</td>
+<td style="text-align:center">可以满足前三个功能</td>
+<td style="text-align:center">太贵了，对个人用户是一个负担。而社区版则没有这个功能</td>
 </tr>
-
 <tr>
-<td align="center">使用VSCode中<code>rmate</code>插件</td>
-<td align="center">在VSCode中编辑服务器端文件</td>
-<td align="center">只能编辑，不能编译和调试。而且使用不便。代码补全也是基于本地环境的</td>
+<td style="text-align:center">使用VSCode中<code>rmate</code>插件</td>
+<td style="text-align:center">在VSCode中编辑服务器端文件</td>
+<td style="text-align:center">只能编辑，不能编译和调试。而且使用不便。代码补全也是基于本地环境的</td>
 </tr>
 </tbody>
 </table>
-
 <h2 id="安装">安装</h2>
-
-<p>好在最近有<strong><em>Microsoft</em></strong>发布的VSCode插件<a href="https://aka.ms/vscode-remote/download/extension">Remote Development</a>解决了这些问题。首先我们做一些准备工作：</p>
-
+<p>好在最近有<em><strong>Microsoft</strong></em>发布的VSCode插件<a href="https://aka.ms/vscode-remote/download/extension">Remote Development</a>解决了这些问题。首先我们做一些准备工作：</p>
 <ol>
 <li>一台开启<code>open-ssh</code>的Linux服务器，一台可以远程登录的客户端。</li>
 <li>客户端需要版本高于<code>1.35</code>的VSCode。</li>
 <li>在VSCode中安装<a href="https://aka.ms/vscode-remote/download/extension">Remote Development</a></li>
 </ol>
-
 <h2 id="配置">配置</h2>
-
 <p>我们需要对客户端和服务器端（不需要管理员权限）进行一些配置：</p>
-
 <ol>
 <li>客户端和服务器端需要进行公私要配对，Remote Development不支持单纯的密码登录，但密码可以作为两步认证的密码登录。</li>
-
-<li><p>在<code>$HOME/.ssh/config</code>或者<code>/etc/ssh/ssh_config</code>中配置服务器名称和登录信息。在VSCode的命令板中输入<code>Remote-SSH: Open Configuration File...</code>，选择要修改的文件，打开文件后输入服务器名称和登录信息。例如：</p>
+<li>在<code>$HOME/.ssh/config</code>或者<code>/etc/ssh/ssh_config</code>中配置服务器名称和登录信息。在VSCode的命令板中输入<code>Remote-SSH: Open Configuration File...</code>，选择要修改的文件，打开文件后输入服务器名称和登录信息。例如：</li>
+</ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -232,42 +213,32 @@
 </span><span class="lnt">6
 </span><span class="lnt">7
 </span><span class="lnt">8
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">Host example-remote-linux-machine
-User your-user-name-here
-HostName host-fqdn-or-ip-goes-here
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Host example-remote-linux-machine
+   User your-user-name-here
+   HostName host-fqdn-or-ip-goes-here
 
 Host example-remote-linux-machine-with-identity-file
-User your-user-name-on-host
-HostName another-host-fqdn-or-ip-goes-here
-IdentityFile ~/.ssh/id_rsa-remote-ssh</pre></td></tr></table>
+   User your-user-name-on-host
+   HostName another-host-fqdn-or-ip-goes-here
+   IdentityFile ~/.ssh/id_rsa-remote-ssh
+</code></pre></td></tr></table>
 </div>
-</div></li>
-</ol>
-
-<blockquote>
+</div><blockquote>
 <p>只在自己的Mac上测试过，详细安装方法见<a href="https://code.visualstudio.com/docs/remote/ssh#_getting-started">官方文档</a></p>
 </blockquote>
-
 <h2 id="连接服务器">连接服务器</h2>
-
 <p>在命令板中输入<code>Remote-SSH: Connect to Host...</code>，然后选择配置过的服务器名就可以链接服务器。
-<img src="/img/vscode-ssh/connect-cmd.png" alt="" /></p>
-
+<img src="/img/vscode-ssh/connect-cmd.png" alt=""></p>
 <p>或者在左侧工具栏中找到配置过的服务器名就，右键点击连接服务器。
-<img src="/img/vscode-ssh/connect-ui.png" alt="" /></p>
-
+<img src="/img/vscode-ssh/connect-ui.png" alt=""></p>
 <h2 id="安装远程插件">安装远程插件</h2>
-
 <p>现在我们还没有安装远程插件，也就是说编译、调试等功能还不能在远程使用。Remote Development提供了远程插件，为SSH主机上的给定工作区安装任何所需的扩展。例如
-<img src="/img/vscode-ssh/ssh-installed-remote-indicator.png" alt="" /></p>
-
+<img src="/img/vscode-ssh/ssh-installed-remote-indicator.png" alt=""></p>
 <h2 id="使用">使用</h2>
-
 <p>连接服务器之后，再打开文件，这时会询问你服务器上的路径，如图
-<img src="/img/vscode-ssh/enter-path.png" alt="" /></p>
-
+<img src="/img/vscode-ssh/enter-path.png" alt=""></p>
 <p>打开项目后和本地一样设置编译器调试即可。</p>
     </div>
 
@@ -312,7 +283,7 @@ IdentityFile ~/.ssh/id_rsa-remote-ssh</pre></td></tr></table>
     <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
     <script type="text/javascript">
       var gitalk = new Gitalk({
-        id: '2019-06-18 12:30:12 \x2b0800 \x2b0800',
+        id: '2019-06-18 12:30:12 \u002b0800 \u002b0800',
         title: '在VSCode中使用Remote-SSH进行远程开发',
         clientID: '83b0e39119b727cd2ba2',
         clientSecret: '2b6f4a9e1459a3e6bafa8afaaa509d755a7cf744',

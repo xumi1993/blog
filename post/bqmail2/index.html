@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3 with theme even" />
+<meta name="generator" content="Hugo 0.91.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.xumijian.me/post/bqmail2/" />
@@ -42,21 +42,15 @@
 <meta property="og:title" content="BQMail2.0: 向IRIS DMC发送数据请求的Python模块（2. 发送申请）" />
 <meta property="og:description" content="在发送数据之前我们需要先查询所需台站和事件。BQMail将根据这些信息发送数据申请。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.xumijian.me/post/bqmail2/" />
+<meta property="og:url" content="https://blog.xumijian.me/post/bqmail2/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-08-26T11:31:38+08:00" />
 <meta property="article:modified_time" content="2020-08-26T11:31:38+08:00" />
+
 <meta itemprop="name" content="BQMail2.0: 向IRIS DMC发送数据请求的Python模块（2. 发送申请）">
-<meta itemprop="description" content="在发送数据之前我们需要先查询所需台站和事件。BQMail将根据这些信息发送数据申请。">
-
-
-<meta itemprop="datePublished" content="2020-08-26T11:31:38&#43;08:00" />
-<meta itemprop="dateModified" content="2020-08-26T11:31:38&#43;08:00" />
-<meta itemprop="wordCount" content="1046">
-
-
-
-<meta itemprop="keywords" content="Python,BQMail," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="description" content="在发送数据之前我们需要先查询所需台站和事件。BQMail将根据这些信息发送数据申请。"><meta itemprop="datePublished" content="2020-08-26T11:31:38+08:00" />
+<meta itemprop="dateModified" content="2020-08-26T11:31:38+08:00" />
+<meta itemprop="wordCount" content="1045">
+<meta itemprop="keywords" content="Python,BQMail," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="BQMail2.0: 向IRIS DMC发送数据请求的Python模块（2. 发送申请）"/>
 <meta name="twitter:description" content="在发送数据之前我们需要先查询所需台站和事件。BQMail将根据这些信息发送数据申请。"/>
 
@@ -140,143 +134,131 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#导入模块">导入模块</a></li>
-<li><a href="#创建bqmail实例">创建BQMail实例</a></li>
-<li><a href="#查询台站信息">查询台站信息</a></li>
-<li><a href="#发送连续数据申请">发送连续数据申请</a></li>
-<li><a href="#发送事件数据申请">发送事件数据申请</a>
-<ul>
-<li><a href="#查询事件信息">查询事件信息</a></li>
-<li><a href="#发送数据申请">发送数据申请</a></li>
-</ul></li>
-<li><a href="#小结">小结</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#导入模块">导入模块</a></li>
+        <li><a href="#创建bqmail实例">创建BQMail实例</a></li>
+        <li><a href="#查询台站信息">查询台站信息</a></li>
+        <li><a href="#发送连续数据申请">发送连续数据申请</a></li>
+        <li><a href="#发送事件数据申请">发送事件数据申请</a>
+          <ul>
+            <li><a href="#查询事件信息">查询事件信息</a></li>
+            <li><a href="#发送数据申请">发送数据申请</a></li>
+          </ul>
+        </li>
+        <li><a href="#小结">小结</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p>在发送数据之前我们需要先查询所需台站和事件。BQMail将根据这些信息发送数据申请。</p>
-
 <p>BQMail将采用调用Python模块的形式，查询和发送数据</p>
-
 <h2 id="导入模块">导入模块</h2>
-
 <p>首先需要导入bqmail和可能用到的模块。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">from</span> <span class="nn">bqmail.mail</span> <span class="kn">import</span> <span class="n">BQMail</span>
-<span class="kn">from</span> <span class="nn">obspy</span> <span class="kn">import</span> <span class="n">UTCDateTime</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">from</span> <span class="nn">bqmail.mail</span> <span class="kn">import</span> <span class="n">BQMail</span>
+<span class="kn">from</span> <span class="nn">obspy</span> <span class="kn">import</span> <span class="n">UTCDateTime</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
+</div><ul>
 <li>BQMail中所有的时间信息全部遵循<a href="https://docs.obspy.org/tutorial/code_snippets/utc_date_time.html"><code>obspy.UTCDateTime</code></a>格式</li>
 </ul>
-
 <h2 id="创建bqmail实例">创建BQMail实例</h2>
-
 <p>我们首先创建一个BQMail实例。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">bq</span> <span class="o">=</span> <span class="n">BQMail</span><span class="p">(</span><span class="s1">&#39;xxx@xxx.com&#39;</span><span class="p">,</span> <span class="n">server</span><span class="o">=</span><span class="s1">&#39;smtp.xxx.com&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;xxx&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s1">&#39;bqmail&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="n">bq</span> <span class="o">=</span> <span class="n">BQMail</span><span class="p">(</span><span class="s1">&#39;xxx@xxx.com&#39;</span><span class="p">,</span> <span class="n">server</span><span class="o">=</span><span class="s1">&#39;smtp.xxx.com&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;xxx&#39;</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="s1">&#39;bqmail&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
+</div><ul>
 <li><code>'xxx@xxx.com'</code>是发送邮件和接受邮件信息的邮箱</li>
 <li><code>server</code>是发送邮件所用的smtp服务器。默认为<code>localhost</code>。
-&gt; 163邮箱在发送大数据量邮件时可能会被退信，目前测试qq企业邮箱可用。</li>
+<blockquote>
+<p>163邮箱在发送大数据量邮件时可能会被退信，目前测试qq企业邮箱可用。</p>
+</blockquote>
+</li>
 <li><code>password</code>是该smtp服务器的密码。</li>
 <li><code>username</code>是IRIS ftp站的用户名。</li>
 </ul>
-
 <h2 id="查询台站信息">查询台站信息</h2>
-
 <p>在发送申请之前我们先查询所需要申请的台站，查询获得台站将全部用于发送数据申请。我们建议先用<code>get_stations</code>命令选择合适的限制条件预先查询，再将准确的限制条件写入脚本中。例如</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">bq</span><span class="o">.</span><span class="n">query_stations</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="s1">&#39;CB&#39;</span><span class="p">,</span> <span class="n">station</span><span class="o">=</span><span class="s1">&#39;LZH&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="n">bq</span><span class="o">.</span><span class="n">query_stations</span><span class="p">(</span><span class="n">network</span><span class="o">=</span><span class="s1">&#39;CB&#39;</span><span class="p">,</span> <span class="n">station</span><span class="o">=</span><span class="s1">&#39;LZH&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p><strong>这里所有的参数信息与<a href="https://service.iris.edu/irisws/fedcatalog/1/">FDSN Client Usage</a>中相同。</strong></p>
-
+</div><p><strong>这里所有的参数信息与<a href="https://service.iris.edu/irisws/fedcatalog/1/">FDSN Client Usage</a>中相同。</strong></p>
 <h2 id="发送连续数据申请">发送连续数据申请</h2>
-
 <p>部分研究需要发送连续数据申请，即从一时刻到另一时刻，以固定的时间间隔作为SAC文件的时长。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">bq</span><span class="o">.</span><span class="n">send_mail</span><span class="p">(</span><span class="n">arrange</span><span class="o">=</span><span class="s1">&#39;continue&#39;</span><span class="p">,</span> <span class="n">starttime</span><span class="o">=</span><span class="n">UTCDateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> 
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="n">bq</span><span class="o">.</span><span class="n">send_mail</span><span class="p">(</span><span class="n">arrange</span><span class="o">=</span><span class="s1">&#39;continue&#39;</span><span class="p">,</span> <span class="n">starttime</span><span class="o">=</span><span class="n">UTCDateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> 
              <span class="n">endtime</span><span class="o">=</span><span class="n">UTCDateTime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">time_val_in_hours</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> 
-             <span class="n">channel</span><span class="o">=</span><span class="s1">&#39;BH?&#39;</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;00&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+             <span class="n">channel</span><span class="o">=</span><span class="s1">&#39;BH?&#39;</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;00&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
+</div><ul>
 <li><code>arrange='continue'</code>表示发送连续数据申请。</li>
 <li><code>starttime</code>和<code>endtime</code>分别为数据申请的起止时刻。</li>
 <li><code>time_val_in_hours</code>为单位文件的时间长度（时间单位为小时）。</li>
 <li><code>channel</code>和<code>location</code>分别为所申请的通道名和位置名，详见<a href="http://ds.iris.edu/ds/nodes/dmc/manuals/breq_fast/">BREQ_FAST Manuals</a>。</li>
 </ul>
-
 <h2 id="发送事件数据申请">发送事件数据申请</h2>
-
 <p>另一种申请方式为事件数据申请，即根据搜索的地震事件信息，以某一参考时刻为标准，前后截取一定时间长度，发送数据申请。</p>
-
 <h3 id="查询事件信息">查询事件信息</h3>
-
 <p>在发送申请前需要以一定的限制条件获取事件信息，例如</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">bq</span><span class="o">.</span><span class="n">query_events</span><span class="p">(</span><span class="n">starttime</span><span class="o">=</span><span class="n">UTCDateTime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">endtime</span><span class="o">=</span><span class="n">UTCDateTime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-                <span class="n">minmagnitude</span><span class="o">=</span><span class="mf">5.5</span><span class="p">,</span> <span class="n">catalog</span><span class="o">=</span><span class="s1">&#39;GCMT&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="n">bq</span><span class="o">.</span><span class="n">query_events</span><span class="p">(</span><span class="n">starttime</span><span class="o">=</span><span class="n">UTCDateTime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">endtime</span><span class="o">=</span><span class="n">UTCDateTime</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                <span class="n">minmagnitude</span><span class="o">=</span><span class="mf">5.5</span><span class="p">,</span> <span class="n">catalog</span><span class="o">=</span><span class="s1">&#39;GCMT&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p><strong>这里所有的参数信息与<a href="https://service.iris.edu/fdsnws/event/1/">fdsnws-event web service</a>中相同。</strong></p>
-
+</div><p><strong>这里所有的参数信息与<a href="https://service.iris.edu/fdsnws/event/1/">fdsnws-event web service</a>中相同。</strong></p>
 <h3 id="发送数据申请">发送数据申请</h3>
-
 <p>获取所需事件信息后，设置截取时窗的标准，即可根据台站和事件发送数据申请。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">bq</span><span class="o">.</span><span class="n">send_mail</span><span class="p">(</span><span class="n">arrange</span><span class="o">=</span><span class="s1">&#39;events&#39;</span><span class="p">,</span> <span class="n">mark</span><span class="o">=</span><span class="s2">&#34;P&#34;</span><span class="p">,</span> <span class="n">time_before</span><span class="o">=-</span><span class="mi">100</span><span class="p">,</span> <span class="n">time_after</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">bq</span><span class="o">.</span><span class="n">send_mail</span><span class="p">(</span><span class="n">arrange</span><span class="o">=</span><span class="s1">&#39;events&#39;</span><span class="p">,</span> <span class="n">mark</span><span class="o">=</span><span class="s2">&#34;P&#34;</span><span class="p">,</span> <span class="n">time_before</span><span class="o">=-</span><span class="mi">100</span><span class="p">,</span> <span class="n">time_after</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
+</div><ul>
 <li><code>arrange='events'</code>表示发送事件数据申请。</li>
 <li><code>mark</code>表示参考时刻，这里可以选择以发震时刻作为标准，或以某一震相的到时作为标准。
-
 <ul>
 <li><code>o</code>: 以发震时刻作为标准。</li>
 <li><code>P</code>, <code>S</code>, <code>...</code>: 以指定震相到时作为标准，震相名于Taup相同。</li>
-</ul></li>
+</ul>
+</li>
 <li><code>time_before</code>和<code>time_after</code>分别表示相对参考时刻前后截取的时长。</li>
 </ul>
-
 <h2 id="小结">小结</h2>
-
 <p>相对于老版本，新版本可以在Python脚本中修改设置，更加灵活。如果有新的建议和意见请在<a href="https://github.com/xumi1993/bqmail/">项目主页</a>中提交Issue。</p>
     </div>
 
@@ -320,7 +302,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
     <script type="text/javascript">
       var gitalk = new Gitalk({
-        id: '2020-08-26 11:31:38 \x2b0800 \x2b0800',
+        id: '2020-08-26 11:31:38 \u002b0800 \u002b0800',
         title: 'BQMail2.0: 向IRIS DMC发送数据请求的Python模块（2. 发送申请）',
         clientID: '83b0e39119b727cd2ba2',
         clientSecret: '2b6f4a9e1459a3e6bafa8afaaa509d755a7cf744',

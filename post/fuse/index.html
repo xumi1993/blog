@@ -25,7 +25,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3 with theme even" />
+<meta name="generator" content="Hugo 0.91.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.xumijian.me/post/fuse/" />
@@ -42,29 +42,20 @@
 
 <meta property="og:title" content="用FUSE和ntfs-3g在MacOS下打造免费的NTFS解决方案" />
 <meta property="og:description" content="Paragon NTFS for Mac和Tuxera是MacOS下常用的NTFS解决方案，但这些软件都是商业软件，而且价格不菲。这些软件除了实现NTFS的读写功能外，还有一些磁盘监测、卸载快捷键等功能，也有很好看的图形界面。但是这些额外功能对我来说都不是必须的，那么有没有一种解决方案可以免费实现最简单的NTFS读写功能呢？
-
 那么这里将介绍通过FUSE和ntfs-3g实现NTFS读写功能" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.xumijian.me/post/fuse/" />
+<meta property="og:url" content="https://blog.xumijian.me/post/fuse/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2019-03-25T20:55:03+08:00" />
 <meta property="article:modified_time" content="2019-03-25T20:55:03+08:00" />
+
 <meta itemprop="name" content="用FUSE和ntfs-3g在MacOS下打造免费的NTFS解决方案">
 <meta itemprop="description" content="Paragon NTFS for Mac和Tuxera是MacOS下常用的NTFS解决方案，但这些软件都是商业软件，而且价格不菲。这些软件除了实现NTFS的读写功能外，还有一些磁盘监测、卸载快捷键等功能，也有很好看的图形界面。但是这些额外功能对我来说都不是必须的，那么有没有一种解决方案可以免费实现最简单的NTFS读写功能呢？
-
-那么这里将介绍通过FUSE和ntfs-3g实现NTFS读写功能">
-
-
-<meta itemprop="datePublished" content="2019-03-25T20:55:03&#43;08:00" />
-<meta itemprop="dateModified" content="2019-03-25T20:55:03&#43;08:00" />
-<meta itemprop="wordCount" content="830">
-
-
-
-<meta itemprop="keywords" content="文件系统,Fuse," />
-<meta name="twitter:card" content="summary"/>
+那么这里将介绍通过FUSE和ntfs-3g实现NTFS读写功能"><meta itemprop="datePublished" content="2019-03-25T20:55:03+08:00" />
+<meta itemprop="dateModified" content="2019-03-25T20:55:03+08:00" />
+<meta itemprop="wordCount" content="836">
+<meta itemprop="keywords" content="文件系统,Fuse," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="用FUSE和ntfs-3g在MacOS下打造免费的NTFS解决方案"/>
 <meta name="twitter:description" content="Paragon NTFS for Mac和Tuxera是MacOS下常用的NTFS解决方案，但这些软件都是商业软件，而且价格不菲。这些软件除了实现NTFS的读写功能外，还有一些磁盘监测、卸载快捷键等功能，也有很好看的图形界面。但是这些额外功能对我来说都不是必须的，那么有没有一种解决方案可以免费实现最简单的NTFS读写功能呢？
-
 那么这里将介绍通过FUSE和ntfs-3g实现NTFS读写功能"/>
 
 <!--[if lte IE 9]>
@@ -147,104 +138,98 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#fuse">FUSE</a></li>
-<li><a href="#ntfs-3g">ntfs-3g</a></li>
-<li><a href="#自动以读写方式挂载ntfs分区">自动以读写方式挂载NTFS分区</a>
-<ul>
-<li><a href="#关闭sip">关闭SIP</a></li>
-<li><a href="#替换自动挂载命令">替换自动挂载命令</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#fuse">FUSE</a></li>
+        <li><a href="#ntfs-3g">ntfs-3g</a></li>
+        <li><a href="#自动以读写方式挂载ntfs分区">自动以读写方式挂载NTFS分区</a>
+          <ul>
+            <li><a href="#关闭sip">关闭SIP</a></li>
+            <li><a href="#替换自动挂载命令">替换自动挂载命令</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p><a href="https://www.paragon-software.com/home/ntfs-mac/">Paragon NTFS for Mac</a>和<a href="https://www.tuxera.com/products/tuxera-ntfs-for-mac/">Tuxera</a>是MacOS下常用的NTFS解决方案，但这些软件都是商业软件，而且价格不菲。这些软件除了实现NTFS的读写功能外，还有一些磁盘监测、卸载快捷键等功能，也有很好看的图形界面。但是这些额外功能对我来说都不是必须的，那么有没有一种解决方案可以免费实现最简单的NTFS读写功能呢？</p>
-
 <p>那么这里将介绍通过FUSE和ntfs-3g实现NTFS读写功能</p>
-
 <h2 id="fuse">FUSE</h2>
-
 <p>FUSE源于Linux中的<a href="http://fuse.sourceforge.net/">FUSE API</a>，它提供了一个用户文件系统的超集，文件系统可以通过FUSE实现。FUSE For MacOS则是FUSE的Mac版本。ntfs-3g也基于FUSE开发，所以要先安装FUSE。
-在<a href="https://osxfuse.github.io/">FUSE For MacOS</a>网站下载<strong><em>.pkg</em></strong>安装包，然后图形化安装即可。</p>
-
+在<a href="https://osxfuse.github.io/">FUSE For MacOS</a>网站下载***.pkg***安装包，然后图形化安装即可。</p>
 <h2 id="ntfs-3g">ntfs-3g</h2>
-
 <p>ntfs-3g需要在Homebrew下安装，所以要先安装<a href="https://brew.sh/">Homebrew</a>。然后用<code>brew</code>进行安装</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">brew install ntfs-3g</pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">brew install ntfs-3g
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>安装完成后重启电脑。这时我们已经可以手动挂在NTFS格式文件系统的分区了。假设想要挂在的分区为<code>/dev/disk2s1</code>，下面的命令可以把该分区以读写方式挂在到<code>/Volumes/NTFS</code>下。</p>
+</div><p>安装完成后重启电脑。这时我们已经可以手动挂在NTFS格式文件系统的分区了。假设想要挂在的分区为<code>/dev/disk2s1</code>，下面的命令可以把该分区以读写方式挂在到<code>/Volumes/NTFS</code>下。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">sudo mkdir /Volumes/NTFS
-sudo /usr/local/bin/ntfs-3g /dev/disk1s1 /Volumes/NTFS -olocal -oallow_other</pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">sudo mkdir /Volumes/NTFS
+sudo /usr/local/bin/ntfs-3g /dev/disk1s1 /Volumes/NTFS -olocal -oallow_other
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="自动以读写方式挂载ntfs分区">自动以读写方式挂载NTFS分区</h2>
-
+</div><h2 id="自动以读写方式挂载ntfs分区">自动以读写方式挂载NTFS分区</h2>
 <p>虽然我们已经可以挂载NTFS分区了，但是当我们插入一块NTFS分区的硬盘，依然只能以只读方式自动挂载。这时因为自动挂载时使用的是Mac默认的NTFS挂载命令，即<code>/sbin/mount_ntfs</code>，所以我们要将它替换成ntfs-3g的自动挂载命令。</p>
-
 <h3 id="关闭sip">关闭SIP</h3>
-
 <p>Mac对操作系统下的文件采取的保护机制SIP (System Integrity Protection)，这样我们无法修改<code>/sbin</code>下的文件，所以我们要先关闭SIP。</p>
-
 <ol>
-<li><p>重启，按住<code>command+R</code>，进入保护模式</p></li>
-
-<li><p>在菜单栏中打开终端，输入</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">csrutil disable</pre></td></tr></table>
-</div>
-</div></li>
-
-<li><p>重启操作系统</p></li>
+<li>
+<p>重启，按住<code>command+R</code>，进入保护模式</p>
+</li>
+<li>
+<p>在菜单栏中打开终端，输入</p>
+</li>
 </ol>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">csrutil disable
+</code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>重启操作系统</li>
+</ol>
 <p>这时就可以修改<code>/sbin/mount_ntfs</code></p>
-
 <h3 id="替换自动挂载命令">替换自动挂载命令</h3>
-
 <ul>
-<li><p>备份之前的命令</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">sudo mv &#34;/Volumes/Macintosh HD/sbin/mount_ntfs&#34; &#34;/Volumes/Macintosh HD/sbin/mount_ntfs.orig&#34;</pre></td></tr></table>
-</div>
-</div></li>
-
-<li><p>将ntfs-3g中的自动挂载命令替换为自动</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">sudo ln -s /usr/local/sbin/mount_ntfs &#34;/Volumes/Macintosh HD/sbin/mount_ntfs&#34;</pre></td></tr></table>
-</div>
-</div></li>
+<li>备份之前的命令</li>
 </ul>
-
-<p>再次重启电脑，插入NTFS文件系统的磁盘后就可以自动读写挂载了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">sudo mv &#34;/Volumes/Macintosh HD/sbin/mount_ntfs&#34; &#34;/Volumes/Macintosh HD/sbin/mount_ntfs.orig&#34;
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>将ntfs-3g中的自动挂载命令替换为自动</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">sudo ln -s /usr/local/sbin/mount_ntfs &#34;/Volumes/Macintosh HD/sbin/mount_ntfs&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>再次重启电脑，插入NTFS文件系统的磁盘后就可以自动读写挂载了。</p>
     </div>
 
     <div class="post-copyright">
@@ -287,7 +272,7 @@ sudo /usr/local/bin/ntfs-3g /dev/disk1s1 /Volumes/NTFS -olocal -oallow_other</pr
     <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
     <script type="text/javascript">
       var gitalk = new Gitalk({
-        id: '2019-03-25 20:55:03 \x2b0800 \x2b0800',
+        id: '2019-03-25 20:55:03 \u002b0800 \u002b0800',
         title: '用FUSE和ntfs-3g在MacOS下打造免费的NTFS解决方案',
         clientID: '83b0e39119b727cd2ba2',
         clientSecret: '2b6f4a9e1459a3e6bafa8afaaa509d755a7cf744',

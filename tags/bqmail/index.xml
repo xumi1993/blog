@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>BQMail on Note to Tech</title>
@@ -6,11 +6,7 @@
     <description>Recent content in BQMail on Note to Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 26 Aug 2020 11:31:38 +0800</lastBuildDate>
-    
-	<atom:link href="https://blog.xumijian.me/tags/bqmail/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 26 Aug 2020 11:31:38 +0800</lastBuildDate><atom:link href="https://blog.xumijian.me/tags/bqmail/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>BQMail2.0: 向IRIS DMC发送数据请求的Python模块（2. 发送申请）</title>
       <link>https://blog.xumijian.me/post/bqmail2/</link>
@@ -27,13 +23,11 @@
       
       <guid>https://blog.xumijian.me/post/bqmail1/</guid>
       <description>&lt;p&gt;BQMail是用于向IRIS申请数据的Python模块。2016年我们完成了BQMail 1.0版本，但受限于当时IRIS服务的欠缺，随着时间的发展软件出现了以下不足：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;发送命令繁琐&lt;/li&gt;
 &lt;li&gt;需要本地地震目录&lt;/li&gt;
 &lt;li&gt;可拓展性差&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;因此我们重写了BQMail的源码，结合了&lt;a href=&#34;http://service.iris.edu/fdsnws/&#34;&gt;IRIS DMC Web Services&lt;/a&gt;和&lt;a href=&#34;http://docs.obspy.org/&#34;&gt;ObsPy&lt;/a&gt;，实现了地震和台站的快速查询，并能够以Python模块的方式调用来发送数据请求。&lt;/p&gt;</description>
     </item>
     

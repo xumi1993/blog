@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3 with theme even" />
+<meta name="generator" content="Hugo 0.91.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.xumijian.me/post/publish-pypi/" />
@@ -42,21 +42,15 @@
 <meta property="og:title" content="发布代码到PyPI" />
 <meta property="og:description" content="作为开发者我们希望自己开发的Python模块可以被更多人使用，为了方便使用，PyPI是管理Python模块最好用的工具之一。所以我们也希望把自己的代码放到PyPI上，以后就可以通过pip install module的方式安装模块了。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.xumijian.me/post/publish-pypi/" />
+<meta property="og:url" content="https://blog.xumijian.me/post/publish-pypi/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2017-10-23T21:51:29+08:00" />
 <meta property="article:modified_time" content="2017-10-23T21:51:29+08:00" />
+
 <meta itemprop="name" content="发布代码到PyPI">
-<meta itemprop="description" content="作为开发者我们希望自己开发的Python模块可以被更多人使用，为了方便使用，PyPI是管理Python模块最好用的工具之一。所以我们也希望把自己的代码放到PyPI上，以后就可以通过pip install module的方式安装模块了。">
-
-
-<meta itemprop="datePublished" content="2017-10-23T21:51:29&#43;08:00" />
-<meta itemprop="dateModified" content="2017-10-23T21:51:29&#43;08:00" />
-<meta itemprop="wordCount" content="596">
-
-
-
-<meta itemprop="keywords" content="Development,Python," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="description" content="作为开发者我们希望自己开发的Python模块可以被更多人使用，为了方便使用，PyPI是管理Python模块最好用的工具之一。所以我们也希望把自己的代码放到PyPI上，以后就可以通过pip install module的方式安装模块了。"><meta itemprop="datePublished" content="2017-10-23T21:51:29+08:00" />
+<meta itemprop="dateModified" content="2017-10-23T21:51:29+08:00" />
+<meta itemprop="wordCount" content="592">
+<meta itemprop="keywords" content="Development,Python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="发布代码到PyPI"/>
 <meta name="twitter:description" content="作为开发者我们希望自己开发的Python模块可以被更多人使用，为了方便使用，PyPI是管理Python模块最好用的工具之一。所以我们也希望把自己的代码放到PyPI上，以后就可以通过pip install module的方式安装模块了。"/>
 
@@ -140,31 +134,30 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#生成一个本地的-python-包">生成一个本地的 Python 包</a></li>
-<li><a href="#编译python包">编译Python包</a></li>
-<li><a href="#注册pypi">注册PyPI</a></li>
-<li><a href="#发布至pypi">发布至PyPI</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#生成一个本地的-python-包">生成一个本地的 Python 包</a></li>
+        <li><a href="#编译python包">编译Python包</a></li>
+        <li><a href="#注册pypi">注册PyPI</a></li>
+        <li><a href="#发布至pypi">发布至PyPI</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p>作为开发者我们希望自己开发的Python模块可以被更多人使用，为了方便使用，<a href="https://pypi.python.org/pypi">PyPI</a>是管理Python模块最好用的工具之一。所以我们也希望把自己的代码放到PyPI上，以后就可以通过<code>pip install module</code>的方式安装模块了。</p>
-
 <h2 id="生成一个本地的-python-包">生成一个本地的 Python 包</h2>
-
 <ul>
 <li>在本地python目录中新建<code>setup.py</code>文件。</li>
 <li>将源码放置在一个新建的目录中，目录名为模块名。</li>
-
-<li><p>在<code>setup.py</code>中写入包的配置信息。</p>
+<li>在<code>setup.py</code>中写入包的配置信息。</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -188,42 +181,42 @@
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">find_packages</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">find_packages</span>
 
 <span class="n">setup</span><span class="p">(</span>
-<span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;sft&#34;</span><span class="p">,</span>
-<span class="n">version</span> <span class="o">=</span> <span class="s2">&#34;0.1&#34;</span><span class="p">,</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/xumi1993/SFT&#39;</span><span class="p">,</span>
-<span class="n">author</span> <span class="o">=</span> <span class="s1">&#39;Mijian Xu&#39;</span><span class="p">,</span>
-<span class="n">author_email</span> <span class="o">=</span> <span class="s1">&#39;gomijianxu@gmail.com&#39;</span><span class="p">,</span>
-<span class="n">packages</span> <span class="o">=</span> <span class="n">find_packages</span><span class="p">(),</span> 
-<span class="n">package_dir</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;sft&#39;</span><span class="p">:</span><span class="s1">&#39;sft&#39;</span><span class="p">},</span>
-<span class="n">entry_points</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;console_scripts&#39;</span><span class="p">:[</span>
-        <span class="s1">&#39;get_events = sft.get_events:main&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;get_resp = sft.get_resp:main&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;get_stations = sft.get_stations:main&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;get_synthetics = sft.get_synthetics:main&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;get_timeseries = sft.get_timeseries:main&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;get_traveltime = sft.get_traveltime:main&#39;</span>
-        <span class="p">],</span> <span class="c1"># 将模块中的函数当作shell命令</span>
-        <span class="p">},</span>
-<span class="n">include_package_data</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-<span class="n">zip_safe</span><span class="o">=</span><span class="bp">False</span>
-<span class="p">)</span></code></pre></td></tr></table>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&#34;sft&#34;</span><span class="p">,</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&#34;0.1&#34;</span><span class="p">,</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/xumi1993/SFT&#39;</span><span class="p">,</span>
+    <span class="n">author</span> <span class="o">=</span> <span class="s1">&#39;Mijian Xu&#39;</span><span class="p">,</span>
+    <span class="n">author_email</span> <span class="o">=</span> <span class="s1">&#39;gomijianxu@gmail.com&#39;</span><span class="p">,</span>
+    <span class="n">packages</span> <span class="o">=</span> <span class="n">find_packages</span><span class="p">(),</span> 
+    <span class="n">package_dir</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;sft&#39;</span><span class="p">:</span><span class="s1">&#39;sft&#39;</span><span class="p">},</span>
+    <span class="n">entry_points</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;console_scripts&#39;</span><span class="p">:[</span>
+            <span class="s1">&#39;get_events = sft.get_events:main&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;get_resp = sft.get_resp:main&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;get_stations = sft.get_stations:main&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;get_synthetics = sft.get_synthetics:main&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;get_timeseries = sft.get_timeseries:main&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;get_traveltime = sft.get_traveltime:main&#39;</span>
+            <span class="p">],</span> <span class="c1"># 将模块中的函数当作shell命令</span>
+            <span class="p">},</span>
+    <span class="n">include_package_data</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">zip_safe</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div></li>
-
-<li><p>完成后其目录结构<br />
-<code>SFT</code> &mdash;&mdash; <code>sft</code> &mdash;&mdash; <code>get_events.py</code><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &mdash; <code>get_resp.py</code> <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &mdash; ……<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &mdash; <code>setup.py</code><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &mdash;  ……</p></li>
-
-<li><p>由于这个例子只依赖Python标准库，所以如果需要依赖其他第三方模块需要在<code>setup.py</code>中加一个字段：</p>
+</div><ul>
+<li>完成后其目录结构<br>
+<code>SFT</code> &mdash;&mdash; <code>sft</code> &mdash;&mdash; <code>get_events.py</code><br>
+                       | &mdash; <code>get_resp.py</code> <br>
+                       | &mdash; ……<br>
+            | &mdash; <code>setup.py</code><br>
+            | &mdash;  ……</li>
+<li>由于这个例子只依赖Python标准库，所以如果需要依赖其他第三方模块需要在<code>setup.py</code>中加一个字段：</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -237,65 +230,59 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">install_requires</span><span class="o">=</span><span class="p">[</span>
-    <span class="s1">&#39;Twisted&gt;=13.1.0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;w3lib&gt;=1.17.0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;queuelib&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;lxml&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;pyOpenSSL&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;cssselect&gt;=0.9&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;six&gt;=1.5.2&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;parsel&gt;=1.1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;PyDispatcher&gt;=2.0.5&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;service_identity&#39;</span><span class="p">,</span>
-<span class="p">]</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="n">install_requires</span><span class="o">=</span><span class="p">[</span>
+        <span class="s1">&#39;Twisted&gt;=13.1.0&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;w3lib&gt;=1.17.0&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;queuelib&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;lxml&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;pyOpenSSL&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;cssselect&gt;=0.9&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;six&gt;=1.5.2&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;parsel&gt;=1.1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PyDispatcher&gt;=2.0.5&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;service_identity&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+</code></pre></td></tr></table>
 </div>
-</div></li>
-</ul>
-
-<h2 id="编译python包">编译Python包</h2>
-
+</div><h2 id="编译python包">编译Python包</h2>
 <p>使用下面命令打包一个源代码的包</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">python setup.py sdist build</pre></td></tr></table>
-</div>
-</div>
-<p>这样在当前目录的dist文件夹下，就会多出一个以tar.gz结尾的包了。</p>
-
-<h2 id="注册pypi">注册PyPI</h2>
-
-<p>打开<a href="https://pypi.python.org/pypi">PyPI</a>官网点击<strong>Register</strong>注册一个账户，记住用户名和密码后面要用。</p>
-
-<h2 id="发布至pypi">发布至PyPI</h2>
-
-<p>官方推荐的方式是用<code>twine</code>模块（我在试用<code>python setup.py sdist upload</code>时没有成功）:</p>
-
-<ul>
-<li><p>安装<code>twine</code></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">sudo pip install twine</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python setup.py sdist build
+</code></pre></td></tr></table>
+</div>
+</div><p>这样在当前目录的dist文件夹下，就会多出一个以tar.gz结尾的包了。</p>
+<h2 id="注册pypi">注册PyPI</h2>
+<p>打开<a href="https://pypi.python.org/pypi">PyPI</a>官网点击<strong>Register</strong>注册一个账户，记住用户名和密码后面要用。</p>
+<h2 id="发布至pypi">发布至PyPI</h2>
+<p>官方推荐的方式是用<code>twine</code>模块（我在试用<code>python setup.py sdist upload</code>时没有成功）:</p>
+<ul>
+<li>
+<p>安装<code>twine</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sudo pip install twine
+</code></pre></td></tr></table>
 </div>
 </div></li>
-
-<li><p>上传包</p>
+<li>
+<p>上传包</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">twine upload dist/*</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">twine upload dist/*
+</code></pre></td></tr></table>
 </div>
 </div></li>
 </ul>
-
 <p>命令行中会提示输入用户名密码，输入PyPI的用户名密码就发布成功了。</p>
     </div>
 
@@ -335,7 +322,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
     <script type="text/javascript">
       var gitalk = new Gitalk({
-        id: '2017-10-23 21:51:29 \x2b0800 \x2b0800',
+        id: '2017-10-23 21:51:29 \u002b0800 \u002b0800',
         title: '发布代码到PyPI',
         clientID: '83b0e39119b727cd2ba2',
         clientSecret: '2b6f4a9e1459a3e6bafa8afaaa509d755a7cf744',

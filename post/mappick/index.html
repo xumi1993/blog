@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3 with theme even" />
+<meta name="generator" content="Hugo 0.91.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.xumijian.me/post/mappick/" />
@@ -43,22 +43,16 @@
 <meta property="og:description" content="
 虽然GMT有强大的绘图功能，但是只能生成静态图像。在地震学研究中通常需要在地图上选取测线，获得测线端点的坐标。我们利用Matplotlib的交互界面实现了这一功能。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.xumijian.me/post/mappick/" />
+<meta property="og:url" content="https://blog.xumijian.me/post/mappick/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2020-04-17T19:23:46+08:00" />
 <meta property="article:modified_time" content="2020-04-17T19:23:46+08:00" />
+
 <meta itemprop="name" content="用Python交互界面在地图上选取测线位置">
 <meta itemprop="description" content="
-虽然GMT有强大的绘图功能，但是只能生成静态图像。在地震学研究中通常需要在地图上选取测线，获得测线端点的坐标。我们利用Matplotlib的交互界面实现了这一功能。">
-
-
-<meta itemprop="datePublished" content="2020-04-17T19:23:46&#43;08:00" />
-<meta itemprop="dateModified" content="2020-04-17T19:23:46&#43;08:00" />
+虽然GMT有强大的绘图功能，但是只能生成静态图像。在地震学研究中通常需要在地图上选取测线，获得测线端点的坐标。我们利用Matplotlib的交互界面实现了这一功能。"><meta itemprop="datePublished" content="2020-04-17T19:23:46+08:00" />
+<meta itemprop="dateModified" content="2020-04-17T19:23:46+08:00" />
 <meta itemprop="wordCount" content="245">
-
-
-
-<meta itemprop="keywords" content="GMT,Map," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="GMT,Map," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="用Python交互界面在地图上选取测线位置"/>
 <meta name="twitter:description" content="
 虽然GMT有强大的绘图功能，但是只能生成静态图像。在地震学研究中通常需要在地图上选取测线，获得测线端点的坐标。我们利用Matplotlib的交互界面实现了这一功能。"/>
@@ -143,71 +137,67 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#依赖">依赖</a></li>
-<li><a href="#功能">功能</a></li>
-<li><a href="#安装">安装</a>
-<ul>
-<li><a href="#通过pypi安装">通过Pypi安装</a></li>
-<li><a href="#通过源码安装">通过源码安装</a></li>
-</ul></li>
-<li><a href="#示例">示例</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#依赖">依赖</a></li>
+        <li><a href="#功能">功能</a></li>
+        <li><a href="#安装">安装</a>
+          <ul>
+            <li><a href="#通过pypi安装">通过Pypi安装</a></li>
+            <li><a href="#通过源码安装">通过源码安装</a></li>
+          </ul>
+        </li>
+        <li><a href="#示例">示例</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <p><img src="/img/mappick/mappick.gif" alt="" />
+      <p><img src="/img/mappick/mappick.gif" alt="">
 虽然GMT有强大的绘图功能，但是只能生成静态图像。在地震学研究中通常需要在地图上选取测线，获得测线端点的坐标。我们利用Matplotlib的交互界面实现了这一功能。</p>
-
 <h2 id="依赖">依赖</h2>
-
 <ul>
 <li><a href="https://matplotlib.org/index.html">Matplotlib</a> 图形界面框架</li>
 <li><a href="https://scitools.org.uk/cartopy/docs/latest/">Cartopy</a> 绘制地图</li>
 <li><a href="https://pyproj4.github.io/pyproj/stable/">pyproj</a> 地理坐标投影</li>
 </ul>
-
 <h2 id="功能">功能</h2>
-
 <ul>
 <li>绘制墨卡托投影下的地图</li>
 <li>绘制地形数据</li>
 <li>绘制断层、边界等线段数据（格式与GMT psxy相同）</li>
 <li>交互选择地图上的两点，并获取其坐标</li>
 </ul>
-
 <h2 id="安装">安装</h2>
-
 <h3 id="通过pypi安装">通过Pypi安装</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">pip install mapclick</pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pip install mapclick
+</code></pre></td></tr></table>
 </div>
-</div>
-<h3 id="通过源码安装">通过源码安装</h3>
+</div><h3 id="通过源码安装">通过源码安装</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">git clone https://github.com/xumi1993/mapclick.git
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git clone https://github.com/xumi1993/mapclick.git
 cd mapclick
-pip install .</pre></td></tr></table>
+pip install .
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="示例">示例</h2>
+</div><h2 id="示例">示例</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -217,17 +207,17 @@ pip install .</pre></td></tr></table>
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">from</span> <span class="nn">mapclick</span> <span class="kn">import</span> <span class="n">MapPoint</span>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">from</span> <span class="nn">mapclick</span> <span class="kn">import</span> <span class="n">MapPoint</span>
 
 <span class="n">mp</span> <span class="o">=</span> <span class="n">MapPoint</span><span class="p">()</span>
-<span class="n">mp</span><span class="o">.</span><span class="n">generate_map</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mf">21.5</span><span class="p">,</span> <span class="mf">24.5</span><span class="p">,</span> <span class="n">elev</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">nation</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">xa</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ya</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">mp</span><span class="o">.</span><span class="n">generate_map</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mf">21.5</span><span class="p">,</span> <span class="mf">24.5</span><span class="p">,</span> <span class="n">elev</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">nation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">xa</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ya</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="n">mp</span><span class="o">.</span><span class="n">plot_line</span><span class="p">(</span><span class="s1">&#39;/path/to/province.cn&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <span class="n">mp</span><span class="o">.</span><span class="n">plot_line</span><span class="p">(</span><span class="s1">&#39;/path/to/faults.ftd&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span> <span class="mi">105</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span> <span class="mi">167</span><span class="o">/</span><span class="mi">255</span><span class="p">))</span>
 <span class="n">mp</span><span class="o">.</span><span class="n">plot_station</span><span class="p">(</span><span class="s1">&#39;/path/to/stations.lst&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></td></tr></table>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>弹出图像后用鼠标点击即可。</p>
+</div><p>弹出图像后用鼠标点击即可。</p>
     </div>
 
     <div class="post-copyright">
@@ -270,7 +260,7 @@ pip install .</pre></td></tr></table>
     <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
     <script type="text/javascript">
       var gitalk = new Gitalk({
-        id: '2020-04-17 19:23:46 \x2b0800 \x2b0800',
+        id: '2020-04-17 19:23:46 \u002b0800 \u002b0800',
         title: '用Python交互界面在地图上选取测线位置',
         clientID: '83b0e39119b727cd2ba2',
         clientSecret: '2b6f4a9e1459a3e6bafa8afaaa509d755a7cf744',

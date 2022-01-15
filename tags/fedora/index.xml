@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fedora on Note to Tech</title>
@@ -6,11 +6,7 @@
     <description>Recent content in Fedora on Note to Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 27 Oct 2017 12:26:29 +0800</lastBuildDate>
-    
-	<atom:link href="https://blog.xumijian.me/tags/fedora/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 27 Oct 2017 12:26:29 +0800</lastBuildDate><atom:link href="https://blog.xumijian.me/tags/fedora/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Fedora26中安装Google拼音输入法</title>
       <link>https://blog.xumijian.me/post/google-pinyin/</link>

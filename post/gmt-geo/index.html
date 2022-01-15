@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3 with theme even" />
+<meta name="generator" content="Hugo 0.91.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.xumijian.me/post/gmt-geo/" />
@@ -43,22 +43,16 @@
 <meta property="og:description" content="
 用GMT绘制绘制地质图一直是一个难题，此前Po-Chin Tseng的博客详细介绍了制作和绘制地质图的过程，并成功绘制了东南亚的地质图。本文将介绍用相似的方法绘制中国大陆及邻区的地质图。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.xumijian.me/post/gmt-geo/" />
+<meta property="og:url" content="https://blog.xumijian.me/post/gmt-geo/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2021-05-14T16:34:22+08:00" />
 <meta property="article:modified_time" content="2021-05-14T16:34:22+08:00" />
+
 <meta itemprop="name" content="用GMT绘制中国大陆及邻区地质年代图">
 <meta itemprop="description" content="
-用GMT绘制绘制地质图一直是一个难题，此前Po-Chin Tseng的博客详细介绍了制作和绘制地质图的过程，并成功绘制了东南亚的地质图。本文将介绍用相似的方法绘制中国大陆及邻区的地质图。">
-
-
-<meta itemprop="datePublished" content="2021-05-14T16:34:22&#43;08:00" />
-<meta itemprop="dateModified" content="2021-05-14T16:34:22&#43;08:00" />
-<meta itemprop="wordCount" content="893">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+用GMT绘制绘制地质图一直是一个难题，此前Po-Chin Tseng的博客详细介绍了制作和绘制地质图的过程，并成功绘制了东南亚的地质图。本文将介绍用相似的方法绘制中国大陆及邻区的地质图。"><meta itemprop="datePublished" content="2021-05-14T16:34:22+08:00" />
+<meta itemprop="dateModified" content="2021-05-14T16:34:22+08:00" />
+<meta itemprop="wordCount" content="829">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="用GMT绘制中国大陆及邻区地质年代图"/>
 <meta name="twitter:description" content="
 用GMT绘制绘制地质图一直是一个难题，此前Po-Chin Tseng的博客详细介绍了制作和绘制地质图的过程，并成功绘制了东南亚的地质图。本文将介绍用相似的方法绘制中国大陆及邻区的地质图。"/>
@@ -141,90 +135,83 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#数据来源与格式转换">数据来源与格式转换</a>
-<ul>
-<li><a href="#原始数据下载">原始数据下载</a></li>
-<li><a href="#格式转换">格式转换</a></li>
-</ul></li>
-<li><a href="#下载链接">下载链接：</a></li>
-<li><a href="#gmt脚本">GMT脚本</a></li>
-<li><a href="#特别鸣谢">特别鸣谢</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#数据来源与格式转换">数据来源与格式转换</a>
+          <ul>
+            <li><a href="#原始数据下载">原始数据下载</a></li>
+            <li><a href="#格式转换">格式转换</a></li>
+          </ul>
+        </li>
+        <li><a href="#下载链接">下载链接：</a></li>
+        <li><a href="#gmt脚本">GMT脚本</a></li>
+        <li><a href="#特别鸣谢">特别鸣谢</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <p><img src="/img/gmt-map/geo3al.png" alt="" />
+      <p><img src="/img/gmt-map/geo3al.png" alt="">
 用GMT绘制绘制地质图一直是一个难题，此前<a href="https://jimmytseng79.github.io/GMT5_tutorials/geology_map.html">Po-Chin Tseng的博客</a>详细介绍了制作和绘制地质图的过程，并成功绘制了东南亚的地质图。本文将介绍用相似的方法绘制中国大陆及邻区的地质图。</p>
-
 <h2 id="数据来源与格式转换">数据来源与格式转换</h2>
-
 <p>地质图的数据来自美国USGS（<a href="https://catalog.data.gov/dataset/generalized-geology-of-the-far-east-geo3al">Generalized Geology of the Far East (geo3al)</a>）其分辨率为1:5,000,000。源数据和引用格式请参考<a href="https://pubs.er.usgs.gov/publication/ofr97470F">这里</a></p>
-
 <h3 id="原始数据下载">原始数据下载</h3>
-
 <p>我们所需要的文件可以从<a href="https://certmapper.cr.usgs.gov/data/we/ofr97470f/spatial/shape/geo3al.zip">这里</a>下载，
 解压该文件后，获得<code>.shp</code>, <code>.dbf</code>, <code>.prj</code> 和 <code>.shx</code>文件。</p>
-
 <h3 id="格式转换">格式转换</h3>
-
 <p>GMT提供了命令<a href="https://docs.gmt-china.org/latest/table/ogr2ogr/"><code>ogr2ogr</code></a>来进行地理矢量数据格式之间的转换，也包括这里的<code>.shp</code>格式。解压后的坐标不是我们希望的经纬度坐标，而是大地坐标，这里需要使用<code>ogr2ogr</code>中的<code>-t_srs</code>参数进行坐标转换。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">ogr2ogr -f GMT geo3al.gmt geo3al.shp -t_srs EPSG:4326</pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ogr2ogr -f GMT geo3al.gmt geo3al.shp -t_srs EPSG:4326
+</code></pre></td></tr></table>
 </div>
+</div><div class="admonition note"><p class="admonition-title">⚠️注意</p>
+<ul>
+<li>
+<p>其中<code>.dbf</code>, <code>.prj</code> 和 <code>.shx</code>文件路径需要与该命令的运行路径为同一路径。</p>
+</li>
+<li>
+<p>确保在安装GMT后所添加的环境变量中包含<code>PROJ_LIB</code>这个变量，请参考<a href="https://docs.gmt-china.org/latest/install/macOS/#gmt">GMT安装说明</a></p>
+</li>
+</ul>
 </div>
-<div class="admonition note"><p class="admonition-title">⚠️注意</p>
-  
-
-- 其中`.dbf`, `.prj` 和 `.shx`文件路径需要与该命令的运行路径为同一路径。
-
-- 确保在安装GMT后所添加的环境变量中包含`PROJ_LIB`这个变量，请参考[GMT安装说明](https://docs.gmt-china.org/latest/install/macOS/#gmt)
-
-
-</div>
-
 <p>格式转换后<code>geo3al.gmt</code>文件的头段为</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"># @D21315149832.578|1546682.830|v|J|J
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># @D21315149832.578|1546682.830|v|J|J
 # @P
 123.121278084975 53.3084236387908
 123.230414901407 53.3161680969698
 123.288482121838 53.3166334127133
 123.328886980316 53.3062394894715
-......</pre></td></tr></table>
+......
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="下载链接">下载链接：</h2>
-
+</div><h2 id="下载链接">下载链接：</h2>
 <p>这里我们提供了已经完成上述步骤的地质年代文件和地质年代色标文件，可以在GMT中直接使用。</p>
-
 <ul>
 <li><a href="/source/geo3al.gmt">地质年代文件</a></li>
 <li><a href="/source/geoage_GEN_GLG.cpt">地质年代色标文件（修改自GTS2012）</a></li>
 </ul>
-
 <h2 id="gmt脚本">GMT脚本</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -277,10 +264,10 @@
 </span><span class="lnt">51
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">data</span><span class="o">=</span>geo3al.gmt
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">data</span><span class="o">=</span>geo3al.gmt
 <span class="nv">cpt</span><span class="o">=</span>geoage.cpt
 <span class="nv">rocksize</span><span class="o">=</span><span class="m">500</span>
-<span class="nv">lengsize</span><span class="o">=</span><span class="m">0</span>.15i
+<span class="nv">lengsize</span><span class="o">=</span>0.15i
 
 <span class="k">function</span> shp2xyz<span class="o">(){</span>
     ogr2ogr -f GMT <span class="nv">$data</span> geo3al.shp -t_srs EPSG:4326
@@ -311,8 +298,8 @@
 shp2xyz
 gmt begin geo3al png
     gmt <span class="nb">set</span> FONT_ANNOT_PRIMARY <span class="m">10</span>
-    gmt <span class="nb">set</span> MAP_FRAME_WIDTH <span class="m">0</span>.08
-    gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY <span class="m">0</span>.08
+    gmt <span class="nb">set</span> MAP_FRAME_WIDTH 0.08
+    gmt <span class="nb">set</span> MAP_TICK_LENGTH_PRIMARY 0.08
 
     gmt coast -R70/150/13/55 -JM8.6i -Baf -Df -G255 -BWsNe
     gmt plot <span class="nv">$data</span> -C<span class="nv">$cpt</span> -aZ<span class="o">=</span><span class="s2">&#34;GEN_GLG&#34;</span> -G+z -L
@@ -327,11 +314,10 @@ gmt begin geo3al png
 
     rm tmp  tmp.cpt
 gmt end show
- </code></pre></td></tr></table>
+ 
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="特别鸣谢">特别鸣谢</h2>
-
+</div><h2 id="特别鸣谢">特别鸣谢</h2>
 <p>这次脚本做了大量的修改，非常感谢<a href="https://me.seisman.info/">田冬冬博士</a>、<a href="https://core-man.github.io/academic-homepage/">姚家园博士</a>和<a href="https://docs.gmt-china.org/">GMT中文社区</a>的其他小伙伴的建议和努力，在和他们的讨论中也使我受益匪浅。</p>
     </div>
 
@@ -372,7 +358,7 @@ gmt end show
     <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
     <script type="text/javascript">
       var gitalk = new Gitalk({
-        id: '2021-05-14 16:34:22 \x2b0800 \x2b0800',
+        id: '2021-05-14 16:34:22 \u002b0800 \u002b0800',
         title: '用GMT绘制中国大陆及邻区地质年代图',
         clientID: '83b0e39119b727cd2ba2',
         clientSecret: '2b6f4a9e1459a3e6bafa8afaaa509d755a7cf744',

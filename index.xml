@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Note to Tech</title>
@@ -6,11 +6,7 @@
     <description>Recent content on Note to Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 30 Nov 2021 20:13:09 +0800</lastBuildDate>
-    
-	<atom:link href="https://blog.xumijian.me/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 30 Nov 2021 20:13:09 +0800</lastBuildDate><atom:link href="https://blog.xumijian.me/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>数据切片与绘制的PyGMT实现</title>
       <link>https://blog.xumijian.me/post/pygmt-section/</link>
@@ -18,7 +14,6 @@
       
       <guid>https://blog.xumijian.me/post/pygmt-section/</guid>
       <description>&lt;p&gt;在GMT绘图前经常需要计算数据并保存到本地，再用GMT调用本地数据文件进行绘图。对数据可视化造成了不便。随着&lt;a href=&#34;https://www.pygmt.org/latest/index.html&#34;&gt;PyGMT&lt;/a&gt;的出现，我们可以在Python脚本中先进行数据计算，后进行绘图。这不仅提高了数据可视化的效率，也解决了Python对地图绘制能力弱的问题。&lt;/p&gt;
-
 &lt;p&gt;这里我们介绍用Python从3D数据结构体中进行数据切片，同时用PyGMT绘图的实例。&lt;/p&gt;</description>
     </item>
     
@@ -28,7 +23,7 @@
       <pubDate>Fri, 14 May 2021 16:34:22 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/post/gmt-geo/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/gmt-map/geo3al.png&#34; alt=&#34;&#34; /&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/gmt-map/geo3al.png&#34; alt=&#34;&#34;&gt;
 用GMT绘制绘制地质图一直是一个难题，此前&lt;a href=&#34;https://jimmytseng79.github.io/GMT5_tutorials/geology_map.html&#34;&gt;Po-Chin Tseng的博客&lt;/a&gt;详细介绍了制作和绘制地质图的过程，并成功绘制了东南亚的地质图。本文将介绍用相似的方法绘制中国大陆及邻区的地质图。&lt;/p&gt;</description>
     </item>
     
@@ -38,7 +33,7 @@
       <pubDate>Sun, 07 Mar 2021 05:12:28 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/post/paraview-model/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/paraview/model_NW.png&#34; alt=&#34;&#34; /&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/paraview/model_NW.png&#34; alt=&#34;&#34;&gt;
 我们通过计算获得了地壳三维速度模型、Moho面起伏，为例对比壳内低速区与Moho面起伏的关系，可以将这些结果用Paraview进行三维可视化。由于数据格式的不同，我们需要借助GMT和PyVista辅助绘制。&lt;/p&gt;</description>
     </item>
     
@@ -58,13 +53,11 @@
       
       <guid>https://blog.xumijian.me/post/bqmail1/</guid>
       <description>&lt;p&gt;BQMail是用于向IRIS申请数据的Python模块。2016年我们完成了BQMail 1.0版本，但受限于当时IRIS服务的欠缺，随着时间的发展软件出现了以下不足：&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;发送命令繁琐&lt;/li&gt;
 &lt;li&gt;需要本地地震目录&lt;/li&gt;
 &lt;li&gt;可拓展性差&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;因此我们重写了BQMail的源码，结合了&lt;a href=&#34;http://service.iris.edu/fdsnws/&#34;&gt;IRIS DMC Web Services&lt;/a&gt;和&lt;a href=&#34;http://docs.obspy.org/&#34;&gt;ObsPy&lt;/a&gt;，实现了地震和台站的快速查询，并能够以Python模块的方式调用来发送数据请求。&lt;/p&gt;</description>
     </item>
     
@@ -74,7 +67,7 @@
       <pubDate>Fri, 17 Apr 2020 19:23:46 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/post/mappick/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/mappick/mappick.gif&#34; alt=&#34;&#34; /&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/mappick/mappick.gif&#34; alt=&#34;&#34;&gt;
 虽然GMT有强大的绘图功能，但是只能生成静态图像。在地震学研究中通常需要在地图上选取测线，获得测线端点的坐标。我们利用Matplotlib的交互界面实现了这一功能。&lt;/p&gt;</description>
     </item>
     
@@ -84,8 +77,7 @@
       <pubDate>Thu, 26 Mar 2020 15:17:48 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/post/vtk-to-nparray/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/vtk2npz/structured_cube.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/vtk2npz/structured_cube.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;VTK是用于三维可视化的重要格式。如果我们要对三维可视化数据进行更多自定义的计算，则需要将其转化为适用与科学计算的数据格式。
 （此图由&lt;a href=&#34;https://docs.pyvista.org/&#34;&gt;&lt;em&gt;PyVista&lt;/em&gt;&lt;/a&gt;生成）&lt;/p&gt;</description>
     </item>
@@ -97,8 +89,7 @@
       
       <guid>https://blog.xumijian.me/post/gmt-map/</guid>
       <description>&lt;p&gt;GMT对地图的处理十分优秀，而且只需要短短几行代码。本文介绍了如何用等距圆锥投影绘制不同范围大小的地形图，以及如何在地形图上绘制断层、文字和矢量等。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/gmt-map/region.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/gmt-map/region.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -107,7 +98,7 @@
       <pubDate>Sun, 19 Jan 2020 14:42:33 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/post/gmt-section/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/gmt-section/sample.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/gmt-section/sample.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -134,7 +125,7 @@
       <pubDate>Tue, 18 Jun 2019 12:30:12 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/post/vscode-ssh/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif&#34; alt=&#34;&#34; /&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif&#34; alt=&#34;&#34;&gt;
 动图来自&lt;a href=&#34;https://microsoft.github.io/vscode-remote-release/images/ssh-readme.gif&#34;&gt;官网&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
@@ -145,7 +136,6 @@
       
       <guid>https://blog.xumijian.me/post/fuse/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://www.paragon-software.com/home/ntfs-mac/&#34;&gt;Paragon NTFS for Mac&lt;/a&gt;和&lt;a href=&#34;https://www.tuxera.com/products/tuxera-ntfs-for-mac/&#34;&gt;Tuxera&lt;/a&gt;是MacOS下常用的NTFS解决方案，但这些软件都是商业软件，而且价格不菲。这些软件除了实现NTFS的读写功能外，还有一些磁盘监测、卸载快捷键等功能，也有很好看的图形界面。但是这些额外功能对我来说都不是必须的，那么有没有一种解决方案可以免费实现最简单的NTFS读写功能呢？&lt;/p&gt;
-
 &lt;p&gt;那么这里将介绍通过FUSE和ntfs-3g实现NTFS读写功能&lt;/p&gt;</description>
     </item>
     
@@ -164,7 +154,7 @@
       <pubDate>Sun, 03 Feb 2019 12:54:38 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/post/hhkb/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/kb/hhkb.png&#34; alt=&#34;&#34; /&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/kb/hhkb.png&#34; alt=&#34;&#34;&gt;
 图片来自&lt;a href=&#34;http://www.pfu.com.cn/HHKB/&#34;&gt;HHKB官网&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
@@ -174,8 +164,7 @@
       <pubDate>Fri, 01 Feb 2019 17:57:29 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/post/mech-kb/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/kb/teaser.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/kb/teaser.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Varmilo VA88M 双彩虹RGB，来自&lt;a href=&#34;https://www.cherrymx.de/en/blog/VARMILO-VA88M-DOUBLE-RAINBOW-RGB-INTRODUCTION.html&#34;&gt;Cherry官方博客&lt;/a&gt;。&lt;/p&gt;</description>
     </item>
     
@@ -195,33 +184,32 @@
       
       <guid>https://blog.xumijian.me/post/vim-intro/</guid>
       <description>&lt;h2 id=&#34;目录&#34;&gt;目录&lt;/h2&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#command-mode&#34;&gt;Command Mode&lt;/a&gt;&lt;/strong&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#cursor-motions&#34;&gt;Cursor Motions&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#edit-command&#34;&gt;Edit Command&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#window-motion&#34;&gt;Window Motion&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#insert-mode&#34;&gt;Insert Mode&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#visual-mode&#34;&gt;Visual Mode&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#search-and-replace&#34;&gt;Search and Replace&lt;/a&gt;&lt;/strong&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#basic-usage&#34;&gt;Basic usage&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#replace&#34;&gt;Replace&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#regular-expression&#34;&gt;Regular Expression&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#vim-中常用的替换表达式&#34;&gt;Vim 中常用的替换表达式&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#vim-%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%9B%BF%E6%8D%A2%E8%A1%A8%E8%BE%BE%E5%BC%8F&#34;&gt;Vim 中常用的替换表达式&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;&lt;a href=&#34;#ctags-and-taglist&#34;&gt;Ctags and Taglist&lt;/a&gt;&lt;/strong&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#ctags-configure&#34;&gt;Ctags Configure&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#pythontag&#34;&gt;为Python标准库添加标签&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#systag&#34;&gt;为C/C++系统函数添加标签&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#taglist-configure&#34;&gt;Taglist Configure&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;</description>
     </item>
     
@@ -232,7 +220,6 @@
       
       <guid>https://blog.xumijian.me/post/vim-plugin/</guid>
       <description>&lt;p&gt;配置一个优秀个开发环境可以极大地提高开发效率，在Linux里Vim是最常用的开发环境之一（emacs也是相当不错的，但鄙人是Vim的忠实粉丝），我们一般所说的开发环境包括了&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;代码高亮&lt;/li&gt;
 &lt;li&gt;文件树&lt;/li&gt;
@@ -240,7 +227,6 @@
 &lt;li&gt;自动缩进&lt;/li&gt;
 &lt;li&gt;代码补全&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;这里就Linux中配置这些功能做一个简单的介绍&lt;/p&gt;</description>
     </item>
     

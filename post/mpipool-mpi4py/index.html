@@ -24,7 +24,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3 with theme even" />
+<meta name="generator" content="Hugo 0.91.0 with theme even" />
 
 
 <link rel="canonical" href="https://blog.xumijian.me/post/mpipool-mpi4py/" />
@@ -42,21 +42,15 @@
 <meta property="og:title" content="Mpipool Mpi4py" />
 <meta property="og:description" content="mpi4py is a python API for MPI. MPIPoolExecutor is a subclass of mpi4py.futures to create MPI processes to execute calls asynchronously" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.xumijian.me/post/mpipool-mpi4py/" />
+<meta property="og:url" content="https://blog.xumijian.me/post/mpipool-mpi4py/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2019-01-03T13:31:58+08:00" />
 <meta property="article:modified_time" content="2019-01-03T13:31:58+08:00" />
+
 <meta itemprop="name" content="Mpipool Mpi4py">
-<meta itemprop="description" content="mpi4py is a python API for MPI. MPIPoolExecutor is a subclass of mpi4py.futures to create MPI processes to execute calls asynchronously">
-
-
-<meta itemprop="datePublished" content="2019-01-03T13:31:58&#43;08:00" />
-<meta itemprop="dateModified" content="2019-01-03T13:31:58&#43;08:00" />
-<meta itemprop="wordCount" content="232">
-
-
-
-<meta itemprop="keywords" content="Python,Mpi," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="description" content="mpi4py is a python API for MPI. MPIPoolExecutor is a subclass of mpi4py.futures to create MPI processes to execute calls asynchronously"><meta itemprop="datePublished" content="2019-01-03T13:31:58+08:00" />
+<meta itemprop="dateModified" content="2019-01-03T13:31:58+08:00" />
+<meta itemprop="wordCount" content="233">
+<meta itemprop="keywords" content="Python,Mpi," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Mpipool Mpi4py"/>
 <meta name="twitter:description" content="mpi4py is a python API for MPI. MPIPoolExecutor is a subclass of mpi4py.futures to create MPI processes to execute calls asynchronously"/>
 
@@ -140,89 +134,82 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#test-script">Test Script</a></li>
-<li><a href="#time-length-running">Time length running</a></li>
-<li><a href="#run-this-script-via-mpiexec">Run this script via mpiexec</a></li>
-<li><a href="#comparision">Comparision</a></li>
-<li><a href="#test-script-1">Test script</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#test-script">Test Script</a></li>
+        <li><a href="#time-length-running">Time length running</a></li>
+        <li><a href="#run-this-script-via-mpiexec">Run this script via mpiexec</a></li>
+        <li><a href="#comparision">Comparision</a></li>
+        <li><a href="#test-script-1">Test script</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
       <p><a href="http://mpi4py.readthedocs.io/en/stable/index.html">mpi4py</a> is a python API for MPI. <strong>MPIPoolExecutor</strong> is a subclass of <code>mpi4py.futures</code> to create MPI processes to execute calls asynchronously</p>
-
 <blockquote>
 <p>The <strong>MPIPoolExecutor</strong> class uses a pool of MPI processes to execute calls asynchronously. By performing computations in separate processes, it allows to side-step the <a href="https://docs.python.org/3/glossary.html#term-global-interpreter-lock">Global Interpreter Lock</a> but also means that only picklable objects can be executed and returned. The <code>__main__</code> module must be importable by worker processes</p>
 </blockquote>
-
 <h2 id="test-script">Test Script</h2>
-
 <p>The test script shows a way to calculate $2^{x}$ in a loop</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">mpi4py.futures</span> <span class="kn">import</span> <span class="n">MPIPoolExecutor</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">mpi4py.futures</span> <span class="kn">import</span> <span class="n">MPIPoolExecutor</span>
 
 <span class="n">executor</span> <span class="o">=</span> <span class="n">MPIPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">executor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="nb">pow</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="mi">32</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">)):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></code></pre></td></tr></table>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
+</div><ul>
 <li><code>executor</code> is an instance of <code>MPIPoolExecutor</code> with <code>max_workers</code> of 100</li>
 <li>Calculate $2^x$ in a <code>map</code> where $x$ set from 0 to 31</li>
 </ul>
-
 <h2 id="time-length-running">Time length running</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">starttime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">starttime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="o">......</span>
 <span class="n">endtime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Running for </span><span class="si">%6.3f</span><span class="s1">s&#39;</span> <span class="o">%</span> <span class="n">endtime</span> <span class="o">-</span> <span class="n">starttime</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Running for </span><span class="si">%6.3f</span><span class="s1">s&#39;</span> <span class="o">%</span> <span class="n">endtime</span> <span class="o">-</span> <span class="n">starttime</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="run-this-script-via-mpiexec">Run this script via mpiexec</h2>
-
+</div><h2 id="run-this-script-via-mpiexec">Run this script via mpiexec</h2>
 <p>script for MPIPoolExecutor could run via mpiexec in <a href="http://mpi4py.readthedocs.io/en/stable/mpi4py.futures.html#command-line">command line</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">mpiexec -n <span class="m">100</span> python -m mpi4py.futures MpiPool.py</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">mpiexec -n <span class="m">100</span> python -m mpi4py.futures MpiPool.py
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>the script would be execute with 100 cores</p>
-
+</div><p>the script would be execute with 100 cores</p>
 <h2 id="comparision">Comparision</h2>
-
 <ul>
 <li><strong>2.7007s</strong> running with 1 core</li>
 <li><strong>0.1527s</strong> running with 100 core</li>
 </ul>
-
 <h2 id="test-script-1">Test script</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -232,18 +219,21 @@
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
+</span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">from</span> <span class="nn">mpi4py.futures</span> <span class="kn">import</span> <span class="n">MPIPoolExecutor</span>
+<pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">from</span> <span class="nn">mpi4py.futures</span> <span class="kn">import</span> <span class="n">MPIPoolExecutor</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">executor</span> <span class="o">=</span> <span class="n">MPIPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">starttime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">executor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="nb">pow</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="mi">32</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">)):</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
     <span class="n">endtime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Running for </span><span class="si">%6.3f</span><span class="s1">s&#39;</span> <span class="o">%</span> <span class="n">endtime</span> <span class="o">-</span> <span class="n">starttime</span><span class="p">)</span></code></pre></td></tr></table>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Running for </span><span class="si">%6.3f</span><span class="s1">s&#39;</span> <span class="o">%</span> <span class="n">endtime</span> <span class="o">-</span> <span class="n">starttime</span><span class="p">)</span>
+
+</code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -288,7 +278,7 @@
     <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
     <script type="text/javascript">
       var gitalk = new Gitalk({
-        id: '2019-01-03 13:31:58 \x2b0800 \x2b0800',
+        id: '2019-01-03 13:31:58 \u002b0800 \u002b0800',
         title: 'Mpipool Mpi4py',
         clientID: '83b0e39119b727cd2ba2',
         clientSecret: '2b6f4a9e1459a3e6bafa8afaaa509d755a7cf744',

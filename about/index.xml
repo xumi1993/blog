@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>About on Note to Tech</title>
@@ -6,10 +6,6 @@
     <description>Recent content in About on Note to Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 11 Jan 2020 23:16:14 +0800</lastBuildDate>
-    
-	<atom:link href="https://blog.xumijian.me/about/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 11 Jan 2020 23:16:14 +0800</lastBuildDate><atom:link href="https://blog.xumijian.me/about/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
