@@ -53,7 +53,7 @@
 
 <meta itemprop="datePublished" content="2021-05-14T16:34:22&#43;08:00" />
 <meta itemprop="dateModified" content="2021-05-14T16:34:22&#43;08:00" />
-<meta itemprop="wordCount" content="836">
+<meta itemprop="wordCount" content="893">
 
 
 
@@ -181,12 +181,12 @@
 <pre class="chroma">ogr2ogr -f GMT geo3al.gmt geo3al.shp -t_srs EPSG:4326</pre></td></tr></table>
 </div>
 </div>
-<p>这一步需要注意以下几点</p>
+<div class="admonition note"><p class="admonition-title">⚠️注意</p>
+  
+- 其中`.dbf`, `.prj` 和 `.shx`文件路径需要与该命令的运行路径为同一路径。
+- 确保在安装GMT后所添加的环境变量中包含`PROJ_LIB`这个变量，请参考[GMT安装说明](https://docs.gmt-china.org/latest/install/macOS/#gmt)
 
-<ul>
-<li>其中<code>.dbf</code>, <code>.prj</code> 和 <code>.shx</code>文件路径需要与该命令的运行路径为同一路径。</li>
-<li>确保在安装GMT后所添加的环境变量中包含<code>PROJ_LIB</code>这个变量，请参考<a href="https://docs.gmt-china.org/latest/install/macOS/#gmt">GMT安装说明</a></li>
-</ul>
+</div>
 
 <p>格式转换后<code>geo3al.gmt</code>文件的头段为</p>
 <div class="highlight"><div class="chroma">
@@ -364,24 +364,25 @@ gmt end show
     </footer>
   </article>
         </div>
-        
+        <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script type="text/javascript">
+      var gitalk = new Gitalk({
+        id: '2021-05-14 16:34:22 \x2b0800 \x2b0800',
+        title: '用GMT绘制中国大陆及邻区地质年代图',
+        clientID: '83b0e39119b727cd2ba2',
+        clientSecret: '2b6f4a9e1459a3e6bafa8afaaa509d755a7cf744',
+        repo: 'blog.post',
+        owner: 'xumi1993',
+        admin: ['xumi1993'],
+        body: decodeURI(location.href)
+      });
+      gitalk.render('gitalk-container');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/gitalk/gitalk">comments powered by gitalk.</a></noscript>
 
   
-  <div id="vcomments"></div>
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-  <script type="text/javascript">
-    new Valine({
-        el: '#vcomments' ,
-        appId: 'pDTTIwKxG0jJoQFkUaQ1Jeqo-gzGzoHsz',
-        appKey: 'LjDsQoPgO74ji2IoczXTiRM5',
-        notify: 'true',
-        verify: 'true',
-        avatar:'mm',
-        placeholder: '说点什么吧...',
-        visitor: 'false'
-    });
-  </script>
 
   
 
@@ -415,7 +416,7 @@ gmt end show
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

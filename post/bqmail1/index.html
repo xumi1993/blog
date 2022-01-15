@@ -68,7 +68,7 @@
 
 <meta itemprop="datePublished" content="2020-06-09T16:58:02&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-09T16:58:02&#43;08:00" />
-<meta itemprop="wordCount" content="1559">
+<meta itemprop="wordCount" content="1581">
 
 
 
@@ -384,9 +384,13 @@ optional arguments:
 <li><code>-c &lt;channel&gt;</code>：通道名</li>
 </ul>
 
-<blockquote>
-<p>⚠️注意：台网名、台站名和通道名支持通配符。</p>
-</blockquote>
+<div class="admonition note"><p class="admonition-title">⚠️注意</p>
+  
+台网名、台站名和通道名支持通配符。
+
+</div>
+
+<!-- >⚠️注意：台网名、台站名和通道名支持通配符。 -->
 
 <h3 id="实例-1">实例</h3>
 
@@ -448,24 +452,25 @@ optional arguments:
     </footer>
   </article>
         </div>
-        
+        <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script type="text/javascript">
+      var gitalk = new Gitalk({
+        id: '2020-06-09 16:58:02 \x2b0800 \x2b0800',
+        title: 'BQMail2.0: 向IRIS DMC发送数据请求的Python模块（1. 数据查询）',
+        clientID: '83b0e39119b727cd2ba2',
+        clientSecret: '2b6f4a9e1459a3e6bafa8afaaa509d755a7cf744',
+        repo: 'blog.post',
+        owner: 'xumi1993',
+        admin: ['xumi1993'],
+        body: decodeURI(location.href)
+      });
+      gitalk.render('gitalk-container');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/gitalk/gitalk">comments powered by gitalk.</a></noscript>
 
   
-  <div id="vcomments"></div>
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-  <script type="text/javascript">
-    new Valine({
-        el: '#vcomments' ,
-        appId: 'pDTTIwKxG0jJoQFkUaQ1Jeqo-gzGzoHsz',
-        appKey: 'LjDsQoPgO74ji2IoczXTiRM5',
-        notify: 'true',
-        verify: 'true',
-        avatar:'mm',
-        placeholder: '说点什么吧...',
-        visitor: 'false'
-    });
-  </script>
 
   
 
@@ -499,7 +504,7 @@ optional arguments:
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2021
+    2022
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
