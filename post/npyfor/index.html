@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>将Fortran中的数组与矩阵保存为numpy中的.npz文件 - Note to Tech</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Mijian Xu" /><meta name="description" content="我们之前讨论过如何用python在三维矩阵中切片，在Python中保存三维矩阵和它的三个坐标轴的方法有用numpy.savez将数组和矩阵用不同的键值对保存至一个.npz文件。这里将讨论如何用Fortran实现这一过程。
+" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.91.0 with theme even" />
+
+
+<link rel="canonical" href="https://blog.xumijian.me/post/npyfor/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.80fdd22f.min.css" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+<meta property="og:title" content="将Fortran中的数组与矩阵保存为numpy中的.npz文件" />
+<meta property="og:description" content="我们之前讨论过如何用python在三维矩阵中切片，在Python中保存三维矩阵和它的三个坐标轴的方法有用numpy.savez将数组和矩阵用不同的键值对保存至一个.npz文件。这里将讨论如何用Fortran实现这一过程。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.xumijian.me/post/npyfor/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-02-01T20:34:54+08:00" />
+<meta property="article:modified_time" content="2022-02-01T20:34:54+08:00" />
+
+<meta itemprop="name" content="将Fortran中的数组与矩阵保存为numpy中的.npz文件">
+<meta itemprop="description" content="我们之前讨论过如何用python在三维矩阵中切片，在Python中保存三维矩阵和它的三个坐标轴的方法有用numpy.savez将数组和矩阵用不同的键值对保存至一个.npz文件。这里将讨论如何用Fortran实现这一过程。"><meta itemprop="datePublished" content="2022-02-01T20:34:54+08:00" />
+<meta itemprop="dateModified" content="2022-02-01T20:34:54+08:00" />
+<meta itemprop="wordCount" content="722">
+<meta itemprop="keywords" content="Python,Fortran," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="将Fortran中的数组与矩阵保存为numpy中的.npz文件"/>
+<meta name="twitter:description" content="我们之前讨论过如何用python在三维矩阵中切片，在Python中保存三维矩阵和它的三个坐标轴的方法有用numpy.savez将数组和矩阵用不同的键值对保存至一个.npz文件。这里将讨论如何用Fortran实现这一过程。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Note to Tech</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="https://home.xumijian.me">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Note to Tech</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="https://home.xumijian.me">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">将Fortran中的数组与矩阵保存为numpy中的.npz文件</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-02-01 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> Python </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <p>我们之前讨论过如何用python在三维矩阵中切片，在Python中保存三维矩阵和它的三个坐标轴的方法有用<code>numpy.savez</code>将数组和矩阵用不同的键值对保存至一个<code>.npz</code>文件。这里将讨论如何用Fortran实现这一过程。</p>
+<h1 id="npy-for-fortrannpy文件的fortran接口">NPY-for-Fortran：<code>npy</code>文件的Fortran接口</h1>
+<p><a href="https://github.com/MRedies/NPY-for-Fortran">NPY-for-Fortran</a>为Fortran提供了<code>npy</code>和<code>npz</code>的接口模块。我们在Fortran中将多种精度的<code>intger</code>、<code>real</code>和<code>cmplx</code>的一维或多维数组保存至<code>npy</code>或<code>npz</code>文件。</p>
+<h1 id="对npy-for-fortran的修改">对NPY-for-Fortran的修改</h1>
+<p>原版的<a href="https://github.com/MRedies/NPY-for-Fortran">NPY-for-Fortran</a>不支持将三维矩阵写入<code>npz</code>文件，因此我在此基础上加入了对各种不同精度三维数组的支持，参考<a href="https://github.com/xumi1993/NPY-for-Fortran.git">xumi1993/NPY-for-Fortran</a>。</p>
+<p>先将仓库克隆至本地</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">git clone https://github.com/xumi1993/NPY-for-Fortran.git
+</code></pre></td></tr></table>
+</div>
+</div><p>然后复制<code>src/npy.f90</code>到任意可调用的路径。</p>
+<h1 id="调用npy-for-fortran">调用NPY-for-Fortran</h1>
+<h2 id="fortran程序实例">Fortran程序实例</h2>
+<p>这里我们定义一个三维矩阵<code>mtx</code>，和它的三个坐标轴<code>x</code>、<code>y</code>和<code>z</code>，然后将他们保存在一个<code>npz</code>文件里</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Fortran" data-lang="Fortran"><span class="k">program </span><span class="n">main</span>
+    <span class="k">use </span><span class="n">m_npy</span>
+
+    <span class="kt">integer</span>     <span class="kd">::</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span>
+    <span class="kt">real</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>     <span class="kd">::</span> <span class="n">mtx</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">),</span> <span class="n">z</span><span class="p">(</span><span class="mi">9</span><span class="p">),</span> <span class="n">y</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">x</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+    <span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="kd">::</span> <span class="n">fname</span>
+
+    <span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;test.npz&#39;</span>
+    <span class="k">do </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span>
+        <span class="n">z</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.3</span>
+        <span class="k">do </span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span>
+            <span class="n">y</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.4</span>
+            <span class="k">do </span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span>
+                <span class="n">x</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="n">j</span> <span class="o">*</span><span class="mf">0.5</span>
+                <span class="n">mtx</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">)</span> <span class="o">=</span> <span class="mi">20</span><span class="o">*</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">100</span><span class="o">*</span><span class="n">j</span> <span class="o">+</span> <span class="n">k</span>
+            <span class="n">enddo</span>
+        <span class="n">enddo</span>
+    <span class="n">enddo</span>
+    
+
+    <span class="k">call </span><span class="n">add_npz</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">add_npz</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">add_npz</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+    <span class="k">call </span><span class="n">add_npz</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s1">&#39;mtx&#39;</span><span class="p">,</span> <span class="n">mtx</span><span class="p">)</span>
+
+<span class="k">end program</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="编译">编译</h2>
+<p>由于<code>npy.f90</code>是一个Fortran模块所以要先编译这个模块，生成<code>.mod</code>文件，再编译上面这个主程序</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">gfortran npy.f90 -c
+gfortran example.f90 npy.f90 -o example_npz
+</code></pre></td></tr></table>
+</div>
+</div><p>其中<code>example.f90</code>是上述主程序。</p>
+<h1 id="在python中查看">在Python中查看</h1>
+<p>用<code>numpy.load</code>即可打开<code>npz</code>文件并在Python脚本中调用其数值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;test.npz&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>结果为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">{&#39;_files&#39;: [&#39;x.npy&#39;, &#39;y.npy&#39;, &#39;z.npy&#39;, &#39;mtx.npy&#39;],
+ &#39;files&#39;: [&#39;x&#39;, &#39;y&#39;, &#39;z&#39;, &#39;mtx&#39;],
+ &#39;allow_pickle&#39;: False,
+ &#39;pickle_kwargs&#39;: {&#39;encoding&#39;: &#39;ASCII&#39;, &#39;fix_imports&#39;: True},
+ &#39;zip&#39;: &lt;zipfile.ZipFile file=&lt;_io.BufferedReader name=&#39;test.npz&#39;&gt; mode=&#39;r&#39;&gt;,
+ &#39;f&#39;: &lt;numpy.lib.npyio.BagObj at 0x7fc3b819c4c0&gt;,
+ &#39;fid&#39;: &lt;_io.BufferedReader name=&#39;test.npz&#39;&gt;}
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python/">Python</a>
+          <a href="/tags/fortran/">Fortran</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/pygmt-section/">
+            <span class="next-text nav-default">数据切片与绘制的PyGMT实现</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:gomijianxu@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/xumi1993" class="iconfont icon-github" title="github"></a>
+      <a href="https://git.nju.edu.cn/xumi1993" class="iconfont icon-gitlab" title="gitlab"></a>
+  <a href="https://blog.xumijian.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      
+    
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2022
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Mijian Xu</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
