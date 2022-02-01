@@ -49,7 +49,7 @@
 <meta itemprop="name" content="将Fortran中的数组与矩阵保存为numpy中的.npz文件">
 <meta itemprop="description" content="我们之前讨论过如何用python在三维矩阵中切片，在Python中保存三维矩阵和它的三个坐标轴的方法有用numpy.savez将数组和矩阵用不同的键值对保存至一个.npz文件。这里将讨论如何用Fortran实现这一过程。"><meta itemprop="datePublished" content="2022-02-01T20:34:54+08:00" />
 <meta itemprop="dateModified" content="2022-02-01T20:34:54+08:00" />
-<meta itemprop="wordCount" content="722">
+<meta itemprop="wordCount" content="723">
 <meta itemprop="keywords" content="Python,Fortran," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="将Fortran中的数组与矩阵保存为numpy中的.npz文件"/>
 <meta name="twitter:description" content="我们之前讨论过如何用python在三维矩阵中切片，在Python中保存三维矩阵和它的三个坐标轴的方法有用numpy.savez将数组和矩阵用不同的键值对保存至一个.npz文件。这里将讨论如何用Fortran实现这一过程。"/>
@@ -209,7 +209,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="编译">编译</h2>
-<p>由于<code>npy.f90</code>是一个Fortran模块所以要先编译这个模块，生成<code>.mod</code>文件，再编译上面这个主程序</p>
+<p>由于<code>npy.f90</code>是一个Fortran模块，所以要先编译这个模块，生成<code>.mod</code>文件，再编译上面这个主程序</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
