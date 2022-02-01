@@ -6,31 +6,67 @@
     <description>Recent content in Tags on Note to Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 26 Aug 2020 11:31:38 +0800</lastBuildDate><atom:link href="https://blog.xumijian.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Feb 2022 20:34:54 +0800</lastBuildDate><atom:link href="https://blog.xumijian.me/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>BQMail</title>
-      <link>https://blog.xumijian.me/tags/bqmail/</link>
-      <pubDate>Wed, 26 Aug 2020 11:31:38 +0800</pubDate>
+      <title>Fortran</title>
+      <link>https://blog.xumijian.me/tags/fortran/</link>
+      <pubDate>Tue, 01 Feb 2022 20:34:54 +0800</pubDate>
       
-      <guid>https://blog.xumijian.me/tags/bqmail/</guid>
+      <guid>https://blog.xumijian.me/tags/fortran/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python</title>
       <link>https://blog.xumijian.me/tags/python/</link>
-      <pubDate>Wed, 26 Aug 2020 11:31:38 +0800</pubDate>
+      <pubDate>Tue, 01 Feb 2022 20:34:54 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>PyGMT</title>
+      <link>https://blog.xumijian.me/tags/pygmt/</link>
+      <pubDate>Tue, 30 Nov 2021 20:13:09 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/tags/pygmt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>GMT</title>
       <link>https://blog.xumijian.me/tags/gmt/</link>
-      <pubDate>Fri, 17 Apr 2020 19:23:46 +0800</pubDate>
+      <pubDate>Fri, 14 May 2021 16:34:22 +0800</pubDate>
       
       <guid>https://blog.xumijian.me/tags/gmt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>地质图</title>
+      <link>https://blog.xumijian.me/tags/%E5%9C%B0%E8%B4%A8%E5%9B%BE/</link>
+      <pubDate>Fri, 14 May 2021 16:34:22 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/tags/%E5%9C%B0%E8%B4%A8%E5%9B%BE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Paraview</title>
+      <link>https://blog.xumijian.me/tags/paraview/</link>
+      <pubDate>Sun, 07 Mar 2021 05:12:28 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/tags/paraview/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>BQMail</title>
+      <link>https://blog.xumijian.me/tags/bqmail/</link>
+      <pubDate>Wed, 26 Aug 2020 11:31:38 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/tags/bqmail/</guid>
       <description></description>
     </item>
     

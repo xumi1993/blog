@@ -2,14 +2,63 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.xumijian.me/categories/</loc>
+    <lastmod>2022-02-01T20:34:54+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/fortran/</loc>
+    <lastmod>2022-02-01T20:34:54+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.xumijian.me/</loc>
-    <lastmod>2021-11-30T20:13:09+08:00</lastmod>
+    <lastmod>2022-02-01T20:34:54+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.xumijian.me/post/</loc>
+    <lastmod>2022-02-01T20:34:54+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/python/</loc>
+    <lastmod>2022-02-01T20:34:54+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/categories/python/</loc>
+    <lastmod>2022-02-01T20:34:54+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/</loc>
+    <lastmod>2022-02-01T20:34:54+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/post/npyfor/</loc>
+    <lastmod>2022-02-01T20:34:54+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/pygmt/</loc>
     <lastmod>2021-11-30T20:13:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -23,8 +72,36 @@
   </url>
   
   <url>
+    <loc>https://blog.xumijian.me/tags/gmt/</loc>
+    <lastmod>2021-05-14T16:34:22+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/categories/mapping/</loc>
+    <lastmod>2021-05-14T16:34:22+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/%E5%9C%B0%E8%B4%A8%E5%9B%BE/</loc>
+    <lastmod>2021-05-14T16:34:22+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.xumijian.me/post/gmt-geo/</loc>
     <lastmod>2021-05-14T16:34:22+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/paraview/</loc>
+    <lastmod>2021-03-07T05:12:28+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -51,28 +128,7 @@
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/categories/</loc>
-    <lastmod>2020-08-26T11:31:38+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/tags/python/</loc>
-    <lastmod>2020-08-26T11:31:38+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.xumijian.me/categories/seismology/</loc>
-    <lastmod>2020-08-26T11:31:38+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/tags/</loc>
     <lastmod>2020-08-26T11:31:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -86,21 +142,7 @@
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/tags/gmt/</loc>
-    <lastmod>2020-04-17T19:23:46+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.xumijian.me/tags/map/</loc>
-    <lastmod>2020-04-17T19:23:46+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/categories/python/</loc>
     <lastmod>2020-04-17T19:23:46+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -130,13 +172,6 @@
   <url>
     <loc>https://blog.xumijian.me/post/vtk-to-nparray/</loc>
     <lastmod>2020-03-26T15:17:48+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/categories/gmt/</loc>
-    <lastmod>2020-01-30T23:18:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

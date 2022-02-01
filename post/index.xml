@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Note to Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 30 Nov 2021 20:13:09 +0800</lastBuildDate><atom:link href="https://blog.xumijian.me/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Feb 2022 20:34:54 +0800</lastBuildDate><atom:link href="https://blog.xumijian.me/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>将Fortran中的数组与矩阵保存为numpy中的.npz文件</title>
+      <link>https://blog.xumijian.me/post/npyfor/</link>
+      <pubDate>Tue, 01 Feb 2022 20:34:54 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/post/npyfor/</guid>
+      <description>&lt;p&gt;我们之前讨论过如何用python在三维矩阵中切片，在Python中保存三维矩阵和它的三个坐标轴的方法有用&lt;code&gt;numpy.savez&lt;/code&gt;将数组和矩阵用不同的键值对保存至一个&lt;code&gt;.npz&lt;/code&gt;文件。这里将讨论如何用Fortran实现这一过程。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>数据切片与绘制的PyGMT实现</title>
       <link>https://blog.xumijian.me/post/pygmt-section/</link>

@@ -6,7 +6,27 @@
     <description>Recent content in GMT on Note to Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 17 Apr 2020 19:23:46 +0800</lastBuildDate><atom:link href="https://blog.xumijian.me/tags/gmt/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 14 May 2021 16:34:22 +0800</lastBuildDate><atom:link href="https://blog.xumijian.me/tags/gmt/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>用GMT绘制中国大陆及邻区地质年代图</title>
+      <link>https://blog.xumijian.me/post/gmt-geo/</link>
+      <pubDate>Fri, 14 May 2021 16:34:22 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/post/gmt-geo/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/gmt-map/geo3al.png&#34; alt=&#34;&#34;&gt;
+用GMT绘制绘制地质图一直是一个难题，此前&lt;a href=&#34;https://jimmytseng79.github.io/GMT5_tutorials/geology_map.html&#34;&gt;Po-Chin Tseng的博客&lt;/a&gt;详细介绍了制作和绘制地质图的过程，并成功绘制了东南亚的地质图。本文将介绍用相似的方法绘制中国大陆及邻区的地质图。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用GMT、PyVista和Paraview对速度模型、地形起伏、Moho面起伏进行三维可视化</title>
+      <link>https://blog.xumijian.me/post/paraview-model/</link>
+      <pubDate>Sun, 07 Mar 2021 05:12:28 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/post/paraview-model/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/paraview/model_NW.png&#34; alt=&#34;&#34;&gt;
+我们通过计算获得了地壳三维速度模型、Moho面起伏，为例对比壳内低速区与Moho面起伏的关系，可以将这些结果用Paraview进行三维可视化。由于数据格式的不同，我们需要借助GMT和PyVista辅助绘制。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>用Python交互界面在地图上选取测线位置</title>
       <link>https://blog.xumijian.me/post/mappick/</link>

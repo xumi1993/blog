@@ -6,7 +6,36 @@
     <description>Recent content in Python on Note to Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 26 Aug 2020 11:31:38 +0800</lastBuildDate><atom:link href="https://blog.xumijian.me/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Feb 2022 20:34:54 +0800</lastBuildDate><atom:link href="https://blog.xumijian.me/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>将Fortran中的数组与矩阵保存为numpy中的.npz文件</title>
+      <link>https://blog.xumijian.me/post/npyfor/</link>
+      <pubDate>Tue, 01 Feb 2022 20:34:54 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/post/npyfor/</guid>
+      <description>&lt;p&gt;我们之前讨论过如何用python在三维矩阵中切片，在Python中保存三维矩阵和它的三个坐标轴的方法有用&lt;code&gt;numpy.savez&lt;/code&gt;将数组和矩阵用不同的键值对保存至一个&lt;code&gt;.npz&lt;/code&gt;文件。这里将讨论如何用Fortran实现这一过程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>数据切片与绘制的PyGMT实现</title>
+      <link>https://blog.xumijian.me/post/pygmt-section/</link>
+      <pubDate>Tue, 30 Nov 2021 20:13:09 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/post/pygmt-section/</guid>
+      <description>&lt;p&gt;在GMT绘图前经常需要计算数据并保存到本地，再用GMT调用本地数据文件进行绘图。对数据可视化造成了不便。随着&lt;a href=&#34;https://www.pygmt.org/latest/index.html&#34;&gt;PyGMT&lt;/a&gt;的出现，我们可以在Python脚本中先进行数据计算，后进行绘图。这不仅提高了数据可视化的效率，也解决了Python对地图绘制能力弱的问题。&lt;/p&gt;
+&lt;p&gt;这里我们介绍用Python从3D数据结构体中进行数据切片，同时用PyGMT绘图的实例。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用GMT、PyVista和Paraview对速度模型、地形起伏、Moho面起伏进行三维可视化</title>
+      <link>https://blog.xumijian.me/post/paraview-model/</link>
+      <pubDate>Sun, 07 Mar 2021 05:12:28 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/post/paraview-model/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://blog.xumijian.me/img/paraview/model_NW.png&#34; alt=&#34;&#34;&gt;
+我们通过计算获得了地壳三维速度模型、Moho面起伏，为例对比壳内低速区与Moho面起伏的关系，可以将这些结果用Paraview进行三维可视化。由于数据格式的不同，我们需要借助GMT和PyVista辅助绘制。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>BQMail2.0: 向IRIS DMC发送数据请求的Python模块（2. 发送申请）</title>
       <link>https://blog.xumijian.me/post/bqmail2/</link>
