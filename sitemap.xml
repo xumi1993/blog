@@ -58,6 +58,13 @@
   </url>
   
   <url>
+    <loc>https://blog.xumijian.me/categories/mapping/</loc>
+    <lastmod>2021-11-30T20:13:09+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.xumijian.me/tags/pygmt/</loc>
     <lastmod>2021-11-30T20:13:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -73,13 +80,6 @@
   
   <url>
     <loc>https://blog.xumijian.me/tags/gmt/</loc>
-    <lastmod>2021-05-14T16:34:22+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/categories/mapping/</loc>
     <lastmod>2021-05-14T16:34:22+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
