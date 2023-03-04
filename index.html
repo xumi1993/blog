@@ -115,6 +115,28 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/double_interp/">两次插值构建三维速度模型</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2023-03-04 </span>
+      <div class="post-category">
+          <a href="/categories/seismology/"> Seismology </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>在三维地震成像中通常需要构建三维初始模型，这些模型往往来自已有的公共速度模型或其他前人研究，尽管提供的模型多为规则网格，由于我们所需网格大小是自定义的，所以需要对其进行网格化。而网格化所用的插值算法多为线性插值，它存在一个弊端：<strong>如果我们的网格范围比原先的大，将会出现<code>NaN</code>结果，无法用于后续计算。</strong></p>
+<p>本文介绍通过两次插值的方法解决这一问题。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/double_interp/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/npyfor/">将Fortran中的数组与矩阵保存为numpy中的.npz文件</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2022-02-01 </span>
@@ -200,27 +222,6 @@
   </div>
 </article>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/bqmail2/">BQMail2.0: 向IRIS DMC发送数据请求的Python模块（2. 发送申请）</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-08-26 </span>
-      <div class="post-category">
-          <a href="/categories/seismology/"> Seismology </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>在发送数据之前我们需要先查询所需台站和事件。BQMail将根据这些信息发送数据申请。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/bqmail2/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
     </section>
   
   <nav class="pagination">
@@ -263,7 +264,7 @@
   <span class="copyright-year">
     &copy; 
     2017 - 
-    2022
+    2023
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>

@@ -3,27 +3,55 @@
   
   <url>
     <loc>https://blog.xumijian.me/categories/</loc>
-    <lastmod>2022-02-01T20:34:54+08:00</lastmod>
+    <lastmod>2023-03-04T16:31:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/tags/fortran/</loc>
-    <lastmod>2022-02-01T20:34:54+08:00</lastmod>
+    <loc>https://blog.xumijian.me/tags/geophysics/</loc>
+    <lastmod>2023-03-04T16:31:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.xumijian.me/</loc>
-    <lastmod>2022-02-01T20:34:54+08:00</lastmod>
+    <lastmod>2023-03-04T16:31:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blog.xumijian.me/post/</loc>
+    <lastmod>2023-03-04T16:31:29+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/categories/seismology/</loc>
+    <lastmod>2023-03-04T16:31:29+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/</loc>
+    <lastmod>2023-03-04T16:31:29+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/post/double_interp/</loc>
+    <lastmod>2023-03-04T16:31:29+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.xumijian.me/tags/fortran/</loc>
     <lastmod>2022-02-01T20:34:54+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -38,13 +66,6 @@
   
   <url>
     <loc>https://blog.xumijian.me/categories/python/</loc>
-    <lastmod>2022-02-01T20:34:54+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/tags/</loc>
     <lastmod>2022-02-01T20:34:54+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -128,13 +149,6 @@
   </url>
   
   <url>
-    <loc>https://blog.xumijian.me/categories/seismology/</loc>
-    <lastmod>2020-08-26T11:31:38+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.xumijian.me/post/bqmail1/</loc>
     <lastmod>2020-06-09T16:58:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -193,13 +207,6 @@
   <url>
     <loc>https://blog.xumijian.me/about/</loc>
     <lastmod>2020-01-11T23:16:14+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.xumijian.me/tags/geophysics/</loc>
-    <lastmod>2020-01-11T21:17:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
