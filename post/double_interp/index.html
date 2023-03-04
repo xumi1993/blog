@@ -181,7 +181,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>这里<code>dep</code>, <code>lat</code>和<code>lon</code>为所需网格深度、纬度和经度方向的坐标，均为一维数组。<code>points</code>是原始模型数据，共4列，分别为深度、纬度、经度和数值。这时线性插值后的结果如图。黄色区域即为<code>NaN</code>值区域，这样的模型不能满足我们的计算需求。</p>
-<p><img src="../../static/img/double-interp/t.png" alt=""></p>
+<p><img src="/img/double-interp/t.png" alt=""></p>
 <h2 id="2-用临近点插值将nan值点赋值">2. 用临近点插值将<code>NaN</code>值点赋值</h2>
 <p>这里用到第二次插值，利用临近点插值 (Nearest Interpolation) 进行外插，填补空值点，同时保证数值不会偏离正常值。这里的思路是将非空值点取出当作散点，用相同的网格进行临近点插值。</p>
 <div class="highlight"><div class="chroma">
@@ -217,7 +217,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>两次插值之后的结果如下图，<code>NaN</code>值部分已经由最底层速度填补。</p>
-<p><img src="../../static/img/double-interp/tt.png" alt=""></p>
+<p><img src="/img/double-interp/tt.png" alt=""></p>
     </div>
 
     <div class="post-copyright">
