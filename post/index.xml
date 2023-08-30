@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Note to Tech</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 04 Mar 2023 16:31:29 +0800</lastBuildDate><atom:link href="https://blog.xumijian.me/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Aug 2023 15:06:47 +0800</lastBuildDate><atom:link href="https://blog.xumijian.me/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在直角坐标系中旋转检测版</title>
+      <link>https://blog.xumijian.me/post/rot_checker/</link>
+      <pubDate>Wed, 30 Aug 2023 15:06:47 +0800</pubDate>
+      
+      <guid>https://blog.xumijian.me/post/rot_checker/</guid>
+      <description>&lt;p&gt;最近遇到一个需求，需要在检测版测试中将检测版旋转一定角度，来避免射线方向的Smearing。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>两次插值构建三维速度模型</title>
       <link>https://blog.xumijian.me/post/double_interp/</link>
